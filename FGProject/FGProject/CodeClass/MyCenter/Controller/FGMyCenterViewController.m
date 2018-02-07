@@ -11,7 +11,6 @@
 #import "CusLayerView.h"
 #import "FGSetupPhotoViewController.h"
 @interface FGMyCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
-
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArr;
 
