@@ -1,0 +1,43 @@
+//
+//  ChoiceView.h
+//  FGProject
+//
+//  Created by XL on 15/7/8.
+//  Copyright (c) 2015年 XL. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "WaterWaveView.h"
+#import "CircleView.h"
+@protocol FGMathRootViewDelegate <NSObject>
+@optional
+- (void)choiceBtnAction:(MathRootViewActionType)mathRootViewActionType;
+@end
+
+@interface FGMathRootView : UIView<UIAlertViewDelegate>
+
+//大的背景
+@property (nonatomic, strong) UIView *bgView;
+
+//加减乘除
+@property (nonatomic, strong) UIButton *addBtn;
+@property (nonatomic, strong) UIButton *subtractBtn;
+@property (nonatomic, strong) UIButton *multiplyBtn;
+@property (nonatomic, strong) UIButton *divideBtn;
+@property (nonatomic,strong) UIButton *sunBtn;
+
+
+@property (nonatomic,strong) UIButton *reduceBtn;
+
+
+@property (nonatomic,strong) WaterWaveView *waterView;
+
+////做的题目数量
+@property (nonatomic, strong) UIButton *countBtn;
+//综合练习
+@property (nonatomic, strong) UIButton *compreBtn;
+
+@property (nonatomic,weak) id <FGMathRootViewDelegate> delegate;
+
+
+@end

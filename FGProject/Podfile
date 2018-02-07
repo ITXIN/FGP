@@ -1,0 +1,21 @@
+platform:ios,'8.0'
+
+target 'FGProject' do
+pod 'Masonry'
+pod 'FBMemoryProfiler'
+pod 'FLEX'
+pod 'AFNetworking', '~> 3.0'
+pod 'SDWebImage'
+pod 'SVProgressHUD'
+pod 'pop'
+pod 'JSPatchPlatform'
+pod 'CocoaAsyncSocket'
+pod 'Firebase'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
+pod 'Firebase/Messaging'
+pod 'Firebase/Core'
+pod 'Firebase/AdMob'
+pod 'JCAlertView'
+end
+

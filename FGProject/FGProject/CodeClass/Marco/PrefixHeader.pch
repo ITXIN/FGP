@@ -1,0 +1,47 @@
+//
+//  PrefixHeader.pch
+//  FGProject
+//
+//  Created by XL on 15/6/30.
+//  Copyright (c) 2015年 XL. All rights reserved.
+//
+
+#ifndef FGProject_PrefixHeader_pch
+#define FGProject_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "APPHeader.h"
+#import "Definition.h"
+#import "FGDateSingle.h"
+#import "AnimationProcess.h"
+#import "SoundsProcess.h"
+#import "HasDoneOperation.h"
+#import "MusicPlayerView.h"
+#import "AdjustVolume.h"
+#import "CommonFuction.h"
+#import "Masonry.h"
+#import "FGHttpsRequestManager.h"
+#import "FGProjectHelper.h"
+#import "UIImageView+WebCache.h"
+#import "SVProgressHUD.h"
+#import "FGNetworkingReachable.h"
+#import <POP/POP.h>
+#import "FGProject-Bridging-Header.h"
+#import <JSPatchPlatform/JSPatch.h>
+#import "Toast+UIView.h"
+#import "FGBlurEffectView.h"
+#import "Firebase.h"
+#import "FLDeviceUID.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
+#import "FGAlertView.h"
+#import "JCAlertView.h"
+#import "FGNavigationView.h"
+#import "FGRequestConst.h"
+#import <SDWebImage/SDImageCache.h>
+#import "FGMathOperationManager.h"
+#import "EnumHeader.h"
+#import "FGUserManager.h"
+#import "FGRewardViewHUD.h"
+#endif
