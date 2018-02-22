@@ -48,6 +48,10 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(popToRootViewController)]) {
        [self.delegate popToRootViewController];
+       
+    }else{
+        UIViewController *preView =(UIViewController*) self.delegate;
+        [preView.navigationController popViewControllerAnimated:YES];
     }
    
 //    CATransition *animation=[CATransition animation];
@@ -74,8 +78,9 @@
         }else{
             make.left.mas_equalTo(30);
         }
-        make.top.mas_equalTo(20);
-        //        make.centerY.mas_equalTo(self.navigationView.mas_centerY).offset(20);
+//        make.top.mas_equalTo(20);
+//                make.centerY.mas_equalTo(self.navigationView.mas_centerY).offset(10);
+        make.centerY.equalTo(self.navigationView);
         //        make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
