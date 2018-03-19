@@ -56,7 +56,7 @@
 
 - (void)levelAction:(UIButton *)btn
 {
-    [SoundsProcess playSoundWithNameStr:@"Tock"];
+    [[SoundsProcess shareInstance]playSoundOfTock];
     [AnimationProcess springAnimationProcessWithView:btn upHeight:30.f];
     if (self.delegate && [self.delegate respondsToSelector:@selector(diffcultyBtnAction:)]){
         [self.delegate diffcultyBtnAction:btn.tag];

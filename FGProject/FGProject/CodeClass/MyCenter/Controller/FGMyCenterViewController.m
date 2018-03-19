@@ -28,7 +28,7 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
     [super initSubviews];
     self.dataArr = @[@"设置按钮点击音效",@"设置头像"];
     CusLayerView * cus = [[CusLayerView alloc]initWithFrame:self.view.bounds];
-    cus.backgroundColor = [UIColor clearColor];
+    cus.backgroundColor = [UIColor yellowColor];
     [self.bgView insertSubview:cus belowSubview:self.navigationView];
     cus.myCenterViewActionBlock = ^(MyCenterViewActionType type) {
         switch (type) {
@@ -45,21 +45,21 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
         }
     };
     
-//    UIButton *myCenterBtn = ({
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.bgView addSubview:btn];
-//        [btn setImage:[UIImage imageNamed:@"my_center"] forState:UIControlStateNormal];
-//        btn.layer.cornerRadius = 50;
-//        btn.layer.masksToBounds = YES;
-//        btn.backgroundColor = [UIColor whiteColor];
-//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *myCenterBtn = ({
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [cus addSubview:btn];
+        [btn setImage:[UIImage imageNamed:@"my_center"] forState:UIControlStateNormal];
+        btn.layer.cornerRadius = 50;
+        btn.layer.masksToBounds = YES;
+        btn.backgroundColor = [UIColor whiteColor];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.top.mas_equalTo(30);
-//            make.centerX.equalTo(self.bgView);
-//            make.size.mas_equalTo(CGSizeMake(100, 100));
-//        }];
-////        [btn addTarget:self action:@selector(myCenterAction:) forControlEvents:UIControlEventTouchUpInside];
-//        btn;
-//    });
+            make.center.equalTo(cus);
+            make.size.mas_equalTo(CGSizeMake(100, 100));
+        }];
+        [btn addTarget:self action:@selector(myCenterAction) forControlEvents:UIControlEventTouchUpInside];
+        btn;
+    });
 //
 //    for (NSInteger i = 0 ; i < 2; i ++) {
 //        UIButton *editeBtn = ({
@@ -100,9 +100,18 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
 //    });
     
     
-    
-}
+    UISwitch *switchView = [[UISwitch alloc]initWithFrame:CGRectMake(100, 150, 100, 30)];
+    switchView.on = [SoundsProcess shareInstance].isPlaySound;
+    [switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
 
+    [self.bgView addSubview:switchView];
+}
+- (void)myCenterAction{
+    [SoundsProcess shareInstance].isPlaySound = NO;
+}
+- (void)switchAction:(UISwitch*)sender{
+    [SoundsProcess shareInstance].isPlaySound = sender.isOn;
+}
 
 #pragma mark - UITableviewDelegate
 

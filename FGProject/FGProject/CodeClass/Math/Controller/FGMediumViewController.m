@@ -150,9 +150,11 @@
 #pragma mark -
 #pragma mark --- MediumCandidateAnswerViewDelegate
 - (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType{
-    [SoundsProcess playSoundWithNameStr:@"Tock"];
+//    [SoundsProcess playSoundWithNameStr:@"Tock"];
+    [[SoundsProcess shareInstance] playSoundOfTock];
     if (actionType == MathSimpleOperationViewActionTypeAnswer) {
-        [SoundsProcess playSoundWithNameStr:@"wonderful"];
+//        [SoundsProcess playSoundWithNameStr:@"wonderful"];
+        [[SoundsProcess shareInstance] playSoundOfWonderful];
         dispatch_after(7.0, dispatch_get_main_queue(), ^{
             NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
             _doneCount ++;
@@ -199,7 +201,8 @@
         });
     }else
     {
-        [SoundsProcess playSoundWithNameStr:@"wrong"];
+//        [SoundsProcess playSoundWithNameStr:@"wrong"];
+        [[SoundsProcess shareInstance] playSoundOfWrong];
         //统计,分析点击情况
         //        NSString *btnStr = btn.currentTitle;
         //        if ([btnStr isEqualToString:[NSString stringWithFormat:@"%ld",clickRandomCounModel.randomMediumModel.firstNum]])
@@ -241,7 +244,8 @@
 {
     [FGRewardViewHUD show];
     //播放烟花声音
-    [SoundsProcess playSoundWithNameStr:@"fireworks-01"];
+//    [SoundsProcess playSoundWithNameStr:@"fireworks-01"];
+    [[SoundsProcess shareInstance] playSoundOfFireworks];
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_main_queue(), ^{
         NSMutableArray *arr = [NSMutableArray array];

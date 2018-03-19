@@ -165,6 +165,6 @@
 }
 - (void)starAction:(UIButton *)btn
 {
-    [SoundsProcess playSoundWithNameStr:@"Tock"];
+    [[SoundsProcess shareInstance]playSoundOfTock];
 }
 @end

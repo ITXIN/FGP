@@ -157,7 +157,7 @@
 
 - (void)btnClick:(UIButton *)btn
 {
-    [SoundsProcess playSoundWithNameStr:@"Tock"];
+    [[SoundsProcess shareInstance]playSoundOfTock];
     if (btn.tag != MusicPlayTypePlay){
         [self updateButtonImage:self.playBtn imageName:@"ic_pause_click"];
     }

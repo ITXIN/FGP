@@ -270,7 +270,7 @@
         if ([btn.layer.presentationLayer hitTest:touchPoint])
         {
             FGLOG(@"22");
-            [SoundsProcess playSoundWithNameStr:@"Tock"];
+            [[SoundsProcess shareInstance] playSoundOfTock];
             if (self.categoryDelegate && [self.categoryDelegate respondsToSelector:@selector(categoryAction:)])
             {
                 [self.categoryDelegate categoryAction:btn];
@@ -300,7 +300,7 @@
     [self celarLayers];
     //解决删除崩溃
     //    [sender.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [SoundsProcess playSoundWithNameStr:@"Tock"];
+    [[SoundsProcess shareInstance] playSoundOfTock];
     if (!self.actionBtn.selected){
         [self addAnimationWithOutFlag:YES];
     }else{

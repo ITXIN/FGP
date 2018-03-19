@@ -382,7 +382,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     {
         if ([imageView.layer.presentationLayer hitTest:touchPoint])
         {
-            [SoundsProcess playSoundWithNameStr:@"Tock"];
+            [[SoundsProcess shareInstance]playSoundOfTock];
           
 //            NSValue *locusValue = [NSValue valueWithCGPoint:imageView.frame.origin];
 //            NSLog(@"-----imageView %ld %@ %@ %@ \n contentsRect %@",imageView.tag,locusValue,NSStringFromCGRect(imageView.frame),NSStringFromCGRect(imageView.layer.frame),NSStringFromCGRect(imageView.layer.contentsRect));

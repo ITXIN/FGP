@@ -145,6 +145,9 @@ static NSInteger kMathOperationRangeNumber = 11;
 //修改头像
 #define MY_ICON_KEY @"MyIconKey"
 
+//声音播放
+#define SOUND_PLAY_STATE_KEY @"SoundPlayStateKey"
+
 
 //Firbase key
 #define FIREBASE_DATABASE_URL @"https://fgmath-77076.firebaseio.com/"

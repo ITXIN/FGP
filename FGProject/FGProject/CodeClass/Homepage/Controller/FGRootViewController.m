@@ -138,13 +138,13 @@
 
 #pragma mark -
 - (void)myCenterAction:(UIButton*)sender{
-//    FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
-//    [self.navigationController pushViewController:myCenterVC animated:YES];
+    FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
+    [self.navigationController pushViewController:myCenterVC animated:YES];
 //    [FGRewardViewHUD show];
     
     
-    FGVideoViewController *myCenterVC = [[FGVideoViewController alloc]init];
-    [self.navigationController pushViewController:myCenterVC animated:YES];
+//    FGVideoViewController *myCenterVC = [[FGVideoViewController alloc]init];
+//    [self.navigationController pushViewController:myCenterVC animated:YES];
 }
 
 - (void)loadCircleView

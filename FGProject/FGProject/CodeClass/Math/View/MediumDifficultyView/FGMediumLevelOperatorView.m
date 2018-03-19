@@ -109,7 +109,7 @@
 - (void)btnClick:(BubbleButton *)btn
 {
 #warning 点击过快会导致动画不能继续执行
-    [SoundsProcess playSoundWithNameStr:@"Tock"];
+    [[SoundsProcess shareInstance]playSoundOfTock];
     [btn generateBubbleInRandom];
     [AnimationProcess springAnimationProcessWithView:btn upHeight:arc4random()%(40-20+1)+20];
     [AnimationProcess scaleAnmiationProcessWithView:btn];

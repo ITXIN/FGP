@@ -52,8 +52,9 @@
     switch (actionType) {
         case MathSimpleOperationViewActionTypeAnswer:
         {
-            [SoundsProcess playSoundWithNameStr:@"Tock"];
-            [SoundsProcess playSoundWithNameStr:@"wonderful"];
+            [[SoundsProcess shareInstance] playSoundOfTock];
+            [[SoundsProcess shareInstance] playSoundOfWonderful];
+            
             NSInteger hasDone = [self.mathManager getCurrentDateHasDone];
             hasDone ++;
             //今天做的题目个数
@@ -91,8 +92,9 @@
         }
         case MathSimpleOperationViewActionTypeOperation:
         {
-            [SoundsProcess vibratePlay];
-            [SoundsProcess playSoundWithNameStr:@"wrong"];
+//            [[SoundsProcess shareInstance] vibratePlay];
+            [[SoundsProcess shareInstance]playSoundOfWrong];
+            
             break;
         }
         default:

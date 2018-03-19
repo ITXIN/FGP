@@ -9,12 +9,24 @@
 #import <Foundation/Foundation.h>
 
 @interface SoundsProcess : NSObject
+
++ (SoundsProcess *)shareInstance;
+@property (nonatomic,assign) BOOL isPlaySound;
+
+- (void)playSoundOfTock;
+//wonderful
+- (void)playSoundOfWonderful;
+//wrong
+- (void)playSoundOfWrong;
+//fireworks
+- (void)playSoundOfFireworks;
+
 /**
  *  播放声音
  */
-+ (void)playSoundWithNameStr:(NSString *)soundNameStr;
+//+ (void)playSoundWithNameStr:(NSString *)soundNameStr;
 /**
  *  震动
  */
-+ (void)vibratePlay;
+- (void)vibratePlay;
 @end
