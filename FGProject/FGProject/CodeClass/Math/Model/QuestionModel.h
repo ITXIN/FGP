@@ -10,7 +10,7 @@
 /**
  *  简单题目的 model
  */
-@interface QuestionModel : NSObject
+@interface QuestionModel : NSObject<NSCoding>
 @property (nonatomic,assign) MathOperationActionType mathOperationActionType;
 @property (nonatomic, assign) NSInteger firstNum;
 @property (nonatomic, assign) NSInteger secondNum;

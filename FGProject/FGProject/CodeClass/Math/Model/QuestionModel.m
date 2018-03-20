@@ -13,6 +13,22 @@
 {
     
 }
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.firstNum] forKey:@"firstNum"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.secondNum] forKey:@"secondNum"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.mathOperationActionType] forKey:@"mathOperationActionType"];
+}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self){
+       
+        self.firstNum =  [[aDecoder decodeObjectForKey:@"firstNum"] integerValue];
+        self.secondNum =  [[aDecoder decodeObjectForKey:@"secondNum"] integerValue];
+        self.mathOperationActionType =  [[aDecoder decodeObjectForKey:@"mathOperationActionType"] integerValue];
+    }
+    return self;
+}
+
 
 #pragma mark --------产生三个随机数,和答案一起,供用户选择----
 + (QuestionModel *)GenerateRandomAnwserNum:(NSInteger )userAnswer mathOperationActionType:(MathOperationActionType)operationType{

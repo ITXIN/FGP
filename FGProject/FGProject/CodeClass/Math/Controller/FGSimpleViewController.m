@@ -43,6 +43,7 @@
 #pragma mark -
 #pragma mark --- FGSimpleViewdeletate
 - (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType{
+    [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
     switch (actionType) {
         case MathSimpleOperationViewActionTypeAnswer:
         {

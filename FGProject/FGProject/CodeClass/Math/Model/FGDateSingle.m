@@ -19,12 +19,15 @@
     });
     return dateSingle;
 }
-
+- (NSDate*)date{
+     NSDate *senddate = [NSDate date];
+    return senddate;
+}
 //获取当前的时间
 - (NSString *)curretDate
 {
-    NSDate *senddate = [NSDate date];
-    return [self stringWithDate:senddate];
+//    NSDate *senddate = [NSDate date];
+    return [self stringWithDate:[self date]];
 }
 
 - (NSString *)stringWithDate:(NSDate *)date
@@ -32,7 +35,20 @@
     NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"YYYYMMdd"];
     NSString *locationString = [dateformatter stringFromDate:date];
-//    NSLog(@"今天日期 %@",locationString);
+    NSLog(@"今天日期 %@",locationString);
+    return locationString;
+}
+
+- (NSString*)getDetailDate{
+//    NSDate *senddate = [NSDate date];
+    return [self detailDateWithDate:[self date]];
+}
+- (NSString *)detailDateWithDate:(NSDate *)date
+{
+    NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *locationString = [dateformatter stringFromDate:date];
+    NSLog(@"今天日期 %@",locationString);
     return locationString;
 }
 

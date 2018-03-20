@@ -10,7 +10,7 @@
 /**
  *  中等难度运算模型
  */
-@interface MediumOperationModel : NSObject
+@interface MediumOperationModel : NSObject<NSCoding>
 /**
  *  三个运算数字
  */

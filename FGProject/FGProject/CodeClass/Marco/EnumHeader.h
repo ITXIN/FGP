@@ -74,7 +74,6 @@ typedef NS_ENUM(NSInteger,MathOperationActionType){
     MathOperationActionTypeSubtract,
     MathOperationActionTypeMultiply,
     MathOperationActionTypeDivide,
-    //    MathOperationActionTypeCompre,
     MathOperationActionTypeCompreOfSimple,
     MathOperationActionTypeCompreOfMedium,
     MathOperationActionTypeCompreOfDiffculty,

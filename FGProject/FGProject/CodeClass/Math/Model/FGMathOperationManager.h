@@ -14,8 +14,12 @@
 + (instancetype)shareMathOperationManager;
 @property (nonatomic,strong) NSArray *operationsArr;
 @property (nonatomic,strong) NSMutableDictionary *countDic;//统计已经做过的题目个数以及奖励
-//@property (nonatomic,strong) NSMutableArray *hasDoneArr;//
 @property (nonatomic,strong) NSMutableDictionary *hasDoneDic;//
+
+@property (nonatomic,strong) QuestionModel *currentQuestionModel;
+@property (nonatomic,strong) MediumOperationModel *currentMediumOperationModel;
+@property (nonatomic,strong) NSString *currentOperationStr;
+@property (nonatomic,assign) BOOL isCompreOperation;
 
 @property (nonatomic,strong) FGDateSingle *dateSingle;
 
@@ -27,4 +31,7 @@
 - (FGMathAnswerOptionsModel *)generateRandomAnswerNum:(NSInteger)answerNum;
 - (void)saveCurrentDateHasDoneNumber:(NSInteger)number;
 - (NSInteger)getCurrentDateHasDone;
+
+- (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer;
+//- (void)saveMathOperationDataStatisticsWithMathOperationActionType:(MathOperationActionType)operationActionType userOperationState:(BOOL)state;
 @end

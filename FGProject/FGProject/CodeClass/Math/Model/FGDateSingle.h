@@ -16,7 +16,9 @@
 
 //当前的日期
 - (NSString *)curretDate;
-
+//当前详细日期
+- (NSString*)getDetailDate;
 //昨天的日期
 - (NSString *)yesterDayDate;
+
 @end

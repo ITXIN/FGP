@@ -10,6 +10,26 @@
 
 @implementation MediumOperationModel
 
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.firstNum] forKey:@"firstNum"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.secondNum] forKey:@"secondNum"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.thirdNum] forKey:@"thirdNum"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.firstOperationType] forKey:@"firstOperationType"];
+     [aCoder encodeObject:[NSNumber numberWithInteger:self.secondOperationType] forKey:@"secondOperationType"];
+}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self){
+        
+        self.firstNum =  [[aDecoder decodeObjectForKey:@"firstNum"] integerValue];
+        self.secondNum =  [[aDecoder decodeObjectForKey:@"secondNum"] integerValue];
+        self.thirdNum =  [[aDecoder decodeObjectForKey:@"thirdNum"] integerValue];
+        self.firstOperationType =  [[aDecoder decodeObjectForKey:@"firstOperationType"] integerValue];
+        self.secondOperationType =  [[aDecoder decodeObjectForKey:@"secondOperationType"] integerValue];
+    }
+    return self;
+}
 #pragma mark -
 #pragma mark --- 产生运算式
 + (MediumOperationModel *)generateMediumOperation

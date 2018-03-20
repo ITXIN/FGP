@@ -150,6 +150,7 @@
 #pragma mark --- MediumCandidateAnswerViewDelegate
 - (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType{
     [[SoundsProcess shareInstance] playSoundOfTock];
+    [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
     if (actionType == MathSimpleOperationViewActionTypeAnswer) {
         [[SoundsProcess shareInstance] playSoundOfWonderful];
         dispatch_after(7.0, dispatch_get_main_queue(), ^{
