@@ -13,11 +13,8 @@
 #import "FGSimpleViewController.h"
 #import "QuestionModel.h"
 #import "FGSimpleOperationView.h"
-//#import "CircleView.h"
 #import "TooltipForAnswerView.h"
 @interface FGSimpleViewController ()<FGSimpleOperationViewDelegate>
-
-//@property (nonatomic, strong) TooltipForAnswerView *toolView;
 @property (nonatomic,strong) FGSimpleOperationView *answerView;
 @end
 
@@ -43,9 +40,6 @@
     
 }
 
-- (void)setupLayoutSubviews{
-    [super setupLayoutSubviews];
-}
 #pragma mark -
 #pragma mark --- FGSimpleViewdeletate
 - (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType{
@@ -92,7 +86,6 @@
         }
         case MathSimpleOperationViewActionTypeOperation:
         {
-//            [[SoundsProcess shareInstance] vibratePlay];
             [[SoundsProcess shareInstance]playSoundOfWrong];
             
             break;

@@ -10,7 +10,6 @@
 #import "FGBaseViewController.h"
 @class FGStoryModel;
 @interface FGStoryPlayViewController : FGBaseViewController
-//@property (nonatomic,strong) NSString *homeID;
 @property (nonatomic,strong) NSMutableArray *playInfoArr;
 @property (nonatomic,strong) FGStoryModel *playModel;
 

@@ -21,9 +21,6 @@
 /**
  *  两个运算符
  */
-//@property (nonatomic,strong) NSString *firstOperStr;
-//@property (nonatomic,strong) NSString *secondOperStr;
-
 @property (nonatomic,assign) MathOperationActionType firstOperationType;
 @property (nonatomic,assign) MathOperationActionType secondOperationType;
 

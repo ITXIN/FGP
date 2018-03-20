@@ -21,8 +21,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     dispatch_once(&onceToken, ^{
         manager = [[self alloc] init];
         manager.operationsArr = @[@(MathOperationActionTypeAdd),@(MathOperationActionTypeSubtract),@(MathOperationActionTypeMultiply),@(MathOperationActionTypeDivide)];
-//        manager.operationsArr = @[@(MathOperationActionTypeAdd),@(MathOperationActionTypeSubtract),@(MathOperationActionTypeMultiply)];
-        
         manager.dateSingle = [FGDateSingle shareInstance];
         manager.countDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:countKey]];
         manager.hasDoneDic = [NSMutableDictionary dictionaryWithDictionary: manager.countDic[hasDoneKey]];
@@ -203,9 +201,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     
     firstNum  = arc4random() % 4 + answerNum + 2;
     //运算符
-//    if (operationType == MathOperationActionTypeSubtract){
-//        firstNum = arc4random() % 4 + answerNum + 1;
-//    }
     
     secondNum = arc4random() % kMathOperationRangeNumber;
     thirdNum = arc4random() % kMathOperationRangeNumber;

@@ -9,10 +9,6 @@
 #ifndef FGProject_APPHeader_h
 #define FGProject_APPHeader_h
 
-//数学计算的范围
-static NSInteger kMathOperationRangeNumber = 11;
-
-#define DATA_WAVE_HEIGHT_SCALE 1000 //做题统计高度参数，1000是按1000道题水充满,可以设置其他的
 
 #ifdef DEBUG  //调试阶段
 #define FGLOG(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
@@ -134,6 +130,12 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define EASY_DIFFCULTYLEVEL_BTN_TITLE @"简单"
 #define MEDIUM_DIFFCULTYLEVEL_BTN_TITLE @"中等"
 #define DIFFCULT_DIFFCULTYLEVEL_BTN_TITLE @"较难"
+//数学计算的范围
+static NSInteger kMathOperationRangeNumber = 11;
+
+#define DATA_WAVE_HEIGHT_SCALE 1000 //做题统计高度参数，1000是按1000道题水充满,可以设置其他的
+
+
 
 //儿童数学的游戏
 #define GAME_CHILDERN_API @"http://cdnapi.bbwansha.com/bb_video30/Home/game/games/version/3/app_id/6/app_sub_id/1?t=589AB3E0"

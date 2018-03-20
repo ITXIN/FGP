@@ -18,7 +18,6 @@
 
 @protocol FGSimpleOperationViewDelegate <NSObject>
 
-//- (void)popToRootView;
 - (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType;
 @end
 @interface FGSimpleOperationView : UIView
