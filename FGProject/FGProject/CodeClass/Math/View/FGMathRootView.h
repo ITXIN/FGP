@@ -9,15 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "WaterWaveView.h"
 #import "CircleView.h"
+
+#import "FGBaseView.h"
 @protocol FGMathRootViewDelegate <NSObject>
 @optional
 - (void)choiceBtnAction:(MathRootViewActionType)mathRootViewActionType;
 @end
 
-@interface FGMathRootView : UIView<UIAlertViewDelegate>
-
-//大的背景
-@property (nonatomic, strong) UIView *bgView;
+@interface FGMathRootView : FGBaseView<UIAlertViewDelegate>
 
 //加减乘除
 @property (nonatomic, strong) UIButton *addBtn;

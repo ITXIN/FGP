@@ -65,7 +65,12 @@
     [super setupLayoutSubviews];
     [self.circleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(15);
+        if (kiPhoneX) {
         make.right.mas_equalTo(-kStatusBarHeight);
+        }else{
+          make.right.mas_equalTo(-30);
+        }
+        
         make.size.mas_equalTo(CGSizeMake(ScreenWidth/7-20, ScreenWidth/7-20));
     }];
 }

@@ -34,11 +34,6 @@
 
 @implementation FGRootViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.radarView startAnimation];
-    [self.angryBirdView restartBirdsAnimation];
-}
 
 
 - (void)viewDidLoad {
@@ -59,7 +54,7 @@
     [super initSubviews];
     self.navigationView.hidden = YES;
     
- 
+    
     [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:[NSString stringWithFormat:@"Indexbg-0%d",arc4random()%(3-1+1)+1]] withBlurLevel:1]];
     RootView *rootView = [[RootView alloc]init];
     [self.bgView addSubview:rootView];
@@ -74,17 +69,17 @@
     [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(rootView);
     }];
-
+    
     //类别
     FGCategoryMenuView *cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
     cateGoryMenuView.categoryDelegate = self;
     [self.bgView addSubview:cateGoryMenuView];
     [cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
-            make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
+        make.center.equalTo(self.view);
     }];
-
-  
+    
+    
     UIButton *myCenterBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.bgView addSubview:btn];
@@ -124,18 +119,18 @@
     //
     //    [self performSelector:@selector(removeAds) withObject:nil afterDelay:5.0f];
     
-//    [self loadCircleView];
+    //    [self loadCircleView];
 }
 
 #pragma mark -
 - (void)myCenterAction:(UIButton*)sender{
     FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
     [self.navigationController pushViewController:myCenterVC animated:YES];
-//    [FGRewardViewHUD show];
+    //    [FGRewardViewHUD show];
     
     
-//    FGVideoViewController *myCenterVC = [[FGVideoViewController alloc]init];
-//    [self.navigationController pushViewController:myCenterVC animated:YES];
+    //    FGVideoViewController *myCenterVC = [[FGVideoViewController alloc]init];
+    //    [self.navigationController pushViewController:myCenterVC animated:YES];
 }
 
 - (void)loadCircleView
@@ -208,7 +203,7 @@
         adView = nil;
         
         if ([interstitial isReady]) {
-//            [interstitial presentFromRootViewController:self];
+            //            [interstitial presentFromRootViewController:self];
             
         }else
         {
@@ -244,8 +239,8 @@
     switch (sender.tag) {
         case CategoryGame:
         {
-//            FGTomViewController *tomVC = [[FGTomViewController alloc]init];
-//            [self.navigationController pushViewController:tomVC animated:YES];
+            //            FGTomViewController *tomVC = [[FGTomViewController alloc]init];
+            //            [self.navigationController pushViewController:tomVC animated:YES];
             
             FGGameViewController *gameVC = [[FGGameViewController alloc]init];
             [self.navigationController pushViewController:gameVC animated:YES];
@@ -262,10 +257,10 @@
         {
             [self runOnMainThread:^{
                 FLStoryViewController *storyVC = [[FLStoryViewController alloc]init];
-//                CATransition *animation=[CATransition animation];
-//                animation.type=@"rippleEffect";
-//                animation.duration=2.0;
-//                [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
+                //                CATransition *animation=[CATransition animation];
+                //                animation.type=@"rippleEffect";
+                //                animation.duration=2.0;
+                //                [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
                 storyVC.titleStr = @"故事";
                 [self.navigationController pushViewController:storyVC animated:YES];
             }];
