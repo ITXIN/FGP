@@ -12,7 +12,6 @@
 {
     CGFloat categoryBtnW;
     CGFloat actionBtnW;
-    UIView *bgView;
     CGFloat actionBtnRadius;
     CGFloat smallRadius;
     CGFloat bigRadius;
@@ -21,41 +20,16 @@
     
     UIImageView *imagView;
     NSTimer *timer;
-    //    CARadarView *radarView;
 }
 -(void)dealloc
 {
     [timer invalidate];
     timer = nil;
 }
-- (instancetype)init{
-    self = [super init];
-    if (self){
-        [self setupSubviews];
-    }
-    return self;
-}
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        [self setupSubviews];
-        
-    }
-    return self;
-}
 
-- (void)setupSubviews{
-    bgView = ({
-        UIView *view = [[UIView alloc]init];
-        [self addSubview:view];
-        view.frame = self.bounds;
-        view;
-    });
+- (void)initSubviews{
+    [super initSubviews];
     
-    //    categoryBtnW = 110;
-    //    actionBtnW = 200;
     categoryBtnW = 100*kScreenHeightRatio;
     actionBtnW = 150*kScreenHeightRatio;
     self.btnsArr = [NSMutableArray array];
@@ -67,13 +41,12 @@
     basicAnim.autoreverses = YES;
     basicAnim.repeatCount = HUGE_VAL;
     basicAnim.removedOnCompletion = NO;
-    for (int i = 0; i < 4; i ++)
-    {
+    for (int i = 0; i < 4; i ++){
         UIButton *categoryBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [bgView addSubview:btn];
+            [self.bgView addSubview:btn];
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.mas_equalTo(bgView);
+                make.center.mas_equalTo(self.bgView );
                 make.size.mas_equalTo(CGSizeMake(categoryBtnW, categoryBtnW));
             }];
             btn.layer.cornerRadius = categoryBtnW/2;
@@ -85,8 +58,7 @@
         [categoryBtn.layer addAnimation:basicAnim forKey:@"categoryKeyTarnsform.rotaiton.z"];
         
         
-        if (i == 0)
-        {
+        if (i == 0){
             self.gameBtn = categoryBtn;
             categoryBtn.tag = CategoryGame;
             imagView = [[UIImageView alloc]init];
@@ -98,19 +70,16 @@
             imagView.layer.cornerRadius = 5;
             imagView.layer.masksToBounds = YES;
             
-        }else if (i == 1)
-        {
+        }else if (i == 1){
             self.aiBtn = categoryBtn;
             categoryBtn.tag = CategoryAI;
             [self.aiBtn setImage:[UIImage imageNamed:@"AI"] forState:UIControlStateNormal];
-        }else if (i == 2)
-        {
+        }else if (i == 2) {
             self.storysBtn = categoryBtn;
             categoryBtn.tag = CategoryStory;
             [self.storysBtn setImage:[UIImage imageNamed:@"home_story"] forState:UIControlStateNormal];
             [self.storysBtn setBackgroundImage:[UIImage imageNamed:@"home_story_bg"] forState:UIControlStateNormal];
-        }else
-        {
+        }else{
             self.mathBtn = categoryBtn;
             categoryBtn.tag = CategoryMath;
             
@@ -124,9 +93,9 @@
     
     self.actionBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bgView addSubview:btn];
+        [self.bgView  addSubview:btn];
         btn.frame = CGRectMake(0, 0, actionBtnW, actionBtnW);
-        btn.center = bgView.center;
+        btn.center = self.center;
         btn.layer.cornerRadius = actionBtnW/2;
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -143,11 +112,11 @@
     bigCenterH = sqrt(pow(bigRadius,2)/2);//直角三角形的直角边
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(categoryTap:)];
-    bgView.userInteractionEnabled = YES;
-    [bgView addGestureRecognizer:tap];
-
-//    UITapGestureRecognizer *actionBtnTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(actionButtonTapAction:)];
-//    [self.actionBtn addGestureRecognizer:actionBtnTap];
+    self.bgView.userInteractionEnabled = YES;
+    [self.bgView  addGestureRecognizer:tap];
+    
+    //    UITapGestureRecognizer *actionBtnTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(actionButtonTapAction:)];
+    //    [self.actionBtn addGestureRecognizer:actionBtnTap];
     
     [self setupTimer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -176,9 +145,9 @@
     //        view.transform = CGAffineTransformIdentity;
     //    }];
     [UIView animateWithDuration:0.5 animations:^{
-       [AnimationProcess springAnimationProcessWithView:self.actionBtn upHeight:arc4random()%(40-20+1)+20];
+        [AnimationProcess springAnimationProcessWithView:self.actionBtn upHeight:arc4random()%(40-20+1)+20];
     }];
-   
+    
     [self startGameImageNewAnimation];
 }
 
@@ -232,14 +201,12 @@
 #pragma mark --- Tom Animation
 - (void)tomAnimation:(NSString *)imageName count:(int )count
 {
-    if ([imagView isAnimating])
-    {
+    if ([imagView isAnimating]){
         return;
     }
     NSMutableArray *imageArr = [NSMutableArray array];
     
-    for (int i = 0; i < count; i ++)
-    {
+    for (int i = 0; i < count; i ++){
         NSString *str = [NSString stringWithFormat:@"%@_%02d.jpg",imageName,i];
         NSString *path = [[NSBundle mainBundle] pathForResource:str ofType:nil];
         UIImage *image = [UIImage imageWithContentsOfFile:path];
@@ -263,24 +230,20 @@
 #pragma mark --- 手势
 - (void)categoryTap:(UITapGestureRecognizer*)sender
 {
-    CGPoint touchPoint = [sender locationInView:bgView];
+    CGPoint touchPoint = [sender locationInView:self.bgView];
     FGLOG(@"11");
-    for (UIButton *btn in self.btnsArr)
-    {
-        if ([btn.layer.presentationLayer hitTest:touchPoint])
-        {
+    for (UIButton *btn in self.btnsArr){
+        if ([btn.layer.presentationLayer hitTest:touchPoint]){
             FGLOG(@"22");
             [[SoundsProcess shareInstance] playSoundOfTock];
-            if (self.categoryDelegate && [self.categoryDelegate respondsToSelector:@selector(categoryAction:)])
-            {
+            if (self.categoryDelegate && [self.categoryDelegate respondsToSelector:@selector(categoryAction:)]){
                 [self.categoryDelegate categoryAction:btn];
             }
         }
     }
 }
 
-- (void)celarLayers
-{
+- (void)celarLayers{
     [self.gameLayer removeFromSuperlayer];
     [self.aiLayer removeFromSuperlayer];
     [self.storyLayer removeFromSuperlayer];
@@ -293,9 +256,7 @@
 }
 #pragma mark -
 #pragma mark --- ActionBtnClick
-- (void)actionBtnClick:(UIButton*)sender
-//- (void)actionButtonTapAction:(UITapGestureRecognizer*)tap
-{
+- (void)actionBtnClick:(UIButton*)sender{
     FGLOG(@"tap");
     [self celarLayers];
     //解决删除崩溃
@@ -309,10 +270,8 @@
     self.actionBtn.selected = !self.actionBtn.selected;
 }
 
-- (void)addAnimationWithOutFlag:(NSInteger)isOut
-{
-    for (int i = 0; i < 4; i ++)
-    {
+- (void)addAnimationWithOutFlag:(BOOL)isOut{
+    for (int i = 0; i < 4; i ++){
         UIBezierPath *circlePath = [UIBezierPath bezierPath];
         circlePath.lineWidth = 2.0;
         circlePath.lineCapStyle = kCGLineCapRound;
@@ -331,28 +290,23 @@
         circleLayer.strokeStart = 0.0;
         
         //in
-        if (i == 0)
-        {
+        if (i == 0){
             //从左上半部开始顺时针绘制
             [circlePath addArcWithCenter:(CGPoint){center.x- bigCenterH,center.y-bigCenterH} radius:bigRadius startAngle:isOut? M_PI/4:M_PI/4*5 endAngle:isOut? M_PI/4*5:M_PI/4*9 clockwise:YES];
             self.gameLayer = circleLayer;
             self.gamePath = circlePath;
-        }
-        else if (i == 1)
-        {
+        }else if (i == 1){
             //从右上半部开始顺时针绘制
             [circlePath addArcWithCenter:(CGPoint){center.x+ bigCenterH,center.y-bigCenterH} radius:bigRadius startAngle:isOut? M_PI/4*3:M_PI/4*7 endAngle:isOut? M_PI/4*7:M_PI/4*11 clockwise:YES];
             self.aiLayer = circleLayer;
             self.aiPath = circlePath;
             
-        }else if (i == 2)
-        {
+        }else if (i == 2){
             //从右下半部开始顺时针绘制
             [circlePath addArcWithCenter:(CGPoint){center.x+ bigCenterH,center.y+bigCenterH} radius:bigRadius startAngle:isOut? M_PI/4*5:M_PI/4 endAngle:isOut? M_PI*2+M_PI/4:M_PI/4*5 clockwise:YES];
             self.storyLayer = circleLayer;
             self.storyPath = circlePath;
-        }else
-        {
+        }else{
             //从左下半部开始顺时针绘制
             [circlePath addArcWithCenter:(CGPoint){center.x- bigCenterH,center.y+bigCenterH} radius:bigRadius startAngle:isOut? M_PI/4*7:M_PI/4*3 endAngle:isOut? M_PI/4*3:M_PI/4*7 clockwise:YES];
             self.mathLayer = circleLayer;
@@ -401,33 +355,29 @@
             [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:50 options:UIViewAnimationOptionCurveLinear animations:^{
                 self.actionBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
                 self.actionBtn.alpha = 1.0;
+                btn.alpha = 1.0;
             } completion:^(BOOL finished) {
                 self.actionBtn.transform = CGAffineTransformIdentity;
             }];
             
-        }else
-        {
+        }else{
             btn.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            
             self.actionBtn.alpha = 0.5;
             [UIView animateWithDuration:1 animations:^{
                 btn.transform = CGAffineTransformMakeScale(0.1, 0.1);
                 self.actionBtn.alpha = 1.0;
                 self.actionBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
+                btn.alpha = 0.0;
             } completion:^(BOOL finished) {
                 btn.transform = CGAffineTransformIdentity;
                 self.actionBtn.transform = CGAffineTransformIdentity;
             }];
         }
         
-        [bgView.layer addSublayer:circleLayer];
+        [self.bgView.layer addSublayer:circleLayer];
     }
     
-}
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
-    }];
 }
 
 @end

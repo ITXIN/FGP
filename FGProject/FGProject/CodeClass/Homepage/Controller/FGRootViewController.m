@@ -63,6 +63,8 @@
     [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:[NSString stringWithFormat:@"Indexbg-0%d",arc4random()%(3-1+1)+1]] withBlurLevel:1]];
     RootView *rootView = [[RootView alloc]init];
     [self.bgView addSubview:rootView];
+    //波
+    self.radarView = rootView.radarView;
     [rootView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.bgView);
     }];
@@ -72,20 +74,7 @@
     [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(rootView);
     }];
-    //波
-    self.radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight+100, ScreenHeight+100)];
-    [self.bgView addSubview:self.radarView];
-    self.radarView.center = self.view.center;
-    self.radarView.fillColor = [UIColor whiteColor];
-    self.radarView.opacityValue = 0.9;
-    [self.radarView startAnimation];
-    
-    self.radarView.backgroundColor = [UIColor purpleColor];
 
-    
-    
-    
-  
     //类别
     FGCategoryMenuView *cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
     cateGoryMenuView.categoryDelegate = self;

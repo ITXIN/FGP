@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
+#import "FGBaseView.h"
 @protocol FGCategoryMenuViewDelegate <NSObject>
 
 - (void)categoryAction:(UIButton*)sender;
 
 @end
-@interface FGCategoryMenuView : UIView
+@interface FGCategoryMenuView : FGBaseView
 @property (nonatomic,strong) UIButton *actionBtn;
 
 @property (nonatomic,strong) UIButton *gameBtn;
@@ -24,12 +23,10 @@
 
 @property (nonatomic,strong) NSMutableArray *btnsArr;
 
-
 @property (nonatomic,strong) CAShapeLayer *gameLayer;
 @property (nonatomic,strong) CAShapeLayer *mathLayer;
 @property (nonatomic,strong) CAShapeLayer *aiLayer;
 @property (nonatomic,strong) CAShapeLayer *storyLayer;
-
 
 @property (nonatomic,strong) UIBezierPath *gamePath;
 @property (nonatomic,strong) UIBezierPath *mathPath;
@@ -37,6 +34,5 @@
 @property (nonatomic,strong) UIBezierPath *storyPath;
 
 @property (nonatomic,assign) id <FGCategoryMenuViewDelegate> categoryDelegate;
-
 
 @end

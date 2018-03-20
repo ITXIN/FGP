@@ -12,8 +12,10 @@
 //@optional
 //- (void)startBtnAction;
 //@end
-@interface RootView : UIView
-
+#import "FGBaseView.h"
+@class CARadarView;
+@interface RootView : FGBaseView
+@property (nonatomic,strong) CARadarView *radarView;
 //@property (nonatomic,weak) id <RootViewDelegate> delegate;
 //太阳图片
 @property (nonatomic, strong) UIImageView *sunImgView;
