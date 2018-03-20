@@ -50,7 +50,7 @@
     //    [adjustVolume setCallDelegate:self];
     
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
-    self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(ScreenWidth- ScreenWidth/7 - 20, 20 , ScreenWidth/7, ScreenWidth/7)];
+    self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(ScreenWidth- ScreenWidth/7 - kStatusBarAndNavigationBarHeight, 20 , ScreenWidth/7, ScreenWidth/7)];
     [self.bgView addSubview:self.circleView];
     
 }

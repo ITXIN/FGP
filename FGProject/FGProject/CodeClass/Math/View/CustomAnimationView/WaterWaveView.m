@@ -88,7 +88,8 @@ static CGFloat x;
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor colorWithRed:53/255.0 green:190/255.0 blue:46/255.0 alpha:0.8];
+//        self.backgroundColor = [UIColor colorWithRed:53/255.0 green:190/255.0 blue:46/255.0 alpha:0.8];
+        self.backgroundColor = RGBA(255, 255, 255, 1);
         self.layer.cornerRadius = frame.size.width/2;
         self.layer.masksToBounds = YES;
         //设置背景图片
@@ -108,7 +109,7 @@ static CGFloat x;
         _countLab = [[UILabel alloc]initWithFrame:self.bounds];
         [_countLab setText:@"0"];
         _countLab.textAlignment = NSTextAlignmentCenter;
-        _countLab.textColor = [UIColor whiteColor];
+        _countLab.textColor = [UIColor lightGrayColor];
         _countLab.font = [UIFont boldSystemFontOfSize:50.f];
         [self addSubview:_countLab];
        [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(animateWaveFish) userInfo:nil repeats:YES];

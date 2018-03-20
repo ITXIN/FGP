@@ -207,7 +207,7 @@ static NSString *reuserID = @"reuserID";
     }else{
         self.automaticallyAdjustsScrollViewInsets = NO;
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SafeAreaToLeft);
+            make.left.mas_equalTo(kStatusBarAndNavigationBarHeight);
             make.top.mas_equalTo(self.navigationView.mas_bottom);
             make.width.mas_equalTo(ScreenWidth/2);
             make.bottom.mas_equalTo(0);

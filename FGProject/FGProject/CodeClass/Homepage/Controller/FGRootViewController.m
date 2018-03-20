@@ -58,11 +58,13 @@
 - (void)initSubviews{
     [super initSubviews];
     self.navigationView.hidden = YES;
+    
+ 
     [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:[NSString stringWithFormat:@"Indexbg-0%d",arc4random()%(3-1+1)+1]] withBlurLevel:1]];
     RootView *rootView = [[RootView alloc]init];
     [self.bgView addSubview:rootView];
     [rootView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.bgView);
     }];
     
     self.angryBirdView = [[FGAngryBirdsView alloc]init];
@@ -70,30 +72,30 @@
     [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(rootView);
     }];
-    //类别
-    FGCategoryMenuView *cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
-    cateGoryMenuView.categoryDelegate = self;
-    [self.bgView addSubview:cateGoryMenuView];
-    [cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (Screen58Inch) {
-            make.width.mas_equalTo(ScreenHeight-34);
-            make.height.mas_equalTo(ScreenHeight-34);
-            make.center.equalTo(self.view);
-        }else{
-            make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
-            make.center.equalTo(self.view);
-        }
-    }];
-    
     //波
     self.radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight+100, ScreenHeight+100)];
-    [self.bgView insertSubview:self.radarView belowSubview:cateGoryMenuView];
+    [self.bgView addSubview:self.radarView];
     self.radarView.center = self.view.center;
     self.radarView.fillColor = [UIColor whiteColor];
     self.radarView.opacityValue = 0.9;
     [self.radarView startAnimation];
     
+    self.radarView.backgroundColor = [UIColor purpleColor];
+
     
+    
+    
+  
+    //类别
+    FGCategoryMenuView *cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
+    cateGoryMenuView.categoryDelegate = self;
+    [self.bgView addSubview:cateGoryMenuView];
+    [cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
+            make.center.equalTo(self.view);
+    }];
+
+  
     UIButton *myCenterBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.bgView addSubview:btn];

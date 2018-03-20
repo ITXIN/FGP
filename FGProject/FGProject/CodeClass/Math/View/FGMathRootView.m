@@ -187,6 +187,7 @@
     }
     
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {

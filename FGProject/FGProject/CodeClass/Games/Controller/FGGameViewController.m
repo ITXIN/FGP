@@ -30,7 +30,7 @@ static NSString *headerIdentifier = @"ReuseHeader";
         flowLayout = [[UICollectionViewFlowLayout alloc]init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
         
-        if (ScreenWidth == Screen58InchWidth) {
+        if (kiPhoneX) {
             flowLayout.itemSize = CGSizeMake(130, 130);
 //            flowLayout.itemSize = CGSizeMake((ScreenWidth-10-88-83)/3, (ScreenWidth-10-88-83)/3);
         }else{

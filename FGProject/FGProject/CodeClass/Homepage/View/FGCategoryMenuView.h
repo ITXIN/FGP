@@ -35,7 +35,7 @@
 @property (nonatomic,strong) UIBezierPath *mathPath;
 @property (nonatomic,strong) UIBezierPath *aiPath;
 @property (nonatomic,strong) UIBezierPath *storyPath;
-//@property (nonatomic,strong) NSTimer *timer;
+
 @property (nonatomic,assign) id <FGCategoryMenuViewDelegate> categoryDelegate;
 
 

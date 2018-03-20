@@ -61,9 +61,11 @@
     //绘制 cos()
     CGContextRef contxt1 = UIGraphicsGetCurrentContext();
     CGMutablePathRef path1 = CGPathCreateMutable();
-    //画水
+    //画水波
     CGContextSetLineWidth(contxt1, 1);
-    CGContextSetFillColorWithColor(contxt1, [[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1] CGColor]);
+//    CGContextSetFillColorWithColor(contxt1, [[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1] CGColor]);
+    
+    CGContextSetFillColorWithColor(contxt1, currentWaterColor.CGColor );
     float y1 = self.waveHeight;
     CGPathMoveToPoint(path1, NULL, 0, y1);
     for (float x = 0; x <= rect.size.width; x ++)

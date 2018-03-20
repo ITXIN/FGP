@@ -164,10 +164,34 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define FIREBASE_DATABASE_CATEGORY_GAME @"Game"
 
 #define AVAILABLE_IOS_11 @available(iOS 11.0, *)
-#define Screen58Inch        (ScreenHeight  == 812.0)
-#define Screen58InchWidth 812
-#define SafeAreaToLeft (ScreenHeight == 812 ? 88.0 : 20.0)
-#define SafeAreaToRight (ScreenHeight == 812 ? 44.0 : 39.0)
+//#define Screen58Inch        (ScreenHeight  == 812.0)
+//#define Screen58InchWidth 812
+//#define SafeAreaToLeft (ScreenHeight == 812 ? 88.0 : 20.0)
+//#define SafeAreaToRight (ScreenHeight == 812 ? 44.0 : 39.0)
+
+
+
+#define kiPhoneX        (ScreenWidth == 812.0 &&  ScreenHeight == 375.f)
+
+
+// Status bar height.
+#define  kStatusBarHeight      (kiPhoneX ? 44.f : 20.f)
+
+// Navigation bar height.
+#define  kNavigationBarHeight  44.f
+
+// Tabbar height.
+#define  kTabbarHeight         (kiPhoneX ? (49.f+34.f) : 49.f)
+
+// Tabbar safe bottom margin.
+#define  kTabbarSafeBottomMargin         (kiPhoneX ? 34.f : 0.f)
+
+// Status bar & navigation bar height.
+#define  kStatusBarAndNavigationBarHeight  (kiPhoneX ? 88.f : 64.f)
+
+// Status bar & navigation bar &Tabbar height.
+#define  kStatusBarAndNavigationBarAndTabbarHeightHeight  (kTabbarHeight+kStatusBarAndNavigationBarHeight)
+
 
 #define USER_ICON_IPAD_WIDTH 100
 

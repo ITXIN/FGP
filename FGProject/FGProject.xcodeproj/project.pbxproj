@@ -1491,8 +1491,8 @@
 		8F5E44771FB3F675004BE4EC /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				8F7DE9512060BD5E00A74108 /* View */,
 				8F5E44781FB3F675004BE4EC /* Controller */,
-				8F5E44791FB3F675004BE4EC /* View */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1506,13 +1506,6 @@
 				8FBCEEA71FBAFAB200849B7A /* FGMathBaseViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		8F5E44791FB3F675004BE4EC /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		8F6AA2921FB0405B00A7B5C7 = {
@@ -2865,6 +2858,13 @@
 				8F6AA5D31FB0410500A7B5C7 /* FGProjectHelper.m */,
 			);
 			path = ProjectHelper;
+			sourceTree = "<group>";
+		};
+		8F7DE9512060BD5E00A74108 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8FADBE641FB46BD40018F6C8 /* PullCircle */ = {

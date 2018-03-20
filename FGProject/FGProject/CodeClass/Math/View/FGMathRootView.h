@@ -25,12 +25,7 @@
 @property (nonatomic, strong) UIButton *multiplyBtn;
 @property (nonatomic, strong) UIButton *divideBtn;
 @property (nonatomic,strong) UIButton *sunBtn;
-
-
 @property (nonatomic,strong) UIButton *reduceBtn;
-
-
-@property (nonatomic,strong) WaterWaveView *waterView;
 
 ////做的题目数量
 @property (nonatomic, strong) UIButton *countBtn;

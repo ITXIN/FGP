@@ -79,7 +79,6 @@
         
         [_sunImgView.layer addAnimation:basicAnimX forKey:@"KCBasicAnimation_RotationX"];
         
-        
     
        
     }

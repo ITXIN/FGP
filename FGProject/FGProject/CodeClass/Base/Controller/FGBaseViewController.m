@@ -27,7 +27,7 @@
 - (void)initSubviews{
     self.bgView= ({
         UIView *view = [[UIView alloc]init];
-        view.backgroundColor = [UIColor whiteColor];
+        view.backgroundColor = [UIColor yellowColor];
         [self.view addSubview:view];
         view;
     });
@@ -39,10 +39,6 @@
     [self.bgView addSubview:self.navigationView];
 
     
-//    CATransition *animation = [CATransition animation];
-//    animation.type = kCATransitionReveal;
-//    animation.duration = 1.5;
-//    [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
 }
 #pragma mark - FGNavigationviewDelegate
 -(void)popToRootViewController{
@@ -59,25 +55,25 @@
     self.navigationView.titleStr = [NSString stringWithFormat:@"%@",titleStr];
 }
 - (void)setupLayoutSubviews{
-//- (void)viewDidLayoutSubviews{
-//    [super viewDidLayoutSubviews];
-    if (AVAILABLE_IOS_11) {
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            if (Screen58Inch) {
-                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-            }else{
-                make.left.equalTo(self.view);
-                make.bottom.equalTo(self.view);
-            }
-            make.right.equalTo(self.view);
-        }];
-    }else{
+
+//    if (AVAILABLE_IOS_11) {
+//        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+//            if (kiPhoneX) {
+//                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+//                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+//                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+//                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+//            }else{
+//              make.edges.equalTo(self.view);
+//            }
+//
+//        }];
+//    }else{
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
-    }
+//    }
     
     [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.leading.mas_equalTo(self.view);
@@ -85,7 +81,7 @@
         make.top.mas_equalTo(0);
     }];
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.bgView);
     }];
 }
 

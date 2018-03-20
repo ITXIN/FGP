@@ -73,7 +73,7 @@
     }];
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (Screen58Inch) {
+        if (kiPhoneX) {
             make.left.mas_equalTo(30);
         }else{
             make.left.mas_equalTo(30);
