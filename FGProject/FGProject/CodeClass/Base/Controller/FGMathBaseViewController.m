@@ -61,5 +61,12 @@
 - (void)showCircleAnimationOfWaterWave{
     [self.circleView.waterWaveView showAnimationOfWaterWave];
 }
-
+- (void)setupLayoutSubviews{
+    [super setupLayoutSubviews];
+    [self.circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(15);
+        make.right.mas_equalTo(-kStatusBarHeight);
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth/7-20, ScreenWidth/7-20));
+    }];
+}
 @end
