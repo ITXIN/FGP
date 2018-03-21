@@ -83,11 +83,12 @@
     }];
 }
 #pragma mark ------产生运算式------
-- (void)operationSubjectByQuestionModel:(QuestionModel *)questionModel
+//- (void)operationSubjectByQuestionModel:(QuestionModel *)questionModel
+- (void)operationSubjectByQuestionModel:(FGMathOperationModel *)questionModel
 {
-    clickRandomCounModel = nil;
-    clickRandomCounModel = [[FGClickRandomAnswerCountModel alloc]init];
-    clickRandomCounModel.questionModel = questionModel;
+//    clickRandomCounModel = nil;
+//    clickRandomCounModel = [[FGClickRandomAnswerCountModel alloc]init];
+//    clickRandomCounModel.questionModel = questionModel;
     dispatch_async(dispatch_get_main_queue(), ^{
         [_operView setQuestionModel:questionModel];
         [self setValueForBtnWithQuestionModel:questionModel];
@@ -95,7 +96,9 @@
     });
 }
 #pragma mark --------对button 进行赋值---- 随机答案
-- (void)setValueForBtnWithQuestionModel:(QuestionModel *)questModel{
+//- (void)setValueForBtnWithQuestionModel:(QuestionModel *)questModel
+- (void)setValueForBtnWithQuestionModel:(FGMathOperationModel *)questModel
+{
     //产生随机答案
     FGMathAnswerOptionsModel *answerModle = [[FGMathOperationManager shareMathOperationManager]generateRandomAnswerNum:questModel.answerNum];
     

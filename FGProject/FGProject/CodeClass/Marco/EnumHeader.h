@@ -67,17 +67,25 @@ typedef NS_ENUM(NSInteger,MathRootViewActionType){
     //    MathRootViewActionTypeCompreOfDiffculty,
     
 };
+//+-一级，x/二级运算
+//Math运算 二数运算，三数运算
+typedef NS_ENUM(NSInteger, MathOperationLevel){
+    MathOperationLevelTwo = 2000,
+    MathOperationLevelThird,
+   
+};
 
 //Math计算类型选择
 typedef NS_ENUM(NSInteger,MathOperationActionType){
     MathOperationActionTypeAdd = 2000,
-    MathOperationActionTypeSubtract,
-    MathOperationActionTypeMultiply,
-    MathOperationActionTypeDivide,
-    MathOperationActionTypeCompreOfSimple,
-    MathOperationActionTypeCompreOfMedium,
-    MathOperationActionTypeCompreOfDiffculty,
+    MathOperationActionTypeSubtract = 2001,
+    MathOperationActionTypeMultiply = 2002,
+    MathOperationActionTypeDivide = 2003,
+    MathOperationActionTypeCompreOfSimple = 2004,
+    MathOperationActionTypeCompreOfMedium= 2005,
+    MathOperationActionTypeCompreOfDiffculty= 2006,
 };
+
 //Math SimpleView
 typedef NS_ENUM(NSInteger,MathSimpleOperationViewActionType){
     MathSimpleOperationViewActionTypeOperation = 2000,

@@ -16,15 +16,10 @@
 #import "MusicPlayerManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
-{
-
-    MusicPlayerView *playView;
-    NSTimer *timer;
-}
 
 @property (nonatomic, strong) FGMathRootView *choiceView;
 @property (nonatomic, strong) DiffcultyLevelView *diffView;
-@property (nonatomic, strong) UIImageView *flowerImageView;
+//@property (nonatomic, strong) UIImageView *flowerImageView;
 @end
 
 @implementation FGMathRootViewController
@@ -35,14 +30,6 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
 
-    
-//    playView = [[MusicPlayerView alloc]initWithFrame:CGRectMake(ScreenWidth/2 + RIGHT_MARGIN_PLAYERVIEW, ScreenHeight - HEIGHT_PLAYERVIEW - 10, WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW)];
-//    playView.delegate = self;
-//    [playView.playerManager setUpMusic];
-//    [self.view addSubview:playView];
-
-
-
 }
 - (void)initSubviews{
     [super initSubviews];
@@ -51,60 +38,42 @@
     self.choiceView.delegate = self;
     [self.bgView insertSubview:self.choiceView belowSubview:self.navigationView];
     
-    self.flowerImageView =  ({
-        UIImageView *image = [[UIImageView alloc]init];
-        [self.bgView addSubview:image];
-        [image mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-10);
-            make.right.mas_equalTo(-10);
-            make.size.mas_equalTo(CGSizeMake(100, 105));
-            
-        }];
-        image;
-    });
-    self.flowerImageView.image = [UIImage imageNamed:@"flower_smile"];
-    [self flowerAnimation:@"flower_walk" count:2];
+//    self.flowerImageView =  ({
+//        UIImageView *image = [[UIImageView alloc]init];
+//        [self.bgView addSubview:image];
+//        [image mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.mas_equalTo(-10);
+//            make.right.mas_equalTo(-10);
+//            make.size.mas_equalTo(CGSizeMake(100, 105));
+//
+//        }];
+//        image;
+//    });
+//    self.flowerImageView.image = [UIImage imageNamed:@"flower_smile"];
+//    [self flowerAnimation:@"flower_walk" count:2];
     
 }
-- (void)flowerAnimation:(NSString *)imageName count:(int )count
-{
-    if ([self.flowerImageView isAnimating]){
-        return;
-    }
-    NSMutableArray *imageArr = [NSMutableArray array];
-    
-    for (int i = 0; i < count; i ++){
-        NSString *str = [NSString stringWithFormat:@"%@_0%d.png",imageName,i+1];
-        NSString *path = [[NSBundle mainBundle] pathForResource:str ofType:nil];
-        UIImage *image = [UIImage imageWithContentsOfFile:path];
-        [imageArr addObject:image];
-    }
-    
-    [self.flowerImageView setAnimationImages:imageArr];
-    [self.flowerImageView setAnimationDuration:imageArr.count *0.5];
-    [self.flowerImageView setAnimationRepeatCount:NSIntegerMax];
-    [self.flowerImageView startAnimating];
-    
-//    [self.flowerImageView performSelector:@selector(setAnimationImages:) withObject:nil afterDelay:self.flowerImageView.animationDuration];
-}
+//- (void)flowerAnimation:(NSString *)imageName count:(int )count
+//{
+//    if ([self.flowerImageView isAnimating]){
+//        return;
+//    }
+//    NSMutableArray *imageArr = [NSMutableArray array];
+//
+//    for (int i = 0; i < count; i ++){
+//        NSString *str = [NSString stringWithFormat:@"%@_0%d.png",imageName,i+1];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:str ofType:nil];
+//        UIImage *image = [UIImage imageWithContentsOfFile:path];
+//        [imageArr addObject:image];
+//    }
+//
+//    [self.flowerImageView setAnimationImages:imageArr];
+//    [self.flowerImageView setAnimationDuration:imageArr.count *0.5];
+//    [self.flowerImageView setAnimationRepeatCount:NSIntegerMax];
+//    [self.flowerImageView startAnimating];
+//
+//}
 
-- (void)setupLayoutSubviews{
-    [super setupLayoutSubviews];
-    [self.choiceView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
-    }];
-}
-#pragma mark -
-#pragma mark --- MusicPlayView delegate
-- (void)musicPlayBtnAction:(UIButton *)btn
-{
-
-}
-
-- (void)progressGerstureWithlocation:(CGFloat)locationX
-{
-
-}
 
 #pragma mark -------FGMathRootViewDelegate-点击按钮进入题目页面----
 //- (void)choiceBtnAction:(UIButton *)btn
@@ -216,7 +185,12 @@
     }
 
 }
-
+- (void)setupLayoutSubviews{
+    [super setupLayoutSubviews];
+    [self.choiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.bgView);
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

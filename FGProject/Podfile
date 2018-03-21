@@ -17,5 +17,6 @@ pod 'Firebase/Messaging'
 pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 pod 'JCAlertView'
+pod 'PNChart'
 end
 

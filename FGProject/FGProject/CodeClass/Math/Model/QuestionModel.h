@@ -16,7 +16,7 @@
 @property (nonatomic, assign) NSInteger secondNum;
 //正确答案
 @property (nonatomic, assign) NSInteger answerNum;
-//用户的答案
+////用户的答案
 @property (nonatomic, strong) NSString *userAnswerStr;
 @property (nonatomic, assign) NSInteger thirdNum;
 

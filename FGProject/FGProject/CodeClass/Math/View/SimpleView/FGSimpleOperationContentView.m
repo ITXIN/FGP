@@ -21,7 +21,8 @@
     return self;
 }
 #pragma mark --------model 的 setter 方法----
--(void)setQuestionModel:(QuestionModel *)questionModel
+//-(void)setQuestionModel:(QuestionModel *)questionModel
+-(void)setQuestionModel:(FGMathOperationModel *)questionModel
 {
     for (UIButton *btn in self.bgView.subviews){
         [btn removeFromSuperview];

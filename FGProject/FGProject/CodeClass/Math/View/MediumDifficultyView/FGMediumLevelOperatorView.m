@@ -37,7 +37,8 @@
 }
 
 #pragma mark --------model 的 setter 方法----
--(void)setMediumOperationModel:(MediumOperationModel *)questionModel
+//-(void)setMediumOperationModel:(MediumOperationModel *)questionModel
+-(void)setMediumOperationModel:(FGMathOperationModel *)questionModel
 {
     for (UIButton *btn in self.bgView.subviews){
         [btn removeFromSuperview];

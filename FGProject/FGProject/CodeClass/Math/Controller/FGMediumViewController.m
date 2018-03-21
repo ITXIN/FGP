@@ -30,7 +30,8 @@
 @property (nonatomic,strong) FIRDatabaseReference *dataBaseRef;//存字符串
 @property (nonatomic,strong) FGMediumLevelOperatorView *mediumLOV;
 @property (nonatomic,strong) FGMediumCandidateAnswerView *candidateAV;
-@property (nonatomic,strong) MediumOperationModel *currentOperaModel;
+//@property (nonatomic,strong) MediumOperationModel *currentOperaModel;
+@property (nonatomic,strong) FGMathOperationModel *currentOperaModel;
 @end
 
 @implementation FGMediumViewController
@@ -136,10 +137,10 @@
     self.currentOperaModel = [self.mathManager generateMediumOperationModel];
     [self.mediumLOV setMediumOperationModel:self.currentOperaModel];
     
-    clickRandomCounModel = nil;
-    clickRandomCounModel = [[FGClickRandomAnswerCountModel alloc]init];
-    clickRandomCounModel.questionMediumModel = self.currentOperaModel;
-    clickRandomCounModel.randomMediumModel = [MediumOperationModel candidateMediumWithAnswer:self.currentOperaModel.answerNum];
+//    clickRandomCounModel = nil;
+//    clickRandomCounModel = [[FGClickRandomAnswerCountModel alloc]init];
+//    clickRandomCounModel.questionMediumModel = self.currentOperaModel;
+//    clickRandomCounModel.randomMediumModel = [MediumOperationModel candidateMediumWithAnswer:self.currentOperaModel.answerNum];
     
     FGMathAnswerOptionsModel *answerOptionModel = [self.mathManager generateRandomAnswerNum:self.currentOperaModel.answerNum];
     [self.candidateAV setupAnswerModel:answerOptionModel];
@@ -159,7 +160,7 @@
             //今天做的题目个数
             [self.mathManager saveCurrentDateHasDoneNumber:_doneCount];
             [self updatCircleviewData];
-            [self postDataToFireBaseWithClickQuestionModel:clickRandomCounModel];
+//            [self postDataToFireBaseWithClickQuestionModel:clickRandomCounModel];
             //每间隔6道题弹出一次
             if (_doneCount %6 == 0)
             {
@@ -200,20 +201,9 @@
     }else
     {
         [[SoundsProcess shareInstance] playSoundOfWrong];
-        //统计,分析点击情况
-        //        NSString *btnStr = btn.currentTitle;
-        //        if ([btnStr isEqualToString:[NSString stringWithFormat:@"%ld",clickRandomCounModel.randomMediumModel.firstNum]])
-        //        {
-        //            clickRandomCounModel.firstNum ++;
-        //
-        //        }else if ([btnStr isEqualToString:[NSString stringWithFormat:@"%ld",clickRandomCounModel.randomMediumModel.secondNum]])
-        //        {
-        //            clickRandomCounModel.secondNum ++;
-        //
-        //        }else
-        //        {
-        //            clickRandomCounModel.thirdNum ++;
-        //        }
+        [self updateView];
+        [self showCircleAnimationOfWaterWave];
+        
         
         
     }

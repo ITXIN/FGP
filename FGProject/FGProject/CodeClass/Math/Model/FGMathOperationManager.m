@@ -7,9 +7,11 @@
 //
 
 #import "FGMathOperationManager.h"
-#import "QuestionModel.h"
-#import "MediumOperationModel.h"
+//#import "QuestionModel.h"
+//#import "MediumOperationModel.h"
 #import "FGMathAnswerOptionsModel.h"
+
+#import "FGMathOperationModel.h"
 @implementation FGMathOperationManager
 static NSString *countKey = @"countKey";
 static NSString *rewardKey = @"rewardKey";
@@ -118,19 +120,26 @@ static NSString *hasDoneKey = @"hasDoneKey";
 /**
  两级运算
  */
-- (QuestionModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType{
-    QuestionModel *questModel = [QuestionModel GenerateRandomNumWithOperationType:mathOperationType];
-    self.currentQuestionModel = questModel;
+//- (QuestionModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType{
+//    QuestionModel *questModel = [QuestionModel GenerateRandomNumWithOperationType:mathOperationType];
+//    self.currentQuestionModel = questModel;
+//    self.isCompreOperation = NO;
+//
+//    return questModel;
+//}
+- (FGMathOperationModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType{
+    FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModelWithOperationType:mathOperationType];
+    self.currentMathOperationModel = questModel;
     self.isCompreOperation = NO;
-//    self.currentOperationStr = [NSString stringWithFormat:@"%@%@%@%@",questModel.firstNum,questModel.mathOperationActionType,];
+    
     return questModel;
 }
-
 
 
 /**
  产生三级加减混合运算
  */
+/*
 - (MediumOperationModel*)generateMediumOperationModel{
     
     MathOperationActionType firstOperationType = [self.operationsArr[arc4random()%self.operationsArr.count] integerValue];
@@ -177,6 +186,18 @@ static NSString *hasDoneKey = @"hasDoneKey";
     self.isCompreOperation = YES;
     return mediumOperationModel;
 }
+
+*/
+
+
+- (FGMathOperationModel*)generateMediumOperationModel{
+    FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModel];
+    self.currentMathOperationModel = questModel;
+    self.isCompreOperation = YES;
+    return questModel;
+    
+}
+
 //随机答案选项
 - (FGMathAnswerOptionsModel *)generateRandomAnswerNum:(NSInteger)answerNum{
     NSInteger firstNum = 0;
@@ -249,12 +270,12 @@ static NSString *hasDoneKey = @"hasDoneKey";
     if (self.isCompreOperation) {
         operationActionType = MathOperationActionTypeCompreOfMedium;
     }else{
-        operationActionType = self.currentQuestionModel.mathOperationActionType;
+        operationActionType = self.currentMathOperationModel.mathOperationActionType;
     }
     NSDictionary *detailDic = @{
                                 kMathOperationTypeKey:[NSString stringWithFormat:@"%ld",operationActionType],
                                 kMathOperationStateKey:[NSString stringWithFormat:@"%@",actionTypeAnswer==MathSimpleOperationViewActionTypeAnswer? @"YES":@"NO"],
-                                kMathOperationObjKey:self.isCompreOperation?self.currentMediumOperationModel:self.currentQuestionModel,
+                                kMathOperationObjKey:self.currentMathOperationModel,
                                 kMathOperationDateKey:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
                                 };
     
@@ -283,8 +304,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
         
         [currentDateDetailArr addObject:detailDic];
         
-        NSDictionary *temp = currentDateDetailArr[2];
-     MediumOperationModel *ques =  temp[@"kMathOperationObjKey"];
+//        NSDictionary *temp = currentDateDetailArr[2];
+//     MediumOperationModel *ques =  temp[@"kMathOperationObjKey"];
 //
         
         
@@ -295,41 +316,11 @@ static NSString *hasDoneKey = @"hasDoneKey";
         [dataDic setValue:currentDateDic forKey:[self.dateSingle curretDate]];
         
     }
+    
+    FGLOG(@"%@",dataDic);
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
     
-//    NSDictionary *currentDateDic = dataDic[[self.dateSingle getDetailDate]];
-//
-//    NSMutableArray *currentDateDetailArr = [NSMutableArray arrayWithArray:
-//    currentDateDic[kMathOperationDetailDataKey]];
-//
-//
-//
-//    NSDictionary *detailDic = @{
-//                                 kMathOperationTypeKey:@"",
-//                                 kMathOperationStateKey:@"",
-//                                 kMathOperationObjKey:@"",
-//                                 kMathOperationDateKey:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
-//                                 };
-//
-//    [currentDateDetailArr addObject:detailDic];
-    
-//    NSDictionary *tempDic = @{
-//                              kMathOperationDataStatisticsKey:@{
-//                                      [self.dateSingle curretDate]:@{
-//                                              kMathOperationDetailDataKey:currentDateDetailArr,
-//                                              kMathOperationTotalNumberKey:@"",
-//                                              },
-//
-//                                      },
-//
-//
-//                                  };
-    
-    
-    
-    
-    
-    
+  
 }
 
 - (void)saveCurrentDateHasDoneNumber:(NSInteger)number{

@@ -44,4 +44,6 @@
 #import "EnumHeader.h"
 #import "FGUserManager.h"
 #import "FGRewardViewHUD.h"
+#import "PNChart.h"
+#import "FGMathOperationModel.h"
 #endif
