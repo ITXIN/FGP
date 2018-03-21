@@ -255,24 +255,23 @@
             break;
         case CategoryStory:
         {
-            [self runOnMainThread:^{
-                FLStoryViewController *storyVC = [[FLStoryViewController alloc]init];
-                //                CATransition *animation=[CATransition animation];
-                //                animation.type=@"rippleEffect";
-                //                animation.duration=2.0;
-                //                [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
-                storyVC.titleStr = @"故事";
-                [self.navigationController pushViewController:storyVC animated:YES];
-            }];
+            //            [self runOnMainThread:^{
+            FLStoryViewController *storyVC = [[FLStoryViewController alloc]init];
+            //                CATransition *animation=[CATransition animation];
+            //                animation.type=@"rippleEffect";
+            //                animation.duration=2.0;
+            //                [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
+            storyVC.titleStr = @"故事";
+            [self.navigationController pushViewController:storyVC animated:YES];
+            //            }];
         }
             break;
         case CategoryMath:
         {
-            [self runOnMainThread:^{
-                FGMathRootViewController *mathRootVC = [[FGMathRootViewController alloc]init];
-                mathRootVC.title = @"数学乐园";
-                [self.navigationController pushViewController:mathRootVC animated:YES];
-            }];
+            FGMathRootViewController *mathRootVC = [[FGMathRootViewController alloc]init];
+            mathRootVC.title = @"数学乐园";
+            [self.navigationController pushViewController:mathRootVC animated:YES];
+            
         }
             break;
         default:
@@ -280,17 +279,6 @@
     }
 }
 
-//iOS在执行动画效果，Controller切换，弹框这些和UI界面相关的程序的时候，必须并且只能在主线程上运行，否则会出现延时或者各种诡异的现象。
-//因此，在参考了各种方法后，整理了一个静态的block方法，如果不在主线程的话，直接切换到主线程执行动画
-#pragma mark 始终在主线程运行
-- (void)runOnMainThread:(dispatch_block_t)block
-{
-    if ([NSThread isMainThread]) {
-        block();
-    }else{
-        dispatch_sync(dispatch_get_main_queue(), block);
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

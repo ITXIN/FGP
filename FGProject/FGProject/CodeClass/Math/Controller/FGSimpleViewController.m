@@ -43,21 +43,16 @@
 #pragma mark -
 #pragma mark --- FGSimpleViewdeletate
 - (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType{
+    
     [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
+    [self updatCircleviewData];
+    
     switch (actionType) {
         case MathSimpleOperationViewActionTypeAnswer:
         {
             [[SoundsProcess shareInstance] playSoundOfTock];
             [[SoundsProcess shareInstance] playSoundOfWonderful];
             
-            NSInteger hasDone = [self.mathManager getCurrentDateHasDone];
-            hasDone ++;
-            //今天做的题目个数
-            [self.mathManager saveCurrentDateHasDoneNumber:hasDone];
-            NSInteger countTemp = [self.mathManager getCurrentDateHasDone];
-            FGLOG(@"countTemp -- %ld",countTemp);
-            
-            [self updatCircleviewData];
             if ([self.mathManager getCurrentDateHasDone] %10 == 0){//每隔10道 显示一次统计个数动画
                 [self showCircleAnimationOfWaterWave];
                 if (![self.view.subviews containsObject:self.toolView]){
@@ -94,6 +89,9 @@
         default:
             break;
     }
+    
+ 
+    
 }
 
 - (void)setupSimplewOperationViewNewQuestionModel{

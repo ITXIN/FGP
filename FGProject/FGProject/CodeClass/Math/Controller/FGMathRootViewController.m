@@ -15,6 +15,7 @@
 #import "FGMediumViewController.h"
 #import "MusicPlayerManager.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "FGMathOperationDataStatisticsViewController.h"
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
 
 @property (nonatomic, strong) FGMathRootView *choiceView;
@@ -25,11 +26,16 @@
 @implementation FGMathRootViewController
 
 #warning ---频繁的从本试图返回根视图内存会持续的增加
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[FGMathOperationManager shareMathOperationManager] getDataStatistic];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
 
+    
 }
 - (void)initSubviews{
     [super initSubviews];
@@ -37,6 +43,25 @@
     self.choiceView = [[FGMathRootView alloc]initWithFrame:self.view.frame];
     self.choiceView.delegate = self;
     [self.bgView insertSubview:self.choiceView belowSubview:self.navigationView];
+    
+    UIButton *myCenterBtn = ({
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.bgView addSubview:btn];
+        CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
+        btn.layer.cornerRadius = btnW/2;
+        btn.layer.masksToBounds = YES;
+        btn.backgroundColor = [UIColor whiteColor];
+        [btn setImage:[UIImage imageNamed:@"Indexbg-02"] forState:UIControlStateNormal];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(30);
+            make.right.mas_equalTo(-30);
+            make.size.mas_equalTo(CGSizeMake(btnW, btnW));
+        }];
+        [btn addTarget:self action:@selector(myCenterAction) forControlEvents:UIControlEventTouchUpInside];
+        btn;
+    });
+
+    
     
 //    self.flowerImageView =  ({
 //        UIImageView *image = [[UIImageView alloc]init];
@@ -52,6 +77,13 @@
 //    self.flowerImageView.image = [UIImage imageNamed:@"flower_smile"];
 //    [self flowerAnimation:@"flower_walk" count:2];
     
+}
+
+- (void)myCenterAction{
+    
+    
+    FGMathOperationDataStatisticsViewController *staticsVC = [[FGMathOperationDataStatisticsViewController alloc]init];
+    [self.navigationController pushViewController:staticsVC animated:YES];
 }
 //- (void)flowerAnimation:(NSString *)imageName count:(int )count
 //{

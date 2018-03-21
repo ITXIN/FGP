@@ -12,9 +12,12 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:[NSNumber numberWithInteger:self.firstNum] forKey:@"firstNum"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.secondNum] forKey:@"secondNum"];
+   [aCoder encodeObject:[NSNumber numberWithInteger:self.thirdNum] forKey:@"thirdNum"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.answerNum] forKey:@"answerNum"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.mathOperationActionType] forKey:@"mathOperationActionType"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.firstOperationType] forKey:@"firstOperationType"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.secondOperationType] forKey:@"secondOperationType"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.operationLevel] forKey:@"operationLevel"];
 }
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
@@ -22,9 +25,13 @@
         
         self.firstNum =  [[aDecoder decodeObjectForKey:@"firstNum"] integerValue];
         self.secondNum =  [[aDecoder decodeObjectForKey:@"secondNum"] integerValue];
+        self.thirdNum =  [[aDecoder decodeObjectForKey:@"thirdNum"] integerValue];
+        self.answerNum =  [[aDecoder decodeObjectForKey:@"answerNum"] integerValue];
         self.mathOperationActionType =  [[aDecoder decodeObjectForKey:@"mathOperationActionType"] integerValue];
+       
         self.firstOperationType =  [[aDecoder decodeObjectForKey:@"firstOperationType"] integerValue];
         self.secondOperationType =  [[aDecoder decodeObjectForKey:@"secondOperationType"] integerValue];
+         self.operationLevel =  [[aDecoder decodeObjectForKey:@"operationLevel"] integerValue];
     }
     return self;
 }
@@ -59,6 +66,7 @@
         thirdNum = arc4random() % kMathOperationRangeNumber;
     }
     
+
     questionModel.firstNum = firstNum;
     questionModel.secondNum = secondNum;
     questionModel.thirdNum = thirdNum;
@@ -105,7 +113,7 @@
     questionModel.secondNum = secondNum;
     questionModel.mathOperationActionType = currentOperationTyp;
     questionModel.operationLevel = MathOperationLevelTwo;
-    questionModel.userAnswerStr = nil;
+//    questionModel.userAnswerStr = nil;
     return questionModel;
 }
 // MARK: - ---------------------------------- 三个数 ----------------------------------
@@ -219,6 +227,7 @@
         
         
     }
+    mediumOperationModel.operationLevel = MathOperationLevelThird;
     return mediumOperationModel;
 }
 

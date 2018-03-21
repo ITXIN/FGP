@@ -231,10 +231,10 @@
 - (void)categoryTap:(UITapGestureRecognizer*)sender
 {
     CGPoint touchPoint = [sender locationInView:self.bgView];
-    FGLOG(@"11");
+//    FGLOG(@"11");
     for (UIButton *btn in self.btnsArr){
         if ([btn.layer.presentationLayer hitTest:touchPoint]){
-            FGLOG(@"22");
+//            FGLOG(@"22");
             [[SoundsProcess shareInstance] playSoundOfTock];
             if (self.categoryDelegate && [self.categoryDelegate respondsToSelector:@selector(categoryAction:)]){
                 [self.categoryDelegate categoryAction:btn];

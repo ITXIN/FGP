@@ -7,27 +7,25 @@
 //
 
 #import "FGMathOperationManager.h"
-//#import "QuestionModel.h"
-//#import "MediumOperationModel.h"
 #import "FGMathAnswerOptionsModel.h"
-
+#import "FGMathOperationDataStatisticsModel.h"
 #import "FGMathOperationModel.h"
 @implementation FGMathOperationManager
 static NSString *countKey = @"countKey";
 static NSString *rewardKey = @"rewardKey";
 static NSString *hasDoneKey = @"hasDoneKey";
-+ (instancetype)shareMathOperationManager
-{
+
++ (FGMathOperationManager*)shareMathOperationManager{
     static FGMathOperationManager *manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[self alloc] init];
+        manager = [[FGMathOperationManager alloc] init];
         manager.operationsArr = @[@(MathOperationActionTypeAdd),@(MathOperationActionTypeSubtract),@(MathOperationActionTypeMultiply),@(MathOperationActionTypeDivide)];
         manager.dateSingle = [FGDateSingle shareInstance];
         manager.countDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:countKey]];
         manager.hasDoneDic = [NSMutableDictionary dictionaryWithDictionary: manager.countDic[hasDoneKey]];
-        
-//        manager.countDic = [NSMutableDictionary dictionaryWithDictionary:@{rewardKey:@"",hasDoneKey:manager.hasDoneArr}];
+        manager.dataStatisticsModel = [[FGMathOperationDataStatisticsModel alloc]init];
+
     });
     return manager;
 }
@@ -120,13 +118,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
 /**
  两级运算
  */
-//- (QuestionModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType{
-//    QuestionModel *questModel = [QuestionModel GenerateRandomNumWithOperationType:mathOperationType];
-//    self.currentQuestionModel = questModel;
-//    self.isCompreOperation = NO;
-//
-//    return questModel;
-//}
+
 - (FGMathOperationModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType{
     FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModelWithOperationType:mathOperationType];
     self.currentMathOperationModel = questModel;
@@ -139,57 +131,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
 /**
  产生三级加减混合运算
  */
-/*
-- (MediumOperationModel*)generateMediumOperationModel{
-    
-    MathOperationActionType firstOperationType = [self.operationsArr[arc4random()%self.operationsArr.count] integerValue];
-    QuestionModel *questModel = [QuestionModel GenerateRandomNumWithOperationType:firstOperationType];
-    MediumOperationModel *mediumOperationModel = [[MediumOperationModel alloc]init];
-    mediumOperationModel.firstOperationType = firstOperationType;
-    mediumOperationModel.firstNum = questModel.firstNum;
-    mediumOperationModel.secondNum = questModel.secondNum;
-    mediumOperationModel.answerNum = questModel.answerNum;
-    
-    if (mediumOperationModel.answerNum > 0) {//只有加减
-        MathOperationActionType secondMathOperationType = [self.operationsArr[arc4random()%2] integerValue];
-        NSInteger thirdNum = arc4random() % kMathOperationRangeNumber;
-        if (secondMathOperationType == MathOperationActionTypeSubtract){
-            while (mediumOperationModel.answerNum < thirdNum){
-                thirdNum = arc4random() % kMathOperationRangeNumber;
-            }
-            mediumOperationModel.answerNum = mediumOperationModel.answerNum - thirdNum;
-        }else if(secondMathOperationType == MathOperationActionTypeAdd){
-            mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
-        }
-        
-        mediumOperationModel.secondOperationType = secondMathOperationType;
-        mediumOperationModel.thirdNum = thirdNum;
-    }else{
-        
-        NSInteger thirdNum = arc4random() % kMathOperationRangeNumber;
-        if (thirdNum == 0) {
-            //当都为0，最后一个既可以为加号也可以为减号。
-            MathOperationActionType secondMathOperationType = [self.operationsArr[arc4random()%2] integerValue];
-            mediumOperationModel.thirdNum = thirdNum;
-             mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
-            mediumOperationModel.secondOperationType = secondMathOperationType;
-            
-        }else{
-                mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
-                mediumOperationModel.secondOperationType = MathOperationActionTypeAdd;
-                mediumOperationModel.thirdNum = thirdNum;
-        }
-        
-       
-    }
-    self.currentMediumOperationModel = mediumOperationModel;
-    self.isCompreOperation = YES;
-    return mediumOperationModel;
-}
-
-*/
-
-
 - (FGMathOperationModel*)generateMediumOperationModel{
     FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModel];
     self.currentMathOperationModel = questModel;
@@ -261,10 +202,16 @@ static NSString *hasDoneKey = @"hasDoneKey";
     }
 }
 
-//运算数据统计
+//保存运算数据统计
 - (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer{
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
     
+    NSInteger hasDone = [self getCurrentDateHasDone];
+    hasDone ++;
+    //今天做的题目个数
+    [self saveCurrentDateHasDoneNumber:hasDone];
+    
+    
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
     
     MathOperationActionType operationActionType;
     if (self.isCompreOperation) {
@@ -275,23 +222,20 @@ static NSString *hasDoneKey = @"hasDoneKey";
     NSDictionary *detailDic = @{
                                 kMathOperationTypeKey:[NSString stringWithFormat:@"%ld",operationActionType],
                                 kMathOperationStateKey:[NSString stringWithFormat:@"%@",actionTypeAnswer==MathSimpleOperationViewActionTypeAnswer? @"YES":@"NO"],
-                                kMathOperationObjKey:self.currentMathOperationModel,
+                                kMathOperationObjKey:self.currentMathOperationModel ,
                                 kMathOperationDateKey:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
                                 };
-    
-   
+    FGMathOperationModel *mathOperationModel = self.currentMathOperationModel;
+      FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
     if (dataDic.allValues.count == 0) {
         
         dataDic = [NSMutableDictionary dictionaryWithDictionary:@{
-                                  kMathOperationDataStatisticsKey:@{
                                           [self.dateSingle curretDate]:@{
                                                   kMathOperationDetailDataKey:@[detailDic],
-                                                  kMathOperationTotalNumberKey:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
+                                                  kMathOperationDetailDataTotalNumberKey:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
                                                   },
-                                          
-                                          },
-                                  
-                                  
+                                           kMathOperationDataStatisticsTotalNumberKey:@"1"
+                                         
                                   }];
         
         
@@ -304,24 +248,176 @@ static NSString *hasDoneKey = @"hasDoneKey";
         
         [currentDateDetailArr addObject:detailDic];
         
-//        NSDictionary *temp = currentDateDetailArr[2];
-//     MediumOperationModel *ques =  temp[@"kMathOperationObjKey"];
-//
-        
-        
-        [currentDateDic setValue:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]] forKey:kMathOperationTotalNumberKey];
+        [currentDateDic setValue:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]] forKey:kMathOperationDetailDataTotalNumberKey];
         [currentDateDic setValue:currentDateDetailArr forKey:kMathOperationDetailDataKey];
-        
         
         [dataDic setValue:currentDateDic forKey:[self.dateSingle curretDate]];
         
+        
+
+        NSInteger totalNumber = [dataDic[kMathOperationDataStatisticsTotalNumberKey] integerValue];
+        totalNumber = totalNumber + 1;
+        
+        [dataDic setValue:[NSString stringWithFormat:@"%ld",totalNumber] forKey:kMathOperationDataStatisticsTotalNumberKey];
+        
+        
     }
     
-    FGLOG(@"%@",dataDic);
+//    FGLOG(@"%@",dataDic);
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
     
   
 }
+
+- (void)getDataStatistic{
+    self.dataStatisticsModel = [[FGMathOperationDataStatisticsModel alloc]init];
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    
+    NSInteger totalNumber = [dataDic[kMathOperationDataStatisticsTotalNumberKey] integerValue];
+    self.dataStatisticsModel.totalNumber = totalNumber;
+    
+    NSArray *allKeys =  dataDic.allKeys;
+    
+    NSMutableArray *mistakesOperationModelArr = [NSMutableArray array];
+    
+    NSInteger addTotalNumber = 0;
+    NSInteger subtractTotalNumber = 0;
+    NSInteger multiplyTotalNumber = 0;
+    NSInteger divideTotalNumber = 0;
+    NSInteger compreOfSimpleTotalNumber = 0;
+    NSInteger compreOfMediumTotalNumber = 0;
+    NSInteger compreOfDiffcultyTotalNumber = 0;
+    //正确的个数
+    NSInteger addAccuracyNumber = 0;
+    NSInteger subtractAccuracyNumber = 0;
+    NSInteger multiplyAccuracyNumber = 0;
+    NSInteger divideAccuracyNumber = 0;
+    NSInteger compreOfSimpleAccuracyNumber = 0;
+    NSInteger compreOfMediumAccuracyNumber = 0;
+    NSInteger compreOfDiffcultyAccuracyNumber = 0;
+    
+    NSInteger totalAccuracyNumber = 0;
+    for (NSString *key in allKeys) {
+        if ([dataDic[key] isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = dataDic[key];
+            NSArray *detailArr = dic[kMathOperationDetailDataKey];
+            
+            for (NSDictionary *detailDic in detailArr) {
+                
+                FGMathOperationModel *mathOperationModel = detailDic[kMathOperationObjKey];
+                
+//                FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
+                [mistakesOperationModelArr addObject:mathOperationModel];
+                
+                NSInteger operationType =  [detailDic[kMathOperationTypeKey] integerValue];
+                NSString *state =  detailDic[kMathOperationStateKey];
+                BOOL isState = NO;
+                if ([state isEqualToString:@"YES"]) {
+                    isState = YES;
+                    totalAccuracyNumber ++;
+                }
+                
+                
+                switch (operationType) {
+                    case MathOperationActionTypeAdd:
+                        addTotalNumber ++;
+                        if (isState) {
+                            addAccuracyNumber ++;
+                        }
+                        break;
+                    case MathOperationActionTypeSubtract:
+                        subtractTotalNumber ++;
+                        if (isState) {
+                            subtractAccuracyNumber ++;
+                        }
+                        break;
+                    case MathOperationActionTypeMultiply:
+                        multiplyTotalNumber ++;
+                        if (isState) {
+                            multiplyAccuracyNumber ++;
+                        }
+                        break;
+                    case MathOperationActionTypeDivide:
+                        divideTotalNumber ++;
+                        if (isState) {
+                            divideAccuracyNumber ++;
+                        }
+                        break;
+                    case MathOperationActionTypeCompreOfSimple:
+                        compreOfSimpleTotalNumber ++;
+                        if (isState) {
+                            compreOfSimpleAccuracyNumber ++;
+                        }
+                        break;
+                    case MathOperationActionTypeCompreOfMedium:
+                        compreOfMediumTotalNumber ++;
+                        if (isState) {
+                            compreOfMediumAccuracyNumber ++;
+                        }
+                        break;
+                    case MathOperationActionTypeCompreOfDiffculty:
+                        compreOfDiffcultyTotalNumber ++;
+                        if (isState) {
+                            compreOfDiffcultyAccuracyNumber ++;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    self.dataStatisticsModel.addTotalNumber = addTotalNumber;
+    self.dataStatisticsModel.subtractTotalNumber = subtractTotalNumber;
+    self.dataStatisticsModel.multiplyTotalNumber = multiplyTotalNumber;
+    self.dataStatisticsModel.divideTotalNumber = divideTotalNumber;
+    self.dataStatisticsModel.compreOfSimpleTotalNumber = compreOfSimpleTotalNumber;
+    self.dataStatisticsModel.compreOfMediumTotalNumber = compreOfMediumTotalNumber;
+    self.dataStatisticsModel.compreOfDiffcultyTotalNumber = compreOfDiffcultyTotalNumber;
+ 
+    self.dataStatisticsModel.totalStr = [NSString stringWithFormat:@"%ld",totalNumber];
+    self.dataStatisticsModel.totalAccuracyNumber = totalAccuracyNumber;
+    
+//    FGLOG(@"totl %@ totalAccuracyNumber %ld",self.dataStatisticsModel.totalStr,self.dataStatisticsModel.totalAccuracyNumber);
+}
+- (void)statisticOperationTypeWith:(NSInteger)operationType{
+    switch (operationType) {
+        case MathOperationActionTypeAdd:
+          
+            break;
+        case MathOperationActionTypeSubtract:
+           
+            break;
+        case MathOperationActionTypeMultiply:
+            
+            break;
+        case MathOperationActionTypeDivide:
+            
+            break;
+        case MathOperationActionTypeCompreOfSimple:
+           
+            break;
+        case MathOperationActionTypeCompreOfMedium:
+          
+            break;
+        case MathOperationActionTypeCompreOfDiffculty:
+            
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+
+
+
+
 
 - (void)saveCurrentDateHasDoneNumber:(NSInteger)number{
     //今天做的题目个数

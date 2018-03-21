@@ -83,12 +83,15 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PNChart (0.8.9):
+    - UICountingLabel (~> 1.2.0)
   - pop (1.0.10)
   - Protobuf (3.4.0)
   - SDWebImage (4.2.1):
     - SDWebImage/Core (= 4.2.1)
   - SDWebImage/Core (4.2.1)
   - SVProgressHUD (2.2.2)
+  - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -104,6 +107,7 @@ DEPENDENCIES:
   - JCAlertView
   - JSPatchPlatform
   - Masonry
+  - PNChart
   - pop
   - SDWebImage
   - SVProgressHUD
@@ -128,14 +132,16 @@ SPEC CHECKSUMS:
   JCAlertView: c65a7b298b8b497b3db783d82f719b88f4914869
   JSPatch: 02cfed591cb907bbfe80a346666e5a35fc2d349d
   JSPatchPlatform: 8cc9aaebe21109d5fdfb4500384ddf38ed0990e9
-  leveldb-library: 44ef425bfde64f5b41daef86b38db2d13edbbee1
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   SDWebImage: 1fa4c9edf525b744f002db89f3f5a38b3cd4c541
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 
-PODFILE CHECKSUM: 265795ace8cc37fa99e9023e044b832ac34893bc
+PODFILE CHECKSUM: 22919063b9cc062a62d72f53a9202275e2515574
 
 COCOAPODS: 1.3.0.beta.2

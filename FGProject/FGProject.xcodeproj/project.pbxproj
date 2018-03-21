@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */; };
+		8F4753CF206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753CE206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m */; };
+		8F4753D2206226260002C0B7 /* UIColor+FGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753D1206226260002C0B7 /* UIColor+FGColor.m */; };
+		8F4753D520622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753D420622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.m */; };
 		8F5E447C1FB3F695004BE4EC /* FGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E447B1FB3F695004BE4EC /* FGBaseViewController.m */; };
 		8F6AA2A01FB0405B00A7B5C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA29F1FB0405B00A7B5C7 /* AppDelegate.m */; };
 		8F6AA2A61FB0405B00A7B5C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F6AA2A41FB0405B00A7B5C7 /* Main.storyboard */; };
@@ -50,7 +53,6 @@
 		8F6AA5F61FB0410500A7B5C7 /* FGSimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA32D1FB0410400A7B5C7 /* FGSimpleViewController.m */; };
 		8F6AA5F71FB0410500A7B5C7 /* AdjustVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3301FB0410400A7B5C7 /* AdjustVolume.m */; };
 		8F6AA5F81FB0410500A7B5C7 /* AnimationProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3321FB0410400A7B5C7 /* AnimationProcess.m */; };
-		8F6AA5F91FB0410500A7B5C7 /* CommonFuction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3341FB0410400A7B5C7 /* CommonFuction.m */; };
 		8F6AA5FA1FB0410500A7B5C7 /* FGDateSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3361FB0410400A7B5C7 /* FGDateSingle.m */; };
 		8F6AA5FB1FB0410500A7B5C7 /* FGClickRandomAnswerCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3381FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.m */; };
 		8F6AA5FC1FB0410500A7B5C7 /* HasDoneOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */; };
@@ -678,6 +680,12 @@
 		8F3A0EF41FBD6C62005AE91C /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 		8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CusLayerView.m; sourceTree = "<group>"; };
 		8F3E0A1E1FBEE37300B838B0 /* CusLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CusLayerView.h; sourceTree = "<group>"; };
+		8F4753CD206222900002C0B7 /* FGMathOperationDataStatisticsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathOperationDataStatisticsViewController.h; sourceTree = "<group>"; };
+		8F4753CE206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMathOperationDataStatisticsViewController.m; sourceTree = "<group>"; };
+		8F4753D0206226260002C0B7 /* UIColor+FGColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+FGColor.h"; sourceTree = "<group>"; };
+		8F4753D1206226260002C0B7 /* UIColor+FGColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FGColor.m"; sourceTree = "<group>"; };
+		8F4753D320622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathOperationDataStatisticsModel.h; sourceTree = "<group>"; };
+		8F4753D420622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMathOperationDataStatisticsModel.m; sourceTree = "<group>"; };
 		8F5E447A1FB3F695004BE4EC /* FGBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGBaseViewController.h; sourceTree = "<group>"; };
 		8F5E447B1FB3F695004BE4EC /* FGBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGBaseViewController.m; sourceTree = "<group>"; };
 		8F6AA29B1FB0405B00A7B5C7 /* FGProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -767,8 +775,6 @@
 		8F6AA3301FB0410400A7B5C7 /* AdjustVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdjustVolume.m; sourceTree = "<group>"; };
 		8F6AA3311FB0410400A7B5C7 /* AnimationProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationProcess.h; sourceTree = "<group>"; };
 		8F6AA3321FB0410400A7B5C7 /* AnimationProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationProcess.m; sourceTree = "<group>"; };
-		8F6AA3331FB0410400A7B5C7 /* CommonFuction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonFuction.h; sourceTree = "<group>"; };
-		8F6AA3341FB0410400A7B5C7 /* CommonFuction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFuction.m; sourceTree = "<group>"; };
 		8F6AA3351FB0410400A7B5C7 /* FGDateSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGDateSingle.h; sourceTree = "<group>"; };
 		8F6AA3361FB0410400A7B5C7 /* FGDateSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGDateSingle.m; sourceTree = "<group>"; };
 		8F6AA3371FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGClickRandomAnswerCountModel.h; sourceTree = "<group>"; };
@@ -1792,6 +1798,8 @@
 				8F6AA3281FB0410400A7B5C7 /* FGMediumViewController.m */,
 				8F6AA32C1FB0410400A7B5C7 /* FGSimpleViewController.h */,
 				8F6AA32D1FB0410400A7B5C7 /* FGSimpleViewController.m */,
+				8F4753CD206222900002C0B7 /* FGMathOperationDataStatisticsViewController.h */,
+				8F4753CE206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1803,8 +1811,6 @@
 				8F6AA3301FB0410400A7B5C7 /* AdjustVolume.m */,
 				8F6AA3311FB0410400A7B5C7 /* AnimationProcess.h */,
 				8F6AA3321FB0410400A7B5C7 /* AnimationProcess.m */,
-				8F6AA3331FB0410400A7B5C7 /* CommonFuction.h */,
-				8F6AA3341FB0410400A7B5C7 /* CommonFuction.m */,
 				8F6AA3351FB0410400A7B5C7 /* FGDateSingle.h */,
 				8F6AA3361FB0410400A7B5C7 /* FGDateSingle.m */,
 				8F6AA3371FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.h */,
@@ -1823,6 +1829,8 @@
 				8F6FEE621FBD8E3E002E745C /* FGMathAnswerOptionsModel.m */,
 				8FE33443206201B20030F8EC /* FGMathOperationModel.h */,
 				8FE33444206201B20030F8EC /* FGMathOperationModel.m */,
+				8F4753D320622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.h */,
+				8F4753D420622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2957,6 +2965,8 @@
 			children = (
 				8FF61A201FC028DD007306D6 /* UIImage+SGHelper.h */,
 				8FF61A211FC028DD007306D6 /* UIImage+SGHelper.m */,
+				8F4753D0206226260002C0B7 /* UIColor+FGColor.h */,
+				8F4753D1206226260002C0B7 /* UIColor+FGColor.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3715,7 +3725,6 @@
 				8F6AA6041FB0410500A7B5C7 /* MyWaterView.m in Sources */,
 				8F6AA8281FB0410700A7B5C7 /* FSDAirportFlipLabel.m in Sources */,
 				8FE33445206201B20030F8EC /* FGMathOperationModel.m in Sources */,
-				8F6AA5F91FB0410500A7B5C7 /* CommonFuction.m in Sources */,
 				8FF61A1E1FC0274C007306D6 /* FGSetupPhotoViewController.m in Sources */,
 				8F6AA5FC1FB0410500A7B5C7 /* HasDoneOperation.m in Sources */,
 				8FADBE6A1FB46D9E0018F6C8 /* PullCircleView.m in Sources */,
@@ -3729,13 +3738,16 @@
 				8F6AA60C1FB0410500A7B5C7 /* FGRewardsView.m in Sources */,
 				8F6AA8331FB0410700A7B5C7 /* FGNetworkingReachable.m in Sources */,
 				8F6AA5EC1FB0410500A7B5C7 /* FGRootViewController.m in Sources */,
+				8F4753D2206226260002C0B7 /* UIColor+FGColor.m in Sources */,
 				8FBCD4FB1FBED56100E72BB6 /* FGRewardViewHUD.m in Sources */,
 				8FD277B91FB2A1E100E0BE44 /* FGRequestConst.m in Sources */,
 				8FBCD4FE1FBED5F400E72BB6 /* FGRewardWindow.m in Sources */,
+				8F4753D520622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.m in Sources */,
 				8F6AA5DF1FB0410500A7B5C7 /* FGChatBaseTableViewCell.m in Sources */,
 				8F6AA5EB1FB0410500A7B5C7 /* FGNavigationController.m in Sources */,
 				8F6AA8261FB0410700A7B5C7 /* XLSphereView.m in Sources */,
 				8F6AA5F61FB0410500A7B5C7 /* FGSimpleViewController.m in Sources */,
+				8F4753CF206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m in Sources */,
 				8F6AA5F21FB0410500A7B5C7 /* FGMathRootViewController.m in Sources */,
 				8F6AA5E61FB0410500A7B5C7 /* FGGameViewController.m in Sources */,
 				8F6AA6071FB0410500A7B5C7 /* FGMediumCandidateAnswerView.m in Sources */,

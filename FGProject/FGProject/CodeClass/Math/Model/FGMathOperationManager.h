@@ -11,8 +11,10 @@
 @class QuestionModel;
 @class FGMathAnswerOptionsModel;
 @class FGMathOperationModel;
+@class FGMathOperationDataStatisticsModel;
+#import "FGMathOperationDataStatisticsModel.h"
 @interface FGMathOperationManager : NSObject
-+ (instancetype)shareMathOperationManager;
++ (FGMathOperationManager*)shareMathOperationManager;
 @property (nonatomic,strong) NSArray *operationsArr;
 @property (nonatomic,strong) NSMutableDictionary *countDic;//统计已经做过的题目个数以及奖励
 @property (nonatomic,strong) NSMutableDictionary *hasDoneDic;//
@@ -21,13 +23,14 @@
 @property (nonatomic,assign) BOOL isCompreOperation;
 
 @property (nonatomic,strong) FGDateSingle *dateSingle;
+@property (nonatomic,strong) FGMathOperationDataStatisticsModel *dataStatisticsModel;
+
 
 - (UIImage*)getOperationImageWithOperationType:(MathOperationActionType)operationType;
 - (UIImage*)getOperationNumberImageWithNumber:(NSInteger)number;
-//- (QuestionModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType;
+
 - (FGMathOperationModel*)generateSimpleOperationModelWithOperationType:(MathOperationActionType)mathOperationType;
 
-//- (MediumOperationModel*)generateMediumOperationModel;
 - (FGMathOperationModel*)generateMediumOperationModel;
 
 - (FGMathAnswerOptionsModel *)generateRandomAnswerNum:(NSInteger)answerNum;
@@ -35,4 +38,5 @@
 - (NSInteger)getCurrentDateHasDone;
 
 - (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer;
+- (void)getDataStatistic;
 @end

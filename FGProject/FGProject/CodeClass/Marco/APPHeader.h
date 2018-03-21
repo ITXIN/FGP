@@ -139,8 +139,10 @@ static NSInteger kMathOperationRangeNumber = 11;
 
 #define kMathOperationDataStatisticsKey @"kMathOperationDataStatisticsKey"
 
+#define kMathOperationDataStatisticsTotalNumberKey @"kMathOperationDataStatisticsTotalNumberKey"
+
 #define kMathOperationDetailDataKey @"kMathOperationDetailDataKey"
-#define kMathOperationTotalNumberKey @"kMathOperationTotalNumberKey"
+#define kMathOperationDetailDataTotalNumberKey @"kMathOperationDetailDataTotalNumberKey"
 
 #define kMathOperationTypeKey @"kMathOperationTypeKey" //运算类型
 #define kMathOperationStateKey @"kMathOperationStateKey"//状态是否正确

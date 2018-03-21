@@ -36,6 +36,7 @@
     [dateformatter setDateFormat:@"YYYYMMdd"];
     NSString *locationString = [dateformatter stringFromDate:date];
     NSLog(@"今天日期 %@",locationString);
+//    locationString = @"20180320";
     return locationString;
 }
 

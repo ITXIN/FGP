@@ -20,7 +20,6 @@
 #import "HasDoneOperation.h"
 #import "MusicPlayerView.h"
 #import "AdjustVolume.h"
-#import "CommonFuction.h"
 #import "Masonry.h"
 #import "FGHttpsRequestManager.h"
 #import "FGProjectHelper.h"
@@ -46,4 +45,5 @@
 #import "FGRewardViewHUD.h"
 #import "PNChart.h"
 #import "FGMathOperationModel.h"
+#import "UIColor+FGColor.h"
 #endif

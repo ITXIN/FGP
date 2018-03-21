@@ -16,23 +16,23 @@ static CGFloat x;
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-
-
+    
+    
     if (x >= rect.size.width)
     {
         x = 0;
     }
-   
+    
     int y1 = ((int)( self.waveHeight) + 1);
     //当大于一定高度,帆船消失换为另外的图片
     if (y1 <= rect.size.height/3)
     {    x += 2;
         int y2 = 10;
         UIImage *image = [UIImage imageNamed:@"fish-01"];
-//        NSLog(@"----x %f",x);
+        //        NSLog(@"----x %f",x);
         if ((int)x == (int)rect.size.width/2 || (int)x == (int)rect.size.width/4 || (int)x == (int)rect.size.width/4*3)
         {
-//            NSLog(@"-----y2 %d",y2);
+            //            NSLog(@"-----y2 %d",y2);
             y2 = 30;
             image = [self imageRotatedByDegrees:90.f image:image];
             [image drawInRect:CGRectMake(x, y1- rect.size.width/4/2-(y2), rect.size.width/4, rect.size.width/4)];
@@ -43,13 +43,13 @@ static CGFloat x;
         
     }else
     {
-         x ++;
+        x ++;
         [[UIImage imageNamed:@"sailing"] drawInRect:CGRectMake(x, y1- rect.size.width/3+(arc4random()%(4+1)), rect.size.width/3, rect.size.width/3)];
     }
     //这个方法会把背景颜色清理掉
-//  CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
+    //  CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
     
-//   NSLog(@"-----self.waveHeight %f - %f",self.waveHeight,rect.size.height);
+    //   NSLog(@"-----self.waveHeight %f - %f",self.waveHeight,rect.size.height);
 }
 
 -(CGFloat)DegreesToRadians:(CGFloat)degress
@@ -88,14 +88,14 @@ static CGFloat x;
     self = [super initWithFrame:frame];
     if (self)
     {
-//        self.backgroundColor = [UIColor colorWithRed:53/255.0 green:190/255.0 blue:46/255.0 alpha:0.8];
+        //        self.backgroundColor = [UIColor colorWithRed:53/255.0 green:190/255.0 blue:46/255.0 alpha:0.8];
         self.backgroundColor = RGBA(255, 255, 255, 1);
         self.layer.cornerRadius = frame.size.width/2;
         self.layer.masksToBounds = YES;
         //设置背景图片
-//        UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-//        [bgImageView setImage:[UIImage imageNamed:@"countNum-bg"]];
-//        [self addSubview:bgImageView];
+        //        UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        //        [bgImageView setImage:[UIImage imageNamed:@"countNum-bg"]];
+        //        [self addSubview:bgImageView];
         
         x = 0;
         _myWaterView = [[MyWaterView alloc]initWithFrame:CGRectMake(0, 0 , ScreenWidth/7, ScreenWidth/7)];
@@ -112,8 +112,8 @@ static CGFloat x;
         _countLab.textColor = [UIColor lightGrayColor];
         _countLab.font = [UIFont boldSystemFontOfSize:50.f];
         [self addSubview:_countLab];
-       [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(animateWaveFish) userInfo:nil repeats:YES];
-
+        [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(animateWaveFish) userInfo:nil repeats:YES];
+        
     }
     return self;
 }
@@ -129,12 +129,12 @@ static CGFloat x;
 #pragma mark --- 显示动画
 - (void)showAnimationOfWaterWave
 {
-    [CommonFuction runOnMainThread:^{
-        [UIView animateWithDuration:1 animations:^{
-            [self countAnimation];
-            [self waterWaveAnimation];
-        }];
+    
+    [UIView animateWithDuration:1 animations:^{
+        [self countAnimation];
+        [self waterWaveAnimation];
     }];
+    
 }
 
 - (void)countAnimation
@@ -169,7 +169,7 @@ static CGFloat x;
     [UIView animateWithDuration:2 animations:^{
         myWaterWaveHeigh ++;
         _myWaterView.waveHeight = myWaterWaveHeigh;
-//        NSLog(@"-----animation count %f %f %f",self.waveHeight,myWaterWaveHeigh,_myWaterView.waveHeight);
+        //        NSLog(@"-----animation count %f %f %f",self.waveHeight,myWaterWaveHeigh,_myWaterView.waveHeight);
         if (myWaterWaveHeigh > self.waveHeight)
         {
             myWaterWaveHeigh = 0;
@@ -178,12 +178,12 @@ static CGFloat x;
     } completion:^(BOOL finished) {
         if ((int)myWaterWaveHeigh ==(int) self.waveHeight)
         {
-//            NSLog(@"-----equle %f %f",myWaterWaveHeigh,self.waveHeight);
+            //            NSLog(@"-----equle %f %f",myWaterWaveHeigh,self.waveHeight);
             myWaterWaveHeigh = 0;
             return;
         }else
         {
-             [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
+            [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
         }
     }];
 }
