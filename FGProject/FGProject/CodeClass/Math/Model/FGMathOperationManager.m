@@ -380,7 +380,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     self.dataStatisticsModel.compreOfMediumTotalNumber = compreOfMediumTotalNumber;
     self.dataStatisticsModel.compreOfDiffcultyTotalNumber = compreOfDiffcultyTotalNumber;
  
-    self.dataStatisticsModel.totalStr = [NSString stringWithFormat:@"%ld",totalNumber];
     self.dataStatisticsModel.totalAccuracyNumber = totalAccuracyNumber;
     
 //    FGLOG(@"totl %@ totalAccuracyNumber %ld",self.dataStatisticsModel.totalStr,self.dataStatisticsModel.totalAccuracyNumber);

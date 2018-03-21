@@ -53,8 +53,8 @@
         btn.backgroundColor = [UIColor whiteColor];
         [btn setImage:[UIImage imageNamed:@"Indexbg-02"] forState:UIControlStateNormal];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(30);
-            make.right.mas_equalTo(-30);
+            make.top.mas_equalTo(130);
+            make.left.mas_equalTo(80);
             make.size.mas_equalTo(CGSizeMake(btnW, btnW));
         }];
         [btn addTarget:self action:@selector(myCenterAction) forControlEvents:UIControlEventTouchUpInside];

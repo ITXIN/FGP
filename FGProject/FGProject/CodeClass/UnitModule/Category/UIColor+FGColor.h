@@ -12,4 +12,5 @@
 +(UIColor*)fgPieChartLightGreenColor;
 +(UIColor*)fgPieChartFreshGreenColor;
 +(UIColor*)fgPieChartDeepGreenColor;
++(UIColor*)fgPieChartDeepRedColor;
 @end

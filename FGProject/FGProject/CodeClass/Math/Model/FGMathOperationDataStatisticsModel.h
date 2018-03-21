@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface FGMathOperationDataStatisticsModel : NSObject
-@property (nonatomic,strong) NSString *totalStr;
-
 //总数
 @property (nonatomic,assign) NSInteger totalNumber;
 //总共正确的
