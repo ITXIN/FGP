@@ -38,7 +38,7 @@
     NSInteger mistakeTotal = self.mathManager.dataStatisticsModel.totalMistakesNumber;
     
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:mistakeTotal color:[UIColor fgPieChartDeepRedColor] description:@"错误"],
-                       [PNPieChartDataItem dataItemWithValue:self.mathManager.dataStatisticsModel.totalNumber color:[UIColor fgPieChartFreshGreenColor] description:@"正确"],
+                       [PNPieChartDataItem dataItemWithValue:self.mathManager.dataStatisticsModel.totalAccuracyNumber color:[UIColor fgPieChartFreshGreenColor] description:@"正确"],
                        ];
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (ScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:items];
     [self setupPieChart:self.pieChart];
@@ -84,6 +84,9 @@
     self.detailLegendView = [self.detailPieChart getLegendWithMaxWidth:200];
     [self.bgView addSubview:self.detailLegendView];
     [self.bgView addSubview:self.detailPieChart];
+    
+    self.detailPieChart.hidden = YES;
+    self.detailLegendView.hidden = YES;
 }
 
 #pragma mark -
