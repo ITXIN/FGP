@@ -44,13 +44,13 @@
 #pragma mark --- FGSimpleViewdeletate
 - (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType{
     
-   
-    
+    [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
+    [self updatCircleviewData];
     switch (actionType) {
         case MathSimpleOperationViewActionTypeAnswer:
         {
-            [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
-            [self updatCircleviewData];
+            
+            
             [[SoundsProcess shareInstance] playSoundOfTock];
             [[SoundsProcess shareInstance] playSoundOfWonderful];
             

@@ -17,10 +17,10 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "FGMathOperationDataStatisticsViewController.h"
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
-
 @property (nonatomic, strong) FGMathRootView *choiceView;
 @property (nonatomic, strong) DiffcultyLevelView *diffView;
-//@property (nonatomic, strong) UIImageView *flowerImageView;
+@property (nonatomic, strong) UILabel *playSoundLab;
+@property (nonatomic, strong) UISwitch *switchView;
 @end
 
 @implementation FGMathRootViewController
@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
     
 }
 - (void)initSubviews{
@@ -44,71 +44,30 @@
     self.choiceView.delegate = self;
     [self.bgView insertSubview:self.choiceView belowSubview:self.navigationView];
     
-    UIButton *myCenterBtn = ({
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.bgView addSubview:btn];
-        CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
-        btn.layer.cornerRadius = btnW/2;
-        btn.layer.masksToBounds = YES;
-        btn.backgroundColor = [UIColor whiteColor];
-        [btn setImage:[UIImage imageNamed:@"Indexbg-02"] forState:UIControlStateNormal];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(130);
-            make.left.mas_equalTo(80);
-            make.size.mas_equalTo(CGSizeMake(btnW, btnW));
-        }];
-        [btn addTarget:self action:@selector(myCenterAction) forControlEvents:UIControlEventTouchUpInside];
-        btn;
+    self.playSoundLab = ({
+        UILabel *label = [[UILabel alloc]init];
+        [self.bgView addSubview:label];
+        label.textColor = [UIColor whiteColor];
+        if (@available(iOS 8.2, *)) {
+            label.font = [UIFont systemFontOfSize:15 weight:10];
+        } else {
+            // Fallback on earlier versions
+        }
+        label.text = @"声音开关";
+        label;
     });
-
-    
-    
-//    self.flowerImageView =  ({
-//        UIImageView *image = [[UIImageView alloc]init];
-//        [self.bgView addSubview:image];
-//        [image mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.bottom.mas_equalTo(-10);
-//            make.right.mas_equalTo(-10);
-//            make.size.mas_equalTo(CGSizeMake(100, 105));
-//
-//        }];
-//        image;
-//    });
-//    self.flowerImageView.image = [UIImage imageNamed:@"flower_smile"];
-//    [self flowerAnimation:@"flower_walk" count:2];
+    self.switchView = [[UISwitch alloc]initWithFrame:CGRectMake(100, 150, 100, 30)];
+    self.switchView.on = [SoundsProcess shareInstance].isPlaySound;
+    [self.switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    self.switchView.tintColor = [UIColor whiteColor];
+    [self.bgView addSubview:self.switchView];
     
 }
-
-- (void)myCenterAction{
-    
-    
-    FGMathOperationDataStatisticsViewController *staticsVC = [[FGMathOperationDataStatisticsViewController alloc]init];
-    [self.navigationController pushViewController:staticsVC animated:YES];
+#pragma mark -----------
+- (void)switchAction:(UISwitch*)sender{
+    [SoundsProcess shareInstance].isPlaySound = sender.isOn;
 }
-//- (void)flowerAnimation:(NSString *)imageName count:(int )count
-//{
-//    if ([self.flowerImageView isAnimating]){
-//        return;
-//    }
-//    NSMutableArray *imageArr = [NSMutableArray array];
-//
-//    for (int i = 0; i < count; i ++){
-//        NSString *str = [NSString stringWithFormat:@"%@_0%d.png",imageName,i+1];
-//        NSString *path = [[NSBundle mainBundle] pathForResource:str ofType:nil];
-//        UIImage *image = [UIImage imageWithContentsOfFile:path];
-//        [imageArr addObject:image];
-//    }
-//
-//    [self.flowerImageView setAnimationImages:imageArr];
-//    [self.flowerImageView setAnimationDuration:imageArr.count *0.5];
-//    [self.flowerImageView setAnimationRepeatCount:NSIntegerMax];
-//    [self.flowerImageView startAnimating];
-//
-//}
-
-
 #pragma mark -------FGMathRootViewDelegate-点击按钮进入题目页面----
-//- (void)choiceBtnAction:(UIButton *)btn
 - (void)choiceBtnAction:(MathRootViewActionType)mathRootViewActionType
 {
     switch (mathRootViewActionType) {
@@ -215,12 +174,20 @@
         default:
             break;
     }
-
+    
 }
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.choiceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.bgView);
+    }];
+    [self.switchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.choiceView.sunBtn.mas_right).offset(10);
+        make.centerY.mas_equalTo(self.choiceView.sunBtn);
+    }];
+    [self.playSoundLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.switchView.mas_right).offset(10);
+        make.centerY.mas_equalTo(self.switchView);
     }];
 }
 - (void)didReceiveMemoryWarning {

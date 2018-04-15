@@ -13,6 +13,4 @@
 #import "FGBaseViewController.h"
 @interface FGRootViewController : FGBaseViewController
  
-
-//@property (nonatomic,strong) NSMutableArray *storyDataArr;
 @end

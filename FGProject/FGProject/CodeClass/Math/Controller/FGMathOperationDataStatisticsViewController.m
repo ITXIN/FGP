@@ -132,12 +132,13 @@
     }];
     [self.legendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.pieChart);
-        make.top.mas_equalTo(self.pieChart.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.pieChart.mas_bottom).offset(20);
         make.size.mas_equalTo(CGSizeMake(50, 20));
     }];
     [self.totalPercentageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.legendView.mas_right).offset(20);
-        make.top.mas_equalTo(self.legendView);
+        make.top.mas_equalTo(self.legendView).offset(20);
+//        make.bottom.mas_equalTo(self.legendView);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(25);
     }];

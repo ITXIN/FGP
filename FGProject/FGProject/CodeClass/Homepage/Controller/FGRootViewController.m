@@ -22,13 +22,11 @@
 #import "PullCircleView.h"
 #import "FGMyCenterViewController.h"
 #import "FGVideoViewController.h"
-@interface FGRootViewController ()<FGCategoryMenuViewDelegate,GADBannerViewDelegate>
+@interface FGRootViewController ()<FGCategoryMenuViewDelegate>
 {
-    GADBannerView *adView;//横幅
-    GADInterstitial *interstitial;//插页
 }
 @property (nonatomic,strong) FGDateView *dateView;
-@property (nonatomic,strong)  CARadarView *radarView;
+@property (nonatomic,strong) CARadarView *radarView;
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
 @end
 
@@ -67,7 +65,7 @@
     self.angryBirdView = [[FGAngryBirdsView alloc]init];
     [self.bgView addSubview:self.angryBirdView];
     [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self.bgView);
     }];
     
     //类别
@@ -98,131 +96,14 @@
     });
     FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
     
-    
-    
-    
-    //横幅
-    //    adView = [[GADBannerView alloc]initWithAdSize:kGADAdSizeSmartBannerLandscape];//自动
-    //    [self.view addSubview:adView];
-    //    adView.adUnitID = @"ca-app-pub-3940256099942544/2934735716";
-    //    adView.rootViewController = self;
-    //    [adView loadRequest:[GADRequest request]];
-    //    adView.delegate = self;
-    //    [adView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.bottom.mas_equalTo(0);
-    //        make.size.mas_equalTo(CGSizeMake(ScreenWidth, 100));
-    //        make.centerX.mas_equalTo(self.view);
-    //    }];
-    //
-    //    interstitial = [[GADInterstitial alloc]initWithAdUnitID:@"ca-app-pub-3940256099942544/4411468910"];
-    //    [interstitial loadRequest:[GADRequest request]];
-    //
-    //    [self performSelector:@selector(removeAds) withObject:nil afterDelay:5.0f];
-    
-    //    [self loadCircleView];
+ 
 }
 
 #pragma mark -
 - (void)myCenterAction:(UIButton*)sender{
     FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
     [self.navigationController pushViewController:myCenterVC animated:YES];
-    //    [FGRewardViewHUD show];
-    
-    
-    //    FGVideoViewController *myCenterVC = [[FGVideoViewController alloc]init];
-    //    [self.navigationController pushViewController:myCenterVC animated:YES];
-}
-
-- (void)loadCircleView
-{
-    //圆圈半径为60，最大拉伸300
-    PullCircleView *circle = [[PullCircleView alloc]initWithCenterPoint:CGPointMake(ScreenWidth-100, (ScreenHeight-64)/2) withRadius:60 withMaxPull:300];
-    
-    [self.view addSubview:circle];
-    //类型为拉伸型
-    circle.circleType = CircleTypePull;
-    
-    //大圆留在原地
-    circle.pullType = PullTypeLeaveBig;
-    
-    //内容文本
-    circle.contentString = @"66";
-    
-    //内容字号
-    circle.contentFont = 30;
-    
-    //圆圈颜色
-    circle.pointColor = [UIColor redColor];
-    
-    //大圆在移动中缩小的速率
-    circle.bigChangeRate = 0.4;
-    
-    //小圆在移动中缩小的速率
-    circle.smallChangeRate = 0.7;
-    
-    //小圆在移动中，最小的比率。如果初始半径为60，这里设置0.3，那么最小的半径则为18
-    circle.minRate = 0.3;
-    
-    //是否需要动画
-    circle.needAnimation = YES;
-    
-    //处理最大拉伸量
-    [circle handleMaxPull:^{
-        
-        NSLog(@"最大拉伸了");
-    }];
-    
-    //处理结束手势时事件
-    [circle handleEndTouch:^{
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (circle.isEnding) {
-                [circle resetOriginCircle];
-                
-            }
-        });
-        
-    }];
-    
-    
-}
-
-
-
-#pragma mark -
-#pragma mark --- remove ads
-- (void)removeAds
-{
-    NSLog(@"-----removeAds ");
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        adView.alpha = 0;
-        
-    } completion:^(BOOL finished) {
-        [adView removeFromSuperview];
-        adView = nil;
-        
-        if ([interstitial isReady]) {
-            //            [interstitial presentFromRootViewController:self];
-            
-        }else
-        {
-            
-        }
-    }];
-    
-}
-#pragma mark -
-#pragma mark --- GADBannerViewDelegate
-
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
-{
-    NSLog(@"-----adViewDidReceiveAd ");
-    [self performSelector:@selector(removeAds) withObject:nil afterDelay:5.0f];
-}
-- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
-{
-    [self removeAds];
+  
 }
 
 #pragma mark -
@@ -239,9 +120,7 @@
     switch (sender.tag) {
         case CategoryGame:
         {
-            //            FGTomViewController *tomVC = [[FGTomViewController alloc]init];
-            //            [self.navigationController pushViewController:tomVC animated:YES];
-            
+           
             FGGameViewController *gameVC = [[FGGameViewController alloc]init];
             [self.navigationController pushViewController:gameVC animated:YES];
             
@@ -255,15 +134,11 @@
             break;
         case CategoryStory:
         {
-            //            [self runOnMainThread:^{
             FLStoryViewController *storyVC = [[FLStoryViewController alloc]init];
-            //                CATransition *animation=[CATransition animation];
-            //                animation.type=@"rippleEffect";
-            //                animation.duration=2.0;
-            //                [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
+            
             storyVC.titleStr = @"故事";
             [self.navigationController pushViewController:storyVC animated:YES];
-            //            }];
+           
         }
             break;
         case CategoryMath:

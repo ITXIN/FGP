@@ -47,8 +47,8 @@
 - (void)setup{
     self.layer.backgroundColor = [UIColor clearColor].CGColor;
     self.fillColor = [UIColor colorWithRed:53/255.0 green:190/255.0 blue:46/255.0 alpha:0.8];
-    self.instanceCount = 10;// 圈数
-    self.instanceDelay = 0.75;//间隔
+    self.instanceCount = 5;// 圈数
+    self.instanceDelay = 0.95;//间隔
     self.animationDuration = self.instanceCount*self.instanceDelay;
     self.opacityValue = 0.46f;//透明度
     

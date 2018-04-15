@@ -35,7 +35,6 @@
     _startBtn.backgroundColor = [UIColor clearColor];
     [self.bgView addSubview:_startBtn];
     
-    //        _startBtn.hidden = YES;
     //太阳
     _sunImgView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth+50, ScreenHeight/6, ScreenWidth/10, ScreenWidth/10)];
     _sunImgView.image = [UIImage imageNamed:@"taiyang-03"];

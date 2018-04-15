@@ -9,8 +9,9 @@
 #import "FGMathBaseViewController.h"
 #import "CircleView.h"
 #import "TooltipForAnswerView.h"
+#import "FGMathOperationDataStatisticsViewController.h"
 @interface FGMathBaseViewController ()
-
+@property(nonatomic,strong) UIButton *datastatisticBtn;
 @end
 
 @implementation FGMathBaseViewController
@@ -53,8 +54,24 @@
     self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(ScreenWidth- ScreenWidth/7 - kStatusBarAndNavigationBarHeight, 20 , ScreenWidth/7, ScreenWidth/7)];
     [self.bgView addSubview:self.circleView];
     
+    
+    self.datastatisticBtn = ({
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.circleView addSubview:btn];
+//        btn.backgroundColor = [UIColor yellowColor];
+        [btn addTarget:self action:@selector(datastatisticAction) forControlEvents:UIControlEventTouchUpInside];
+        btn;
+    });
+    
+}
+#pragma mark -------name----
+- (void)datastatisticAction{
+    FGMathOperationDataStatisticsViewController *staticsVC = [[FGMathOperationDataStatisticsViewController alloc]init];
+    [self.navigationController pushViewController:staticsVC animated:YES];
+    
 }
 
+#pragma mark -----------
 - (void)updatCircleviewData{
     [self.circleView updatCircleviewData];
 }
@@ -66,12 +83,16 @@
     [self.circleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(15);
         if (kiPhoneX) {
-        make.right.mas_equalTo(-kStatusBarHeight);
+            make.right.mas_equalTo(-kStatusBarHeight);
         }else{
-          make.right.mas_equalTo(-30);
+            make.right.mas_equalTo(-30);
         }
         
         make.size.mas_equalTo(CGSizeMake(ScreenWidth/7-20, ScreenWidth/7-20));
+    }];
+    
+    [self.datastatisticBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.circleView.waterWaveView.countLab);
     }];
 }
 @end

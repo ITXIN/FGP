@@ -30,7 +30,6 @@
 @property (nonatomic,strong) FIRDatabaseReference *dataBaseRef;//存字符串
 @property (nonatomic,strong) FGMediumLevelOperatorView *mediumLOV;
 @property (nonatomic,strong) FGMediumCandidateAnswerView *candidateAV;
-//@property (nonatomic,strong) MediumOperationModel *currentOperaModel;
 @property (nonatomic,strong) FGMathOperationModel *currentOperaModel;
 @end
 
@@ -65,21 +64,14 @@
     leftMargin = 60.0;
 
     //运算式
-//    self.mediumLOV  = [[FGMediumLevelOperatorView alloc]initWithFrame:CGRectMake(leftMargin, 2*height, width, 2*height)];
-    
     self.mediumLOV  = [[FGMediumLevelOperatorView alloc]init];
     [self.view addSubview:self.mediumLOV];
     
     //候选答案
-//    self.candidateAV = [[FGMediumCandidateAnswerView alloc]initWithFrame:CGRectMake(leftMargin, 4*height, width, 2*height)];
-    
     self.candidateAV = [[FGMediumCandidateAnswerView alloc]init];
     self.candidateAV.delegate = self;
     [self.view addSubview:self.candidateAV];
     [self updateView];
-    
-
-    //    [self setupPostDataToFireBase];
     
 }
 - (void)setupLayoutSubviews{
@@ -113,6 +105,7 @@
 #pragma mark --- update view
 - (void)updateView
 {
+    /*
     NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
     NSString *numberStr = [NSString stringWithFormat:@"今天已经完成了%ld道题目",(long)_doneCount];
     UIColor *numberColor = [UIColor colorWithRed:(arc4random()%(255 -1 +1)+1)/255.0 green:(arc4random()%(255 -1 +1)+1)/255.0 blue:(arc4random()%(255 -1 +1)+1)/255.0 alpha:1.0];
@@ -133,15 +126,9 @@
     [str addAttribute:NSFontAttributeName value:textFont range:textRange1];
     
     self.navigationView.titleLab.attributedText = str ;
-    
+    */
     self.currentOperaModel = [self.mathManager generateMediumOperationModel];
     [self.mediumLOV setMediumOperationModel:self.currentOperaModel];
-    
-//    clickRandomCounModel = nil;
-//    clickRandomCounModel = [[FGClickRandomAnswerCountModel alloc]init];
-//    clickRandomCounModel.questionMediumModel = self.currentOperaModel;
-//    clickRandomCounModel.randomMediumModel = [MediumOperationModel candidateMediumWithAnswer:self.currentOperaModel.answerNum];
-    
     FGMathAnswerOptionsModel *answerOptionModel = [self.mathManager generateRandomAnswerNum:self.currentOperaModel.answerNum];
     [self.candidateAV setupAnswerModel:answerOptionModel];
     
@@ -150,17 +137,14 @@
 #pragma mark -
 #pragma mark --- MediumCandidateAnswerViewDelegate
 - (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType{
-    [[SoundsProcess shareInstance] playSoundOfTock];
+    
     [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
+    [self updatCircleviewData];
+    
     if (actionType == MathSimpleOperationViewActionTypeAnswer) {
         [[SoundsProcess shareInstance] playSoundOfWonderful];
         dispatch_after(7.0, dispatch_get_main_queue(), ^{
             NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
-            _doneCount ++;
-            //今天做的题目个数
-            [self.mathManager saveCurrentDateHasDoneNumber:_doneCount];
-            [self updatCircleviewData];
-//            [self postDataToFireBaseWithClickQuestionModel:clickRandomCounModel];
             //每间隔6道题弹出一次
             if (_doneCount %6 == 0)
             {
@@ -190,8 +174,8 @@
                 
                 [self fireworksProcess];
                 
-                NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
-                self.titleStr = [NSString stringWithFormat:@"今天已经完成了%ld道题目",(long)_doneCount];
+//                NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
+//                self.titleStr = [NSString stringWithFormat:@"今天已经完成了%ld道题目",(long)_doneCount];
             }else
             {
                 [self updateView];
@@ -202,9 +186,6 @@
     {
         [[SoundsProcess shareInstance] playSoundOfWrong];
         [self updateView];
-        [self showCircleAnimationOfWaterWave];
-        
-        
         
     }
 }
