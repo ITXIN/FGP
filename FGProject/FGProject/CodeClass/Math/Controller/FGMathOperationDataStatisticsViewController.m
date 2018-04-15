@@ -56,6 +56,7 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
         [btn setTitle:@"显示数量样式" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+        btn.hidden = self.mathManager.dataStatisticsModel.totalNumber == 0?YES:NO;
         btn;
     });
     
@@ -111,7 +112,7 @@
     pieChart.descriptionTextColor = [UIColor whiteColor];
     pieChart.descriptionTextFont = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
     pieChart.descriptionTextShadowColor = [UIColor yellowColor];
-    pieChart.showAbsoluteValues = NO;
+    pieChart.showAbsoluteValues = YES;
     pieChart.showOnlyValues = NO;
     [pieChart strokeChart];
     pieChart.legendStyle = PNLegendItemStyleStacked;
