@@ -54,7 +54,7 @@
         btn.layer.cornerRadius = 10;
         btn.layer.masksToBounds = YES;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [btn setTitle:@"显示数量样式" forState:UIControlStateNormal];
+        [btn setTitle:@"显示百分比样式" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         btn.hidden = self.mathManager.dataStatisticsModel.totalNumber == 0?YES:NO;
         btn;
@@ -95,13 +95,13 @@
     NSInteger tag = sender.tag;
     if (tag == 1000) {
         sender.selected = !sender.selected;
-        if (sender.selected) {
+        if (!sender.selected) {
             [sender setTitle:@"显示百分比样式" forState:UIControlStateNormal];
         }else{
             [sender setTitle:@"显示数量样式" forState:UIControlStateNormal];
         }
         
-        self.pieChart.showAbsoluteValues = sender.selected;
+        self.pieChart.showAbsoluteValues = !sender.selected;
         [self.pieChart strokeChart];
     }
     
@@ -133,11 +133,11 @@
     [self.legendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.pieChart);
         make.top.mas_equalTo(self.pieChart.mas_bottom).offset(20);
-        make.size.mas_equalTo(CGSizeMake(50, 20));
+        make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
     [self.totalPercentageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.legendView.mas_right).offset(20);
-        make.top.mas_equalTo(self.legendView).offset(20);
+        make.top.mas_equalTo(self.legendView).offset(10);
 //        make.bottom.mas_equalTo(self.legendView);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(25);

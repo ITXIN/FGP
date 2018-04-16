@@ -12,6 +12,7 @@
 #import "FGMathOperationDataStatisticsViewController.h"
 @interface FGMathBaseViewController ()
 @property(nonatomic,strong) UIButton *datastatisticBtn;
+@property(nonatomic,strong) UILabel *todyTitleLab;
 @end
 
 @implementation FGMathBaseViewController
@@ -54,6 +55,20 @@
     self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(ScreenWidth- ScreenWidth/7 - kStatusBarAndNavigationBarHeight, 20 , ScreenWidth/7, ScreenWidth/7)];
     [self.bgView addSubview:self.circleView];
     
+    self.todyTitleLab = ({
+        UILabel *label = [[UILabel alloc]init];
+        [self.circleView addSubview:label];
+        label.textColor = [UIColor whiteColor];
+        if (@available(iOS 8.2, *)) {
+            label.font = [UIFont systemFontOfSize:14 weight:50];
+        } else {
+            // Fallback on earlier versions
+        }
+        label.text = @"今日完成";
+        label.textAlignment = NSTextAlignmentCenter;
+        label;
+    });
+    
     
     self.datastatisticBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -91,6 +106,11 @@
         make.size.mas_equalTo(CGSizeMake(ScreenWidth/7-20, ScreenWidth/7-20));
     }];
     
+    
+    [self.todyTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.circleView.waterWaveView.countLab).offset(20);
+        make.left.right.equalTo(self.circleView.waterWaveView.countLab);
+    }];
     [self.datastatisticBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.circleView.waterWaveView.countLab);
     }];
