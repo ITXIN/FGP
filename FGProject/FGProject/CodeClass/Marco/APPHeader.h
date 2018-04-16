@@ -136,7 +136,6 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define DATA_WAVE_HEIGHT_SCALE 1000 //做题统计高度参数，1000是按1000道题水充满,可以设置其他的
 
 //数学运算数据统计
-
 #define kMathOperationDataStatisticsKey @"kMathOperationDataStatisticsKey"
 
 #define kMathOperationDataStatisticsTotalNumberKey @"kMathOperationDataStatisticsTotalNumberKey"
@@ -148,6 +147,9 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define kMathOperationStateKey @"kMathOperationStateKey"//状态是否正确
 #define kMathOperationObjKey @"kMathOperationObjKey"//运算式
 #define kMathOperationDateKey @"kMathOperationDateKey"//日期
+
+//综合练习类型
+#define kMathCompreOfOperationTypeKey @"kMathCompreOfOperationTypeKey"
 
 //儿童数学的游戏
 #define GAME_CHILDERN_API @"http://cdnapi.bbwansha.com/bb_video30/Home/game/games/version/3/app_id/6/app_sub_id/1?t=589AB3E0"

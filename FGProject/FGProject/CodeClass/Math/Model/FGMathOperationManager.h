@@ -39,4 +39,7 @@
 
 - (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer;
 - (void)getDataStatistic;
+
+- (void)saveMathCompreOfOperationType:(NSDictionary*)typeDic;
+- (NSDictionary*)getMathCompreOfOperationType;
 @end

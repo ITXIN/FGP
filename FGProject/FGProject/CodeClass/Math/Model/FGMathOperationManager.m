@@ -266,9 +266,9 @@ static NSString *hasDoneKey = @"hasDoneKey";
 //    FGLOG(@"%@",dataDic);
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
     
-  
 }
 
+#pragma mark -----------
 - (void)getDataStatistic{
     self.dataStatisticsModel = [[FGMathOperationDataStatisticsModel alloc]init];
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
@@ -303,10 +303,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
             NSArray *detailArr = dic[kMathOperationDetailDataKey];
             
             for (NSDictionary *detailDic in detailArr) {
-                
                 FGMathOperationModel *mathOperationModel = detailDic[kMathOperationObjKey];
                 
-//                FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
                 [mistakesOperationModelArr addObject:mathOperationModel];
                 
                 NSInteger operationType =  [detailDic[kMathOperationTypeKey] integerValue];
@@ -316,7 +314,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
                     isState = YES;
                     totalAccuracyNumber ++;
                 }
-                
                 
                 switch (operationType) {
                     case MathOperationActionTypeAdd:
@@ -379,10 +376,23 @@ static NSString *hasDoneKey = @"hasDoneKey";
     self.dataStatisticsModel.compreOfSimpleTotalNumber = compreOfSimpleTotalNumber;
     self.dataStatisticsModel.compreOfMediumTotalNumber = compreOfMediumTotalNumber;
     self.dataStatisticsModel.compreOfDiffcultyTotalNumber = compreOfDiffcultyTotalNumber;
- 
+
     self.dataStatisticsModel.totalAccuracyNumber = totalAccuracyNumber;
     
 //    FGLOG(@"totl %@ totalAccuracyNumber %ld",self.dataStatisticsModel.totalStr,self.dataStatisticsModel.totalAccuracyNumber);
+}
+
+#pragma mark -------保存综合练习题目类型设置----
+- (void)saveMathCompreOfOperationType:(NSDictionary*)typeDic{
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    dataDic[kMathCompreOfOperationTypeKey] = typeDic;
+    [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
+    
+}
+- (NSDictionary*)getMathCompreOfOperationType{
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    NSDictionary *typeDic = [NSDictionary dictionaryWithDictionary:dataDic[kMathCompreOfOperationTypeKey]];
+    return typeDic;
 }
 - (void)statisticOperationTypeWith:(NSInteger)operationType{
     switch (operationType) {
@@ -415,27 +425,16 @@ static NSString *hasDoneKey = @"hasDoneKey";
 }
 
 
-
-
-
 - (void)saveCurrentDateHasDoneNumber:(NSInteger)number{
     //今天做的题目个数
-    //    [[NSUserDefaults standardUserDefaults] setInteger:number forKey:[self.dateSingle curretDate]];
-    
-    //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [self.hasDoneDic setValue:[NSString stringWithFormat:@"%ld",number] forKey:[self.dateSingle curretDate]];
     [self.countDic setObject:self.hasDoneDic forKey:hasDoneKey];
     [self.countDic setObject:@"" forKey:rewardKey];
     [FGProjectHelper saveDataWithKey:countKey data:self.countDic];
-    //    });
-    
-    
 }
+
 - (NSInteger)getCurrentDateHasDone{
-    //   NSInteger hasDone = [[NSUserDefaults standardUserDefaults]integerForKey:[self.dateSingle curretDate]];
-    
     NSString *hasDoneStr = self.hasDoneDic[[self.dateSingle curretDate]];
-    
     return [hasDoneStr integerValue];
 }
 

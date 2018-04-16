@@ -16,6 +16,7 @@
 #import "MusicPlayerManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "FGMathOperationDataStatisticsViewController.h"
+#import "FGMathSettingViewController.h"
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
 @property (nonatomic, strong) FGMathRootView *choiceView;
 @property (nonatomic, strong) DiffcultyLevelView *diffView;
@@ -65,7 +66,9 @@
 }
 #pragma mark -----------
 - (void)switchAction:(UISwitch*)sender{
-    [SoundsProcess shareInstance].isPlaySound = sender.isOn;
+//    [SoundsProcess shareInstance].isPlaySound = sender.isOn;
+    FGMathSettingViewController *settingVC = [[FGMathSettingViewController alloc]init];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 #pragma mark -------FGMathRootViewDelegate-点击按钮进入题目页面----
 - (void)choiceBtnAction:(MathRootViewActionType)mathRootViewActionType
