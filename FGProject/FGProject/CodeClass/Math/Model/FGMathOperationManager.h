@@ -41,5 +41,6 @@
 - (void)getDataStatistic;
 
 - (void)saveMathCompreOfOperationType:(NSDictionary*)typeDic;
-- (NSDictionary*)getMathCompreOfOperationType;
+- (NSDictionary*)getMathCompreOfOperationTypeDic;
+- (NSArray*)getMathCompreOfOperationTypeArr;
 @end

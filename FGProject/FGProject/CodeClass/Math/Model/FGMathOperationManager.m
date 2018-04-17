@@ -389,11 +389,25 @@ static NSString *hasDoneKey = @"hasDoneKey";
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
     
 }
-- (NSDictionary*)getMathCompreOfOperationType{
+- (NSDictionary*)getMathCompreOfOperationTypeDic{
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
     NSDictionary *typeDic = [NSDictionary dictionaryWithDictionary:dataDic[kMathCompreOfOperationTypeKey]];
     return typeDic;
 }
+
+- (NSArray*)getMathCompreOfOperationTypeArr{
+    NSDictionary *typeDic = [self getMathCompreOfOperationTypeDic];
+    NSMutableArray *typeArr = [NSMutableArray array];
+    for (NSString *key in typeDic.allKeys) {
+        if ([typeDic[key] isEqualToString:@"YES"]) {
+            [typeArr addObject: key];
+        }
+    }
+    
+    FGLOG(@"%@",typeArr);
+    return typeArr;
+}
+
 - (void)statisticOperationTypeWith:(NSInteger)operationType{
     switch (operationType) {
         case MathOperationActionTypeAdd:

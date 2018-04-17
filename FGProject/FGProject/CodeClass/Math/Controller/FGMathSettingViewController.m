@@ -26,7 +26,7 @@
 
 - (void)initSubviews{
     [super initSubviews];
-    self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationType]];
+    self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeDic]];
     self.operationSettingTitleLab = ({
         UILabel *label = [[UILabel alloc]init];
         [self.bgView addSubview:label];
@@ -36,23 +36,20 @@
     });
     
     
-    UIImageView *preLab;
+    UIImageView *preImageView;
     //    NSArray *titleLab = @[@"加",@"减",@"乘",@"除"];
-    NSArray *titleLab = @[@"setting_add",@"setting_subtract",@"setting_multiply",@"setting_divide"];
+    NSArray *titleArr = @[@"setting_add",@"setting_subtract",@"setting_multiply",@"setting_divide"];
     
     for (NSInteger i = 0; i < 4; i ++) {
-        //        UILabel *tempLab = ({
-        //            UILabel *label = [[UILabel alloc]init];
-        //            [self.bgView addSubview:label];
-        //            label.font = [UIFont boldSystemFontOfSize:20.0];
-        //            label.text = titleLab[i];
-        //            label;
-        //        });
         
-        UIImageView *tempLab =  ({
+        UIImageView *tempImageView =  ({
             UIImageView *imgView = [[UIImageView alloc]init];
             [self.bgView addSubview:imgView];
-            imgView.image = [UIImage imageNamed:titleLab[i]];
+            imgView.image = [UIImage imageNamed:titleArr[i]];
+//            imgView.backgroundColor = [UIColor whiteColor];
+            imgView.contentMode = UIViewContentModeScaleAspectFill;
+//            imgView.layer.cornerRadius = 20;
+//            imgView.layer.masksToBounds = YES;
             imgView;
         });
         
@@ -67,21 +64,22 @@
             btn;
         });
         
-        [tempLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        [tempImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(ScreenWidth/2+15);
+            make.size.mas_equalTo(CGSizeMake(30, 30));
             if (i == 0) {
                 make.top.mas_equalTo(self.operationSettingTitleLab.mas_bottom).offset(20);
             }else{
-                make.top.mas_equalTo(preLab.mas_bottom).offset(20);
+                make.top.mas_equalTo(preImageView.mas_bottom).offset(20);
             }
         }];
         
         [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(tempLab.mas_right).offset(100);
-            make.centerY.equalTo(tempLab);
+            make.left.mas_equalTo(tempImageView.mas_right).offset(100);
+            make.centerY.equalTo(tempImageView);
         }];
         
-        preLab = tempLab;
+        preImageView = tempImageView;
         NSString *tagStr = [NSString stringWithFormat:@"%ld",tempBtn.tag];
         if (self.operationsDic.allValues.count == 4) {
             if ([self.operationsDic[tagStr]isEqualToString:@"YES"]) {
@@ -95,11 +93,6 @@
         }
         
     }
-    
-    
-    
-    
-    
     
 }
 #pragma mark -------action----

@@ -96,10 +96,6 @@
 }
 
 - (void)setupSimplewOperationViewNewQuestionModel{
-//    QuestionModel *questModel = [self.mathManager generateSimpleOperationModelWithOperationType:self.mathOperationActionType];
-//    [self.answerView operationSubjectByQuestionModel:questModel];
-    
-    
     FGMathOperationModel *questModel = [self.mathManager generateSimpleOperationModelWithOperationType:self.mathOperationActionType];
     [self.answerView operationSubjectByQuestionModel:questModel];
     
