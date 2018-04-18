@@ -41,12 +41,10 @@
     NSArray *titleArr = @[@"setting_add",@"setting_subtract",@"setting_multiply",@"setting_divide"];
     
     for (NSInteger i = 0; i < 4; i ++) {
-        
         UIImageView *tempImageView =  ({
             UIImageView *imgView = [[UIImageView alloc]init];
             [self.bgView addSubview:imgView];
             imgView.image = [UIImage imageNamed:titleArr[i]];
-//            imgView.backgroundColor = [UIColor whiteColor];
             imgView.contentMode = UIViewContentModeScaleAspectFill;
 //            imgView.layer.cornerRadius = 20;
 //            imgView.layer.masksToBounds = YES;

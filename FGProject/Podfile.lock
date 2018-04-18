@@ -1,81 +1,67 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.0):
+    - AFNetworking/NSURLSession (= 3.2.0)
+    - AFNetworking/Reachability (= 3.2.0)
+    - AFNetworking/Security (= 3.2.0)
+    - AFNetworking/Serialization (= 3.2.0)
+    - AFNetworking/UIKit (= 3.2.0)
+  - AFNetworking/NSURLSession (3.2.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.0)
+  - AFNetworking/Security (3.2.0)
+  - AFNetworking/Serialization (3.2.0)
+  - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
-  - CocoaAsyncSocket (7.6.1)
-  - FBAllocationTracker (0.1.5)
-  - FBMemoryProfiler (0.1.3):
-    - FBAllocationTracker (~> 0.1)
-    - FBRetainCycleDetector (~> 0.1)
-  - FBRetainCycleDetector (0.1.3)
-  - Firebase (4.5.0):
-    - Firebase/Core (= 4.5.0)
-  - Firebase/AdMob (4.5.0):
+  - Firebase (4.13.0):
+    - Firebase/Core (= 4.13.0)
+  - Firebase/AdMob (4.13.0):
     - Firebase/Core
-    - Google-Mobile-Ads-SDK (= 7.25.0)
-  - Firebase/Core (4.5.0):
-    - FirebaseAnalytics (= 4.0.4)
-    - FirebaseCore (= 4.0.10)
-  - Firebase/Database (4.5.0):
+    - Google-Mobile-Ads-SDK (= 7.30.0)
+  - Firebase/Core (4.13.0):
+    - FirebaseAnalytics (= 4.2.0)
+    - FirebaseCore (= 4.0.20)
+  - Firebase/Database (4.13.0):
     - Firebase/Core
-    - FirebaseDatabase (= 4.1.0)
-  - Firebase/Messaging (4.5.0):
+    - FirebaseDatabase (= 4.1.5)
+  - Firebase/Messaging (4.13.0):
     - Firebase/Core
-    - FirebaseMessaging (= 2.0.6)
-  - Firebase/Storage (4.5.0):
+    - FirebaseMessaging (= 2.2.0)
+  - Firebase/Storage (4.13.0):
     - Firebase/Core
-    - FirebaseStorage (= 2.0.2)
-  - FirebaseAnalytics (4.0.4):
+    - FirebaseStorage (= 2.2.0)
+  - FirebaseAnalytics (4.2.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.10):
+  - FirebaseCore (4.0.20):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-    - nanopb (~> 0.3)
-  - FirebaseDatabase (4.1.0):
-    - FirebaseAnalytics (~> 4.0)
+  - FirebaseDatabase (4.1.5):
+    - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
     - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.5)
-  - FirebaseMessaging (2.0.6):
-    - FirebaseAnalytics (~> 4.0)
+  - FirebaseInstanceID (2.0.10):
+    - FirebaseCore (~> 4.0)
+  - FirebaseMessaging (2.2.0):
+    - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
-    - Protobuf (~> 3.1)
-  - FirebaseStorage (2.0.2):
-    - FirebaseAnalytics (~> 4.0)
+    - Protobuf (~> 3.5)
+  - FirebaseStorage (2.2.0):
+    - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FLEX (2.4.0)
-  - Google-Mobile-Ads-SDK (7.25.0)
+  - Google-Mobile-Ads-SDK (7.30.0)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/Logger (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Core (1.1.15)
   - JCAlertView (1.1.5)
-  - JSPatch (1.1.3):
-    - JSPatch/Core (= 1.1.3)
-  - JSPatch/Core (1.1.3)
-  - JSPatchPlatform (1.6.6):
-    - JSPatchPlatform/Core (= 1.6.6)
-  - JSPatchPlatform/Core (1.6.6):
-    - JSPatch
   - leveldb-library (1.20)
   - Masonry (1.1.0)
   - nanopb (0.3.8):
@@ -86,26 +72,22 @@ PODS:
   - PNChart (0.8.9):
     - UICountingLabel (~> 1.2.0)
   - pop (1.0.10)
-  - Protobuf (3.4.0)
-  - SDWebImage (4.2.1):
-    - SDWebImage/Core (= 4.2.1)
-  - SDWebImage/Core (4.2.1)
-  - SVProgressHUD (2.2.2)
+  - Protobuf (3.5.0)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - SVProgressHUD (2.2.5)
   - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
   - AFNetworking
-  - CocoaAsyncSocket
-  - FBMemoryProfiler
   - Firebase
   - Firebase/AdMob
   - Firebase/Core
   - Firebase/Database
   - Firebase/Messaging
   - Firebase/Storage
-  - FLEX
   - JCAlertView
-  - JSPatchPlatform
   - Masonry
   - PNChart
   - pop
@@ -115,10 +97,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
-    - CocoaAsyncSocket
-    - FBAllocationTracker
-    - FBMemoryProfiler
-    - FBRetainCycleDetector
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -126,13 +104,10 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseMessaging
     - FirebaseStorage
-    - FLEX
     - Google-Mobile-Ads-SDK
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - JCAlertView
-    - JSPatch
-    - JSPatchPlatform
     - leveldb-library
     - Masonry
     - nanopb
@@ -144,35 +119,28 @@ SPEC REPOS:
     - UICountingLabel
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
-  FBAllocationTracker: dfdca3f71aceca6a85e95e3c6ec76a9785eba0f1
-  FBMemoryProfiler: 623fc5f8a61f7d02ec75c87e3b97c90f621d8b02
-  FBRetainCycleDetector: f0c7b290bf48ae77f6ae060843ce34ae341781eb
-  Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
-  FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
-  FirebaseCore: da5e8e372cb6046212739a4d81e42d32c22907cc
-  FirebaseDatabase: 607284a103e961d7f5863ee603cab5e85f443bd6
-  FirebaseInstanceID: f2b688c66b972f30d7fa9f5f9f91455454a03b47
-  FirebaseMessaging: 75d83375b0f7a9911568d7bdd1a1a8261cbcbdef
-  FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
-  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  Google-Mobile-Ads-SDK: 113804f266381a30f982ad3c18063d4e0155414f
+  AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
+  Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
+  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
+  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
+  FirebaseDatabase: 5f0bc6134c5c237cf55f9e1249d406770a75eafd
+  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  FirebaseMessaging: 75cdb862e86c30e0913a2ff307e48d49357c5b73
+  FirebaseStorage: 0c223481c8f89ed300cf1239ddd2d9833622c65f
+  Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   JCAlertView: c65a7b298b8b497b3db783d82f719b88f4914869
-  JSPatch: 02cfed591cb907bbfe80a346666e5a35fc2d349d
-  JSPatchPlatform: 8cc9aaebe21109d5fdfb4500384ddf38ed0990e9
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
-  Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
-  SDWebImage: 1fa4c9edf525b744f002db89f3f5a38b3cd4c541
-  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 
-PODFILE CHECKSUM: b77e8aca0de0fc9ca3e8a7a5ea82df5a47049733
+PODFILE CHECKSUM: 34ef19fc9033c95796c76a940bc19a45ada6a9f6
 
 COCOAPODS: 1.5.0

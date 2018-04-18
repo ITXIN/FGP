@@ -28,7 +28,7 @@
 #import "FGNetworkingReachable.h"
 #import <POP/POP.h>
 #import "FGProject-Bridging-Header.h"
-#import <JSPatchPlatform/JSPatch.h>
+//#import <JSPatchPlatform/JSPatch.h>
 #import "Toast+UIView.h"
 #import "FGBlurEffectView.h"
 #import "Firebase.h"

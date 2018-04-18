@@ -3662,13 +3662,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FGProject/Pods-FGProject-resources.sh",
 				"${PODS_ROOT}/JCAlertView/JCAlertView/JCAlertView.bundle",
-				"${PODS_ROOT}/JSPatch/JSPatch/JSPatch.js",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JCAlertView.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSPatch.js",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
