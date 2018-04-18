@@ -25,14 +25,14 @@
 @interface FGRootViewController ()<FGCategoryMenuViewDelegate>
 {
 }
-@property (nonatomic,strong) FGDateView *dateView;
-@property (nonatomic,strong) CARadarView *radarView;
+//@property (nonatomic,strong) FGDateView *dateView;
+//@property (nonatomic,strong) CARadarView *radarView;
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
+@property (nonatomic,strong) RootView *rootBgView;
+@property (nonatomic,strong) FGCategoryMenuView *cateGoryMenuView;
 @end
 
 @implementation FGRootViewController
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,32 +52,20 @@
     [super initSubviews];
     self.navigationView.hidden = YES;
     
-    
-    [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:[NSString stringWithFormat:@"Indexbg-0%d",arc4random()%(3-1+1)+1]] withBlurLevel:1]];
-    RootView *rootView = [[RootView alloc]init];
-    [self.bgView addSubview:rootView];
-    //波
-    self.radarView = rootView.radarView;
-    [rootView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
-    }];
+    //    [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:[NSString stringWithFormat:@"Indexbg-0%d",arc4random()%(3-1+1)+1]] withBlurLevel:1]];
+    //波以及背景
+    self.rootBgView = [[RootView alloc]init];
+    [self.bgView addSubview:self.rootBgView];
     
     self.angryBirdView = [[FGAngryBirdsView alloc]init];
     [self.bgView addSubview:self.angryBirdView];
-    [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
-    }];
     
     //类别
-    FGCategoryMenuView *cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
-    cateGoryMenuView.categoryDelegate = self;
-    [self.bgView addSubview:cateGoryMenuView];
-    [cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
-        make.center.equalTo(self.view);
-    }];
+    self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
+    self.cateGoryMenuView.categoryDelegate = self;
+    [self.bgView addSubview: self.cateGoryMenuView];
     
-    
+
     UIButton *myCenterBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.bgView addSubview:btn];
@@ -96,21 +84,21 @@
     });
     FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
     
- 
+    
 }
 
 #pragma mark -
 - (void)myCenterAction:(UIButton*)sender{
     FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
     [self.navigationController pushViewController:myCenterVC animated:YES];
-  
+    
 }
 
 #pragma mark -
 #pragma mark --- categoryDelegate
 - (void)categoryAction:(UIButton *)sender
 {
-    [self.radarView startAnimation];
+    //    [self.radarView startAnimation];
     
     CATransition *animation=[CATransition animation];
     animation.type=@"rippleEffect";
@@ -120,7 +108,7 @@
     switch (sender.tag) {
         case CategoryGame:
         {
-           
+            
             FGGameViewController *gameVC = [[FGGameViewController alloc]init];
             [self.navigationController pushViewController:gameVC animated:YES];
             
@@ -138,7 +126,7 @@
             
             storyVC.titleStr = @"故事";
             [self.navigationController pushViewController:storyVC animated:YES];
-           
+            
         }
             break;
         case CategoryMath:
@@ -154,6 +142,19 @@
     }
 }
 
+- (void)setupLayoutSubviews{
+    [super setupLayoutSubviews];
+    [self.rootBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.bgView);
+    }];
+    [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.bgView);
+    }];
+    [self.cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
+        make.center.equalTo(self.view);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

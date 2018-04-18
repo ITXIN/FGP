@@ -57,22 +57,22 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
             view;
         });
         
-        yellowBirdImageView =  ({
-            UIImageView *imgView = [[UIImageView alloc]init];
-            [bgView addSubview:imgView];
-            imgView.frame = CGRectMake(100,130, 100, 100);
+//        yellowBirdImageView =  ({
+//            UIImageView *imgView = [[UIImageView alloc]init];
+//            [bgView addSubview:imgView];
+//            imgView.frame = CGRectMake(100,130, 100, 100);
+//
+//            [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(100, 100));
+//                make.left.mas_equalTo(100);
+//                make.bottom.mas_equalTo(10);
+//            }];
+//            imgView.contentMode = UIViewContentModeScaleAspectFill;
+//            imgView;
+//        });
+//        yellowBirdImageView.image = [UIImage imageNamed:@"yellowbird_00"];
         
-            [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(100, 100));
-                make.left.mas_equalTo(100);
-                make.bottom.mas_equalTo(10);
-            }];
-            imgView.contentMode = UIViewContentModeScaleAspectFill;
-            imgView;
-        });
-        yellowBirdImageView.image = [UIImage imageNamed:@"yellowbird_00"];
-        
-        [self yellowBirdsAnimation];
+//        [self yellowBirdsAnimation];
         
         
         // 添加通知(处理从后台进来后的情况)
@@ -80,7 +80,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
                                                  selector:@selector(groupBirdsAnimation)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
-        [self setupTimer];
+//        [self setupTimer];
         [self groupBirdsAnimation];
         
     }

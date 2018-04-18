@@ -28,7 +28,6 @@
         self.thirdNum =  [[aDecoder decodeObjectForKey:@"thirdNum"] integerValue];
         self.answerNum =  [[aDecoder decodeObjectForKey:@"answerNum"] integerValue];
         self.mathOperationActionType =  [[aDecoder decodeObjectForKey:@"mathOperationActionType"] integerValue];
-        
         self.firstOperationType =  [[aDecoder decodeObjectForKey:@"firstOperationType"] integerValue];
         self.secondOperationType =  [[aDecoder decodeObjectForKey:@"secondOperationType"] integerValue];
         self.operationLevel =  [[aDecoder decodeObjectForKey:@"operationLevel"] integerValue];

@@ -20,22 +20,23 @@
 @implementation CARadarView
 #pragma mark -- Init
 
--(instancetype)init{
-    self = [super init];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
+//-(instancetype)init{
+//    self = [super init];
+//    if (self) {
+//        [self setup];
+////        [self setupViewLayout];
+//    }
+//    return self;
+//}
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-
+//-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+//    self = [super initWithCoder:aDecoder];
+//    if (self) {
+//        [self setup];
+//    }
+//    return self;
+//}
+//
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -165,9 +166,10 @@
     }
     return _opacityAnima;
 }
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    self.pulseLayer.frame = self.bounds;
-    self.replicatorLayer.frame = self.bounds;
-}
+//- (void)layoutSubviews{
+//    [super layoutSubviews];
+//- (void)setupViewLayout{
+//    self.pulseLayer.frame = self.bounds;
+//    self.replicatorLayer.frame = self.bounds;
+//}
 @end

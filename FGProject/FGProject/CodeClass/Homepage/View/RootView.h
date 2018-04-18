@@ -16,7 +16,6 @@
 @class CARadarView;
 @interface RootView : FGBaseView
 @property (nonatomic,strong) CARadarView *radarView;
-//@property (nonatomic,weak) id <RootViewDelegate> delegate;
 //太阳图片
 @property (nonatomic, strong) UIImageView *sunImgView;
 @property (nonatomic, strong) UIImageView *redImageView;

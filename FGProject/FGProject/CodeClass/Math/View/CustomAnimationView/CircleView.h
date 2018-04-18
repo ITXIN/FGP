@@ -13,14 +13,6 @@
  */
 @interface CircleView : UIView
 @property (nonatomic,strong) WaterWaveView *waterWaveView;
-
-/**
- *  绘制波圈
- *
- *  @param frame  frame
- */
-- (void)drawCircleWithFrame:(CGRect)frame;
-
 - (void)circleViewWillApper;
 
 - (void)circleViewWillDisapper;
