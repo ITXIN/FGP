@@ -46,4 +46,5 @@
 #import "PNChart.h"
 #import "FGMathOperationModel.h"
 #import "UIColor+FGColor.h"
+#import "FGImageTopTitleBottomButton.h"
 #endif

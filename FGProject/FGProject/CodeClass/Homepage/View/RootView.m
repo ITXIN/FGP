@@ -55,15 +55,19 @@
     [_sunImgView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     
     //太阳移动
-    CABasicAnimation *basicAnimX = [CABasicAnimation animationWithKeyPath:@"position"];
-    basicAnimX.fromValue = [NSValue valueWithCGPoint:CGPointMake(-50, ScreenHeight/5*2)];
-    basicAnimX.toValue = [NSValue valueWithCGPoint:_sunImgView.layer.position];
-    basicAnimX.duration = 13.0;
+    CAKeyframeAnimation *basicAnimX = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    basicAnimX.duration = 50.0;
     basicAnimX.autoreverses = NO;
     basicAnimX.repeatCount = HUGE_VAL;
     basicAnimX.removedOnCompletion = NO;
-    
+    basicAnim.fillMode = kCAFillModeForwards;
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(ScreenWidth/2, ScreenHeight) radius:ScreenWidth/2 startAngle:M_PI endAngle:M_PI*2 clockwise:true];
+    // 设置贝塞尔曲线路径
+    basicAnimX.path = circlePath.CGPath;
+
     [_sunImgView.layer addAnimation:basicAnimX forKey:@"KCBasicAnimation_RotationX"];
+    
+    
     
     self.radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight+100, ScreenHeight+100)];
     [self.bgView addSubview:self.radarView];

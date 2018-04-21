@@ -91,12 +91,12 @@
             case MathRootViewActionTypeSun:
             {
                 
-                self.sunBtn = tempBtn;
-                [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.right.mas_equalTo(self.subtractBtn.mas_left).offset(-2*btnSpace);
-                    make.top.mas_equalTo(topMar/2);
-                    make.size.mas_equalTo(CGSizeMake(ScreenWidth/10, ScreenWidth/10));
-                }];
+//                self.sunBtn = tempBtn;
+//                [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.right.mas_equalTo(self.subtractBtn.mas_left).offset(-2*btnSpace);
+//                    make.top.mas_equalTo(topMar/2);
+//                    make.size.mas_equalTo(CGSizeMake(ScreenWidth/10, ScreenWidth/10));
+//                }];
                 
                 break;
             }
@@ -120,9 +120,9 @@
     
     
     //隐藏接口删除数据
-    UILongPressGestureRecognizer *longPGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clearPastData:)];
-    longPGR.minimumPressDuration = 4.0;
-    [self.sunBtn addGestureRecognizer:longPGR];
+//    UILongPressGestureRecognizer *longPGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clearPastData:)];
+//    longPGR.minimumPressDuration = 4.0;
+//    [self.sunBtn addGestureRecognizer:longPGR];
 }
 
 #pragma mark -

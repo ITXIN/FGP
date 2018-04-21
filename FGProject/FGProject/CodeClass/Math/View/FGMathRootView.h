@@ -23,7 +23,7 @@
 @property (nonatomic, strong) UIButton *subtractBtn;
 @property (nonatomic, strong) UIButton *multiplyBtn;
 @property (nonatomic, strong) UIButton *divideBtn;
-@property (nonatomic,strong) UIButton *sunBtn;
+//@property (nonatomic,strong) UIButton *sunBtn;
 @property (nonatomic,strong) UIButton *reduceBtn;
 
 ////做的题目数量

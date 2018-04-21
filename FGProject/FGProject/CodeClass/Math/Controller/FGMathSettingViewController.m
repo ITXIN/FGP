@@ -9,8 +9,10 @@
 #import "FGMathSettingViewController.h"
 
 @interface FGMathSettingViewController ()
+
 @property (nonatomic,strong) UILabel *operationSettingTitleLab;
 @property (nonatomic,strong) NSMutableDictionary *operationsDic;
+@property (nonatomic, strong) FGImageTopTitleBottomButton *voiceBtn;
 @end
 
 @implementation FGMathSettingViewController
@@ -26,6 +28,24 @@
 
 - (void)initSubviews{
     [super initSubviews];
+    
+    self.voiceBtn = ({
+        FGImageTopTitleBottomButton *btn = [FGImageTopTitleBottomButton buttonWithType:UIButtonTypeCustom];
+        [self.bgView addSubview:btn];
+        [btn setTitle:@"声音打开" forState:UIControlStateNormal];
+        [btn setTitle:@"声音关闭" forState:UIControlStateSelected];
+        btn.selected = ![SoundsProcess shareInstance].isPlaySound;
+        [btn setImage:[UIImage imageNamed:@"voice"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"non_voice"] forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTintColor:[UIColor whiteColor]];
+        [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [btn addTarget:self action:@selector(voiceBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        btn;
+    });
+    
+    
     self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeDic]];
     self.operationSettingTitleLab = ({
         UILabel *label = [[UILabel alloc]init];
@@ -37,7 +57,6 @@
     
     
     UIImageView *preImageView;
-    //    NSArray *titleLab = @[@"加",@"减",@"乘",@"除"];
     NSArray *titleArr = @[@"setting_add",@"setting_subtract",@"setting_multiply",@"setting_divide"];
     
     for (NSInteger i = 0; i < 4; i ++) {
@@ -46,8 +65,6 @@
             [self.bgView addSubview:imgView];
             imgView.image = [UIImage imageNamed:titleArr[i]];
             imgView.contentMode = UIViewContentModeScaleAspectFill;
-//            imgView.layer.cornerRadius = 20;
-//            imgView.layer.masksToBounds = YES;
             imgView;
         });
         
@@ -93,21 +110,25 @@
     }
     
 }
+#pragma mark -----------
+- (void)voiceBtnAction:(UIButton*)sender{
+    sender.selected = !sender.selected;
+    [SoundsProcess shareInstance].isPlaySound = !sender.selected;
+}
 #pragma mark -------action----
 - (void)actionBtn:(UIButton*)sender{
     //至少选择一个
-     NSInteger count = 0;
+    NSInteger count = 0;
     for (NSString *values in self.operationsDic.allValues) {
         if ([values isEqualToString:@"YES"]) {
             count ++;
         }
     }
-    FGLOG(@"%ld",count);
     if (count == 1 && sender.selected == YES) {
         [SVProgressHUD showInfoWithStatus:@"至少选择一种计算类型"];
         return;
     }
-   
+    
     sender.selected = !sender.selected;
     NSString *tagStr = [NSString stringWithFormat:@"%ld",sender.tag];
     if (sender.selected) {
@@ -125,6 +146,16 @@
         make.top.mas_equalTo(64);
         make.left.mas_equalTo(ScreenWidth/2);
     }];
+    
+    [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(50);
+        make.top.equalTo(self.operationSettingTitleLab
+                         .mas_bottom).offset(5);
+//        make.height.mas_equalTo(100);
+//        make.width.mas_equalTo(200);
+        
+    }];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

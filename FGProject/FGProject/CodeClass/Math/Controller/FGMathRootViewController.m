@@ -20,8 +20,8 @@
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
 @property (nonatomic, strong) FGMathRootView *choiceView;
 @property (nonatomic, strong) DiffcultyLevelView *diffView;
-@property (nonatomic, strong) UILabel *playSoundLab;
-@property (nonatomic, strong) UISwitch *switchView;
+
+@property (nonatomic,strong)  UIButton *settingBtn;
 @end
 
 @implementation FGMathRootViewController
@@ -45,28 +45,17 @@
     self.choiceView.delegate = self;
     [self.bgView insertSubview:self.choiceView belowSubview:self.navigationView];
     
-    self.playSoundLab = ({
-        UILabel *label = [[UILabel alloc]init];
-        [self.bgView addSubview:label];
-        label.textColor = [UIColor whiteColor];
-        if (@available(iOS 8.2, *)) {
-            label.font = [UIFont systemFontOfSize:15 weight:10];
-        } else {
-            // Fallback on earlier versions
-        }
-        label.text = @"声音开关";
-        label;
+    self.settingBtn = ({
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.bgView  addSubview:btn];
+        [btn addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setBackgroundImage:[UIImage imageNamed:@"math_setting"] forState:UIControlStateNormal];
+        btn;
     });
-    self.switchView = [[UISwitch alloc]initWithFrame:CGRectMake(100, 150, 100, 30)];
-    self.switchView.on = [SoundsProcess shareInstance].isPlaySound;
-    [self.switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    self.switchView.tintColor = [UIColor whiteColor];
-    [self.bgView addSubview:self.switchView];
     
 }
 #pragma mark -----------
-- (void)switchAction:(UISwitch*)sender{
-//    [SoundsProcess shareInstance].isPlaySound = sender.isOn;
+- (void)settingAction:(UIButton*)sender{
     FGMathSettingViewController *settingVC = [[FGMathSettingViewController alloc]init];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
@@ -184,13 +173,11 @@
     [self.choiceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.bgView);
     }];
-    [self.switchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.choiceView.sunBtn.mas_right).offset(10);
-        make.centerY.mas_equalTo(self.choiceView.sunBtn);
-    }];
-    [self.playSoundLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.switchView.mas_right).offset(10);
-        make.centerY.mas_equalTo(self.switchView);
+
+    [self.settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(100);
+        make.top.mas_equalTo(10);
+        make.size.mas_equalTo(CGSizeMake(80, 80));
     }];
 }
 - (void)didReceiveMemoryWarning {
