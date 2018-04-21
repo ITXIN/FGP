@@ -114,8 +114,8 @@
 #pragma mark --- 产生运算式 随机
 +(FGMathOperationModel *)generateMathOperationModel{
     
-    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]operationsArr];
-    
+//    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]operationsArr];
+     NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeArr];
     
     MathOperationActionType firstOperationType = [operationArr[arc4random()%operationArr.count] integerValue];
     FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModelWithOperationType:firstOperationType];
@@ -125,7 +125,85 @@
     mediumOperationModel.secondNum = questModel.secondNum;
     mediumOperationModel.answerNum = questModel.answerNum;
     
+    MathOperationActionType secondMathOperationType = [operationArr[arc4random()%operationArr.count] integerValue];
+    NSInteger thirdNum = arc4random() % kMathOperationRangeNumber;
+    
+    if (mediumOperationModel.firstOperationType == MathOperationActionTypeMultiply || mediumOperationModel.firstOperationType == MathOperationActionTypeDivide) {
+        
+            if (mediumOperationModel.answerNum == 0) {
+                if (secondMathOperationType == MathOperationActionTypeAdd){
+                    mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
+                }else if (secondMathOperationType == MathOperationActionTypeSubtract) {
+                    thirdNum = 0;
+                    mediumOperationModel.answerNum = mediumOperationModel.answerNum - thirdNum;
+                }else if(secondMathOperationType == MathOperationActionTypeMultiply){
+                    mediumOperationModel.answerNum = 0;
+                }else if(secondMathOperationType == MathOperationActionTypeDivide){
+                    mediumOperationModel.answerNum = 0;
+                }
+                
+            }else if(mediumOperationModel.answerNum > 0){
+                
+                if (secondMathOperationType == MathOperationActionTypeAdd){
+                    mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
+                }else if (secondMathOperationType == MathOperationActionTypeSubtract) {
+                    thirdNum = arc4random() %(mediumOperationModel.answerNum +1);
+                    mediumOperationModel.answerNum = mediumOperationModel.answerNum - thirdNum;
+                }else if(secondMathOperationType == MathOperationActionTypeMultiply){
+                    mediumOperationModel.answerNum =  mediumOperationModel.answerNum*thirdNum;
+                }else if (secondMathOperationType == MathOperationActionTypeDivide){
+                    NSMutableArray *tempArr = [NSMutableArray array];
+                    NSInteger n = mediumOperationModel.answerNum;
+                    for (NSInteger i = 1; i <= n ; i ++) {
+                        if ((n%i == 0)) {
+                            [tempArr addObject:@(i)];
+                        }
+                    }
+                    thirdNum = [tempArr[arc4random()%tempArr.count] integerValue];
+                    mediumOperationModel.answerNum = mediumOperationModel.answerNum / thirdNum;
+                }
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"Error"];
+            }
+       
+    }else if(mediumOperationModel.firstOperationType == MathOperationActionTypeAdd || mediumOperationModel.firstOperationType == MathOperationActionTypeSubtract){
+        //目前只支持先计算前面的结果
+        
+        if (mediumOperationModel.answerNum == 0) {
+            secondMathOperationType = mediumOperationModel.firstOperationType;
+            if (secondMathOperationType == MathOperationActionTypeAdd) {
+                mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
+            }else if(secondMathOperationType == MathOperationActionTypeSubtract){
+                thirdNum = 0;
+                mediumOperationModel.answerNum = 0;
+            }
+            
+        }else if(mediumOperationModel.answerNum > 0){
+            secondMathOperationType = mediumOperationModel.firstOperationType;
+            
+            if (secondMathOperationType == MathOperationActionTypeAdd){
+                mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
+            }else if (secondMathOperationType == MathOperationActionTypeSubtract) {
+                thirdNum = arc4random() %(mediumOperationModel.answerNum +1);
+                mediumOperationModel.answerNum = mediumOperationModel.answerNum - thirdNum;
+            }
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"Error"];
+        }
+        
+        
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"异常"];
+    }
+    mediumOperationModel.secondOperationType = secondMathOperationType;
+    mediumOperationModel.thirdNum = thirdNum;
+    mediumOperationModel.operationLevel = MathOperationLevelThird;
+    
+    /*
     if (mediumOperationModel.answerNum > 0) {//只有加减
+        
         MathOperationActionType secondMathOperationType = [operationArr[arc4random()%2] integerValue];
         NSInteger thirdNum = arc4random() % kMathOperationRangeNumber;
         if (secondMathOperationType == MathOperationActionTypeSubtract){
@@ -158,6 +236,8 @@
         
     }
     mediumOperationModel.operationLevel = MathOperationLevelThird;
+    
+    */
     return mediumOperationModel;
 }
 
