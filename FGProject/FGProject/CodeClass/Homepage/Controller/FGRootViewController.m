@@ -25,8 +25,6 @@
 @interface FGRootViewController ()<FGCategoryMenuViewDelegate>
 {
 }
-//@property (nonatomic,strong) FGDateView *dateView;
-//@property (nonatomic,strong) CARadarView *radarView;
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
 @property (nonatomic,strong) RootView *rootBgView;
 @property (nonatomic,strong) FGCategoryMenuView *cateGoryMenuView;
@@ -51,40 +49,36 @@
 - (void)initSubviews{
     [super initSubviews];
     self.navigationView.hidden = YES;
-    
-    //    [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:[NSString stringWithFormat:@"Indexbg-0%d",arc4random()%(3-1+1)+1]] withBlurLevel:1]];
     //波以及背景
     self.rootBgView = [[RootView alloc]init];
     [self.bgView addSubview:self.rootBgView];
-    
+//
     self.angryBirdView = [[FGAngryBirdsView alloc]init];
     [self.bgView addSubview:self.angryBirdView];
-    
-    //类别
+//
+//    //类别
     self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
     self.cateGoryMenuView.categoryDelegate = self;
     [self.bgView addSubview: self.cateGoryMenuView];
     
-
-    UIButton *myCenterBtn = ({
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.bgView addSubview:btn];
-        CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
-        btn.layer.cornerRadius = btnW/2;
-        btn.layer.masksToBounds = YES;
-        btn.backgroundColor = [UIColor whiteColor];
-        [btn setImage:[UIImage imageNamed:@"Indexbg-02"] forState:UIControlStateNormal];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(30);
-            make.right.mas_equalTo(-30);
-            make.size.mas_equalTo(CGSizeMake(btnW, btnW));
-        }];
-        [btn addTarget:self action:@selector(myCenterAction:) forControlEvents:UIControlEventTouchUpInside];
-        btn;
-    });
-    FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
-    
-    
+//
+//    UIButton *myCenterBtn = ({
+//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.bgView addSubview:btn];
+//        CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
+//        btn.layer.cornerRadius = btnW/2;
+//        btn.layer.masksToBounds = YES;
+//        btn.backgroundColor = [UIColor whiteColor];
+//        [btn setImage:[UIImage imageNamed:@"Indexbg-02"] forState:UIControlStateNormal];
+//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(30);
+//            make.right.mas_equalTo(-30);
+//            make.size.mas_equalTo(CGSizeMake(btnW, btnW));
+//        }];
+//        [btn addTarget:self action:@selector(myCenterAction:) forControlEvents:UIControlEventTouchUpInside];
+//        btn;
+//    });
+//    FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
 }
 
 #pragma mark -
@@ -96,9 +90,7 @@
 
 #pragma mark -
 #pragma mark --- categoryDelegate
-- (void)categoryAction:(UIButton *)sender
-{
-    //    [self.radarView startAnimation];
+- (void)categoryAction:(UIButton *)sender{
     
     CATransition *animation=[CATransition animation];
     animation.type=@"rippleEffect";

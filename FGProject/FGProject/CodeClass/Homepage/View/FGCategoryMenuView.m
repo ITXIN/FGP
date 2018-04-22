@@ -114,11 +114,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(categoryTap:)];
     self.bgView.userInteractionEnabled = YES;
     [self.bgView  addGestureRecognizer:tap];
-    
-    //    UITapGestureRecognizer *actionBtnTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(actionButtonTapAction:)];
-    //    [self.actionBtn addGestureRecognizer:actionBtnTap];
-    
-    [self setupTimer];
+//    [self setupTimer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self actionBtnClick:self.actionBtn];
     });
@@ -135,15 +131,7 @@
 }
 #pragma mark -
 #pragma mark --- timeAction
-- (void)autoAction
-{
-    //    UIButton *view = (UIButton*)[bgView viewWithTag:(arc4random() %(103 - 100 + 1)+ 100)];
-    //
-    //    [UIView animateWithDuration:0.75 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:50 options:UIViewAnimationOptionCurveLinear animations:^{
-    //        view.transform = CGAffineTransformMakeScale(0.9, 0.9);
-    //    } completion:^(BOOL finished) {
-    //        view.transform = CGAffineTransformIdentity;
-    //    }];
+- (void)autoAction{
     [UIView animateWithDuration:0.5 animations:^{
         [AnimationProcess springAnimationProcessWithView:self.actionBtn upHeight:arc4random()%(40-20+1)+20];
     }];

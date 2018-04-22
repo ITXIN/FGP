@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface FGBlurEffectView : UIView
+#import "FGBaseView.h"
+@interface FGBlurEffectView : FGBaseView
 @property (nonatomic,strong) UIBlurEffect *blurEffect;
 @property (nonatomic,strong) UIVisualEffectView *effView;
 @property (nonatomic,strong) UIImageView *bgImageView;
