@@ -33,8 +33,7 @@ static NSString *reuserID = @"reuserID";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.playInfoArr = [NSMutableArray array];
-    if (![FGNetworkingReachable sharedInstance].isReachable)
-    {
+    if (![FGNetworkingReachable sharedInstance].isReachable){
         NSArray *dataArr = [FGProjectHelper getDataWithKey:[NSString stringWithFormat:@"%@%@",STORY_MUSIC_LIST_KEY,self.playModel.home_id]];
         FGLOG(@"-----本地数据 ");
         [self setupStoryDataWithArr:dataArr];
@@ -48,7 +47,7 @@ static NSString *reuserID = @"reuserID";
 #pragma mark -
 - (void)initSubviews{
     [super initSubviews];
-    [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:@"Indexbg-01"] withBlurLevel:1]];
+  
     self.titleStr = self.playModel.title;
     self.navigationView.titleLab.textColor = [UIColor whiteColor];
     self.navigationView.titleLab.font = [UIFont systemFontOfSize:15];
@@ -59,11 +58,6 @@ static NSString *reuserID = @"reuserID";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    
-    self.playView = [[MusicPlayerView alloc]initWithFrame:CGRectMake(0, ScreenHeight*0.80- HEIGHT_PLAYERVIEW - 10, WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW)];
-    self.playView.delegate = self;
-    [self.bgView addSubview:self.playView];
-    
     
     self.fadeStringView = [[FGFadeStringView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.fadeStringView.foreColor = [UIColor whiteColor];
@@ -76,14 +70,17 @@ static NSString *reuserID = @"reuserID";
     
     self.musicImageView =  ({
         UIImageView *image = [[UIImageView alloc]init];
-        [self.bgView insertSubview:image belowSubview:self.playView];
-        image.contentMode = UIViewContentModeScaleToFill;
-        image.backgroundColor = [UIColor lightGrayColor];
-        //        image.contentMode = UIViewContentModeScaleAspectFit;
-        //        image.contentMode = UIViewContentModeScaleAspectFill;
+        [self.bgView addSubview:image];
+        image.contentMode = UIViewContentModeScaleAspectFill;
+        image.layer.masksToBounds = YES;
+        image.layer.cornerRadius = 3.0;
         image;
     });
     [self.musicImageView addSubview:self.fadeStringView];
+    
+    self.playView = [[MusicPlayerView alloc]initWithFrame:CGRectMake(0, ScreenHeight*0.80- HEIGHT_PLAYERVIEW - 10, WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW)];
+    self.playView.delegate = self;
+    [self.bgView addSubview:self.playView];
     
 }
 
@@ -176,6 +173,8 @@ static NSString *reuserID = @"reuserID";
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];
     FGPlayStoryModel *model = self.playInfoArr[indexPath.row];
+    cell.imageView.layer.cornerRadius = 3.0;
+    cell.imageView.layer.masksToBounds = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.img_url] placeholderImage:[UIImage imageNamed:@"home_story"] options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (image) {//解决cell imageview 变大
@@ -214,21 +213,22 @@ static NSString *reuserID = @"reuserID";
             make.bottom.mas_equalTo(0);
         }];
     }
-    [self.playView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-kStatusBarHeight);
-        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-20);
-        make.size.mas_equalTo(CGSizeMake(WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW));
-    }];
+    
     [self.musicImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(50);
-        make.right.equalTo(self.playView);
         make.bottom.mas_equalTo(self.playView.mas_top).offset(-10);
+        make.top.equalTo(self.tableView);
+        make.right.equalTo(self.playView);
         make.left.equalTo(self.playView);
     }];
     [self.fadeStringView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(0);
         make.right.equalTo(self.musicImageView);
         make.left.equalTo(self.musicImageView);
+    }];
+    [self.playView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-kStatusBarHeight);
+        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-20);
+        make.size.mas_equalTo(CGSizeMake(WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW));
     }];
 }
 - (void)didReceiveMemoryWarning {

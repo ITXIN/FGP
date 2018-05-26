@@ -18,7 +18,7 @@
     if (self)
     {
         
-        UIVisualEffectView *effView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+        UIVisualEffectView *effView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
         [self addSubview:effView];
         [effView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
@@ -42,7 +42,6 @@
         CGFloat proceTop =  self.currentTimeLab.frame.origin.y + timeLabHeight/2 - pace/2;
         //
         self.processView = [[UISlider alloc]initWithFrame:CGRectMake(self.currentTimeLab.frame.size.width + self.currentTimeLab.frame.origin.x + pace, proceTop, processWidth, processHeight)];
-//        [self.processView setThumbImage:[UIImage imageNamed:@"ic_heart_pregress"] forState:UIControlStateNormal];
         
         self.processView.value = 0.0;
         [self addSubview:self.processView];

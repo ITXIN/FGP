@@ -21,9 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];//隐藏状态栏
-    
     
 //    //显示SDK的版本号
 //    NSLog(@"verson=%@",[IFlySetting getVersion]);
@@ -48,8 +47,6 @@
     
     //监听网络
     [[FGNetworkingReachable sharedInstance]startMonitoringNetworkReachable];
-    
-   
     
     [self setupSVProgressHUD];
     
