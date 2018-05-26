@@ -25,7 +25,6 @@
     self.yellowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"huangqiu.png"]];
     [self.bgView addSubview:self.yellowImageView];
     
-    
     _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _startBtn.frame = CGRectMake(ScreenWidth - 100 - ScreenHeight/6, ScreenHeight/2, ScreenHeight/6, ScreenHeight/6);
     _startBtn.hidden = YES;
@@ -40,33 +39,31 @@
     _sunImgView.image = [UIImage imageNamed:@"taiyang-03"];
     [self.bgView addSubview:_sunImgView];
     
-    //晃动动画
+   //晃动动画
     CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/7];
     basicAnim.duration = 2.0;
     basicAnim.autoreverses = YES;
     basicAnim.repeatCount = HUGE_VAL;
     basicAnim.removedOnCompletion = NO;
-    
+    basicAnim.fillMode = kCAFillModeForwards;
     [_startBtn.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     [self.redImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     [self.yellowImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/9];
     [_sunImgView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     
-    //太阳移动
+   //太阳移动
     CAKeyframeAnimation *basicAnimX = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     basicAnimX.duration = 50.0;
     basicAnimX.autoreverses = NO;
     basicAnimX.repeatCount = HUGE_VAL;
     basicAnimX.removedOnCompletion = NO;
-    basicAnim.fillMode = kCAFillModeForwards;
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(ScreenWidth/2, ScreenHeight) radius:ScreenWidth/2 startAngle:M_PI endAngle:M_PI*2 clockwise:true];
+    //以原点和半径
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(ScreenHeight, ScreenHeight/3*4) radius:ScreenHeight startAngle:M_PI endAngle:M_PI*2 clockwise:true];
     // 设置贝塞尔曲线路径
     basicAnimX.path = circlePath.CGPath;
-
     [_sunImgView.layer addAnimation:basicAnimX forKey:@"KCBasicAnimation_RotationX"];
-    
     
     
     self.radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight+100, ScreenHeight+100)];
@@ -75,7 +72,6 @@
     self.radarView.fillColor = [UIColor whiteColor];
     self.radarView.opacityValue = 0.9;
     [self.radarView startAnimation];
-    
     
 }
 

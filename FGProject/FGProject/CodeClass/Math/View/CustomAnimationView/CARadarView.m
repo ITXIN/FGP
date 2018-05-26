@@ -123,6 +123,7 @@
         
         _pulseLayer.fillColor = [UIColor blueColor].CGColor;
         _pulseLayer.opacity = 0.0;
+        
     }
     return _pulseLayer;
 }
@@ -143,7 +144,6 @@
         CABasicAnimation *scaleAnima = [CABasicAnimation animationWithKeyPath:@"transform"];
         scaleAnima.fromValue = [NSValue valueWithCATransform3D:CATransform3DScale(CATransform3DIdentity, 0.0, 0.0, 0.0)];
         scaleAnima.toValue = [NSValue valueWithCATransform3D:CATransform3DScale(CATransform3DIdentity, 1.0, 1.0, 0.0)];
-        
         scaleAnima.removedOnCompletion = NO;
         
         _animaGroup = [CAAnimationGroup animation];
@@ -151,7 +151,6 @@
         _animaGroup.duration = 9;
         _animaGroup.autoreverses = NO;
         _animaGroup.repeatCount = HUGE;
-        
         _animaGroup.removedOnCompletion = NO;
     }
     return _animaGroup;

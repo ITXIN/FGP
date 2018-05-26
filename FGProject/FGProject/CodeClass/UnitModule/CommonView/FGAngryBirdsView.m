@@ -80,7 +80,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
                                                  selector:@selector(groupBirdsAnimation)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
-//        [self setupTimer];
+        [self setupTimer];
         [self groupBirdsAnimation];
         
     }
