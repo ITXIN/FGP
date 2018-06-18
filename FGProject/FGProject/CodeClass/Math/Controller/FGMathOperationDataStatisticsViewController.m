@@ -29,7 +29,7 @@
 }
 - (void)initSubviews{
     [super initSubviews];
-    self.mathManager = [FGMathOperationManager shareMathOperationManager];
+//    self.mathManager = [FGMathOperationManager shareMathOperationManager];
     
     //    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:[UIColor fgPieChartLightGreenColor]],
     //                       [PNPieChartDataItem dataItemWithValue:20 color:[UIColor fgPieChartFreshGreenColor] description:@"WWDC"],

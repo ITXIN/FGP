@@ -113,6 +113,23 @@ static CGFloat x;
         _countLab.font = [UIFont boldSystemFontOfSize:50.f];
         [self addSubview:_countLab];
         [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(animateWaveFish) userInfo:nil repeats:YES];
+        self.titleLab = ({
+            UILabel *label = [[UILabel alloc]init];
+            [self addSubview:label];
+            label.textColor = [UIColor lightGrayColor];
+            if (@available(iOS 8.2, *)) {
+                label.font = [UIFont systemFontOfSize:14 weight:50];
+            } else {
+                // Fallback on earlier versions
+            }
+            [label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(-15);
+                make.centerX.equalTo(self);
+            }];
+            label.text = @"今日完成";
+            label.textAlignment = NSTextAlignmentCenter;
+            label;
+        });
         
     }
     return self;

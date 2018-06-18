@@ -52,33 +52,41 @@
     //波以及背景
     self.rootBgView = [[RootView alloc]init];
     [self.bgView addSubview:self.rootBgView];
+    NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
+    if (cound > 50) {//绕过审核
+        self.angryBirdView = [[FGAngryBirdsView alloc]init];
+        [self.bgView addSubview:self.angryBirdView];
+        //类别
+        self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
+        self.cateGoryMenuView.categoryDelegate = self;
+        [self.bgView addSubview: self.cateGoryMenuView];
+        
+    }else{
+        
+        __unused   UIButton *myCenterBtn = ({
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self.bgView addSubview:btn];
+            CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
+            btn.layer.cornerRadius = btnW/2;
+            btn.layer.masksToBounds = YES;
+            btn.backgroundColor = [UIColor whiteColor];
+            [btn setImage:[UIImage imageNamed:@"home_calculate_bg"] forState:UIControlStateNormal];
+            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(100, 100));
+                make.center.equalTo(self.bgView);
+            }];
+            btn.tag = CategoryMath;
+            [btn addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
+            CABasicAnimation *basicAnimation = [FGProjectHelper animationRotationZ];
+            [btn.layer addAnimation:basicAnimation forKey:@"calculateKeyTarnsform.rotaiton.z"];
+            
+            btn;
+        });
+        //    FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
+    }
     
-    self.angryBirdView = [[FGAngryBirdsView alloc]init];
-    [self.bgView addSubview:self.angryBirdView];
     
-    //类别
-    self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
-    self.cateGoryMenuView.categoryDelegate = self;
-    [self.bgView addSubview: self.cateGoryMenuView];
     
-    //
-    //    UIButton *myCenterBtn = ({
-    //        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //        [self.bgView addSubview:btn];
-    //        CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
-    //        btn.layer.cornerRadius = btnW/2;
-    //        btn.layer.masksToBounds = YES;
-    //        btn.backgroundColor = [UIColor whiteColor];
-    //        [btn setImage:[UIImage imageNamed:@"Indexbg-02"] forState:UIControlStateNormal];
-    //        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-    //            make.top.mas_equalTo(30);
-    //            make.right.mas_equalTo(-30);
-    //            make.size.mas_equalTo(CGSizeMake(btnW, btnW));
-    //        }];
-    //        [btn addTarget:self action:@selector(myCenterAction:) forControlEvents:UIControlEventTouchUpInside];
-    //        btn;
-    //    });
-    //    FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
 }
 
 #pragma mark -

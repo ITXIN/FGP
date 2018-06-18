@@ -213,5 +213,15 @@
     }
     return NO;
 }
-
+    //晃动动画
++ (CABasicAnimation*)animationRotationZ{
+    CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/7];
+    basicAnim.duration = 2.0;
+    basicAnim.autoreverses = YES;
+    basicAnim.repeatCount = HUGE_VAL;
+    basicAnim.removedOnCompletion = NO;
+    return basicAnim;
+    
+}
 @end

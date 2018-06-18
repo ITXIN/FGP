@@ -25,4 +25,7 @@
 
 + (NSDictionary*)postDataWithClickRandomModel:(FGClickRandomAnswerCountModel*)clickModel;
 + (BOOL)getIsiPad;
+
+//晃动动画
++ (CABasicAnimation*)animationRotationZ;
 @end

@@ -17,7 +17,7 @@
 @property (nonatomic,assign) float waveHeight;
 @property (nonatomic,strong)  UILabel *countLab;
 @property (nonatomic,strong) MyWaterView *myWaterView;
-
+@property (nonatomic, strong) UILabel *titleLab;
 /**
  *  水波球动画
  */

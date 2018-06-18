@@ -66,12 +66,12 @@
     [_sunImgView.layer addAnimation:basicAnimX forKey:@"KCBasicAnimation_RotationX"];
     
     
-    self.radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight+100, ScreenHeight+100)];
-    [self.bgView addSubview:self.radarView];
-    self.radarView.center = self.center;
-    self.radarView.fillColor = [UIColor whiteColor];
-    self.radarView.opacityValue = 0.9;
-    [self.radarView startAnimation];
+//    self.radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight+100, ScreenHeight+100)];
+//    [self.bgView addSubview:self.radarView];
+//    self.radarView.center = self.center;
+//    self.radarView.fillColor = [UIColor whiteColor];
+//    self.radarView.opacityValue = 0.9;
+//    [self.radarView startAnimation];
     
 }
 

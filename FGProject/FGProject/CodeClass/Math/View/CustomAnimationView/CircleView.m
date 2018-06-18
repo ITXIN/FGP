@@ -17,8 +17,7 @@
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         colorArr = @[[UIColor purpleColor],[UIColor yellowColor],[UIColor cyanColor],[UIColor greenColor],[UIColor blueColor],[UIColor redColor],RGBA(24, 185, 77, 1),RGBA(0, 255, 255, 1),RGBA(255, 0, 0, 1)];
         
         radarView = [[CARadarView alloc]initWithFrame:CGRectMake(0, 0,CGRectGetWidth(frame)+100, CGRectGetHeight(frame)+100)];
