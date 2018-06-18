@@ -7,12 +7,13 @@
 //
 
 #import "FGMathSettingViewController.h"
-
+#import "FGImageLeftTitleRightButtom.h"
 @interface FGMathSettingViewController ()
 
 @property (nonatomic,strong) UILabel *operationSettingTitleLab;
 @property (nonatomic,strong) NSMutableDictionary *operationsDic;
-@property (nonatomic, strong) FGImageTopTitleBottomButton *voiceBtn;
+//@property (nonatomic, strong) FGImageTopTitleBottomButton *voiceBtn;
+@property (nonatomic, strong) FGImageLeftTitleRightButtom *voiceBtn;
 @end
 
 @implementation FGMathSettingViewController
@@ -30,7 +31,7 @@
     [super initSubviews];
     
     self.voiceBtn = ({
-        FGImageTopTitleBottomButton *btn = [FGImageTopTitleBottomButton buttonWithType:UIButtonTypeCustom];
+        FGImageLeftTitleRightButtom *btn = [FGImageLeftTitleRightButtom buttonWithType:UIButtonTypeCustom];
         [self.bgView addSubview:btn];
         [btn setTitle:@"声音打开" forState:UIControlStateNormal];
         [btn setTitle:@"声音关闭" forState:UIControlStateSelected];
@@ -146,13 +147,12 @@
         make.top.mas_equalTo(64);
         make.left.mas_equalTo(ScreenWidth/2);
     }];
-    
     [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(50);
         make.top.equalTo(self.operationSettingTitleLab
                          .mas_bottom).offset(5);
-//        make.height.mas_equalTo(100);
-//        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(60);
+        make.width.mas_equalTo(130);
         
     }];
     

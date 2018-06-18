@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2361A3FE20D757060041981D /* FGImageLeftTitleRightButtom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */; };
 		8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */; };
 		8F4753CF206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753CE206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m */; };
 		8F4753D2206226260002C0B7 /* UIColor+FGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753D1206226260002C0B7 /* UIColor+FGColor.m */; };
@@ -678,6 +679,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2361A3FC20D757060041981D /* FGImageLeftTitleRightButtom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageLeftTitleRightButtom.h; sourceTree = "<group>"; };
+		2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageLeftTitleRightButtom.m; sourceTree = "<group>"; };
 		50CD0E07C5EC3671962FD5B6 /* Pods-FGProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FGProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FGProject/Pods-FGProject.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3A0EF41FBD6C62005AE91C /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 		8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CusLayerView.m; sourceTree = "<group>"; };
@@ -2852,6 +2855,8 @@
 				8FBCD4FD1FBED5F400E72BB6 /* FGRewardWindow.m */,
 				E65AA45F208B34C000A4F808 /* FGImageTopTitleBottomButton.h */,
 				E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */,
+				2361A3FC20D757060041981D /* FGImageLeftTitleRightButtom.h */,
+				2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -3714,6 +3719,7 @@
 				8F6AA5FF1FB0410500A7B5C7 /* SoundsProcess.m in Sources */,
 				8F5E447C1FB3F695004BE4EC /* FGBaseViewController.m in Sources */,
 				8F6AA5E91FB0410500A7B5C7 /* FGGameModel.m in Sources */,
+				2361A3FE20D757060041981D /* FGImageLeftTitleRightButtom.m in Sources */,
 				8F6AA5E21FB0410500A7B5C7 /* AKPickerView.m in Sources */,
 				8F6AA82D1FB0410700A7B5C7 /* FGAngryBirdsView.m in Sources */,
 				8F6AA6041FB0410500A7B5C7 /* MyWaterView.m in Sources */,
