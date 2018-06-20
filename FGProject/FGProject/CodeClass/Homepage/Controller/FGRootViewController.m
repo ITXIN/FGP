@@ -23,8 +23,6 @@
 #import "FGMyCenterViewController.h"
 #import "FGVideoViewController.h"
 @interface FGRootViewController ()<FGCategoryMenuViewDelegate>
-{
-}
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
 @property (nonatomic,strong) RootView *rootBgView;
 @property (nonatomic,strong) FGCategoryMenuView *cateGoryMenuView;
@@ -39,7 +37,7 @@
     
     FGUserManager *user = self.userManager;
     FGLOG(@"---%@ %@ %@",user.name,user.ID,user.isPlaySound);
-    
+
     NSString *uidStr = [FLDeviceUID uid];
     NSDictionary *userInfoDic = @{@"name":@"聪明可爱的宝贝",@"ID":[NSString stringWithFormat:@"%@",uidStr],@"isPlaySound":@"N"};
     [user saveUserDataWithDic:userInfoDic];
@@ -82,11 +80,7 @@
             
             btn;
         });
-        //    FGLOG(@"isiPad %d",[FGProjectHelper getIsiPad]);
     }
-    
-    
-    
 }
 
 #pragma mark -
@@ -99,7 +93,7 @@
 #pragma mark --- categoryDelegate
 - (void)categoryAction:(UIButton *)sender{
     CATransition *animation=[CATransition animation];
-    animation.type=@"rippleEffect";
+    animation.type = @"rippleEffect";
     animation.duration=2.0;
     [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
     
