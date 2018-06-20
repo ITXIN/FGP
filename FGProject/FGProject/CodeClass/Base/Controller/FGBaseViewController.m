@@ -19,7 +19,6 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.userManager = [FGUserManager standard];
-    FGLOG(@"");
     [self initSubviews];
     [self setupLayoutSubviews];
 }
@@ -37,7 +36,7 @@
     self.navigationView.delegate = self;
     self.navigationView.navigationView.backgroundColor = [UIColor clearColor];
     [self.bgView addSubview:self.navigationView];
-
+    
     
 }
 #pragma mark - FGNavigationviewDelegate
@@ -55,26 +54,10 @@
     self.navigationView.titleStr = [NSString stringWithFormat:@"%@",titleStr];
 }
 - (void)setupLayoutSubviews{
-
-//    if (AVAILABLE_IOS_11) {
-//        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-//            if (kiPhoneX) {
-//                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-//                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-//                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-//                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-//            }else{
-//              make.edges.equalTo(self.view);
-//            }
-//
-//        }];
-//    }else{
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
-        }];
-//    }
     
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
     [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.leading.mas_equalTo(self.view);
         make.height.mas_equalTo(64);
@@ -91,13 +74,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
