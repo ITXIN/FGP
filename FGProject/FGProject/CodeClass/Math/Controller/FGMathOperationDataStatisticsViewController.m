@@ -25,11 +25,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
-    FGLOG(@"");
+    FGLOG(@"2%@",self.mathManager);
 }
 - (void)initSubviews{
     [super initSubviews];
-//    self.mathManager = [FGMathOperationManager shareMathOperationManager];
+    //先调用这个而后调用 viewDidLoad
+    FGLOG(@"1%@",self.mathManager);
+    self.mathManager = [FGMathOperationManager shareMathOperationManager];
     
     //    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:[UIColor fgPieChartLightGreenColor]],
     //                       [PNPieChartDataItem dataItemWithValue:20 color:[UIColor fgPieChartFreshGreenColor] description:@"WWDC"],
@@ -63,7 +65,7 @@
     self.totalNumberLab = ({
         UILabel *label = [[UILabel alloc]init];
         [self.pieChart addSubview:label];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor grayColor];
         label.font = [UIFont systemFontOfSize:14];
         label.textAlignment = NSTextAlignmentCenter;
         label.text = [NSString stringWithFormat:@"总答题数:\n%ld",self.mathManager.dataStatisticsModel.totalNumber];
