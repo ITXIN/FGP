@@ -30,7 +30,7 @@
 - (void)initSubviews{
     [super initSubviews];
     //先调用这个而后调用 viewDidLoad
-//    FGLOG(@"1%@",self.mathManager);
+    FGLOG(@"1%@",self.mathManager);
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
     
     //    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:[UIColor fgPieChartLightGreenColor]],
