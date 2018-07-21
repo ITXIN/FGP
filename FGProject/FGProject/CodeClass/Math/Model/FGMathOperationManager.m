@@ -10,6 +10,7 @@
 #import "FGMathAnswerOptionsModel.h"
 #import "FGMathOperationDataStatisticsModel.h"
 #import "FGMathOperationModel.h"
+#import "FGMistakesModel.h"
 @implementation FGMathOperationManager
 static NSString *countKey = @"countKey";
 static NSString *rewardKey = @"rewardKey";
@@ -220,10 +221,10 @@ static NSString *hasDoneKey = @"hasDoneKey";
         operationActionType = self.currentMathOperationModel.mathOperationActionType;
     }
     NSDictionary *detailDic = @{
-                                kMathOperationTypeKey:[NSString stringWithFormat:@"%ld",operationActionType],
-                                kMathOperationStateKey:[NSString stringWithFormat:@"%@",actionTypeAnswer==MathSimpleOperationViewActionTypeAnswer? @"YES":@"NO"],
-                                kMathOperationObjKey:self.currentMathOperationModel ,
-                                kMathOperationDateKey:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
+                                [NSString stringWithFormat:@"%@",kMathOperationTypeKey]:[NSString stringWithFormat:@"%ld",operationActionType],
+                                [NSString stringWithFormat:@"%@",kMathOperationStateKey]:[NSString stringWithFormat:@"%@",actionTypeAnswer==MathSimpleOperationViewActionTypeAnswer? @"YES":@"NO"],
+                                [NSString stringWithFormat:@"%@",kMathOperationObjKey]:self.currentMathOperationModel ,
+                                [NSString stringWithFormat:@"%@",kMathOperationDateKey]:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
                                 };
     FGMathOperationModel *mathOperationModel = self.currentMathOperationModel;
       FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
@@ -231,10 +232,10 @@ static NSString *hasDoneKey = @"hasDoneKey";
         
         dataDic = [NSMutableDictionary dictionaryWithDictionary:@{
                                           [self.dateSingle curretDate]:@{
-                                                  kMathOperationDetailDataKey:@[detailDic],
-                                                  kMathOperationDetailDataTotalNumberKey:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
+                                                  [NSString stringWithFormat:@"%@",kMathOperationDetailDataKey]:@[detailDic],
+                                                  [NSString stringWithFormat:@"%@",kMathOperationDetailDataTotalNumberKey]:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
                                                   },
-                                           kMathOperationDataStatisticsTotalNumberKey:@"1"
+                                           [NSString stringWithFormat:@"%@",kMathOperationDataStatisticsTotalNumberKey]:@"1"
                                          
                                   }];
         
@@ -268,9 +269,34 @@ static NSString *hasDoneKey = @"hasDoneKey";
     
 }
 
+
+
 #pragma mark -----------
+- (void)getAllData{
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    NSLog(@"---data1--%@",dataDic);
+    NSLog(@"---data--%@",dataDic.allKeys);
+    NSMutableArray *dateArr = [NSMutableArray array];
+    NSMutableArray *mistakesModelArr = [NSMutableArray array];
+    for (id key in dataDic.allKeys) {
+        if ([key isKindOfClass:[NSString class]] ) {
+            if (![(NSString*)key hasPrefix:@"k"] ) {//日期
+                [dateArr addObject:key];
+                NSLog(@"--key %@-count--%@",key,dataDic[key][kMathOperationDetailDataTotalNumberKey]);
+                for (NSDictionary*dic in dataDic[key][@"kMathOperationDetailDataKey"]) {//模型
+                    NSLog(@"---dic--%@",dic);
+                    FGMistakesModel *mistakeModel = [[FGMistakesModel alloc]initWithDic:dic];
+                    [mistakesModelArr addObject:mistakeModel];
+                }
+            }
+        }
+    }
+    
+//NSLog(@"---data--%<#type#>",<#name#>);
+}
+
+
 - (void)getDataStatistic{
-    self.dataStatisticsModel = [[FGMathOperationDataStatisticsModel alloc]init];
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
     
     NSInteger totalNumber = [dataDic[kMathOperationDataStatisticsTotalNumberKey] integerValue];
@@ -438,7 +464,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
     
 }
 
-
+//保存今日已经做的个数
 - (void)saveCurrentDateHasDoneNumber:(NSInteger)number{
     //今天做的题目个数
     [self.hasDoneDic setValue:[NSString stringWithFormat:@"%ld",number] forKey:[self.dateSingle curretDate]];

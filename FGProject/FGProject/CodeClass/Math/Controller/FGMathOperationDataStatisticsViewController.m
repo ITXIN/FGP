@@ -7,8 +7,8 @@
 //
 
 #import "FGMathOperationDataStatisticsViewController.h"
-
-@interface FGMathOperationDataStatisticsViewController ()
+#import "FGMistakesCell.h"
+@interface FGMathOperationDataStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) PNPieChart *pieChart;
 @property (nonatomic,strong) UIView  *legendView;
 @property (nonatomic,strong) FGMathOperationManager *mathManager;
@@ -17,9 +17,13 @@
 
 @property (nonatomic,strong) PNPieChart *detailPieChart;
 @property (nonatomic,strong) UIView  *detailLegendView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataArr;
+
 @end
 
 @implementation FGMathOperationDataStatisticsViewController
+static NSString *reusedMistakesID = @"reusedMistakesID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,8 +35,29 @@
     [super initSubviews];
     //先调用这个而后调用 viewDidLoad
     FGLOG(@"1%@",self.mathManager);
+    self.dataArr = [NSMutableArray array];
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
     
+    [self initPieChartSubviews];
+    [self initMistakesViews];
+}
+//错题
+- (void)initMistakesViews{
+    self.tableView = ({
+        UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.showsVerticalScrollIndicator = NO;
+        [self.bgView addSubview:tableView];
+        tableView.delaysContentTouches = NO;
+        [tableView registerClass:[FGMistakesCell class] forCellReuseIdentifier:reusedMistakesID];
+        tableView;
+    });
+    [self.mathManager getAllData];
+}
+//饼状图
+- (void)initPieChartSubviews{
     //    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:[UIColor fgPieChartLightGreenColor]],
     //                       [PNPieChartDataItem dataItemWithValue:20 color:[UIColor fgPieChartFreshGreenColor] description:@"WWDC"],
     //                       [PNPieChartDataItem dataItemWithValue:70 color:[UIColor fgPieChartDeepGreenColor] description:@"GOOG I/O"],
@@ -91,7 +116,6 @@
     self.detailPieChart.hidden = YES;
     self.detailLegendView.hidden = YES;
 }
-
 #pragma mark -
 - (void)btnAction:(UIButton*)sender{
     NSInteger tag = sender.tag;
@@ -120,7 +144,29 @@
     pieChart.legendStyle = PNLegendItemStyleStacked;
     pieChart.legendFont = [UIFont boldSystemFontOfSize:15.0f];
 }
+#pragma mark -------delegate----
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.dataArr.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex{
+//    return self.dataArr.count;
+    return 100;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FGMistakesCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedMistakesID];
+    return cell;
+}
+
+
+
+#pragma mark -----------
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.pieChart mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -155,6 +201,12 @@
         make.top.mas_equalTo(self.detailPieChart.mas_bottom).offset(10);
         make.size.mas_equalTo(CGSizeMake(50, 20));
     }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.pieChart);
+        make.bottom.equalTo(self.view).offset(-20);
+        make.left.equalTo(self.pieChart.mas_right).offset(20);
+        make.right.mas_equalTo(-50);
+    }];
     
 }
 
@@ -164,14 +216,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 @end

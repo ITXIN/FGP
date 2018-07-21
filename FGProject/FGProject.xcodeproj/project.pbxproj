@@ -657,6 +657,9 @@
 		8FE33445206201B20030F8EC /* FGMathOperationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE33444206201B20030F8EC /* FGMathOperationModel.m */; };
 		8FF61A1E1FC0274C007306D6 /* FGSetupPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF61A1D1FC0274C007306D6 /* FGSetupPhotoViewController.m */; };
 		BC342144BC41CC887887A04B /* libPods-FGProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D994E97528FF0101CC05AECB /* libPods-FGProject.a */; };
+		E623492B2103240A00F04A6F /* FGMistakesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E623492A2103240A00F04A6F /* FGMistakesCell.m */; };
+		E623492E210334FE00F04A6F /* FGMistakesOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E623492D210334FE00F04A6F /* FGMistakesOperationView.m */; };
+		E62349322103682A00F04A6F /* FGMistakesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E62349312103682A00F04A6F /* FGMistakesModel.m */; };
 		E65AA461208B34C000A4F808 /* FGImageTopTitleBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */; };
 		E6EE387D208494DB005028D0 /* FGMathSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE387C208494DB005028D0 /* FGMathSettingViewController.m */; };
 /* End PBXBuildFile section */
@@ -1451,6 +1454,12 @@
 		8FF61A211FC028DD007306D6 /* UIImage+SGHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGHelper.m"; sourceTree = "<group>"; };
 		AF1180214914448E9A6709B8 /* Pods-FGProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FGProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-FGProject/Pods-FGProject.release.xcconfig"; sourceTree = "<group>"; };
 		D994E97528FF0101CC05AECB /* libPods-FGProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FGProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E62349292103240A00F04A6F /* FGMistakesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMistakesCell.h; sourceTree = "<group>"; };
+		E623492A2103240A00F04A6F /* FGMistakesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesCell.m; sourceTree = "<group>"; };
+		E623492C210334FE00F04A6F /* FGMistakesOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMistakesOperationView.h; sourceTree = "<group>"; };
+		E623492D210334FE00F04A6F /* FGMistakesOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesOperationView.m; sourceTree = "<group>"; };
+		E62349302103682A00F04A6F /* FGMistakesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMistakesModel.h; sourceTree = "<group>"; };
+		E62349312103682A00F04A6F /* FGMistakesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesModel.m; sourceTree = "<group>"; };
 		E65AA45F208B34C000A4F808 /* FGImageTopTitleBottomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageTopTitleBottomButton.h; sourceTree = "<group>"; };
 		E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageTopTitleBottomButton.m; sourceTree = "<group>"; };
 		E6EE387B208494DB005028D0 /* FGMathSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathSettingViewController.h; sourceTree = "<group>"; };
@@ -1818,6 +1827,7 @@
 		8F6AA32E1FB0410400A7B5C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E623492F210367F900F04A6F /* MistakesModel */,
 				8F6AA32F1FB0410400A7B5C7 /* AdjustVolume.h */,
 				8F6AA3301FB0410400A7B5C7 /* AdjustVolume.m */,
 				8F6AA3311FB0410400A7B5C7 /* AnimationProcess.h */,
@@ -1849,6 +1859,7 @@
 		8F6AA3411FB0410400A7B5C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E6234928210323AD00F04A6F /* MistakesViews */,
 				8F6AA3421FB0410400A7B5C7 /* FGMathRootView.h */,
 				8F6AA3431FB0410400A7B5C7 /* FGMathRootView.m */,
 				8F6AA3441FB0410400A7B5C7 /* CustomAnimationView */,
@@ -3005,6 +3016,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E6234928210323AD00F04A6F /* MistakesViews */ = {
+			isa = PBXGroup;
+			children = (
+				E62349292103240A00F04A6F /* FGMistakesCell.h */,
+				E623492A2103240A00F04A6F /* FGMistakesCell.m */,
+				E623492C210334FE00F04A6F /* FGMistakesOperationView.h */,
+				E623492D210334FE00F04A6F /* FGMistakesOperationView.m */,
+			);
+			path = MistakesViews;
+			sourceTree = "<group>";
+		};
+		E623492F210367F900F04A6F /* MistakesModel */ = {
+			isa = PBXGroup;
+			children = (
+				E62349302103682A00F04A6F /* FGMistakesModel.h */,
+				E62349312103682A00F04A6F /* FGMistakesModel.m */,
+			);
+			path = MistakesModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3759,6 +3790,7 @@
 				8F6AA82C1FB0410700A7B5C7 /* FGAlertView.m in Sources */,
 				8F6AA5F01FB0410500A7B5C7 /* FGDateView.m in Sources */,
 				8F6AA5F71FB0410500A7B5C7 /* AdjustVolume.m in Sources */,
+				E623492E210334FE00F04A6F /* FGMistakesOperationView.m in Sources */,
 				8F6AA82A1FB0410700A7B5C7 /* WriteAnimationLayer.m in Sources */,
 				8F6AA8341FB0410700A7B5C7 /* FGProjectHelper.m in Sources */,
 				8F6AA60F1FB0410500A7B5C7 /* MusicPlayerManager.m in Sources */,
@@ -3778,6 +3810,7 @@
 				8F6AA60A1FB0410500A7B5C7 /* FGSimpleOperationView.m in Sources */,
 				8F6AA8221FB0410700A7B5C7 /* FLDeviceUID.m in Sources */,
 				8F6AA5D71FB0410500A7B5C7 /* PcmPlayer.m in Sources */,
+				E62349322103682A00F04A6F /* FGMistakesModel.m in Sources */,
 				8F6AA8251FB0410700A7B5C7 /* MCFireworksView.m in Sources */,
 				8FB1607F1FBC43EE006C9BBA /* FGMyCenterViewController.m in Sources */,
 				8F6AA5F81FB0410500A7B5C7 /* AnimationProcess.m in Sources */,
@@ -3792,6 +3825,7 @@
 				8F6AA5E01FB0410500A7B5C7 /* FGMySpeakTableViewCell.m in Sources */,
 				8F6AA5FA1FB0410500A7B5C7 /* FGDateSingle.m in Sources */,
 				8F6AA6051FB0410500A7B5C7 /* WaterWaveView.m in Sources */,
+				E623492B2103240A00F04A6F /* FGMistakesCell.m in Sources */,
 				8F6AA5FE1FB0410500A7B5C7 /* QuestionModel.m in Sources */,
 				8FB160821FBC47FB006C9BBA /* FGMyCenterCell.m in Sources */,
 				8F6AA81E1FB0410700A7B5C7 /* FLStoryViewController.m in Sources */,
