@@ -78,11 +78,11 @@
     [super setupLayoutSubviews];
     [self.mediumLOV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.bgView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth, ScreenHeight/4));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
     }];
     [self.candidateAV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mediumLOV.mas_bottom).offset(20);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth, ScreenHeight/4));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
     }];
 }
 
@@ -218,9 +218,9 @@
         NSMutableArray *arr = [NSMutableArray array];
         for (int i = 0; i < 10; i ++)
         {
-            int x = arc4random()%((int)ScreenWidth - 10 + 1) + 1;
-            int y = arc4random()%((int)ScreenHeight - 10 + 1) + 1;
-            int w = arc4random()%((int)ScreenHeight/6 - 50 + 1) + 1;
+            int x = arc4random()%((int)kScreenWidth - 10 + 1) + 1;
+            int y = arc4random()%((int)kScreenHeight - 10 + 1) + 1;
+            int w = arc4random()%((int)kScreenHeight/6 - 50 + 1) + 1;
             int h = w;
             
             MCFireworksButton *likeButton = [MCFireworksButton buttonWithType:UIButtonTypeCustom];
@@ -232,7 +232,7 @@
             likeButton.frame = CGRectMake(x, y, w, h);
             [arr addObject:likeButton];
         }
-        UIView *shadowView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        UIView *shadowView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         shadowView.tag = 10012;
         shadowView.backgroundColor = [UIColor blackColor];
         [self.view insertSubview:shadowView aboveSubview:self.view.superview];

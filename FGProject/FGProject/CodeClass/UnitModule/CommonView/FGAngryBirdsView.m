@@ -103,7 +103,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     //b的增幅（速度控制）
     self.waveSpeed = 0.1;
     //起始Y值
-    self.waveHeight = ScreenWidth/7;
+    self.waveHeight = kScreenWidth/7;
     //起始频率
     self.w = 180;
 }
@@ -229,7 +229,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         NSMutableArray *tempArr = [NSMutableArray array];
         if (i %2 == 0)
         {
-            for (float x = -100; x <= ScreenWidth+100; x ++)
+            for (float x = -100; x <= kScreenWidth+100; x ++)
             {
                 //y=Acos(wx+Φ)+B
                 y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
@@ -237,7 +237,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
             }
         }else
         {
-            for (float x = -100; x <= ScreenWidth+100; x ++)
+            for (float x = -100; x <= kScreenWidth+100; x ++)
             {
                 //y=Asin(wx+Φ)+B
                 y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
@@ -433,7 +433,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         CABasicAnimation *animation =
         [CABasicAnimation animationWithKeyPath:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:point]; // 起始点
-        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x+10, ScreenHeight-10)]; // 终了点
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x+10, kScreenHeight-10)]; // 终了点
         animation.repeatCount = repeatCount;
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;

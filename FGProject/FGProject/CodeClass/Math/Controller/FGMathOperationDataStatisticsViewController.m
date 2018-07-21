@@ -24,8 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.mathManager = [FGMathOperationManager shareMathOperationManager];
-//    FGLOG(@"2%@",self.mathManager);
+    self.mathManager = [FGMathOperationManager shareMathOperationManager];
+    FGLOG(@"2%@",self.mathManager);
 }
 - (void)initSubviews{
     [super initSubviews];
@@ -42,7 +42,7 @@
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:mistakeTotal color:[UIColor fgPieChartDeepRedColor] description:@"错误"],
                        [PNPieChartDataItem dataItemWithValue:self.mathManager.dataStatisticsModel.totalAccuracyNumber color:[UIColor fgPieChartFreshGreenColor] description:@"正确"],
                        ];
-    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (ScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:items];
+    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (kScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:items];
     [self setupPieChart:self.pieChart];
     self.legendView = [self.pieChart getLegendWithMaxWidth:200];
     [self.bgView addSubview:self.legendView];
@@ -82,7 +82,7 @@
                                [PNPieChartDataItem dataItemWithValue:self.mathManager.dataStatisticsModel.compreOfMediumTotalNumber color:[UIColor fgPieChartFreshGreenColor] description:@"中等混合运算"],
                                [PNPieChartDataItem dataItemWithValue:self.mathManager.dataStatisticsModel.compreOfDiffcultyTotalNumber color:[UIColor fgPieChartFreshGreenColor] description:@"困难混合运算"],
                                ];
-    self.detailPieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (ScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:itemsTotalArr];
+    self.detailPieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (kScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:itemsTotalArr];
     [self setupPieChart:self.detailPieChart];
     self.detailLegendView = [self.detailPieChart getLegendWithMaxWidth:200];
     [self.bgView addSubview:self.detailLegendView];

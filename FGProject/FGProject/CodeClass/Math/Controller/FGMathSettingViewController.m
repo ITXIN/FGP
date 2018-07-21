@@ -81,7 +81,7 @@
         });
         
         [tempImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(ScreenWidth/2+15);
+            make.left.mas_equalTo(kScreenWidth/2+15);
             make.size.mas_equalTo(CGSizeMake(30, 30));
             if (i == 0) {
                 make.top.mas_equalTo(self.operationSettingTitleLab.mas_bottom).offset(20);
@@ -145,7 +145,7 @@
     [super setupLayoutSubviews];
     [self.operationSettingTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(64);
-        make.left.mas_equalTo(ScreenWidth/2);
+        make.left.mas_equalTo(kScreenWidth/2);
     }];
     [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(50);

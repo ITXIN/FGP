@@ -56,10 +56,10 @@
 
 
 //获取屏幕的宽高
-#define ScreenHeight [UIScreen mainScreen].bounds.size.height
-#define ScreenWidth  [UIScreen mainScreen].bounds.size.width
-#define kScreenWidthRatio    ScreenWidth / 320.0
-#define kScreenHeightRatio   ScreenHeight / 568.0
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define kkScreenWidthRatio    kScreenWidth / 320.0
+#define kScreenHeightRatio   kScreenHeight / 568.0
 
 #undef RGBA
 #define RGBA(R/*红*/, G/*绿*/, B/*蓝*/, A/*透明*/) \
@@ -75,26 +75,26 @@
 
 
 
-#define OPERATOR_HEIGHT (ScreenWidth-100*2)/2/4
+#define OPERATOR_HEIGHT (kScreenWidth-100*2)/2/4
 #define OPERATOR_LEFT_MARGIN 100.0
 
-#define QUESTION_MARK_HEIGHT (ScreenWidth-100*2)/2/4
+#define QUESTION_MARK_HEIGHT (kScreenWidth-100*2)/2/4
 
-#define ANSWEROPTION_TOPMARGIN  ScreenHeight/10
-#define ANSWEROPTION_BTN_WIDTH  ScreenHeight/5
+#define ANSWEROPTION_TOPMARGIN  kScreenHeight/10
+#define ANSWEROPTION_BTN_WIDTH  kScreenHeight/5
 /**
  *  choiceView 距离顶部间隙
  */
-#define TOP_MARGIN_BTN_CHOICEVIEW ScreenHeight/7
+#define TOP_MARGIN_BTN_CHOICEVIEW kScreenHeight/7
 /**
   choiceView 按钮高度
  */
-#define HEIGHT_BTN_CHOICEVIEW ScreenWidth/6
+#define HEIGHT_BTN_CHOICEVIEW kScreenWidth/6
 
 //和太阳位置一致
 #define RIGHT_MARGIN_PLAYERVIEW 40.0
-#define HEIGHT_PLAYERVIEW ScreenWidth/6
-#define WIDTH_PLAYERVIEW ScreenWidth/2 - 2*RIGHT_MARGIN_PLAYERVIEW
+#define HEIGHT_PLAYERVIEW kScreenWidth/6
+#define WIDTH_PLAYERVIEW kScreenWidth/2 - 2*RIGHT_MARGIN_PLAYERVIEW
 
 //diffcultlevelView height
 #define HEIGHT_DIFFCULTYLEVEVIEW 
@@ -102,7 +102,7 @@
 /**
  *  在 MediumViewController的高
  */
-#define HEIGHT_MEDIUM_VC ScreenHeight/8
+#define HEIGHT_MEDIUM_VC kScreenHeight/8
 /**
  * MediumViewController 的左边间距
  */
@@ -112,7 +112,7 @@
 #define CONTINUE_BTN_TAG_TOOLTIP 4001
 #define REST_BTN_TAG_TOOLTIP 4002
 
-#define CHART_WORDS_WIDTH ScreenWidth/2 - 45*2 - 10*2
+#define CHART_WORDS_WIDTH kScreenWidth/2 - 45*2 - 10*2
 
 //弧度转角度
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
@@ -180,14 +180,14 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define FIREBASE_DATABASE_CATEGORY_GAME @"Game"
 
 #define AVAILABLE_IOS_11 @available(iOS 11.0, *)
-//#define Screen58Inch        (ScreenHeight  == 812.0)
+//#define Screen58Inch        (kScreenHeight  == 812.0)
 //#define Screen58InchWidth 812
-//#define SafeAreaToLeft (ScreenHeight == 812 ? 88.0 : 20.0)
-//#define SafeAreaToRight (ScreenHeight == 812 ? 44.0 : 39.0)
+//#define SafeAreaToLeft (kScreenHeight == 812 ? 88.0 : 20.0)
+//#define SafeAreaToRight (kScreenHeight == 812 ? 44.0 : 39.0)
 
 
 
-#define kiPhoneX        (ScreenWidth == 812.0 &&  ScreenHeight == 375.f)
+#define kiPhoneX        (kScreenWidth == 812.0 &&  kScreenHeight == 375.f)
 
 
 // Status bar height.

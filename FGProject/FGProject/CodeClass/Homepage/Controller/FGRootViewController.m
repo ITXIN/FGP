@@ -55,7 +55,7 @@
         self.angryBirdView = [[FGAngryBirdsView alloc]init];
         [self.bgView addSubview:self.angryBirdView];
         //类别
-        self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, ScreenHeight, ScreenHeight)];
+        self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];
         self.cateGoryMenuView.categoryDelegate = self;
         [self.bgView addSubview: self.cateGoryMenuView];
         
@@ -143,7 +143,7 @@
         make.edges.equalTo(self.bgView);
     }];
     [self.cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(ScreenHeight, ScreenHeight));
+        make.size.mas_equalTo(CGSizeMake(kScreenHeight, kScreenHeight));
         make.center.equalTo(self.view);
     }];
 }

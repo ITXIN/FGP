@@ -62,7 +62,7 @@
     
     [_sphereView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(ScreenHeight*0.75, ScreenHeight*0.75));
+        make.size.mas_equalTo(CGSizeMake(kScreenHeight*0.75, kScreenHeight*0.75));
     }];
     
 }

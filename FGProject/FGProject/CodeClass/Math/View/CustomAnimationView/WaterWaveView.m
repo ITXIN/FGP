@@ -98,8 +98,8 @@ static CGFloat x;
         //        [self addSubview:bgImageView];
         
         x = 0;
-        _myWaterView = [[MyWaterView alloc]initWithFrame:CGRectMake(0, 0 , ScreenWidth/7, ScreenWidth/7)];
-        _myWaterView.layer.cornerRadius = ScreenWidth/7/2;
+        _myWaterView = [[MyWaterView alloc]initWithFrame:CGRectMake(0, 0 , kScreenWidth/7, kScreenWidth/7)];
+        _myWaterView.layer.cornerRadius = kScreenWidth/7/2;
         _myWaterView.layer.masksToBounds = YES;
         [self addSubview:_myWaterView];
         number = 0;

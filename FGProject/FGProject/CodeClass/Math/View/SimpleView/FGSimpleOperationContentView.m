@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.bgView = [[UIView alloc]initWithFrame:CGRectMake(OPERATOR_LEFT_MARGIN, 0, ScreenWidth/2-OPERATOR_LEFT_MARGIN,OPERATOR_HEIGHT)];
+        self.bgView = [[UIView alloc]initWithFrame:CGRectMake(OPERATOR_LEFT_MARGIN, 0, kScreenWidth/2-OPERATOR_LEFT_MARGIN,OPERATOR_HEIGHT)];
         [self addSubview:self.bgView];
     }
     return self;

@@ -32,9 +32,9 @@ static NSString *headerIdentifier = @"ReuseHeader";
         
         if (kiPhoneX) {
             flowLayout.itemSize = CGSizeMake(130, 130);
-//            flowLayout.itemSize = CGSizeMake((ScreenWidth-10-88-83)/3, (ScreenWidth-10-88-83)/3);
+//            flowLayout.itemSize = CGSizeMake((kScreenWidth-10-88-83)/3, (kScreenWidth-10-88-83)/3);
         }else{
-            flowLayout.itemSize = CGSizeMake((ScreenWidth-10)/3, (ScreenWidth-10)/3);
+            flowLayout.itemSize = CGSizeMake((kScreenWidth-10)/3, (kScreenWidth-10)/3);
         }
         _myCollectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         _myCollectionView.delegate = self;
@@ -195,7 +195,7 @@ static NSString *headerIdentifier = @"ReuseHeader";
 // 设置section头视图的参考大小，与tableheaderview类似
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(ScreenWidth, 30);
+    return CGSizeMake(kScreenWidth, 30);
 
 }
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

@@ -46,7 +46,7 @@
     FGMathOperationManager *mathManager = [FGMathOperationManager shareMathOperationManager];
     CGFloat btnWidth = OPERATOR_HEIGHT;
     //间距
-    CGFloat padding = (ScreenWidth-7*btnWidth)/2;
+    CGFloat padding = (kScreenWidth-7*btnWidth)/2;
     NSInteger firstNum = questionModel.firstNum;
     //第二个数
     NSInteger secondNum = questionModel.secondNum;
@@ -55,7 +55,7 @@
     NSArray *imageArr = @[[UIImage imageNamed:@"fireworks-01"],[UIImage imageNamed:@"fireworks-02"],[UIImage imageNamed:@"fireworks-03"],[UIImage imageNamed:@"fireworks-04"],[UIImage imageNamed:@"start-02"],[UIImage imageNamed:@"Sparkle"]];
     UIImage *operationImage = nil;
     for (int i = 0; i < 7; i ++){
-        BubbleButton *numAndOperBtn = [[BubbleButton alloc]initWithFrame:CGRectMake(padding + i*btnWidth ,0, btnWidth, btnWidth) leftWidth:ScreenWidth/2 rightWidth:ScreenWidth/2 bottomHeight:ScreenHeight/4];
+        BubbleButton *numAndOperBtn = [[BubbleButton alloc]initWithFrame:CGRectMake(padding + i*btnWidth ,0, btnWidth, btnWidth) leftWidth:kScreenWidth/2 rightWidth:kScreenWidth/2 bottomHeight:kScreenHeight/4];
         numAndOperBtn.imagesArr = imageArr;
         numAndOperBtn.duration = 2.0;
         numAndOperBtn.tag = 100 + i;

@@ -47,7 +47,7 @@
 - (void)initSubviews{
     [super initSubviews];
     self.view.transform = CGAffineTransformMakeRotation(-M_PI*0.5);
-    self.view.frame = CGRectMake(0, 0,ScreenWidth,ScreenHeight );
+    self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight );
     
 //    _imageView.frame = self.view.bounds;
     self.iconView =  ({

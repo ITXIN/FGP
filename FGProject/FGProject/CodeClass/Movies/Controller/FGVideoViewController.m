@@ -48,7 +48,7 @@
 //    [self.moviePlayerVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.mas_equalTo(100);
 //        make.centerY.equalTo(self.bgView);
-//        make.size.mas_equalTo(CGSizeMake(ScreenWidth/2, ScreenHeight-2*64));
+//        make.size.mas_equalTo(CGSizeMake(kScreenWidth/2, kScreenHeight-2*64));
 //    }];
 //}
 - (void)viewDidLayoutSubviews{
@@ -56,7 +56,7 @@
     [self.moviePlayerVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(100);
         make.centerY.equalTo(self.bgView);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth/2, ScreenHeight-2*64));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth/2, kScreenHeight-2*64));
     }];
 }
 #pragma mark -

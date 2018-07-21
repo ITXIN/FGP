@@ -28,7 +28,7 @@
     NSArray *tagArr = @[@(MathRootViewActionTypeSubtract),@(MathRootViewActionTypeAdd),@(MathRootViewActionTypeMultiply),@(MathRootViewActionTypeDivide),@(MathRootViewActionTypeSun),@(MathRootViewActionTypeCompre)];
     NSArray *imageNameArr = @[@"jianhao-01",@"jiahao-02.png",@"chenghao-01",@"chuhao-01",@"taiyang-03",@"zhonghe-01.png"];
     
-    CGFloat operationButtonWidth = ScreenWidth/7;
+    CGFloat operationButtonWidth = kScreenWidth/7;
     CGSize operationSize = CGSizeMake(operationButtonWidth, operationButtonWidth);
     CGFloat topMar = 20;
     CGFloat btnSpace = 20.0;
@@ -95,7 +95,7 @@
 //                [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 //                    make.right.mas_equalTo(self.subtractBtn.mas_left).offset(-2*btnSpace);
 //                    make.top.mas_equalTo(topMar/2);
-//                    make.size.mas_equalTo(CGSizeMake(ScreenWidth/10, ScreenWidth/10));
+//                    make.size.mas_equalTo(CGSizeMake(kScreenWidth/10, kScreenWidth/10));
 //                }];
                 
                 break;

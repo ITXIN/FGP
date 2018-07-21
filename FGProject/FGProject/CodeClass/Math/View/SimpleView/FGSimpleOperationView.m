@@ -25,7 +25,7 @@
         //初始化
         self.answerOptionArr = [NSMutableArray array];
         self.mathOperationActionType = operationType;
-        _bigView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        _bigView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _bigView.userInteractionEnabled = YES;
         [self addSubview:_bigView];
         
@@ -38,7 +38,7 @@
         UIImage *btnBackgImg = [UIImage imageNamed:btnStr1];
         
         _button = [UIButton buttonWithType:UIButtonTypeSystem];
-        _button.frame = CGRectMake((ScreenWidth)/2+5, (ScreenHeight - QUESTION_MARK_HEIGHT)/2, QUESTION_MARK_HEIGHT, QUESTION_MARK_HEIGHT);
+        _button.frame = CGRectMake((kScreenWidth)/2+5, (kScreenHeight - QUESTION_MARK_HEIGHT)/2, QUESTION_MARK_HEIGHT, QUESTION_MARK_HEIGHT);
         [_button setBackgroundImage:btnBackgImg forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(showMenu) forControlEvents:(UIControlEventTouchUpInside)];
         [_bigView addSubview:_button];
@@ -50,7 +50,7 @@
             [self.candidateBtnArr addObject:candidateBtn];
         }
         //运算的式子
-        _operView = [[FGSimpleOperationContentView alloc]initWithFrame:CGRectMake(0, (ScreenHeight - QUESTION_MARK_HEIGHT)/2, ScreenWidth/2, OPERATOR_HEIGHT)];
+        _operView = [[FGSimpleOperationContentView alloc]initWithFrame:CGRectMake(0, (kScreenHeight - QUESTION_MARK_HEIGHT)/2, kScreenWidth/2, OPERATOR_HEIGHT)];
         [_bigView  addSubview:_operView];
         //        [self setupPostDataToFireBase];
     }
@@ -145,7 +145,7 @@
     buttton.titleLabel.textAlignment = center;
     buttton.alpha = 0;
     [buttton setTitle:title forState:(UIControlStateNormal)];
-    buttton.frame = CGRectMake(ScreenWidth/2-ScreenHeight/5, ScreenHeight/2-ScreenHeight/5, ScreenHeight/5, ScreenHeight/5);
+    buttton.frame = CGRectMake(kScreenWidth/2-kScreenHeight/5, kScreenHeight/2-kScreenHeight/5, kScreenHeight/5, kScreenHeight/5);
     //#warning 发现调整 frame 可以改变动画效果
     buttton.center = CGPointMake(self.button.center.x, self.button.center.y);
     //tag值默认为0
@@ -193,10 +193,10 @@
     CGFloat btnWH = ANSWEROPTION_BTN_WIDTH;
     
     //不能使用循环,可能由于动画时间太短或其他原因.
-    [self viewAnimation:self.candidateBtnArr[0] duration:0.4 x:0 y:-(ScreenHeight/2 - topMargin - btnWH/2) alpha:1.0];
-    [self viewAnimation:self.candidateBtnArr[1] duration:0.7 x:(ScreenHeight/2 - topMargin - btnWH/2)/1.414 y:-(ScreenHeight/2 - topMargin - btnWH/2)/2 alpha:1.0];
-    [self viewAnimation:self.candidateBtnArr[2] duration:0.9 x:(ScreenHeight/2 - topMargin - btnWH/2)/1.414 y:(ScreenHeight/2 - topMargin - btnWH/2)/2 alpha:1.0];
-    [self viewAnimation:self.candidateBtnArr[3] duration:1.1 x:0 y:(ScreenHeight/2 - topMargin - btnWH/2) alpha:1.0];
+    [self viewAnimation:self.candidateBtnArr[0] duration:0.4 x:0 y:-(kScreenHeight/2 - topMargin - btnWH/2) alpha:1.0];
+    [self viewAnimation:self.candidateBtnArr[1] duration:0.7 x:(kScreenHeight/2 - topMargin - btnWH/2)/1.414 y:-(kScreenHeight/2 - topMargin - btnWH/2)/2 alpha:1.0];
+    [self viewAnimation:self.candidateBtnArr[2] duration:0.9 x:(kScreenHeight/2 - topMargin - btnWH/2)/1.414 y:(kScreenHeight/2 - topMargin - btnWH/2)/2 alpha:1.0];
+    [self viewAnimation:self.candidateBtnArr[3] duration:1.1 x:0 y:(kScreenHeight/2 - topMargin - btnWH/2) alpha:1.0];
 }
 #pragma mark-----点击屏幕子菜单收回
 

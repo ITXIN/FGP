@@ -46,30 +46,30 @@
     _footLeftButton.tag = 7;
     [_footLeftButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_footLeftButton];
-    NSLog(@"-----width %f height %f",ScreenWidth,ScreenHeight);
+    NSLog(@"-----width %f height %f",kScreenWidth,kScreenHeight);
     [UIView animateWithDuration:0.25 animations:^{
 //        self.view.transform = CGAffineTransformMakeRotation(-M_PI*0.5);
-//        self.view.frame = CGRectMake(0, 0,ScreenWidth,ScreenHeight );
+//        self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight );
         
         
 //        self.view.transform = CGAffineTransformMakeRotation(-M_PI*1.5);
         self.view.transform = CGAffineTransformMakeRotation(-M_PI*0.5);
-        self.view.frame = CGRectMake(0, 0,ScreenWidth,ScreenHeight );
+        self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight );
         
         _imageView.frame = self.view.bounds;
         
-//        if (ScreenWidth > 800)
+//        if (kScreenWidth > 800)
 //        {
             [self.headButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self.view);
-                make.bottom.mas_equalTo(-ScreenWidth/2);
-                make.size.mas_equalTo(CGSizeMake(ScreenHeight/2+15*2, ScreenHeight/2));
+                make.bottom.mas_equalTo(-kScreenWidth/2);
+                make.size.mas_equalTo(CGSizeMake(kScreenHeight/2+15*2, kScreenHeight/2));
             }];
             
             [self.angryButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self.view);
                 make.top.mas_equalTo(self.headButton.mas_bottom).offset(10);
-                make.size.mas_equalTo(CGSizeMake(ScreenHeight/3, ScreenWidth/10));
+                make.size.mas_equalTo(CGSizeMake(kScreenHeight/3, kScreenWidth/10));
                 
             }];
             
@@ -77,13 +77,13 @@
             [self.stomachButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self.view);
                 make.top.mas_equalTo(self.angryButton.mas_bottom).offset(5);
-                make.size.mas_equalTo(CGSizeMake(ScreenHeight/3, ScreenWidth/10*3-15));
+                make.size.mas_equalTo(CGSizeMake(kScreenHeight/3, kScreenWidth/10*3-15));
                 
             }];
             
             [self.footLeftButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(self.stomachButton.mas_bottom).offset(5);
-                make.size.mas_equalTo(CGSizeMake(ScreenHeight/6, ScreenWidth/10-15));
+                make.size.mas_equalTo(CGSizeMake(kScreenHeight/6, kScreenWidth/10-15));
                 make.left.mas_equalTo(self.stomachButton.mas_left);
                 
             }];
@@ -91,7 +91,7 @@
             
             [self.footRightButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(self.stomachButton.mas_bottom).offset(5);
-                make.size.mas_equalTo(CGSizeMake(ScreenHeight/6, ScreenWidth/10-15));
+                make.size.mas_equalTo(CGSizeMake(kScreenHeight/6, kScreenWidth/10-15));
                 make.right.mas_equalTo(self.stomachButton.mas_right);
                 
             }];
@@ -120,8 +120,8 @@
             [btn removeFromSuperview];
         }
         CGSize btnSize = CGSizeMake(80, 80);
-        CGFloat space = (ScreenWidth/2 - btnSize.height*3)/4;
-        CGFloat leftM = ScreenHeight/6-btnSize.width;
+        CGFloat space = (kScreenWidth/2 - btnSize.height*3)/4;
+        CGFloat leftM = kScreenHeight/6-btnSize.width;
         if (leftM < 20)
         {
             leftM = 15;
@@ -142,14 +142,14 @@
                 [_actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.size.mas_equalTo(btnSize);
                     make.left.mas_equalTo(leftM);
-                    make.top.mas_equalTo(ScreenWidth/2+i*(space+btnSize.height)+space);
+                    make.top.mas_equalTo(kScreenWidth/2+i*(space+btnSize.height)+space);
                 }];
             }else
             {
                 [_actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.size.mas_equalTo(btnSize);
                     make.right.mas_equalTo(-leftM);
-                    make.top.mas_equalTo(ScreenWidth/2+(i-3)*(space+btnSize.height)+space);
+                    make.top.mas_equalTo(kScreenWidth/2+(i-3)*(space+btnSize.height)+space);
                 }];
             }
             _actionButton.tag =  i;

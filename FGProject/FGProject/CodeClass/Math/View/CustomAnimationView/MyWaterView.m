@@ -140,7 +140,7 @@
     //b的增幅（速度控制）
     self.waveSpeed = 0.1;
     //起始Y值
-    self.waveHeight = ScreenWidth/7;
+    self.waveHeight = kScreenWidth/7;
     //起始频率
     self.w = 180;
 }

@@ -51,7 +51,7 @@
     //    [adjustVolume setCallDelegate:self];
     
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
-    self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(ScreenWidth- ScreenWidth/7 - kStatusBarAndNavigationBarHeight, 20 , ScreenWidth/7, ScreenWidth/7)];
+    self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(kScreenWidth- kScreenWidth/7 - kStatusBarAndNavigationBarHeight, 20 , kScreenWidth/7, kScreenWidth/7)];
     [self.bgView addSubview:self.circleView];
     
     self.datastatisticBtn = ({
@@ -86,7 +86,7 @@
         }else{
             make.right.mas_equalTo(-30);
         }
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth/7-20, ScreenWidth/7-20));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth/7-20, kScreenWidth/7-20));
     }];
     [self.datastatisticBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.circleView.waterWaveView.countLab);

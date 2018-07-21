@@ -77,7 +77,7 @@
 {
     maxWidth = _leftWidth+_rightWidth;
     
-    startPoint = CGPointMake(ScreenWidth/2, 0);
+    startPoint = CGPointMake(kScreenWidth/2, 0);
     CGPoint endPoint = CGPointMake(maxWidth*[self randomFloat] - _leftWidth, _bottomHeight);
     //过度
     CGPoint controlPonit1 = CGPointMake(maxWidth*[self randomFloat] - _leftWidth, _bottomHeight*0.2);

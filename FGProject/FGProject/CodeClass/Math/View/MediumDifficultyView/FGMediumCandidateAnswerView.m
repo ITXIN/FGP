@@ -22,11 +22,11 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        btnWidth = ScreenHeight/5;
-        btnHeight = ScreenHeight/5;
-        btnMargin = (ScreenWidth - 4*btnWidth)/5;
+        btnWidth = kScreenHeight/5;
+        btnHeight = kScreenHeight/5;
+        btnMargin = (kScreenWidth - 4*btnWidth)/5;
         
-        _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,ScreenWidth,btnHeight)];
+        _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,kScreenWidth,btnHeight)];
         [self addSubview:_bgView];
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
@@ -103,8 +103,8 @@
     }
     
     //有5个间隙
-    CGFloat x1 = ScreenWidth/2 - btnWidth*3/2 - 2*btnMargin;
-    CGFloat x2 = ScreenWidth/2 - btnWidth/2 - btnMargin;
+    CGFloat x1 = kScreenWidth/2 - btnWidth*3/2 - 2*btnMargin;
+    CGFloat x2 = kScreenWidth/2 - btnWidth/2 - btnMargin;
     [self viewAnimation:self.candidateBtnArr[0] duration:1.4 x:-x1 y:0 alpha:1.0];
     [self viewAnimation:self.candidateBtnArr[1] duration:1.4 x:x1 y:0 alpha:1.0];
     [self viewAnimation:self.candidateBtnArr[2] duration:2.9 x:-x2 y:0 alpha:1.0];

@@ -18,7 +18,7 @@
 
         self.userInteractionEnabled = YES;
         
-        _bgView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/3, ScreenHeight/3, ScreenWidth/3, ScreenHeight/3)];
+        _bgView = [[UIView alloc]initWithFrame:CGRectMake(kScreenWidth/3, kScreenHeight/3, kScreenWidth/3, kScreenHeight/3)];
 //        _bgView.backgroundColor = [UIColor cyanColor];
         _bgView.userInteractionEnabled = YES;
         _bgView.layer.cornerRadius = 5;

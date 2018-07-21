@@ -13,7 +13,7 @@
 {
     self  = [super initWithFrame:frame];
     if (self){
-        UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/2-120, ScreenHeight/2-55)];
+        UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth/2-120, kScreenHeight/2-55)];
         bgView.backgroundColor = [UIColor clearColor];
         [self addSubview:bgView];
     

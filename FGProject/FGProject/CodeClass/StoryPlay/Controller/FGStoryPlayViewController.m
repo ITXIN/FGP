@@ -78,7 +78,7 @@ static NSString *reuserID = @"reuserID";
     });
     [self.musicImageView addSubview:self.fadeStringView];
     
-    self.playView = [[MusicPlayerView alloc]initWithFrame:CGRectMake(0, ScreenHeight*0.80- HEIGHT_PLAYERVIEW - 10, WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW)];
+    self.playView = [[MusicPlayerView alloc]initWithFrame:CGRectMake(0, kScreenHeight*0.80- HEIGHT_PLAYERVIEW - 10, WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW)];
     self.playView.delegate = self;
     [self.bgView addSubview:self.playView];
     
@@ -202,14 +202,14 @@ static NSString *reuserID = @"reuserID";
             make.top.mas_equalTo(self.navigationView.mas_bottom);
             make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
             make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-            make.width.mas_equalTo(ScreenWidth/2);
+            make.width.mas_equalTo(kScreenWidth/2);
         }];
     }else{
         self.automaticallyAdjustsScrollViewInsets = NO;
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(kStatusBarHeight);
             make.top.mas_equalTo(self.navigationView.mas_bottom);
-            make.width.mas_equalTo(ScreenWidth/2);
+            make.width.mas_equalTo(kScreenWidth/2);
             make.bottom.mas_equalTo(0);
         }];
     }

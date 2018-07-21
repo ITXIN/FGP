@@ -107,9 +107,9 @@ static CGRect   strOfRect;
 {
     if (!_tableView)
     {
-//        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 44+10, ScreenHeight-2*10, ScreenWidth-20-100-44) style:UITableViewStylePlain];
+//        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 44+10, kScreenHeight-2*10, kScreenWidth-20-100-44) style:UITableViewStylePlain];
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 44+10, ScreenWidth-2*10, ScreenHeight -20-100-44) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 44+10, kScreenWidth-2*10, kScreenHeight -20-100-44) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -145,7 +145,7 @@ static CGRect   strOfRect;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
 //    self.view.transform = CGAffineTransformMakeRotation(-M_PI*0.5);
-//    self.view.frame = CGRectMake(0, 0,ScreenWidth,ScreenHeight);
+//    self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight);
     
     self.noAnswerArr = [NSMutableArray arrayWithArray: @[@"我好像不明白.",@"对不起,我不知道.",@"我懂得太少,不清楚."]];
     FGBlurEffectView *blurView = [[FGBlurEffectView alloc]init];
@@ -160,10 +160,10 @@ static CGRect   strOfRect;
     }];
     [self.view addSubview:self.tableView];
 //    
-//    self.startAIChatView = [[FGStartAIChatView alloc]initWithFrame:CGRectMake(10, ScreenWidth-80, ScreenHeight-20, 50)];
+//    self.startAIChatView = [[FGStartAIChatView alloc]initWithFrame:CGRectMake(10, kScreenWidth-80, kScreenHeight-20, 50)];
     
     
-    self.startAIChatView = [[FGStartAIChatView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(self.tableView.frame) + 10, ScreenWidth-20, 50)];
+    self.startAIChatView = [[FGStartAIChatView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(self.tableView.frame) + 10, kScreenWidth-20, 50)];
     [self.view addSubview:self.startAIChatView];
     self.startAIChatView.startAIChatDelegate = self;
 
@@ -182,7 +182,7 @@ static CGRect   strOfRect;
 //    [self.aiActionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.right.mas_equalTo(-10);
 //        make.bottom.mas_equalTo(-10);
-//        make.width.mas_equalTo(ScreenWidth/2-20);
+//        make.width.mas_equalTo(kScreenWidth/2-20);
 //    }];
 //    [self.aiActionView.voiceToWordsBtn addTarget:self action:@selector(setupVoiceToWords) forControlEvents:UIControlEventTouchUpInside];
 //    [self.aiActionView.cancelSpeechBtn addTarget:self action:@selector(cancelSpeechBtnSpeechClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -227,7 +227,7 @@ static CGRect   strOfRect;
     [self.view addSubview:iatConfig.view];
     [iatConfig.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(ScreenHeight*0.8, ScreenHeight*0.8+180));
+        make.size.mas_equalTo(CGSizeMake(kScreenHeight*0.8, kScreenHeight*0.8+180));
     }];
     self.tableView.userInteractionEnabled = NO;
     
@@ -292,7 +292,7 @@ static CGRect   strOfRect;
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"修改头像" message:@"" delegate: self cancelButtonTitle:@"取消" otherButtonTitles:@"使用相册",@"使用相机", nil];
 //        alerView.transform = CGAffineTransformMakeRotation(-M_PI*1);
-//        //    self.view.frame = CGRectMake(0, 0,ScreenWidth,ScreenHeight);
+//        //    self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight);
 //        
 //        [alerView show];
 //    });
