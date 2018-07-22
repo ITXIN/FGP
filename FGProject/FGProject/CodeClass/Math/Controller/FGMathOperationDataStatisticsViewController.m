@@ -8,6 +8,8 @@
 
 #import "FGMathOperationDataStatisticsViewController.h"
 #import "FGMistakesCell.h"
+#import "FGMistakesModel.h"
+#import "FGMistakesOperationDataModel.h"
 @interface FGMathOperationDataStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) PNPieChart *pieChart;
 @property (nonatomic,strong) UIView  *legendView;
@@ -54,7 +56,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
         [tableView registerClass:[FGMistakesCell class] forCellReuseIdentifier:reusedMistakesID];
         tableView;
     });
-    [self.mathManager getAllData];
+    self.dataArr = [self.mathManager getAllMistakes];
 }
 //饼状图
 - (void)initPieChartSubviews{
@@ -153,14 +155,29 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArr.count;
 }
-
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *headerLab = ({
+        UILabel *label = [[UILabel alloc]init];
+        label.textColor = UIColor.redColor;
+        label.font = [UIFont systemFontOfSize:15];
+        
+        label;
+    });
+    FGMistakesModel *model = self.dataArr[section];
+    headerLab.text = model.mainTitle;
+    return headerLab;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex{
-//    return self.dataArr.count;
-    return 100;
+    FGMistakesModel *model = self.dataArr[sectionIndex];
+    return model.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FGMistakesCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedMistakesID];
+    FGMistakesModel *model = self.dataArr[indexPath.section];
+    FGMistakesOperationDataModel *mistakeModel = model.dataArr[indexPath.row];
+    
+    [cell setupQuestMode:mistakeModel.objeKey];
     return cell;
 }
 
@@ -186,7 +203,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     [self.totalPercentageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.legendView.mas_right).offset(20);
         make.top.mas_equalTo(self.legendView).offset(10);
-//        make.bottom.mas_equalTo(self.legendView);
+        //        make.bottom.mas_equalTo(self.legendView);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(25);
     }];

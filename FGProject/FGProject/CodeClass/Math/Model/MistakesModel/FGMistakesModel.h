@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 @class FGMathOperationModel;
 @interface FGMistakesModel : NSObject
-@property (nonatomic, copy) NSString *dateKey;
-@property (nonatomic, strong) FGMathOperationModel *objeKey;
-@property (nonatomic, copy) NSString *stateKey;
-@property (nonatomic, copy) NSString *typeKey;
-- (instancetype)initWithDic:(NSDictionary*)dic;
+@property (nonatomic, copy) NSString *mainTitle;//日期
+@property (nonatomic, copy) NSString *count;
+@property (nonatomic, strong) NSArray *dataArr;
 @end

@@ -65,11 +65,7 @@
             
         }
         answerBgView.backgroundColor = UIColor.yellowColor;
-//        self.operationLab.text = @"1+2=?";
-//        FGMathOperationModel *questModel = [[FGMathOperationManager shareMathOperationManager] generateSimpleOperationModelWithOperationType:MathOperationActionTypeAdd];
-//        [self.operationView setQuestionModel:questModel];
-        
-        
+
         self.operationView.backgroundColor = UIColor.purpleColor;
         self.contentView.backgroundColor = UIColor.cyanColor;
         [btnArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:10 tailSpacing:10];

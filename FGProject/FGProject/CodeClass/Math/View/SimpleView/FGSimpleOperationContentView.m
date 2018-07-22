@@ -7,7 +7,6 @@
 //
 
 #import "FGSimpleOperationContentView.h"
-#import "QuestionModel.h"
 @implementation FGSimpleOperationContentView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -21,7 +20,6 @@
     return self;
 }
 #pragma mark --------model 的 setter 方法----
-//-(void)setQuestionModel:(QuestionModel *)questionModel
 -(void)setQuestionModel:(FGMathOperationModel *)questionModel
 {
     for (UIButton *btn in self.bgView.subviews){

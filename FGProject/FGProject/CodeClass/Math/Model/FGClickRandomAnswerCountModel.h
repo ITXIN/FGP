@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "QuestionModel.h"
 #import "MediumOperationModel.h"
 @interface FGClickRandomAnswerCountModel : NSObject
-@property (nonatomic,strong) QuestionModel *questionModel;//运算式
-@property (nonatomic,strong) QuestionModel *randomAnswerModel;//随机答案
+//@property (nonatomic,strong) QuestionModel *questionModel;//运算式
+//@property (nonatomic,strong) QuestionModel *randomAnswerModel;//随机答案
 
 
 @property (nonatomic,strong) MediumOperationModel *questionMediumModel;

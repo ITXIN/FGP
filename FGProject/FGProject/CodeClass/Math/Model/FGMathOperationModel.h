@@ -27,6 +27,6 @@
 @property (nonatomic,assign) MathOperationActionType secondOperationType;
 
 + (FGMathOperationModel *)generateMathOperationModelWithOperationType:(MathOperationActionType )operationType;
-+(FGMathOperationModel *)generateMathOperationModel;
++ (FGMathOperationModel *)generateMathOperationModel;
 + (FGMathOperationModel *)generateRandomAnwserNum:(NSInteger)userAnswer;
 @end

@@ -9,7 +9,6 @@
 #import "FGProjectHelper.h"
 #import <Accelerate/Accelerate.h>
 #import <AdSupport/AdSupport.h>
-#import "QuestionModel.h"
 #import "FGClickRandomAnswerCountModel.h"
 @implementation FGProjectHelper
 + (void)saveDataWithKey:(NSString *)keyStr data:(id)data
@@ -130,6 +129,7 @@
 
 #pragma mark -
 #pragma mark --- 对上传的简单的运算 Math 赋值
+/*
 + (NSDictionary*)postDataWithClickRandomModel:(FGClickRandomAnswerCountModel*)clickModel
 {
     NSString *firstOperStr = @"";
@@ -194,6 +194,7 @@
     
     return dic;
 }
+*/
 //如果想要判断设备是ipad，要用如下方法
 + (BOOL)getIsiPad
 {

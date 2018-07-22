@@ -11,13 +11,13 @@
 #import "FGClickRandomAnswerCountModel.h"
 #import "FGMathAnswerOptionsModel.h"
 @interface FGSimpleOperationView ()
-
-@property (nonatomic,strong ) FIRDatabaseReference *dataBaseRef;//存字符串
-@end
-@implementation FGSimpleOperationView
 {
     FGClickRandomAnswerCountModel *clickRandomCounModel;
 }
+@property (nonatomic,strong ) FIRDatabaseReference *dataBaseRef;//存字符串
+@end
+@implementation FGSimpleOperationView
+
 
 - (instancetype)initWithFrame:(CGRect)frame operationType:(MathOperationActionType)operationType{
     self = [super initWithFrame:frame];
@@ -52,14 +52,13 @@
         //运算的式子
         _operView = [[FGSimpleOperationContentView alloc]initWithFrame:CGRectMake(0, (kScreenHeight - QUESTION_MARK_HEIGHT)/2, kScreenWidth/2, OPERATOR_HEIGHT)];
         [_bigView  addSubview:_operView];
-        //        [self setupPostDataToFireBase];
+        
     }
     return self;
 }
 #pragma mark -
 #pragma mark --- 数据上传 Firebase
-- (void)setupPostDataToFireBase
-{
+- (void)setupPostDataToFireBase{
     NSString *adidStr = [FLDeviceUID uid];
     self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
     self.dataBaseRef = [[[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_MATH] child:FIREBASE_DATABASE_CATEGORY_MATH_SIMPLE];
@@ -71,8 +70,7 @@
 
 #pragma mark -
 #pragma mark --- postDataToFireBase
-- (void)postDataToFireBaseWithClickQuestionModel:(FGClickRandomAnswerCountModel*)clickModel
-{
+- (void)postDataToFireBaseWithClickQuestionModel:(FGClickRandomAnswerCountModel*)clickModel{
     NSString *dateStr = [FGProjectHelper logTimeStringFromDate:[NSDate date]];
     NSDictionary *dic = [FGProjectHelper postDataWithClickRandomModel:clickModel];
     [[self.dataBaseRef child:dateStr] updateChildValues:dic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
@@ -83,22 +81,16 @@
     }];
 }
 #pragma mark ------产生运算式------
-//- (void)operationSubjectByQuestionModel:(QuestionModel *)questionModel
-- (void)operationSubjectByQuestionModel:(FGMathOperationModel *)questionModel
-{
-//    clickRandomCounModel = nil;
-//    clickRandomCounModel = [[FGClickRandomAnswerCountModel alloc]init];
-//    clickRandomCounModel.questionModel = questionModel;
+- (void)operationSubjectByQuestionModel:(FGMathOperationModel *)questionModel{
     dispatch_async(dispatch_get_main_queue(), ^{
         [_operView setQuestionModel:questionModel];
         [self setValueForBtnWithQuestionModel:questionModel];
         [self showMenu];
     });
 }
+
 #pragma mark --------对button 进行赋值---- 随机答案
-//- (void)setValueForBtnWithQuestionModel:(QuestionModel *)questModel
-- (void)setValueForBtnWithQuestionModel:(FGMathOperationModel *)questModel
-{
+- (void)setValueForBtnWithQuestionModel:(FGMathOperationModel *)questModel{
     //产生随机答案
     FGMathAnswerOptionsModel *answerModle = [[FGMathOperationManager shareMathOperationManager]generateRandomAnswerNum:questModel.answerNum];
     
@@ -118,8 +110,7 @@
     
 }
 #pragma mark-----CAAnimation
-- (void)viewCAAnimation:(UIView *)view duration:(CGFloat )duration keyPath:(NSString *)keyPath toValue:(NSNumber *)number
-{
+- (void)viewCAAnimation:(UIView *)view duration:(CGFloat )duration keyPath:(NSString *)keyPath toValue:(NSNumber *)number{
     CABasicAnimation *animation  = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     animation.toValue = number;
     animation.duration = 0.8;
@@ -137,8 +128,7 @@
 
 #pragma mark--------设置button的属性
 //标题  大小 初始位置 响应时间
-- (void)setButtonView:(UIButton *)buttton title:(NSString *)title backgroundColor:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
-{
+- (void)setButtonView:(UIButton *)buttton title:(NSString *)title backgroundColor:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue{
     UIFont *font = [UIFont systemFontOfSize:50];
     NSTextAlignment center = NSTextAlignmentCenter;
     buttton.titleLabel.font =font;
@@ -158,27 +148,12 @@
 }
 #pragma mark-------对题目准确性的判断------
 - (void)answerBtnAction:(UIButton *)button{
-    
     if(button.tag == MathSimpleOperationViewActionTypeAnswer){
         if (self.delegate && [self.delegate respondsToSelector:@selector(simpleViewOperationActionType:)]) {
             [self.delegate simpleViewOperationActionType:MathSimpleOperationViewActionTypeAnswer];
         }
     }else{
         //统计,分析点击情况
-//        NSString *btnStr = button.currentTitle;
-//        if ([btnStr isEqualToString:[NSString stringWithFormat:@"%ld",clickRandomCounModel.randomAnswerModel.firstNum]])
-//        {
-//            clickRandomCounModel.firstNum ++;
-//
-//        }else if ([btnStr isEqualToString:[NSString stringWithFormat:@"%ld",clickRandomCounModel.randomAnswerModel.secondNum]])
-//        {
-//            clickRandomCounModel.secondNum ++;
-//
-//        }else
-//        {
-//            clickRandomCounModel.thirdNum ++;
-//        }
-
         if (self.delegate && [self.delegate respondsToSelector:@selector(simpleViewOperationActionType:)]) {
             [self.delegate simpleViewOperationActionType:MathSimpleOperationViewActionTypeOperation];
         }
@@ -203,8 +178,7 @@
 - (void)hiddenMenu{
     [self viewCAAnimation:_button duration:0.8 keyPath:@"transform.rotation.z" toValue:[NSNumber numberWithFloat:(-M_PI/180 *360)]];
     //可以使用 for
-    for (int i = 0; i < self.candidateBtnArr.count; i ++)
-    {
+    for (int i = 0; i < self.candidateBtnArr.count; i ++){
         [self viewAnimation:self.candidateBtnArr[i] duration:0.4 + i*0.3 x:0 y:0 alpha:0.0];
     }
 }

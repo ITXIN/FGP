@@ -19,7 +19,6 @@
 #import "iflyMSC/IFlySpeechRecognizer.h"
 #import "WriteFunction.h"
 #import "WriteAnimationLayer.h"
-#import "FGCalculateVerticalView.h"
 #import "FGAIActionView.h"
 #import "FGAIChatTableViewCell.h"
 #import "FGMySpeakTableViewCell.h"

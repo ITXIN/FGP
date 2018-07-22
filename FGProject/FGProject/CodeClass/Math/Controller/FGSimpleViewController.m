@@ -11,7 +11,6 @@
  *
  */
 #import "FGSimpleViewController.h"
-#import "QuestionModel.h"
 #import "FGSimpleOperationView.h"
 #import "TooltipForAnswerView.h"
 @interface FGSimpleViewController ()<FGSimpleOperationViewDelegate>

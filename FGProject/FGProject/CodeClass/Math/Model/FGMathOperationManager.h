@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 @class MediumOperationModel;
-@class QuestionModel;
 @class FGMathAnswerOptionsModel;
 @class FGMathOperationModel;
 @class FGMathOperationDataStatisticsModel;
@@ -48,6 +47,8 @@
 - (NSDictionary*)getMathCompreOfOperationTypeDic;
 //获取用户对运算类型的选择
 - (NSArray*)getMathCompreOfOperationTypeArr;
-//获取存储的所有数据
-- (void)getAllData;
+//获取存储的所有数据,
+- (NSMutableDictionary*)getAllData;
+//获取存储的错题
+- (NSMutableArray*)getAllMistakes;
 @end

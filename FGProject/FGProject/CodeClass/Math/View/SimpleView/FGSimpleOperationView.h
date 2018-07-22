@@ -45,6 +45,5 @@
 @property (nonatomic,strong) NSTimer *deleteTimer;
 
 - (instancetype)initWithFrame:(CGRect)frame operationType:(MathOperationActionType)operationType;
-//- (void)operationSubjectByQuestionModel:(QuestionModel*)questionModel;
 - (void)operationSubjectByQuestionModel:(FGMathOperationModel *)questionModel;
 @end

@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "QuestionModel.h"
 /**
  *  运算图片的视图
  */
 @interface FGSimpleOperationContentView : UIView
 //大的背景视图,方便修改
 @property (nonatomic, strong)  UIView *bgView;
-//-(void)setQuestionModel:(QuestionModel *)questionModel;
 -(void)setQuestionModel:(FGMathOperationModel *)questionModel;
 @end

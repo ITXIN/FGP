@@ -30,7 +30,6 @@
 		8F6AA5DB1FB0410500A7B5C7 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2E71FB0410400A7B5C7 /* IATConfig.m */; };
 		8F6AA5DC1FB0410500A7B5C7 /* FGAIActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2EA1FB0410400A7B5C7 /* FGAIActionView.m */; };
 		8F6AA5DD1FB0410500A7B5C7 /* FGAIChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2EC1FB0410400A7B5C7 /* FGAIChatTableViewCell.m */; };
-		8F6AA5DE1FB0410500A7B5C7 /* FGCalculateVerticalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2EE1FB0410400A7B5C7 /* FGCalculateVerticalView.m */; };
 		8F6AA5DF1FB0410500A7B5C7 /* FGChatBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2F01FB0410400A7B5C7 /* FGChatBaseTableViewCell.m */; };
 		8F6AA5E01FB0410500A7B5C7 /* FGMySpeakTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2F21FB0410400A7B5C7 /* FGMySpeakTableViewCell.m */; };
 		8F6AA5E11FB0410500A7B5C7 /* FGStartAIChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA2F41FB0410400A7B5C7 /* FGStartAIChatView.m */; };
@@ -58,7 +57,6 @@
 		8F6AA5FB1FB0410500A7B5C7 /* FGClickRandomAnswerCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3381FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.m */; };
 		8F6AA5FC1FB0410500A7B5C7 /* HasDoneOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */; };
 		8F6AA5FD1FB0410500A7B5C7 /* MediumOperationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA33C1FB0410400A7B5C7 /* MediumOperationModel.m */; };
-		8F6AA5FE1FB0410500A7B5C7 /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA33E1FB0410400A7B5C7 /* QuestionModel.m */; };
 		8F6AA5FF1FB0410500A7B5C7 /* SoundsProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3401FB0410400A7B5C7 /* SoundsProcess.m */; };
 		8F6AA6001FB0410500A7B5C7 /* FGMathRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3431FB0410400A7B5C7 /* FGMathRootView.m */; };
 		8F6AA6021FB0410500A7B5C7 /* CARadarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3481FB0410400A7B5C7 /* CARadarView.m */; };
@@ -660,6 +658,7 @@
 		E623492B2103240A00F04A6F /* FGMistakesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E623492A2103240A00F04A6F /* FGMistakesCell.m */; };
 		E623492E210334FE00F04A6F /* FGMistakesOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E623492D210334FE00F04A6F /* FGMistakesOperationView.m */; };
 		E62349322103682A00F04A6F /* FGMistakesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E62349312103682A00F04A6F /* FGMistakesModel.m */; };
+		E6239AE121042CF1002B0751 /* FGMistakesOperationDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */; };
 		E65AA461208B34C000A4F808 /* FGImageTopTitleBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */; };
 		E6EE387D208494DB005028D0 /* FGMathSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE387C208494DB005028D0 /* FGMathSettingViewController.m */; };
 /* End PBXBuildFile section */
@@ -731,8 +730,6 @@
 		8F6AA2EA1FB0410400A7B5C7 /* FGAIActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGAIActionView.m; sourceTree = "<group>"; };
 		8F6AA2EB1FB0410400A7B5C7 /* FGAIChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGAIChatTableViewCell.h; sourceTree = "<group>"; };
 		8F6AA2EC1FB0410400A7B5C7 /* FGAIChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGAIChatTableViewCell.m; sourceTree = "<group>"; };
-		8F6AA2ED1FB0410400A7B5C7 /* FGCalculateVerticalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGCalculateVerticalView.h; sourceTree = "<group>"; };
-		8F6AA2EE1FB0410400A7B5C7 /* FGCalculateVerticalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGCalculateVerticalView.m; sourceTree = "<group>"; };
 		8F6AA2EF1FB0410400A7B5C7 /* FGChatBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGChatBaseTableViewCell.h; sourceTree = "<group>"; };
 		8F6AA2F01FB0410400A7B5C7 /* FGChatBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGChatBaseTableViewCell.m; sourceTree = "<group>"; };
 		8F6AA2F11FB0410400A7B5C7 /* FGMySpeakTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGMySpeakTableViewCell.h; sourceTree = "<group>"; };
@@ -791,8 +788,6 @@
 		8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HasDoneOperation.m; sourceTree = "<group>"; };
 		8F6AA33B1FB0410400A7B5C7 /* MediumOperationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediumOperationModel.h; sourceTree = "<group>"; };
 		8F6AA33C1FB0410400A7B5C7 /* MediumOperationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediumOperationModel.m; sourceTree = "<group>"; };
-		8F6AA33D1FB0410400A7B5C7 /* QuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionModel.h; sourceTree = "<group>"; };
-		8F6AA33E1FB0410400A7B5C7 /* QuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionModel.m; sourceTree = "<group>"; };
 		8F6AA33F1FB0410400A7B5C7 /* SoundsProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundsProcess.h; sourceTree = "<group>"; };
 		8F6AA3401FB0410400A7B5C7 /* SoundsProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundsProcess.m; sourceTree = "<group>"; };
 		8F6AA3421FB0410400A7B5C7 /* FGMathRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGMathRootView.h; sourceTree = "<group>"; };
@@ -1460,6 +1455,8 @@
 		E623492D210334FE00F04A6F /* FGMistakesOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesOperationView.m; sourceTree = "<group>"; };
 		E62349302103682A00F04A6F /* FGMistakesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMistakesModel.h; sourceTree = "<group>"; };
 		E62349312103682A00F04A6F /* FGMistakesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesModel.m; sourceTree = "<group>"; };
+		E6239ADF21042CF1002B0751 /* FGMistakesOperationDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMistakesOperationDataModel.h; sourceTree = "<group>"; };
+		E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesOperationDataModel.m; sourceTree = "<group>"; };
 		E65AA45F208B34C000A4F808 /* FGImageTopTitleBottomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageTopTitleBottomButton.h; sourceTree = "<group>"; };
 		E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageTopTitleBottomButton.m; sourceTree = "<group>"; };
 		E6EE387B208494DB005028D0 /* FGMathSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathSettingViewController.h; sourceTree = "<group>"; };
@@ -1680,8 +1677,6 @@
 				8F6AA2EA1FB0410400A7B5C7 /* FGAIActionView.m */,
 				8F6AA2EB1FB0410400A7B5C7 /* FGAIChatTableViewCell.h */,
 				8F6AA2EC1FB0410400A7B5C7 /* FGAIChatTableViewCell.m */,
-				8F6AA2ED1FB0410400A7B5C7 /* FGCalculateVerticalView.h */,
-				8F6AA2EE1FB0410400A7B5C7 /* FGCalculateVerticalView.m */,
 				8F6AA2EF1FB0410400A7B5C7 /* FGChatBaseTableViewCell.h */,
 				8F6AA2F01FB0410400A7B5C7 /* FGChatBaseTableViewCell.m */,
 				8F6AA2F11FB0410400A7B5C7 /* FGMySpeakTableViewCell.h */,
@@ -1840,8 +1835,6 @@
 				8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */,
 				8F6AA33B1FB0410400A7B5C7 /* MediumOperationModel.h */,
 				8F6AA33C1FB0410400A7B5C7 /* MediumOperationModel.m */,
-				8F6AA33D1FB0410400A7B5C7 /* QuestionModel.h */,
-				8F6AA33E1FB0410400A7B5C7 /* QuestionModel.m */,
 				8F6AA33F1FB0410400A7B5C7 /* SoundsProcess.h */,
 				8F6AA3401FB0410400A7B5C7 /* SoundsProcess.m */,
 				8F9BDB141FB83C1D00BE8717 /* FGMathOperationManager.h */,
@@ -3032,6 +3025,8 @@
 			children = (
 				E62349302103682A00F04A6F /* FGMistakesModel.h */,
 				E62349312103682A00F04A6F /* FGMistakesModel.m */,
+				E6239ADF21042CF1002B0751 /* FGMistakesOperationDataModel.h */,
+				E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */,
 			);
 			path = MistakesModel;
 			sourceTree = "<group>";
@@ -3753,6 +3748,7 @@
 				2361A3FE20D757060041981D /* FGImageLeftTitleRightButtom.m in Sources */,
 				8F6AA5E21FB0410500A7B5C7 /* AKPickerView.m in Sources */,
 				8F6AA82D1FB0410700A7B5C7 /* FGAngryBirdsView.m in Sources */,
+				E6239AE121042CF1002B0751 /* FGMistakesOperationDataModel.m in Sources */,
 				8F6AA6041FB0410500A7B5C7 /* MyWaterView.m in Sources */,
 				8F6AA8281FB0410700A7B5C7 /* FSDAirportFlipLabel.m in Sources */,
 				8FE33445206201B20030F8EC /* FGMathOperationModel.m in Sources */,
@@ -3796,7 +3792,6 @@
 				8F6AA60F1FB0410500A7B5C7 /* MusicPlayerManager.m in Sources */,
 				8F6AA5EF1FB0410500A7B5C7 /* FGCategoryMenuView.m in Sources */,
 				8F6AA5DA1FB0410500A7B5C7 /* TTSUIController.m in Sources */,
-				8F6AA5DE1FB0410500A7B5C7 /* FGCalculateVerticalView.m in Sources */,
 				8F6AA5DD1FB0410500A7B5C7 /* FGAIChatTableViewCell.m in Sources */,
 				8FBCEEA81FBAFAB200849B7A /* FGMathBaseViewController.m in Sources */,
 				8F6AA5D41FB0410500A7B5C7 /* AIVoiceMathematicsViewController.m in Sources */,
@@ -3826,7 +3821,6 @@
 				8F6AA5FA1FB0410500A7B5C7 /* FGDateSingle.m in Sources */,
 				8F6AA6051FB0410500A7B5C7 /* WaterWaveView.m in Sources */,
 				E623492B2103240A00F04A6F /* FGMistakesCell.m in Sources */,
-				8F6AA5FE1FB0410500A7B5C7 /* QuestionModel.m in Sources */,
 				8FB160821FBC47FB006C9BBA /* FGMyCenterCell.m in Sources */,
 				8F6AA81E1FB0410700A7B5C7 /* FLStoryViewController.m in Sources */,
 				8F6AA6001FB0410500A7B5C7 /* FGMathRootView.m in Sources */,
