@@ -23,7 +23,6 @@
 
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,weak) id <FGMediumCandidateAnswerViewDelegate> delegate;
-//- (void)showCandidateViewWithCandidateMediumModel:(MediumOperationModel *)model answer:(NSInteger)answerNum;
 - (void)setupAnswerModel:(FGMathAnswerOptionsModel*)answerOptionModel;
 
 @end

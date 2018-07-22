@@ -7,7 +7,6 @@
 //
 
 #import "FGMediumLevelOperatorView.h"
-#import "MediumOperationModel.h"
 #import "BubbleButton.h"
 @implementation FGMediumLevelOperatorView
 
@@ -20,10 +19,6 @@
 {
     self = [super initWithFrame:frame];
     if (self){
-//        CGFloat topMargin = (frame.size.height -OPERATOR_HEIGHT)/2;
-//        CGFloat leftMargin = (frame.size.width - 7*OPERATOR_HEIGHT)/2;
-//        CGFloat width = self.frame.size.width - 2*leftMargin;
-//        CGFloat height = self.frame.size.height - 2*topMargin;
         self.bgView = ({
             UIView *view = [[UIView alloc]init];
             [self addSubview:view];

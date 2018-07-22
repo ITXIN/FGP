@@ -9,7 +9,7 @@
 #import "FGMediumViewController.h"
 #import "FGRewardsView.h"
 #import "FGMediumLevelOperatorView.h"
-#import "MediumOperationModel.h"
+//#import "MediumOperationModel.h"
 #import "FGMediumCandidateAnswerView.h"
 #import "MCFireworksButton.h"
 #import "TooltipForAnswerView.h"

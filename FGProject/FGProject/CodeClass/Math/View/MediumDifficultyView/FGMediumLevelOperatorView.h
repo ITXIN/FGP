@@ -17,6 +17,5 @@
 @property (nonatomic,strong) UIView *bgView;
 @property (nonatomic,strong) NSTimer *timer;
 
-//-(void)setMediumOperationModel:(MediumOperationModel *)questionModel;
 -(void)setMediumOperationModel:(FGMathOperationModel *)questionModel;
 @end

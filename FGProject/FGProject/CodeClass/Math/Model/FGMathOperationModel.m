@@ -114,7 +114,6 @@
 #pragma mark --- 产生运算式 随机
 +(FGMathOperationModel *)generateMathOperationModel{
     
-//    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]operationsArr];
      NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeArr];
     
     MathOperationActionType firstOperationType = [operationArr[arc4random()%operationArr.count] integerValue];

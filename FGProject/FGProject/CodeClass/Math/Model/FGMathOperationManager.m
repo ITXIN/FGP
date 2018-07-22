@@ -280,6 +280,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
 
 - (NSMutableArray*)getAllMistakes{
     NSMutableDictionary *dataDic = [self getAllData];
+    NSLog(@"---dataDic--%@",dataDic);
     NSMutableArray *dataArr = [NSMutableArray array];
     for (id key in dataDic.allKeys) {
         if ([key isKindOfClass:[NSString class]] ) {

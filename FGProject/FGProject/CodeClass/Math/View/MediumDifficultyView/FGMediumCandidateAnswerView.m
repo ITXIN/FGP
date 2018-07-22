@@ -7,7 +7,7 @@
 //
 
 #import "FGMediumCandidateAnswerView.h"
-#import "MediumOperationModel.h"
+//#import "MediumOperationModel.h"
 #import "FGMathAnswerOptionsModel.h"
 @implementation FGMediumCandidateAnswerView
 {
