@@ -74,6 +74,7 @@
     }
     return self;
 }
+
 - (void)setupQuestMode:(FGMathOperationModel*)questModel{
      [self.operationView setQuestionModel:questModel];
 }

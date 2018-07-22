@@ -11,6 +11,7 @@
 @class FGMathAnswerOptionsModel;
 @class FGMathOperationModel;
 @class FGMathOperationDataStatisticsModel;
+@class FGMathAnswerOptionsModel;
 #import "FGMathOperationDataStatisticsModel.h"
 @interface FGMathOperationManager : NSObject
 + (FGMathOperationManager*)shareMathOperationManager;
@@ -19,6 +20,8 @@
 @property (nonatomic,strong) NSMutableDictionary *hasDoneDic;//
 
 @property (nonatomic,strong) FGMathOperationModel *currentMathOperationModel;
+@property (nonatomic, strong) FGMathAnswerOptionsModel *currentMathAnswerOperationModel;
+
 @property (nonatomic,assign) BOOL isCompreOperation;
 
 @property (nonatomic,strong) FGDateSingle *dateSingle;

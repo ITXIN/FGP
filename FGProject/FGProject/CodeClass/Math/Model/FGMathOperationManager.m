@@ -172,6 +172,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
     answerOptionModel.secondNum = [NSString stringWithFormat:@"%ld",secondNum];
     answerOptionModel.thirdNum = [NSString stringWithFormat:@"%ld",thirdNum];
     answerOptionModel.answerNum = [NSString stringWithFormat:@"%ld",answerNum];
+    self.currentMathOperationModel = [answerOptionModel copy];
     return answerOptionModel;
 }
 // MARK: - ----------------------------------  ----------------------------------
@@ -221,6 +222,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
     }else{
         operationActionType = self.currentMathOperationModel.mathOperationActionType;
     }
+#warning 需要存储答案候选模型，以及在错题模型可以取到。
+    
     NSDictionary *detailDic = @{
                                 [NSString stringWithFormat:@"%@",kMathOperationTypeKey]:[NSString stringWithFormat:@"%ld",operationActionType],
                                 [NSString stringWithFormat:@"%@",kMathOperationStateKey]:[NSString stringWithFormat:@"%@",actionTypeAnswer==MathSimpleOperationViewActionTypeAnswer? @"YES":@"NO"],
@@ -230,7 +233,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     FGMathOperationModel *mathOperationModel = self.currentMathOperationModel;
     FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
     if (dataDic.allValues.count == 0) {
-        
         dataDic = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                   [self.dateSingle curretDate]:@{
                                                                           [NSString stringWithFormat:@"%@",kMathOperationDetailDataKey]:@[detailDic],
@@ -273,9 +275,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
 #pragma mark -----------
 - (NSMutableDictionary*)getAllData{
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
-    
     return dataDic;
-    
 }
 
 - (NSMutableArray*)getAllMistakes{

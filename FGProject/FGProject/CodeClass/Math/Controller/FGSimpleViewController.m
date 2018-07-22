@@ -27,7 +27,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-
 }
 
 - (void)initSubviews{
@@ -36,7 +35,6 @@
     self.answerView = [[FGSimpleOperationView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) operationType:self.mathOperationActionType];
     self.answerView.delegate = self;
     [self.bgView insertSubview:self.answerView belowSubview:self.navigationView];
-    
 }
 
 #pragma mark -
@@ -48,8 +46,6 @@
     switch (actionType) {
         case MathSimpleOperationViewActionTypeAnswer:
         {
-            
-            
             [[SoundsProcess shareInstance] playSoundOfTock];
             [[SoundsProcess shareInstance] playSoundOfWonderful];
             
@@ -72,7 +68,6 @@
                         }
                     };
                 }
-                
                
             }else{
                 //产生新的视图
@@ -89,16 +84,11 @@
         default:
             break;
     }
-    
- 
-    
 }
 
 - (void)setupSimplewOperationViewNewQuestionModel{
     FGMathOperationModel *questModel = [self.mathManager generateSimpleOperationModelWithOperationType:self.mathOperationActionType];
     [self.answerView operationSubjectByQuestionModel:questModel];
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
