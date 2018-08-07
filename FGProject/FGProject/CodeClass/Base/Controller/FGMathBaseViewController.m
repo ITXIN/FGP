@@ -31,6 +31,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.circleView circleViewWillDisapper];
+    
 }
 
 - (void)viewDidLoad {

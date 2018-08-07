@@ -26,18 +26,12 @@
 
 @implementation FGMathRootViewController
 
-#warning ---频繁的从本试图返回根视图内存会持续的增加
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [[FGMathOperationManager shareMathOperationManager] getDataStatistic];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    
 }
+
 - (void)initSubviews{
     [super initSubviews];
     
@@ -54,14 +48,15 @@
     });
     
 }
+
 #pragma mark -----------
 - (void)settingAction:(UIButton*)sender{
     FGMathSettingViewController *settingVC = [[FGMathSettingViewController alloc]init];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
+
 #pragma mark -------FGMathRootViewDelegate-点击按钮进入题目页面----
-- (void)choiceBtnAction:(MathRootViewActionType)mathRootViewActionType
-{
+- (void)choiceBtnAction:(MathRootViewActionType)mathRootViewActionType{
     switch (mathRootViewActionType) {
         case MathRootViewActionTypeAdd:
         case MathRootViewActionTypeSubtract:
@@ -168,6 +163,7 @@
     }
     
 }
+
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.choiceView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -180,6 +176,7 @@
         make.size.mas_equalTo(CGSizeMake(80, 80));
     }];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

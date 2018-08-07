@@ -56,9 +56,9 @@ static CGFloat x;
 {
     return degress*M_PI/180.0;
 }
+
 //旋转
-- (UIImage *)imageRotatedByDegrees:(CGFloat)degrees image:(UIImage *)m_getImageView
-{
+- (UIImage *)imageRotatedByDegrees:(CGFloat)degrees image:(UIImage *)m_getImageView{
     // calculate the size of the rotated view's containing box for our drawing space
     UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0,m_getImageView.size.width, m_getImageView.size.height)];
     CGAffineTransform t = CGAffineTransformMakeRotation([self DegreesToRadians:degrees]);
@@ -83,20 +83,14 @@ static CGFloat x;
     UIGraphicsEndImageContext();
     return newImage;
 }
-- (instancetype)initWithFrame:(CGRect)frame
-{
+
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
-        //        self.backgroundColor = [UIColor colorWithRed:53/255.0 green:190/255.0 blue:46/255.0 alpha:0.8];
+    if (self){
         self.backgroundColor = RGBA(255, 255, 255, 1);
         self.layer.cornerRadius = frame.size.width/2;
         self.layer.masksToBounds = YES;
-        //设置背景图片
-        //        UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        //        [bgImageView setImage:[UIImage imageNamed:@"countNum-bg"]];
-        //        [self addSubview:bgImageView];
-        
+       
         x = 0;
         _myWaterView = [[MyWaterView alloc]initWithFrame:CGRectMake(0, 0 , kScreenWidth/7, kScreenWidth/7)];
         _myWaterView.layer.cornerRadius = kScreenWidth/7/2;
@@ -117,13 +111,9 @@ static CGFloat x;
             UILabel *label = [[UILabel alloc]init];
             [self addSubview:label];
             label.textColor = [UIColor lightGrayColor];
-            if (@available(iOS 8.2, *)) {
-                label.font = [UIFont systemFontOfSize:14 weight:50];
-            } else {
-                // Fallback on earlier versions
-            }
+            label.font = [UIFont boldSystemFontOfSize:14.0];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-15);
+                make.bottom.mas_equalTo(-10);
                 make.centerX.equalTo(self);
             }];
             label.text = @"今日完成";
@@ -137,91 +127,75 @@ static CGFloat x;
 
 #pragma mark -
 #pragma mark --- 绘制 fish
-- (void)animateWaveFish
-{
+- (void)animateWaveFish{
     [self setNeedsDisplay];
 }
 
 #pragma mark -
 #pragma mark --- 显示动画
-- (void)showAnimationOfWaterWave
-{
-    
+- (void)showAnimationOfWaterWave{
     [UIView animateWithDuration:1 animations:^{
         [self countAnimation];
         [self waterWaveAnimation];
     }];
-    
 }
 
-- (void)countAnimation
-{
-    if (self.count == 0)
-    {
+- (void)countAnimation{
+    if (self.count == 0){
         return;
     }
     _countLab.text = [NSString stringWithFormat:@"%ld",number];
     [UIView animateWithDuration:1 animations:^{
         number ++;
         _countLab.text = [NSString stringWithFormat:@"%ld",number];
-        if (number > self.count)
-        {
+        if (number > self.count){
             number = 0;
             return ;
         }
     } completion:^(BOOL finished) {
-        if (number == self.count)
-        {
+        if (number == self.count){
             number = 0;
             return ;
-        }else
-        {
+        }else{
             [self performSelector:@selector(countAnimation) withObject:nil afterDelay:0.05];
         }
     }];
 }
-- (void)waterWaveAnimation
-{
+
+- (void)waterWaveAnimation{
     _myWaterView.waveHeight = myWaterWaveHeigh;
     [UIView animateWithDuration:2 animations:^{
         myWaterWaveHeigh ++;
         _myWaterView.waveHeight = myWaterWaveHeigh;
-        //        NSLog(@"-----animation count %f %f %f",self.waveHeight,myWaterWaveHeigh,_myWaterView.waveHeight);
-        if (myWaterWaveHeigh > self.waveHeight)
-        {
+        if (myWaterWaveHeigh > self.waveHeight){
             myWaterWaveHeigh = 0;
             return ;
         }
     } completion:^(BOOL finished) {
-        if ((int)myWaterWaveHeigh ==(int) self.waveHeight)
-        {
-            //            NSLog(@"-----equle %f %f",myWaterWaveHeigh,self.waveHeight);
+        if ((int)myWaterWaveHeigh ==(int) self.waveHeight){
             myWaterWaveHeigh = 0;
             return;
-        }else
-        {
+        }else{
             [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
         }
     }];
 }
-- (void)setWaveHeight:(float)waveHeight
-{
+
+- (void)setWaveHeight:(float)waveHeight{
     _myWaterView.waveHeight = waveHeight;
     _waveHeight = waveHeight;
 }
--(void)setCount:(NSInteger)count
-{
+
+-(void)setCount:(NSInteger)count{
     _countLab.text = [NSString stringWithFormat:@"%ld",count];
     _myWaterView.count = count;
 }
 
-- (NSInteger)count
-{
+- (NSInteger)count{
     return _myWaterView.count;
 }
 
-- (NSTimer *)timer
-{
+- (NSTimer *)timer{
     return _myWaterView.timer;
 }
 @end

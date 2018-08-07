@@ -34,17 +34,17 @@
             view;
         });
         [self.operationView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(answerBgView.mas_left).offset(-10);
-            make.left.mas_equalTo(10);
+            make.right.equalTo(answerBgView.mas_left).offset(-0);
+            make.left.mas_equalTo(0);
             make.centerY.equalTo(self.contentView);
             make.width.equalTo(self.contentView).multipliedBy(0.5);
             make.top.bottom.equalTo(self.contentView);
         }];
         [answerBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.operationView.mas_right).offset(10);
+            make.left.equalTo(self.operationView.mas_right).offset(0);
             make.height.equalTo(self.contentView);
             make.centerY.equalTo(self.contentView);
-            make.right.mas_equalTo(-10);
+            make.right.mas_equalTo(-0);
         }];
         NSMutableArray *btnArr = [NSMutableArray array];
         for (NSInteger i = 0; i < 4; i ++) {
@@ -52,9 +52,10 @@
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [answerBgView addSubview:btn];
                 btn.tag = 2000+i;
-                [btn setTitle:[NSString stringWithFormat:@"btn-%ld",i] forState:UIControlStateNormal];
+                [btn setTitle:[NSString stringWithFormat:@"%ld",arc4random()%100] forState:UIControlStateNormal];
                 btn;
             });
+            tempBtn.titleLabel.font = [UIFont boldSystemFontOfSize:35.0];
             tempBtn.backgroundColor = UIColor.redColor;
             [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.bottom.equalTo(answerBgView);
@@ -68,7 +69,7 @@
 
         self.operationView.backgroundColor = UIColor.purpleColor;
         self.contentView.backgroundColor = UIColor.cyanColor;
-        [btnArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:10 tailSpacing:10];
+        [btnArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:2.5 leadSpacing:0 tailSpacing:0];
         
         
     }

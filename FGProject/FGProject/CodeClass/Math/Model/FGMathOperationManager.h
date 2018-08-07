@@ -43,7 +43,7 @@
 //保存运算数据统计
 - (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer;
 //获取统计具体数据
-- (void)getDataStatistic;
+- (void)updateDataStatistic;
 //保存用户对运算类型的选择
 - (void)saveMathCompreOfOperationType:(NSDictionary*)typeDic;
 //获取用户对运算类型的选择

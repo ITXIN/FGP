@@ -33,16 +33,19 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
     FGLOG(@"2%@",self.mathManager);
 }
+
 - (void)initSubviews{
     [super initSubviews];
     //先调用这个而后调用 viewDidLoad
     FGLOG(@"1%@",self.mathManager);
     self.dataArr = [NSMutableArray array];
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
+    [self.mathManager updateDataStatistic];//更新统计数据
     
     [self initPieChartSubviews];
     [self initMistakesViews];
 }
+
 //错题
 - (void)initMistakesViews{
     self.tableView = ({
@@ -58,6 +61,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     });
     self.dataArr = [self.mathManager getAllMistakes];
 }
+
 //饼状图
 - (void)initPieChartSubviews{
     //    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:[UIColor fgPieChartLightGreenColor]],
@@ -118,6 +122,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     self.detailPieChart.hidden = YES;
     self.detailLegendView.hidden = YES;
 }
+
 #pragma mark -
 - (void)btnAction:(UIButton*)sender{
     NSInteger tag = sender.tag;
@@ -155,6 +160,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArr.count;
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UILabel *headerLab = ({
         UILabel *label = [[UILabel alloc]init];
@@ -167,6 +173,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     headerLab.text = model.mainTitle;
     return headerLab;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex{
     FGMistakesModel *model = self.dataArr[sectionIndex];
     return model.dataArr.count;
@@ -181,29 +188,30 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     return cell;
 }
 
-
-
 #pragma mark -----------
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.pieChart mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(50);
+        make.left.mas_equalTo(20);
+        make.top.mas_equalTo(50);
         make.size.mas_equalTo(CGSizeMake(200, 200));
     }];
+    
     [self.totalNumberLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.pieChart);
         make.size.mas_equalTo(CGSizeMake(100, 50));
         
     }];
+    
     [self.legendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.pieChart);
         make.top.mas_equalTo(self.pieChart.mas_bottom).offset(20);
         make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
+    
     [self.totalPercentageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.legendView.mas_right).offset(20);
         make.top.mas_equalTo(self.legendView).offset(10);
-        //        make.bottom.mas_equalTo(self.legendView);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(25);
     }];
@@ -213,26 +221,25 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
         make.left.mas_equalTo(self.pieChart.mas_right).offset(50);
         make.size.mas_equalTo(CGSizeMake(200, 200));
     }];
+    
     [self.detailLegendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.detailPieChart);
         make.top.mas_equalTo(self.detailPieChart.mas_bottom).offset(10);
         make.size.mas_equalTo(CGSizeMake(50, 20));
     }];
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.pieChart);
         make.bottom.equalTo(self.view).offset(-20);
         make.left.equalTo(self.pieChart.mas_right).offset(20);
-        make.right.mas_equalTo(-50);
+        make.right.mas_equalTo(-20);
     }];
     
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

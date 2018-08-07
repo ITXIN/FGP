@@ -56,13 +56,11 @@ static NSString *hasDoneKey = @"hasDoneKey";
             picStr = @"Divide";
             break;
         }
-            
         default:
             break;
     }
     UIImage *operationImage = [UIImage imageNamed:picStr];
     return operationImage;
-    
 }
 
 //获取运算数字的图片
@@ -84,8 +82,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
         UIImage *resultImage = [self drawImagesWithArr:numberArr];
         return resultImage;
     }
-    
 }
+
 //拼接图片
 - (UIImage *)drawImagesWithArr:(NSArray*)imagesArr{
     CGFloat sumWidth = 0;
@@ -115,8 +113,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     return resultingImage;
 }
 
-
-
 /**
  两级运算
  */
@@ -125,10 +121,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
     FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModelWithOperationType:mathOperationType];
     self.currentMathOperationModel = questModel;
     self.isCompreOperation = NO;
-    
     return questModel;
 }
-
 
 /**
  产生三级加减混合运算
@@ -138,7 +132,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     self.currentMathOperationModel = questModel;
     self.isCompreOperation = YES;
     return questModel;
-    
 }
 
 //随机答案选项
@@ -148,10 +141,9 @@ static NSString *hasDoneKey = @"hasDoneKey";
     NSInteger secondNum = 0;
     //第三个
     NSInteger thirdNum = 0;
-    
     firstNum  = arc4random() % 4 + answerNum + 2;
-    //运算符
     
+    //运算符
     secondNum = arc4random() % kMathOperationRangeNumber;
     thirdNum = arc4random() % kMathOperationRangeNumber;
     
@@ -172,9 +164,10 @@ static NSString *hasDoneKey = @"hasDoneKey";
     answerOptionModel.secondNum = [NSString stringWithFormat:@"%ld",secondNum];
     answerOptionModel.thirdNum = [NSString stringWithFormat:@"%ld",thirdNum];
     answerOptionModel.answerNum = [NSString stringWithFormat:@"%ld",answerNum];
-    self.currentMathOperationModel = [answerOptionModel copy];
+    self.currentMathAnswerOperationModel = answerOptionModel;
     return answerOptionModel;
 }
+
 // MARK: - ----------------------------------  ----------------------------------
 - (void)getOperationActionTypeStr:(MathOperationActionType)type{
     NSString *operationStr = @"";
@@ -213,7 +206,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     //今天做的题目个数
     [self saveCurrentDateHasDoneNumber:hasDone];
     
-    
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
     
     MathOperationActionType operationActionType;
@@ -222,7 +214,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
     }else{
         operationActionType = self.currentMathOperationModel.mathOperationActionType;
     }
-#warning 需要存储答案候选模型，以及在错题模型可以取到。
     
     NSDictionary *detailDic = @{
                                 [NSString stringWithFormat:@"%@",kMathOperationTypeKey]:[NSString stringWithFormat:@"%ld",operationActionType],
@@ -239,36 +230,28 @@ static NSString *hasDoneKey = @"hasDoneKey";
                                                                           [NSString stringWithFormat:@"%@",kMathOperationDetailDataTotalNumberKey]:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
                                                                           },
                                                                   [NSString stringWithFormat:@"%@",kMathOperationDataStatisticsTotalNumberKey]:@"1"
-                                                                  
                                                                   }];
-        
-        
     }else{
         
         NSMutableDictionary *currentDateDic = [NSMutableDictionary dictionaryWithDictionary: dataDic[[self.dateSingle curretDate]]];
-        
         NSMutableArray *currentDateDetailArr = [NSMutableArray arrayWithArray:
                                                 currentDateDic[kMathOperationDetailDataKey]];
-        
         [currentDateDetailArr addObject:detailDic];
-        
         [currentDateDic setValue:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]] forKey:kMathOperationDetailDataTotalNumberKey];
         [currentDateDic setValue:currentDateDetailArr forKey:kMathOperationDetailDataKey];
-        
         [dataDic setValue:currentDateDic forKey:[self.dateSingle curretDate]];
-        
-        
         
         NSInteger totalNumber = [dataDic[kMathOperationDataStatisticsTotalNumberKey] integerValue];
         totalNumber = totalNumber + 1;
-        
         [dataDic setValue:[NSString stringWithFormat:@"%ld",totalNumber] forKey:kMathOperationDataStatisticsTotalNumberKey];
-        
-        
     }
     
-    //    FGLOG(@"%@",dataDic);
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
+    
+    //更新统计
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self updateDataStatistic];
+    });
     
 }
 
@@ -280,7 +263,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
 
 - (NSMutableArray*)getAllMistakes{
     NSMutableDictionary *dataDic = [self getAllData];
-    NSLog(@"---dataDic--%@",dataDic);
     NSMutableArray *dataArr = [NSMutableArray array];
     for (id key in dataDic.allKeys) {
         if ([key isKindOfClass:[NSString class]] ) {
@@ -299,25 +281,23 @@ static NSString *hasDoneKey = @"hasDoneKey";
                     mistakesModel.count = [NSString stringWithFormat:@"%@",dataDic[key][kMathOperationDetailDataTotalNumberKey]];
                     [dataArr addObject:mistakesModel];
                 }
-               
+                
             }
         }
     }
-    NSLog(@"---data--%@",dataArr);
     return dataArr;
     
 }
 
-- (void)getDataStatistic{
+//数据统计
+- (void)updateDataStatistic{
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
     
     NSInteger totalNumber = [dataDic[kMathOperationDataStatisticsTotalNumberKey] integerValue];
     self.dataStatisticsModel.totalNumber = totalNumber;
     
     NSArray *allKeys =  dataDic.allKeys;
-    
     NSMutableArray *mistakesOperationModelArr = [NSMutableArray array];
-    
     NSInteger addTotalNumber = 0;
     NSInteger subtractTotalNumber = 0;
     NSInteger multiplyTotalNumber = 0;
@@ -342,9 +322,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
             
             for (NSDictionary *detailDic in detailArr) {
                 FGMathOperationModel *mathOperationModel = detailDic[kMathOperationObjKey];
-                
                 [mistakesOperationModelArr addObject:mathOperationModel];
-                
                 NSInteger operationType =  [detailDic[kMathOperationTypeKey] integerValue];
                 NSString *state =  detailDic[kMathOperationStateKey];
                 BOOL isState = NO;
@@ -399,12 +377,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
                     default:
                         break;
                 }
-                
             }
-            
-            
         }
-        
     }
     
     self.dataStatisticsModel.addTotalNumber = addTotalNumber;
@@ -414,10 +388,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
     self.dataStatisticsModel.compreOfSimpleTotalNumber = compreOfSimpleTotalNumber;
     self.dataStatisticsModel.compreOfMediumTotalNumber = compreOfMediumTotalNumber;
     self.dataStatisticsModel.compreOfDiffcultyTotalNumber = compreOfDiffcultyTotalNumber;
-    
     self.dataStatisticsModel.totalAccuracyNumber = totalAccuracyNumber;
-    
-    //    FGLOG(@"totl %@ totalAccuracyNumber %ld",self.dataStatisticsModel.totalStr,self.dataStatisticsModel.totalAccuracyNumber);
 }
 
 #pragma mark -------保存综合练习题目类型设置----
@@ -442,8 +413,9 @@ static NSString *hasDoneKey = @"hasDoneKey";
             [typeArr addObject: key];
         }
     }
-    
-    FGLOG(@"%@",typeArr);
+    if (typeArr.count == 0) {
+        return self.operationsArr;
+    }
     return typeArr;
 }
 
@@ -473,8 +445,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
         default:
             break;
     }
-    
-    
+
 }
 
 //保存今日已经做的个数

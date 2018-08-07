@@ -17,21 +17,16 @@
 @end
 
 @interface FGMathRootView : FGBaseView<UIAlertViewDelegate>
-
 //加减乘除
 @property (nonatomic, strong) UIButton *addBtn;
 @property (nonatomic, strong) UIButton *subtractBtn;
 @property (nonatomic, strong) UIButton *multiplyBtn;
 @property (nonatomic, strong) UIButton *divideBtn;
-//@property (nonatomic,strong) UIButton *sunBtn;
 @property (nonatomic,strong) UIButton *reduceBtn;
-
-////做的题目数量
+//做的题目数量
 @property (nonatomic, strong) UIButton *countBtn;
 //综合练习
 @property (nonatomic, strong) UIButton *compreBtn;
-
 @property (nonatomic,weak) id <FGMathRootViewDelegate> delegate;
-
 
 @end
