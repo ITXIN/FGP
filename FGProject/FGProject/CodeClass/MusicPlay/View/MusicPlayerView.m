@@ -15,8 +15,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         
         UIVisualEffectView *effView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
         [self addSubview:effView];
@@ -40,9 +39,8 @@
         [self addSubview:self.currentTimeLab];
         self.currentTimeLab.text = @"00:00";
         CGFloat proceTop =  self.currentTimeLab.frame.origin.y + timeLabHeight/2 - pace/2;
-        //
-        self.processView = [[UISlider alloc]initWithFrame:CGRectMake(self.currentTimeLab.frame.size.width + self.currentTimeLab.frame.origin.x + pace, proceTop, processWidth, processHeight)];
         
+        self.processView = [[UISlider alloc]initWithFrame:CGRectMake(self.currentTimeLab.frame.size.width + self.currentTimeLab.frame.origin.x + pace, proceTop, processWidth, processHeight)];
         self.processView.value = 0.0;
         [self addSubview:self.processView];
         [self.processView addTarget:self action:@selector(processAction:) forControlEvents:UIControlEventValueChanged];
@@ -52,7 +50,7 @@
         self.allTimeLab = [[UILabel alloc]initWithFrame:CGRectMake(self.processView.frame.size.width + self.processView.frame.origin.x + pace, pace, timeLabWidth, timeLabHeight)];
         [self addSubview:self.allTimeLab];
         self.allTimeLab.text = @"00:00";
-
+        
         self.currentTimeLab.font = font;
         self.allTimeLab.font = font;
         
@@ -63,11 +61,11 @@
         self.allTimeLab.textAlignment = alignment;
         
         CGFloat btnTopMar = 10.0;
-         CGFloat btnTopMargin = frame.size.height/3 + btnTopMar;
+        CGFloat btnTopMargin = frame.size.height/3 + btnTopMar;
         CGFloat btnW = frame.size.height/3*2 - 2*btnTopMar;
         CGFloat btnLeftW = btnW - 10;
         CGFloat btnPace = 40;
-       
+        
         _playBtn=[UIButton buttonWithType:UIButtonTypeSystem];
         _playBtn.frame=CGRectMake(frame.size.width/2 - btnW/2, btnTopMargin, btnW, btnW);
         [_playBtn setBackgroundImage:[UIImage imageNamed:@"ic_play_click"] forState:UIControlStateNormal];
@@ -92,51 +90,40 @@
         
         self.playerManager = [MusicPlayerManager shareMusicPlayerManager];
         self.playerManager.delegate = self;
-
+        
         @weakify(self);
         self.playerManager.musicManagerTimeBlock = ^(FGMusicPlayerTimeModel *timeModel) {
             @strongify(self);
-
+            
             [self.currentTimeLab setText:timeModel.currentTime];
             [self.allTimeLab setText:timeModel.durationTime];
             [self.processView setValue:timeModel.processValue animated:YES];
             
         };
-
+        
     }
     return self;
 }
 
-//- (UIImage *)blurryImage:(UIImage *)image  withBlurLevel:(CGFloat)blur
-//{
-//    CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
-//    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"                           keysAndValues:kCIInputImageKey, inputImage,                                         @"inputRadius", @(blur),nil];
-//    CIImage *outputImage = filter.outputImage;
-//    CIContext *context = [CIContext contextWithOptions:nil];
-//    CGImageRef outImage = [context createCGImage:outputImage                                      fromRect:[outputImage extent]];
-//    return [UIImage imageWithCGImage:outImage];
-//}
+
 - (void)updateButtonImage:(UIButton*)sender imageName:(NSString *)imageName{
-    
     [sender setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 }
+
 #pragma mark - MusicPlayerManagerDelegate
 - (void)musicManagerIndex:(NSInteger)index{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(currentPlayMusicIndex:)])
-    {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(currentPlayMusicIndex:)]){
         [self.delegate currentPlayMusicIndex:index];
     }
 }
 
 #pragma mark -
 #pragma mark --- 设置数据
-- (void)setupPlayerDataArr:(NSArray *)arr
-{
+- (void)setupPlayerDataArr:(NSArray *)arr{
     [self.playerManager setupMusicWithMusicDataArr:arr];
 }
 
-- (void)setPlayerWithMusicIndex:(NSInteger)index
-{
+- (void)setPlayerWithMusicIndex:(NSInteger)index{
     [self.playerManager setPlayerWithMusicIndex:index];
     [self pauseMusic];
 }
@@ -145,17 +132,16 @@
     [self.playerManager pause];
     [self updateButtonImage:self.playBtn imageName:@"ic_play_click"];
 }
+
 - (void)playMusic{
     @weakify(self);
     [self.playerManager play:^{
         @strongify(self);
         [self updateButtonImage:self.playBtn imageName:@"ic_pause_click"];
     }];
-    
 }
 
-- (void)btnClick:(UIButton *)btn
-{
+- (void)btnClick:(UIButton *)btn{
     [[SoundsProcess shareInstance]playSoundOfTock];
     if (btn.tag != MusicPlayTypePlay){
         [self updateButtonImage:self.playBtn imageName:@"ic_pause_click"];
@@ -164,7 +150,7 @@
         case MusicPlayTypeBefore:
         {
             [self.playerManager beforeMusic];
-              break;
+            break;
         }
         case MusicPlayTypePlay:
         {
@@ -177,7 +163,7 @@
         }
         case MusicPlayTypeNext:
         {
-             [self.playerManager nextMusic];
+            [self.playerManager nextMusic];
             break;
         }
             
@@ -191,17 +177,14 @@
     }
 }
 
-- (void)processAction:(id<NSObject>)sender
-{
+- (void)processAction:(id<NSObject>)sender{
     UISlider *slider = (UISlider *)sender;
-
+    
     [self.playerManager playWithProgressValue:slider.value*self.playerManager.durationTime];
     [self pauseMusic];
     [self playMusic];
-    if (slider == self.processView)
-    {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(progressGerstureWithlocation:)])
-        {
+    if (slider == self.processView){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(progressGerstureWithlocation:)]){
             [self.delegate progressGerstureWithlocation:slider.value];
         }
     }

@@ -10,7 +10,5 @@
 
 @interface FGStroyPlayCell : UITableViewCell
 @property (nonatomic,strong) UILabel *contenLab;
-//@property (nonatomic,strong) UIImageView *imageView;
-
 
 @end

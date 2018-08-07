@@ -24,8 +24,8 @@ static CGFloat SuccessWindow_hight = 170;
     }
     return self;
 }
-- (void)configSubViews
-{
+
+- (void)configSubViews{
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;

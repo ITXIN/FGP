@@ -11,19 +11,19 @@
 #import <AdSupport/AdSupport.h>
 #import "FGClickRandomAnswerCountModel.h"
 @implementation FGProjectHelper
-+ (void)saveDataWithKey:(NSString *)keyStr data:(id)data
-{
+
++ (void)saveDataWithKey:(NSString *)keyStr data:(id)data{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:keyStr];
     [defaults synchronize];
 }
+
 //获取数据
-+ (id)getDataWithKey:(NSString *)key
-{
++ (id)getDataWithKey:(NSString *)key{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSArray *dataArr = [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:key]];
     return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:key]];
 }
+
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
     if (jsonString == nil) {
         return nil;
@@ -40,6 +40,7 @@
     }
     return dic;
 }
+
 + (CGRect)stringRect:(NSString *)string fontSize:(CGFloat)fontSize constraintWidth:(CGFloat)width constraintHeight:(CGFloat)height {
     UIFont *font = [UIFont systemFontOfSize:fontSize];
     CGSize constraint = CGSizeMake(width, height);
@@ -108,8 +109,7 @@
     return returnImage;
 }
 
-+ (NSString *)logTimeStringFromDate:(NSDate *)date
-{
++ (NSString *)logTimeStringFromDate:(NSDate *)date{
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -120,12 +120,9 @@
     return [formatter stringFromDate:date];
 }
 
-+(NSString*)adidWith
-{
++(NSString*)adidWith{
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier]UUIDString];
-    
 }
-
 
 #pragma mark -
 #pragma mark --- 对上传的简单的运算 Math 赋值
@@ -196,8 +193,7 @@
 }
 */
 //如果想要判断设备是ipad，要用如下方法
-+ (BOOL)getIsiPad
-{
++ (BOOL)getIsiPad{
     NSString *deviceType = [UIDevice currentDevice].model;
     
     if([deviceType isEqualToString:@"iPhone"]) {
@@ -214,7 +210,8 @@
     }
     return NO;
 }
-    //晃动动画
+
+//晃动动画
 + (CABasicAnimation*)animationRotationZ{
     CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/7];
@@ -223,6 +220,6 @@
     basicAnim.repeatCount = HUGE_VAL;
     basicAnim.removedOnCompletion = NO;
     return basicAnim;
-    
 }
+
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "FGMediumCandidateAnswerView.h"
-//#import "MediumOperationModel.h"
 #import "FGMathAnswerOptionsModel.h"
 @implementation FGMediumCandidateAnswerView
 {
@@ -20,6 +19,7 @@
     [_timer invalidate];
     _timer = nil;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
@@ -55,15 +55,16 @@
     }
     return self;
 }
+
 #pragma mark -
 #pragma mark ---init Timer
-- (void)setupTimer
-{
+- (void)setupTimer{
     [_timer invalidate];
     _timer = nil;
     _timer = [NSTimer timerWithTimeInterval:30.0 target:self selector:@selector(autoAction) userInfo:nil repeats:YES];
     [[NSRunLoop  currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
 }
+
 #pragma mark -
 #pragma mark --- timeAction
 - (void)autoAction{
@@ -72,7 +73,6 @@
 }
 
 - (void)candidateBtnClick:(UIButton *)btn{
-    //    [self setupTimer];
     //最好的方法是比较点击间隔时间如果间隔时间大于某个值就
     if (btn.tag == MathSimpleOperationViewActionTypeAnswer) {
         [AnimationProcess springAnimationProcessWithView:btn upHeight:30.0];
@@ -83,6 +83,7 @@
         [self.delegate didClickCandidateActionType:btn.tag];
     }
 }
+
 - (void)setupAnswerModel:(FGMathAnswerOptionsModel*)answerOptionModel{
     //随机产生正确答案的位置
     NSMutableArray *anwerArr = [NSMutableArray array];
@@ -111,6 +112,7 @@
     [self viewAnimation:self.candidateBtnArr[2] duration:2.9 x:-x2 y:0 alpha:1.0];
     [self viewAnimation:self.candidateBtnArr[3] duration:2.9 x:x2 y:0 alpha:1.0];
 }
+
 #pragma mark-----CAAnimation
 - (void)viewCAAnimation:(UIView *)view duration:(CGFloat )duration keyPath:(NSString *)keyPath toValue:(NSNumber *)number{
     CABasicAnimation *animation  = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -118,6 +120,7 @@
     animation.duration = 0.8;
     [view.layer addAnimation:animation forKey:nil];
 }
+
 #pragma mark-----Animation 子菜单动画
 - (void)viewAnimation:(UIView *)view duration:(CGFloat )duration x:(CGFloat)x y:(CGFloat)y alpha:(CGFloat)alpha{
     [UIView animateWithDuration:duration animations:^{
@@ -126,6 +129,7 @@
         view.alpha = alpha;
     } completion:nil];
 }
+
 #pragma mark--------设置button的属性
 //标题  大小 初始位置 响应时间
 - (void)setButtonView:(UIButton *)buttton title:(NSString *)title duration:(CGFloat)duration{

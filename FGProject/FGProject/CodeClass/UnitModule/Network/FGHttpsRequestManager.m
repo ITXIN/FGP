@@ -9,23 +9,17 @@
 #import "FGHttpsRequestManager.h"
 #import "AFNetworking.h"
 @implementation FGHttpsRequestManager
-// 1
+
 static FGHttpsRequestManager *_sharedInstance = nil;
-+(FGHttpsRequestManager*)shareInstance
-{
-    // 2
++(FGHttpsRequestManager*)shareInstance{
     static dispatch_once_t oncePredicate;
-    // 3
     dispatch_once(&oncePredicate, ^{
         _sharedInstance = [[FGHttpsRequestManager alloc] init];
     });
     return _sharedInstance;
 }
 
-
-
-- (void)getDataWithUrlStr:(NSString *)urlStr succeedHandler:(succeedHandler)succeedHandler failedHandler:(failedHandler)failedHandler
-{
+- (void)getDataWithUrlStr:(NSString *)urlStr succeedHandler:(succeedHandler)succeedHandler failedHandler:(failedHandler)failedHandler{
     urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -43,4 +37,5 @@ static FGHttpsRequestManager *_sharedInstance = nil;
          failedHandler(error);
     }];
 }
+
 @end

@@ -14,11 +14,10 @@
     NSString *imgesName;
     NSInteger imagesCount;
 }
--(instancetype)initWithFrame:(CGRect)frame
-{
+
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         imageArr = [NSMutableArray array];
         self.bgView = ({
             UIView *view = [[UIView alloc]init];
@@ -42,19 +41,16 @@
     return self;
 }
 
-- (void)imageViewAnimationWithName:(NSString *)name count:(NSInteger)count
-{
+- (void)imageViewAnimationWithName:(NSString *)name count:(NSInteger)count{
     imgesName = name;imagesCount = count;
     self.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@0",name]];
-    if ([self.imageView isAnimating])
-    {
+    if ([self.imageView isAnimating]){
         return;
     }
 
     [imageArr removeAllObjects];
     
-    for (int i = 0; i < count; i ++)
-    {
+    for (int i = 0; i < count; i ++){
         [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"%@%d",name,i]]];
     }
     
@@ -64,14 +60,10 @@
     [self.imageView startAnimating];
 
     [self.imageView performSelector:@selector(setAnimationImages:) withObject:nil afterDelay:self.imageView.animationDuration];
-
 }
 
-- (void)startImageAnimation
-{
+- (void)startImageAnimation{
     [self imageViewAnimationWithName:imgesName count:imagesCount];
 }
-
-
 
 @end

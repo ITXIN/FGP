@@ -24,11 +24,13 @@
 
 @implementation FGStoryPlayViewController
 static NSString *reuserID = @"reuserID";
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.playView.playerManager pause];
     
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -41,7 +43,6 @@ static NSString *reuserID = @"reuserID";
     }
     
     [self dataOfStoryRequest];
-    
 }
 
 #pragma mark -
@@ -84,10 +85,8 @@ static NSString *reuserID = @"reuserID";
     
 }
 
-
 #pragma mark -
-- (void)dataOfStoryRequest
-{
+- (void)dataOfStoryRequest{
     [[FGHttpsRequestManager shareInstance] getDataWithUrlStr:[NSString stringWithFormat:@"%@%@%@",FGStoryBaseURLString,FGStoryListURLString,self.playModel.home_id] succeedHandler:^(id responseObject, NSError *error) {
         NSDictionary *dataDic = (NSDictionary*)responseObject;
         NSArray *musicArr = dataDic[@"data"][@"music"];
@@ -100,14 +99,12 @@ static NSString *reuserID = @"reuserID";
         [self.view makeToast:error.description];
         [self setupStoryDataWithArr:dataArr];
     }];
-    
 }
 
 /**
  *  使用数据
  */
-- (void)setupStoryDataWithArr:(NSArray*)dataArr
-{
+- (void)setupStoryDataWithArr:(NSArray*)dataArr{
     if (dataArr.count > 0) {
         NSMutableArray *musicUrlArr = [NSMutableArray array];
         NSMutableArray *titleArr = [NSMutableArray array];
@@ -123,17 +120,16 @@ static NSString *reuserID = @"reuserID";
         
         [self.tableView reloadData];
     }
-    
 }
 
 #pragma mark -
 #pragma mark --- MusicPlayerViewDelegate
-- (void)musicPlayBtnAction:(UIButton *)btn
-{
+- (void)musicPlayBtnAction:(UIButton *)btn{
     FGLOG(@"musicPlayBtnAction");
     [self updateMusicPlayviewWithIndex:self.playView.playerManager.currendIndex];
     
 }
+
 - (void)currentPlayMusicIndex:(NSInteger)index{
     [self updateMusicPlayviewWithIndex:index];
 }
@@ -148,6 +144,7 @@ static NSString *reuserID = @"reuserID";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.playInfoArr.count;
 }
@@ -155,15 +152,18 @@ static NSString *reuserID = @"reuserID";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80.0;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1f;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self updateMusicPlayviewWithIndex:indexPath.row];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [self.playView setPlayerWithMusicIndex:indexPath.row];
     });
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuserID forIndexPath:indexPath];
@@ -231,6 +231,7 @@ static NSString *reuserID = @"reuserID";
         make.size.mas_equalTo(CGSizeMake(WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW));
     }];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

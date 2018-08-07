@@ -13,6 +13,5 @@
 @property (nonatomic,strong) UIView *bgView;
 //设置后便开始动画
 - (void)imageViewAnimationWithName:(NSString *)name count:(NSInteger)count;
-
 - (void)startImageAnimation;//再次调用开始动画
 @end

@@ -19,13 +19,12 @@
 {
     CGPoint velocity;
     CGFloat mass;
-    
-      CADisplayLink * displayLink;
+    CADisplayLink * displayLink;
 }
+
 @property (nonatomic,strong) NSMutableArray *menuBtnArr;
 @property (nonatomic,assign) CGPoint centerPoint;
 @property (nonatomic,strong) NSMutableArray *menuBtnCenterArr;
-
 @property (nonatomic,strong) UIPanGestureRecognizer * panGestureRecognizer;
 @property (nonatomic, assign) CGFloat panDragCoefficient;
 @property (nonatomic, assign) CGPoint restCenter;

@@ -20,7 +20,6 @@
     if (imageWidth <= screenWidth && imageHeight <= screenHeight) {
         return image;
     }
-    
     //SGQRCodeLog(@"压缩前图片尺寸 － width：%.2f, height: %.2f", imageWidth, imageHeight);
     CGFloat max = MAX(imageWidth, imageHeight);
     // 如果是6plus等设备，比例应该是 3.0
@@ -29,6 +28,7 @@
     
     return [UIImage imageWithImage:image scaledToSize:CGSizeMake(imageWidth / scale, imageHeight / scale)];
 }
+
 /// 返回一张处理后的图片
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
@@ -39,8 +39,7 @@
 }
 
 #pragma mark 图片压缩
-- (UIImage *)scaleToSize:(CGSize)newSize
-{
+- (UIImage *)scaleToSize:(CGSize)newSize{
     // Create a graphics image context
     UIGraphicsBeginImageContext(newSize);
     // Tell the old image to draw in this new context, with the desired
@@ -55,8 +54,7 @@
 }
 
 #pragma mark 裁剪中心点周围最大的正方形区域的图片
-- (UIImage *)cropCenterMaxSquareArea
-{
+- (UIImage *)cropCenterMaxSquareArea{
     // 安全判断
     if (!self.CGImage) {
         return nil;
@@ -70,7 +68,6 @@
     UIImage *targetImage = [UIImage imageWithCIImage:[originalImage imageByCroppingToRect:targetRect]];
     return targetImage;
 }
-
 
 - (UIImage *)fixOrientation {
     

@@ -18,7 +18,6 @@
 @end
 @implementation FGSimpleOperationView
 
-
 - (instancetype)initWithFrame:(CGRect)frame operationType:(MathOperationActionType)operationType{
     self = [super initWithFrame:frame];
     if (self){
@@ -52,21 +51,18 @@
         //运算的式子
         _operView = [[FGSimpleOperationContentView alloc]initWithFrame:CGRectMake(0, (kScreenHeight - QUESTION_MARK_HEIGHT)/2, kScreenWidth/2, OPERATOR_HEIGHT)];
         [_bigView  addSubview:_operView];
-        
     }
     return self;
 }
+
 #pragma mark -
 #pragma mark --- 数据上传 Firebase
 - (void)setupPostDataToFireBase{
     NSString *adidStr = [FLDeviceUID uid];
     self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
     self.dataBaseRef = [[[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_MATH] child:FIREBASE_DATABASE_CATEGORY_MATH_SIMPLE];
-    
     self.dataBaseRef = [self.dataBaseRef child:[NSString stringWithFormat:@"%@",[FGProjectHelper logTimeStringFromDate:[NSDate date]]]];
-    
 }
-
 
 #pragma mark -
 #pragma mark --- postDataToFireBase
@@ -75,11 +71,11 @@
     NSDictionary *dic = [FGProjectHelper postDataWithClickRandomModel:clickModel];
     [[self.dataBaseRef child:dateStr] updateChildValues:dic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
         if (error) {
-            NSLog(@"-----error %@ %@ %@",error,ref.key,ref.URL);
             return ;
         }
     }];
 }
+
 #pragma mark ------产生运算式------
 - (void)operationSubjectByQuestionModel:(FGMathOperationModel *)questionModel{
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -93,7 +89,6 @@
 - (void)setValueForBtnWithQuestionModel:(FGMathOperationModel *)questModel{
     //产生随机答案
     FGMathAnswerOptionsModel *answerModle = [[FGMathOperationManager shareMathOperationManager]generateRandomAnswerNum:questModel.answerNum];
-    
     [self.answerOptionArr removeAllObjects];
     [self.answerOptionArr addObject:answerModle.firstNum];
     [self.answerOptionArr addObject:answerModle.secondNum];
@@ -107,8 +102,8 @@
             anwerBtn.tag = MathSimpleOperationViewActionTypeAnswer;
         }
     }
-    
 }
+
 #pragma mark-----CAAnimation
 - (void)viewCAAnimation:(UIView *)view duration:(CGFloat )duration keyPath:(NSString *)keyPath toValue:(NSNumber *)number{
     CABasicAnimation *animation  = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -146,6 +141,7 @@
     buttton.tintColor = [UIColor whiteColor];
     [buttton addTarget:self action:@selector(answerBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
 }
+
 #pragma mark-------对题目准确性的判断------
 - (void)answerBtnAction:(UIButton *)button{
     if(button.tag == MathSimpleOperationViewActionTypeAnswer){
@@ -161,7 +157,6 @@
 }
 
 #pragma mark------显示菜单栏
-
 - (void)showMenu{
     [self viewCAAnimation:_button duration:0.8 keyPath:@"transform.rotation.z" toValue:[NSNumber numberWithFloat:(M_PI/180 *360)]];
     CGFloat topMargin = ANSWEROPTION_TOPMARGIN;
@@ -173,11 +168,10 @@
     [self viewAnimation:self.candidateBtnArr[2] duration:0.9 x:(kScreenHeight/2 - topMargin - btnWH/2)/1.414 y:(kScreenHeight/2 - topMargin - btnWH/2)/2 alpha:1.0];
     [self viewAnimation:self.candidateBtnArr[3] duration:1.1 x:0 y:(kScreenHeight/2 - topMargin - btnWH/2) alpha:1.0];
 }
-#pragma mark-----点击屏幕子菜单收回
 
+#pragma mark-----点击屏幕子菜单收回
 - (void)hiddenMenu{
     [self viewCAAnimation:_button duration:0.8 keyPath:@"transform.rotation.z" toValue:[NSNumber numberWithFloat:(-M_PI/180 *360)]];
-    //可以使用 for
     for (int i = 0; i < self.candidateBtnArr.count; i ++){
         [self viewAnimation:self.candidateBtnArr[i] duration:0.4 + i*0.3 x:0 y:0 alpha:0.0];
     }

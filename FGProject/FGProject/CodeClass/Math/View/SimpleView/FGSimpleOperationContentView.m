@@ -9,22 +9,21 @@
 #import "FGSimpleOperationContentView.h"
 @implementation FGSimpleOperationContentView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         self.bgView = [[UIView alloc]initWithFrame:CGRectMake(OPERATOR_LEFT_MARGIN, 0, kScreenWidth/2-OPERATOR_LEFT_MARGIN,OPERATOR_HEIGHT)];
         [self addSubview:self.bgView];
     }
     return self;
 }
+
 #pragma mark --------model 的 setter 方法----
--(void)setQuestionModel:(FGMathOperationModel *)questionModel
-{
+-(void)setQuestionModel:(FGMathOperationModel *)questionModel{
     for (UIButton *btn in self.bgView.subviews){
         [btn removeFromSuperview];
     }
+    
     //间距
     CGFloat padding = 0;
     NSInteger firstNum = questionModel.firstNum;
@@ -60,6 +59,6 @@
         }];
         preBtn = numAndOperBtn;
     }//end for
-    
 }
+
 @end

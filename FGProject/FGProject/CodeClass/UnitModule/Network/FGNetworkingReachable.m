@@ -10,19 +10,17 @@
 #import "AFNetworking.h"
 @implementation FGNetworkingReachable
 
-+(FGNetworkingReachable *)sharedInstance
-{
++(FGNetworkingReachable *)sharedInstance{
     static FGNetworkingReachable *_sharedInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _sharedInstance = [[FGNetworkingReachable alloc] init];
-       
     });
     return _sharedInstance;
 }
+
 //进行网络判断
-- (void)startMonitoringNetworkReachable
-{
+- (void)startMonitoringNetworkReachable{
     //1.创建网络状态监测管理者
     AFNetworkReachabilityManager *manger = [AFNetworkReachabilityManager sharedManager];
     [manger startMonitoring];

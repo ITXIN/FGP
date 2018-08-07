@@ -14,10 +14,6 @@
 @property (nonatomic,strong) NSString *allMinuteStr;
 @property (nonatomic,strong) NSString *allSecondStr;
 @property (nonatomic,assign) CGFloat processValue;
-
 @property (nonatomic,strong) NSString *currentTime;
 @property (nonatomic,strong) NSString *durationTime;
-
-
-
 @end

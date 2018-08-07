@@ -614,8 +614,6 @@
 		8F6AA82B1FB0410700A7B5C7 /* WriteFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5BD1FB0410500A7B5C7 /* WriteFunction.m */; };
 		8F6AA82C1FB0410700A7B5C7 /* FGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5C11FB0410500A7B5C7 /* FGAlertView.m */; };
 		8F6AA82D1FB0410700A7B5C7 /* FGAngryBirdsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5C31FB0410500A7B5C7 /* FGAngryBirdsView.m */; };
-		8F6AA82E1FB0410700A7B5C7 /* FGBuildingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5C51FB0410500A7B5C7 /* FGBuildingsView.m */; };
-		8F6AA82F1FB0410700A7B5C7 /* FGDrawBirdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5C71FB0410500A7B5C7 /* FGDrawBirdView.m */; };
 		8F6AA8301FB0410700A7B5C7 /* FGImageViewAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5C91FB0410500A7B5C7 /* FGImageViewAnimationView.m */; };
 		8F6AA8311FB0410700A7B5C7 /* FGNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5CB1FB0410500A7B5C7 /* FGNavigationView.m */; };
 		8F6AA8321FB0410700A7B5C7 /* FGHttpsRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA5CE1FB0410500A7B5C7 /* FGHttpsRequestManager.m */; };
@@ -1378,10 +1376,6 @@
 		8F6AA5C11FB0410500A7B5C7 /* FGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGAlertView.m; sourceTree = "<group>"; };
 		8F6AA5C21FB0410500A7B5C7 /* FGAngryBirdsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGAngryBirdsView.h; sourceTree = "<group>"; };
 		8F6AA5C31FB0410500A7B5C7 /* FGAngryBirdsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGAngryBirdsView.m; sourceTree = "<group>"; };
-		8F6AA5C41FB0410500A7B5C7 /* FGBuildingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGBuildingsView.h; sourceTree = "<group>"; };
-		8F6AA5C51FB0410500A7B5C7 /* FGBuildingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGBuildingsView.m; sourceTree = "<group>"; };
-		8F6AA5C61FB0410500A7B5C7 /* FGDrawBirdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGDrawBirdView.h; sourceTree = "<group>"; };
-		8F6AA5C71FB0410500A7B5C7 /* FGDrawBirdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGDrawBirdView.m; sourceTree = "<group>"; };
 		8F6AA5C81FB0410500A7B5C7 /* FGImageViewAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGImageViewAnimationView.h; sourceTree = "<group>"; };
 		8F6AA5C91FB0410500A7B5C7 /* FGImageViewAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGImageViewAnimationView.m; sourceTree = "<group>"; };
 		8F6AA5CA1FB0410500A7B5C7 /* FGNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGNavigationView.h; sourceTree = "<group>"; };
@@ -2840,10 +2834,6 @@
 				8F6AA5C11FB0410500A7B5C7 /* FGAlertView.m */,
 				8F6AA5C21FB0410500A7B5C7 /* FGAngryBirdsView.h */,
 				8F6AA5C31FB0410500A7B5C7 /* FGAngryBirdsView.m */,
-				8F6AA5C41FB0410500A7B5C7 /* FGBuildingsView.h */,
-				8F6AA5C51FB0410500A7B5C7 /* FGBuildingsView.m */,
-				8F6AA5C61FB0410500A7B5C7 /* FGDrawBirdView.h */,
-				8F6AA5C71FB0410500A7B5C7 /* FGDrawBirdView.m */,
 				8F6AA5C81FB0410500A7B5C7 /* FGImageViewAnimationView.h */,
 				8F6AA5C91FB0410500A7B5C7 /* FGImageViewAnimationView.m */,
 				8F6AA5CA1FB0410500A7B5C7 /* FGNavigationView.h */,
@@ -3751,7 +3741,6 @@
 				8FADBE6A1FB46D9E0018F6C8 /* PullCircleView.m in Sources */,
 				8F6AA5D61FB0410500A7B5C7 /* AlertView.m in Sources */,
 				8F6AA82B1FB0410700A7B5C7 /* WriteFunction.m in Sources */,
-				8F6AA82F1FB0410700A7B5C7 /* FGDrawBirdView.m in Sources */,
 				23CADFE32119826900EF8CE1 /* FGRootView.m in Sources */,
 				8F6AA2AE1FB0405B00A7B5C7 /* main.m in Sources */,
 				8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */,
@@ -3805,7 +3794,6 @@
 				8F6AA5F81FB0410500A7B5C7 /* AnimationProcess.m in Sources */,
 				8F7DE9552060C58100A74108 /* FGBaseView.m in Sources */,
 				8F6AA5EE1FB0410500A7B5C7 /* FGBlurEffectView.m in Sources */,
-				8F6AA82E1FB0410700A7B5C7 /* FGBuildingsView.m in Sources */,
 				8F6AA8301FB0410700A7B5C7 /* FGImageViewAnimationView.m in Sources */,
 				8F6AA5FB1FB0410500A7B5C7 /* FGClickRandomAnswerCountModel.m in Sources */,
 				8F6AA8241FB0410700A7B5C7 /* MCFireworksButton.m in Sources */,

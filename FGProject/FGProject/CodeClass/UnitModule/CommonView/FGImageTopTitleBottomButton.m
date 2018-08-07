@@ -21,15 +21,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         [self setup];
     }
     return self;
 }
 
 - (void)setup{
-    
     self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;//使图片和文字居中显示
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;

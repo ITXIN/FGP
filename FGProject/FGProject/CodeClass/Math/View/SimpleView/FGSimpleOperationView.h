@@ -14,14 +14,11 @@
  *  答案候选项
  */
 //typedef void (^backToRootVCBlock) (void);
-
-
 @protocol FGSimpleOperationViewDelegate <NSObject>
-
 - (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType;
 @end
-@interface FGSimpleOperationView : UIView
 
+@interface FGSimpleOperationView : UIView
 @property (nonatomic, assign) id <FGSimpleOperationViewDelegate> delegate;
 //接收题目的运算符
 @property (nonatomic,assign) MathOperationActionType mathOperationActionType;
@@ -37,10 +34,8 @@
  *  答案数字
  */
 @property (nonatomic, strong) UIButton *button;//问号
-
 @property (nonatomic,strong) NSMutableArray *candidateBtnArr;
 @property (nonatomic,strong) NSMutableArray *answerOptionArr;
-
 @property (nonatomic,strong) NSString *keySoundPath;
 @property (nonatomic,strong) NSTimer *deleteTimer;
 

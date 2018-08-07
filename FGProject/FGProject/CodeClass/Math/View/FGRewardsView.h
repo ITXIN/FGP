@@ -13,14 +13,9 @@
 @interface FGRewardsView : UIView
 //图片
 @property (nonatomic, strong) UIImageView *startImgView;
-
-//@property (nonatomic, strong) UIButton *startImgBtn;
-
 //个数
 @property (nonatomic, strong) UILabel *numLabel;
-
 @property (nonatomic,strong) UIView *bgView;
-
 /**
  *  属于容易题目视图
  */
@@ -28,6 +23,5 @@
 /**
  *    属于中等难度题目视图
  */
-//- (instancetype)initWithFrame:(CGRect)frame;
 - (void)setMediumStarNumber:(NSInteger)starNumber;
 @end

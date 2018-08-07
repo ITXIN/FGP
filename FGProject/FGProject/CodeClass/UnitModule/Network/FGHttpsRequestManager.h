@@ -11,8 +11,6 @@ typedef void(^succeedHandler)(id responseObject, NSError *error);
 typedef void(^failedHandler)(NSError *error);
 
 @interface FGHttpsRequestManager : NSObject
-
 +(FGHttpsRequestManager*)shareInstance;
 - (void)getDataWithUrlStr:(NSString *)urlStr succeedHandler:(succeedHandler)succeedHandler failedHandler:(failedHandler)failedHandler;
-
 @end

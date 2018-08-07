@@ -13,9 +13,7 @@
 typedef void (^FGMusicManagerTimeBlock)(FGMusicPlayerTimeModel *timeModel);
 @protocol MusicPlayerManagerDelegate <NSObject>
 - (void)musicManagerIndex:(NSInteger)index;
-//- (void)musicManagerTimeModel;
 @end
-
 
 @interface MusicPlayerManager : NSObject<AVAudioPlayerDelegate>
 @property (nonatomic,weak) id<MusicPlayerManagerDelegate> delegate;
@@ -28,7 +26,6 @@ typedef void (^FGMusicManagerTimeBlock)(FGMusicPlayerTimeModel *timeModel);
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) FGMusicPlayerTimeModel *timeModel;
 
-//- (void)startTimer;
 - (void)play:(void (^)(void))callblock;//播放
 - (void)pause;//暂停
 - (void)stop;//停止

@@ -10,21 +10,17 @@
 
 @implementation TooltipForAnswerView
 
--(instancetype)initWithFrame:(CGRect)frame
-{
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
-
+    if (self){
+        
         self.userInteractionEnabled = YES;
         
         _bgView = [[UIView alloc]initWithFrame:CGRectMake(kScreenWidth/3, kScreenHeight/3, kScreenWidth/3, kScreenHeight/3)];
-//        _bgView.backgroundColor = [UIColor cyanColor];
         _bgView.userInteractionEnabled = YES;
         _bgView.layer.cornerRadius = 5;
         _bgView.layer.masksToBounds = YES;
         [self addSubview:_bgView];
-        
         
         UIImageView *bgimgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, _bgView.frame.size.width, _bgView.frame.size.height)];
         
@@ -39,7 +35,6 @@
         titleLabel.font = [UIFont systemFontOfSize:12.f];
         [_bgView addSubview:titleLabel];
         
-        
         _imgView = [[UIImageView alloc]init];
         _imgView.frame = CGRectMake(_bgView.frame.size.width/3, _bgView.frame.size.height/3, 40,40);
         _imgView.backgroundColor = [UIColor clearColor];
@@ -49,7 +44,7 @@
         
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _backBtn.frame = CGRectMake(_bgView.frame.size.width/3/4, _bgView.frame.size.height/3*2+5, _bgView.frame.size.width/3, _bgView.frame.size.height/3-10);
-
+        
         _backBtn.titleLabel.font = [UIFont systemFontOfSize:12.f];
         [_backBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         _backBtn.tag = REST_BTN_TAG_TOOLTIP;
@@ -59,25 +54,21 @@
         _cotinueBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _cotinueBtn.frame = CGRectMake(_bgView.frame.size.width/3*2-_bgView.frame.size.width/3/4, _bgView.frame.size.height/3*2+5, _bgView.frame.size.width/3, _bgView.frame.size.height/3-10);
         _cotinueBtn.tag = CONTINUE_BTN_TAG_TOOLTIP;
-         _cotinueBtn.titleLabel.font = [UIFont systemFontOfSize:12.f];
+        _cotinueBtn.titleLabel.font = [UIFont systemFontOfSize:12.f];
         [_cotinueBtn setTitle:@"继续" forState: UIControlStateNormal];
         [_cotinueBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_bgView addSubview:_cotinueBtn];
+        
         self.alpha = 0.0;
         [UIView animateWithDuration:1.0 animations:^{
             self.alpha = 1.0;
-        } completion:^(BOOL finished) {
         }];
     }
     return self;
 }
 
-- (void)buttonAction:(UIButton *)btn
-{
+- (void)buttonAction:(UIButton *)btn{
     self.actionIndexBlock(btn.tag);
-//    if (_delegate && [_delegate respondsToSelector:@selector(passTag:)])
-//    {
-//        [_delegate passTag:btn.tag];
-//    }
 }
+
 @end

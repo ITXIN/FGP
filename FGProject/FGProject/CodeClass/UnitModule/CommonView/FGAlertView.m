@@ -12,17 +12,14 @@
 @implementation FGAlertView
 static NSInteger itemCount = 2;
 
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message delegate:(nullable id )delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ...
-{
+- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message delegate:(nullable id )delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ...{
     self = [super init];
-    if (self)
-    {
+    if (self){
 
         self.backgroundColor = RGBA(0, 0, 0, 0.5);
         self.fgAlertDelegate = delegate;
         CGFloat itemWidth = 250;
         CGFloat itemHeight = 40;
-//        CGFloat itemSpace = 10;
         self.bgView = ({
             UIView *view = [[UIView alloc]init];
             [self addSubview:view];
@@ -83,8 +80,7 @@ static NSInteger itemCount = 2;
             
         }];
         
-        for (NSInteger i = 0; i < tittlsArr.count; i ++)
-        {
+        for (NSInteger i = 0; i < tittlsArr.count; i ++){
             __unused  UIButton *itemBtn = ({
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [self.bgView addSubview:btn];
@@ -160,8 +156,7 @@ static NSInteger itemCount = 2;
 
 #pragma mark -
 #pragma mark --- tapAction
-- (void)tapAction:(UITapGestureRecognizer*)sender
-{
+- (void)tapAction:(UITapGestureRecognizer*)sender{
     [UIView animateWithDuration: 0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.bgView.transform = CGAffineTransformMakeScale(0.0, 0.0);
     } completion:^(BOOL finished) {
@@ -184,6 +179,5 @@ static NSInteger itemCount = 2;
     }];
     
 }
-
 
 @end

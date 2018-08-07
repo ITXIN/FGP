@@ -10,13 +10,12 @@
 #import "BubbleButton.h"
 @implementation FGMediumLevelOperatorView
 
--(void)dealloc
-{
+-(void)dealloc{
     [_timer invalidate];
     _timer = nil;
 }
--(instancetype)initWithFrame:(CGRect)frame
-{
+
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
         self.bgView = ({
@@ -32,11 +31,11 @@
 }
 
 #pragma mark --------model 的 setter 方法----
--(void)setMediumOperationModel:(FGMathOperationModel *)questionModel
-{
+-(void)setMediumOperationModel:(FGMathOperationModel *)questionModel{
     for (UIButton *btn in self.bgView.subviews){
         [btn removeFromSuperview];
     }
+    
     FGMathOperationManager *mathManager = [FGMathOperationManager shareMathOperationManager];
     CGFloat btnWidth = OPERATOR_HEIGHT;
     //间距
@@ -78,22 +77,20 @@
         [_bgView addSubview:numAndOperBtn];
         [AnimationProcess springAnimationProcessWithView:numAndOperBtn upHeight:arc4random()%(100-30+1)+30];
     }//end for
-    
 }
+
 #pragma mark -
 #pragma mark ---init Timer
-- (void)setupTimer
-{
+- (void)setupTimer{
     [_timer invalidate];
     _timer = nil;
     _timer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(autoAction) userInfo:nil repeats:YES];
     [[NSRunLoop  currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
 }
+
 #pragma mark -
 #pragma mark --- timeAction
-- (void)autoAction
-{
-    //    NSLog(@"-----autoaction ");
+- (void)autoAction{
     [[self.bgView viewWithTag:(arc4random() %(106 - 100 + 1)+ 100)] generateBubbleInRandom];
     [AnimationProcess springAnimationProcessWithView:[self.bgView viewWithTag:(arc4random() %(106 - 100 + 1)+ 100)] upHeight:arc4random()%(40-20+1)+20];
     [AnimationProcess scaleAnmiationProcessWithView:[self.bgView viewWithTag:(arc4random() %(106 - 100 + 1)+ 100)]];
@@ -101,20 +98,12 @@
 
 #pragma mark -
 #pragma mark --- btnClick
-- (void)btnClick:(BubbleButton *)btn
-{
+- (void)btnClick:(BubbleButton *)btn{
 #warning 点击过快会导致动画不能继续执行
     [[SoundsProcess shareInstance]playSoundOfTock];
     [btn generateBubbleInRandom];
     [AnimationProcess springAnimationProcessWithView:btn upHeight:arc4random()%(40-20+1)+20];
     [AnimationProcess scaleAnmiationProcessWithView:btn];
-    
-    //    int rand = arc4random() %(360 -(-360)+1)+(-360);
-    //    CABasicAnimation *animation  = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    //    animation.toValue = [NSNumber numberWithFloat:(M_PI/180 *rand)];
-    //    animation.duration = 0.8;
-    //    [btn.layer removeAllAnimations];
-    //    [btn.layer addAnimation:animation forKey:nil];
 }
 
 - (void)layoutSubviews{
@@ -123,6 +112,4 @@
         make.edges.equalTo(self);
     }];
 }
-
-
 @end

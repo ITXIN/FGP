@@ -52,6 +52,7 @@
     
     return YES;
 }
+
 - (void)setupSVProgressHUD{
     //    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:0.5];

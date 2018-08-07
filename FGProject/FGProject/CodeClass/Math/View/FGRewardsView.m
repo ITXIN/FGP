@@ -9,14 +9,14 @@
 #import "FGRewardsView.h"
 
 @implementation FGRewardsView
-- (instancetype)initWithFrame:(CGRect)frame startNum:(NSInteger)num todayDoneNum:(NSInteger )todayNum
-{
+
+- (instancetype)initWithFrame:(CGRect)frame startNum:(NSInteger)num todayDoneNum:(NSInteger )todayNum{
     self  = [super initWithFrame:frame];
     if (self){
         UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth/2-120, kScreenHeight/2-55)];
         bgView.backgroundColor = [UIColor clearColor];
         [self addSubview:bgView];
-    
+        
         _numLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 3, bgView.frame.size.width, bgView.frame.size.height/3-5)];
         _numLabel.backgroundColor = [UIColor clearColor];
         _numLabel.textAlignment = NSTextAlignmentCenter;
@@ -36,49 +36,40 @@
         NSInteger sunNum = 0;//太阳个数
         
         NSString *titleStr = @"";
-        if (todayNum > 0)
-        {
+        if (todayNum > 0){
             titleStr = [NSString stringWithFormat:@"完成%ld道", todayNum];
         }
         
-        if (startNum >= 10)
-        {
+        if (startNum >= 10){
             moonNum = startNum / 10;
             startNum = startNum % 10;
         }
-      
-        if (moonNum >= 5)
-        {
+        
+        if (moonNum >= 5){
             sunNum = moonNum / 5;
             moonNum = moonNum % 5;
         }
-         _numLabel.text = titleStr;
-
-        for (int i = 0; i < startNum + moonNum  + sunNum; i ++)
-        {
-          UIButton  *_startImgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _numLabel.text = titleStr;
+        
+        for (int i = 0; i < startNum + moonNum  + sunNum; i ++){
+            UIButton  *_startImgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             _startImgBtn.backgroundColor = [UIColor clearColor];
-            if (i < 5)
-            {
+            if (i < 5){
                 _startImgBtn.frame = CGRectMake(i*startWidth,heigth , startWidth, startWidth);
                 
-            }else if(i < 10)
-            {
+            }else if(i < 10){
                 _startImgBtn.frame = CGRectMake((i-5)*startWidth, 2*heigth, startWidth, startWidth);
             }
             
-            if (i< sunNum)
-            {
+            if (i< sunNum){
                 [_startImgBtn setImage:[UIImage imageNamed:sunImgStr] forState:UIControlStateNormal];
- 
-            }else if( i < sunNum + moonNum)
-            {
-               [_startImgBtn setImage:[UIImage imageNamed:moonImgStr] forState:UIControlStateNormal];
-            }else
-            {
+                
+            }else if( i < sunNum + moonNum){
+                [_startImgBtn setImage:[UIImage imageNamed:moonImgStr] forState:UIControlStateNormal];
+            }else{
                 [_startImgBtn setImage:[UIImage imageNamed:startImgStr] forState:UIControlStateNormal];
             }
-           
+            
             [bgView addSubview:_startImgBtn];
             
             CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -95,22 +86,19 @@
     return self;
 }
 
-- (void)setMediumStarNumber:(NSInteger)starNumber
-{
-    if (![self.subviews containsObject:self.bgView])
-    {
+- (void)setMediumStarNumber:(NSInteger)starNumber{
+    if (![self.subviews containsObject:self.bgView]){
         self.bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [self addSubview:self.bgView];
-    }else
-    {
-        for (id view in self.bgView.subviews)
-        {
+    }else{
+        for (id view in self.bgView.subviews){
             [view removeFromSuperview];
         }
     }
+    
     CGFloat startWidth = self.frame.size.width/10;
     CGFloat heigth = startWidth;
-
+    
     NSString *startImgStr = @"start-02.png";
     NSString *moonImgStr  = @"yueliang.png";
     NSString *sunImgStr = @"taiyang-02";
@@ -118,33 +106,29 @@
     NSInteger moonNum = 0;//月亮个数
     NSInteger sunNum = 0;//太阳个数
     
-    if (startNum >= 10)
-    {
+    if (startNum >= 10){
         moonNum = startNum / 10;
         startNum = startNum % 10;
     }
     
-    if (moonNum >= 5)
-    {
+    if (moonNum >= 5){
         sunNum = moonNum / 5;
         moonNum = moonNum % 5;
     }
-    for (int i = 0; i < startNum + moonNum  + sunNum; i ++)
-    {
-       UIButton *_startImgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    for (int i = 0; i < startNum + moonNum  + sunNum; i ++){
+        UIButton *_startImgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _startImgBtn.backgroundColor = [UIColor clearColor];
         _startImgBtn.frame = CGRectMake(i*startWidth,0 , startWidth, heigth);
         
-        if (i< sunNum)
-        {
+        if (i< sunNum){
             [_startImgBtn setImage:[UIImage imageNamed:sunImgStr] forState:UIControlStateNormal];
-        }else if( i < sunNum + moonNum)
-        {
+        }else if( i < sunNum + moonNum){
             [_startImgBtn setImage:[UIImage imageNamed:moonImgStr] forState:UIControlStateNormal];
-        }else
-        {
+        }else{
             [_startImgBtn setImage:[UIImage imageNamed:startImgStr] forState:UIControlStateNormal];
         }
+        
         [self.bgView addSubview:_startImgBtn];
         
         CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -157,14 +141,14 @@
         
         [self setBtnActionWithBtn:_startImgBtn];
     }
-
 }
-- (void)setBtnActionWithBtn:(UIButton *)btn
-{
+
+- (void)setBtnActionWithBtn:(UIButton *)btn{
     [btn addTarget:self action:@selector(starAction:) forControlEvents:UIControlEventTouchUpInside];
 }
-- (void)starAction:(UIButton *)btn
-{
+
+- (void)starAction:(UIButton *)btn{
     [[SoundsProcess shareInstance]playSoundOfTock];
 }
+
 @end

@@ -18,14 +18,10 @@
 + (id)getDataWithKey:(NSString *)key;
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 + (CGRect)stringRect:(NSString *)string fontSize:(CGFloat)fontSize constraintWidth:(CGFloat)width constraintHeight:(CGFloat)height;
-
 +(UIImage *)blurryImage:(UIImage *)image withBlurLevel:(CGFloat)blur;
-
 + (NSString *)logTimeStringFromDate:(NSDate *)date;
-
 + (NSDictionary*)postDataWithClickRandomModel:(FGClickRandomAnswerCountModel*)clickModel;
 + (BOOL)getIsiPad;
-
 //晃动动画
 + (CABasicAnimation*)animationRotationZ;
 @end

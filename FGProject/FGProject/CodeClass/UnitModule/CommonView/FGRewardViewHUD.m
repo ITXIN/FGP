@@ -13,9 +13,7 @@
 #define EmitterColor_Blue     [UIColor colorWithRed:50/255.0 green:170/255.0 blue:207/255.0 alpha:1]
 @implementation FGRewardViewHUD
 
-
-+ (void)show
-{
++ (void)show{
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     
     UIView *backgroundView = [[UIView alloc] initWithFrame:window.bounds];
@@ -56,8 +54,7 @@
     
 }
 
-CAEmitterLayer *addEmitterLayer(UIView *view,UIView *window)
-{
+CAEmitterLayer *addEmitterLayer(UIView *view,UIView *window){
     
     //色块粒子
     CAEmitterCell *subCell1 = subCell(imageWithColor(EmitterColor_Red));
@@ -84,8 +81,7 @@ CAEmitterLayer *addEmitterLayer(UIView *view,UIView *window)
     
 }
 
-void startAnimate(CAEmitterLayer *emitterLayer)
-{
+void startAnimate(CAEmitterLayer *emitterLayer){
     CABasicAnimation *redBurst = [CABasicAnimation animationWithKeyPath:@"emitterCells.red.birthRate"];
     redBurst.fromValue        = [NSNumber numberWithFloat:30];
     redBurst.toValue            = [NSNumber numberWithFloat:  0.0];
@@ -116,8 +112,7 @@ void startAnimate(CAEmitterLayer *emitterLayer)
     [emitterLayer addAnimation:group forKey:@"heartsBurst"];
 }
 
-CAEmitterCell *subCell(UIImage *image)
-{
+CAEmitterCell *subCell(UIImage *image){
     CAEmitterCell * cell = [CAEmitterCell emitterCell];
     
     cell.name = @"heart";
@@ -148,8 +143,7 @@ CAEmitterCell *subCell(UIImage *image)
     return cell;
 }
 
-UIImage *imageWithColor(UIColor *color)
-{
+UIImage *imageWithColor(UIColor *color){
     CGRect rect = CGRectMake(0, 0, 13, 17);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();

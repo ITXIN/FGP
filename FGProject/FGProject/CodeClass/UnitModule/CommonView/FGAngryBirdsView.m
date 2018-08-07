@@ -31,17 +31,14 @@ static NSInteger endGroupBirdNumber = 0;
 static NSString *keyDropDowningAnimationGroup = @"positionKeyGroupDropDonwing";//掉落过程
 static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";//掉落过程
 
--(void)dealloc
-{
+-(void)dealloc{
     [timer invalidate];
     timer = nil;
 }
 
--(instancetype)initWithFrame:(CGRect)frame
-{
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         groupPointArr = [NSMutableArray array];
         groupImagesArr  = [NSMutableArray array];
         [self initWaveValue];
@@ -86,9 +83,9 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     }
     return self;
 }
+
 #pragma mark 初始化波浪参数
-- (void)initWaveValue
-{
+- (void)initWaveValue{
     self.b = 0.0;
     //公式中用到(起始幅度)
     self.wave = 1.5;
@@ -110,8 +107,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark -
 #pragma mark ---init Timer
-- (void)setupTimer
-{
+- (void)setupTimer{
     [timer invalidate];
     timer = nil;
     timer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(yellowBirdsAnimation) userInfo:nil repeats:YES];
@@ -120,16 +116,13 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark -
 #pragma mark --- yellowbird animation
-- (void)yellowBirdsAnimation
-{
-    if ([yellowBirdImageView isAnimating])
-    {
+- (void)yellowBirdsAnimation{
+    if ([yellowBirdImageView isAnimating]){
         return;
     }
     NSMutableArray *imageArr = [NSMutableArray array];
     
-    for (int i = 0; i < 6; i ++)
-    {
+    for (int i = 0; i < 6; i ++){
         [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"yellowbird_0%d",i]]];
     }
     
@@ -141,13 +134,12 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     [yellowBirdImageView performSelector:@selector(setAnimationImages:) withObject:nil afterDelay:yellowBirdImageView.animationDuration];
     
 }
+
 #pragma mark -
 #pragma mark --- 一群鸟
-- (void)clerarGroupBirdsAnimation
-{
+- (void)clerarGroupBirdsAnimation{
     [tempGroupView removeFromSuperview];
-    for (NSInteger i = 0; i < groupImagesArr.count; i ++)
-    {
+    for (NSInteger i = 0; i < groupImagesArr.count; i ++){
         UIImageView *imagesView = groupImagesArr[i];
         [imagesView stopAnimating];
         [imagesView.layer removeAllAnimations];
@@ -163,8 +155,8 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     groupPointArr = [NSMutableArray array];
     
 }
-- (void)groupBirdsAnimation
-{
+
+- (void)groupBirdsAnimation{
     NSInteger numberBirds = arc4random()%10+1;
     groupBirdCount = numberBirds;
     tempGroupView = ({
@@ -177,8 +169,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         view;
     });
     
-    for (NSInteger i = 0; i < numberBirds; i ++)
-    {
+    for (NSInteger i = 0; i < numberBirds; i ++){
         UIImageView *imageView =  ({
             UIImageView *imgView = [[UIImageView alloc]init];
             [tempGroupView addSubview:imgView];
@@ -198,13 +189,11 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         });
         [groupImagesArr addObject:imageView];
         
-        if ([imageView isAnimating])
-        {
+        if ([imageView isAnimating]){
             return;
         }
         NSMutableArray *imageArr = [NSMutableArray array];
-        for (int i = 0; i < 5; i ++)
-        {
+        for (int i = 0; i < 5; i ++){
             [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"angrybird_0%d",i+1]]];
         }
 
@@ -222,23 +211,19 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 //        [self setupGravityBehaviorWithImageView:imageView];
     }
     
-    for (NSInteger i = 0; i < numberBirds; i ++)
-    {
+    for (NSInteger i = 0; i < numberBirds; i ++){
         float y = arc4random()%50 + 20;
         self.waveHeight = y;
         NSMutableArray *tempArr = [NSMutableArray array];
-        if (i %2 == 0)
-        {
+        if (i %2 == 0){
             for (float x = -100; x <= kScreenWidth+100; x ++)
             {
                 //y=Acos(wx+Φ)+B
                 y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
             }
-        }else
-        {
-            for (float x = -100; x <= kScreenWidth+100; x ++)
-            {
+        }else{
+            for (float x = -100; x <= kScreenWidth+100; x ++){
                 //y=Asin(wx+Φ)+B
                 y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
@@ -253,11 +238,9 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark -
 #pragma mark --- 绘制群鸟的路径
-- (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)pointsArr imageViewArr:(NSMutableArray*)imageViewArr
-{
+- (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)pointsArr imageViewArr:(NSMutableArray*)imageViewArr{
     
-    for (NSInteger i = 0; i < imageViewArr.count; i ++)
-    {
+    for (NSInteger i = 0; i < imageViewArr.count; i ++){
         UIImageView *imageView = (UIImageView*)imageViewArr[i];
         
         NSMutableArray *tepPointsArr = pointsArr[i];
@@ -278,19 +261,15 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         circleLayer.strokeColor = RGBA(255,255,255,1.0).CGColor;
         circleLayer.strokeEnd = 1.0;
         circleLayer.strokeStart = 0.0;
-        for (int i = 0; i < tepPointsArr.count; i ++)
-        {
-            if (i == 0)
-            {
+        for (int i = 0; i < tepPointsArr.count; i ++){
+            if (i == 0){
                 [circlePath moveToPoint:CGPointFromString(tepPointsArr[i]) ];
-            }else
-            {
+            }else{
                 [circlePath addLineToPoint:CGPointFromString(tepPointsArr[i])];
             }
         }
         circleLayer.path = circlePath.CGPath;
 
-        
         CABasicAnimation *pathAnima = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         pathAnima.duration = 15.5f;
         pathAnima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -311,8 +290,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 }
 
-- (CAKeyframeAnimation *)setupStartLiveCircularAnimationPath:(UIBezierPath *)path withRepatCount:(NSInteger)repeatCount
-{
+- (CAKeyframeAnimation *)setupStartLiveCircularAnimationPath:(UIBezierPath *)path withRepatCount:(NSInteger)repeatCount{
     CAKeyframeAnimation *orbit = [CAKeyframeAnimation animation];
     orbit.keyPath = @"position";
     orbit.path = path.CGPath;
@@ -330,8 +308,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark -
 #pragma mark --- 添加碰撞效果
-- (void)setupGravityBehaviorWithImageView:(UIImageView*)imageView
-{
+- (void)setupGravityBehaviorWithImageView:(UIImageView*)imageView{
     // 初始化力学动画生成器
     UIDynamicAnimator *animator = [[UIDynamicAnimator alloc]initWithReferenceView:self];
     
@@ -361,36 +338,24 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark -
 #pragma mark --- UICollisionBehaviorDelegate
--(void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier atPoint:(CGPoint)p
-{
+-(void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier atPoint:(CGPoint)p{
     NSLog(@"开始碰撞时触发的方法");
 }
 
--(void)collisionBehavior:(UICollisionBehavior *)behavior endedContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier
-{
+-(void)collisionBehavior:(UICollisionBehavior *)behavior endedContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier{
     NSLog(@"结束碰撞时触发的方法");
 }
 
-
-
 #pragma mark -
 #pragma mark --- 添加手势
-- (void)tapGroupImageView:(UITapGestureRecognizer*)sender
-{
+- (void)tapGroupImageView:(UITapGestureRecognizer*)sender{
     CGPoint touchPoint = [sender locationInView:bgView];
-    for (UIImageView *imageView in groupImagesArr)
-    {
+    for (UIImageView *imageView in groupImagesArr){
         if ([imageView.layer.presentationLayer hitTest:touchPoint])
         {
             [[SoundsProcess shareInstance]playSoundOfTock];
-          
-//            NSValue *locusValue = [NSValue valueWithCGPoint:imageView.frame.origin];
-//            NSLog(@"-----imageView %ld %@ %@ %@ \n contentsRect %@",imageView.tag,locusValue,NSStringFromCGRect(imageView.frame),NSStringFromCGRect(imageView.layer.frame),NSStringFromCGRect(imageView.layer.contentsRect));
             currentTapBirdView = imageView;
-            
-//            [self setupGravityBehaviorWithImageView:imageView];
-            
-            
+          
             [self dropBirdAnimationImagesWithImageView:imageView];
             [self dropBirdCABasicAnimationWithImageView:imageView point:touchPoint];
         }
@@ -399,17 +364,14 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark - 掉落过程中
 #pragma mark --- drop animation
-- (void)dropBirdAnimationImagesWithImageView:(UIImageView*)imageView
-{
-    if ([imageView isAnimating])
-    {
+- (void)dropBirdAnimationImagesWithImageView:(UIImageView*)imageView{
+    if ([imageView isAnimating]){
         [imageView.layer removeAllAnimations];
         [imageView stopAnimating];
     }
     
     NSMutableArray *imageArr = [NSMutableArray array];
-    for (int i = 0; i < 7; i ++)
-    {
+    for (int i = 0; i < 7; i ++){
         [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"dropbird_0%d",i]]];
     }
     
@@ -423,8 +385,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 
 #pragma mark -
 #pragma mark --- drop CABasicAnimation
-- (void)dropBirdCABasicAnimationWithImageView:(UIImageView*)imageView point:(CGPoint)point
-{
+- (void)dropBirdCABasicAnimationWithImageView:(UIImageView*)imageView point:(CGPoint)point{
     CAAnimationGroup *group = [CAAnimationGroup animation];
     CGFloat duration = 1.5;
     CGFloat repeatCount = 1.0;
@@ -465,15 +426,12 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     [imageView.layer addAnimation:group forKey:keyDropDowningAnimationGroup];
 }
 
-
 #pragma mark -
 #pragma mark --- 掉落到底部时设置新的动画
-- (void)dropDownEndAnimationWithImageView:(UIImageView*)imageView
-{
+- (void)dropDownEndAnimationWithImageView:(UIImageView*)imageView{
     [imageView stopAnimating];
     NSMutableArray *imageArr = [NSMutableArray array];
-    for (int i = 0; i < 2; i ++)
-    {
+    for (int i = 0; i < 2; i ++){
         [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"drop_angry_bird_0%d",i]]];
     }
     
@@ -485,8 +443,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     imageArr = nil;
 }
 
-- (void)dropDownEndCABasicAnimationWithImageView:(UIImageView*)imageView
-{
+- (void)dropDownEndCABasicAnimationWithImageView:(UIImageView*)imageView{
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     // 动画选项设定
     animation.duration = 0.75; // 动画持续时间
@@ -501,44 +458,30 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     [imageView.layer addAnimation:animation forKey:@"dropDownEnd"];
 }
 
-
-
 #pragma mark -
 #pragma mark --- <CAAnimationDelegate>
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    if (flag)
-    {
+    if (flag){
         endGroupBirdNumber ++;
         
-        if (currentTapBirdView)
-        {
+        if (currentTapBirdView){
             
             //对点击的图片的处理
-            if ([currentTapBirdView.layer animationForKey:keyDropDowningAnimationGroup] == anim)
-            {
-//                NSLog(@"-----curentapbirdview drop end  %@",currentTapBirdView);
-              
+            if ([currentTapBirdView.layer animationForKey:keyDropDowningAnimationGroup] == anim){
                 [self dropDownEndAnimationWithImageView:currentTapBirdView];
                 [self dropDownEndCABasicAnimationWithImageView:currentTapBirdView];
-                
             }
-         
-            
         }
        
-        
-        
-        if (endGroupBirdNumber == groupBirdCount)
-        {
-            NSLog(@"-----new ");
+        if (endGroupBirdNumber == groupBirdCount){
             [self restartBirdsAnimation];
         }
     }
 }
+
 #warning --- 当进入后台重新打开,绘制的线不能清除
-- (void)restartBirdsAnimation
-{
+- (void)restartBirdsAnimation{
     [self clerarGroupBirdsAnimation];
     [self groupBirdsAnimation];
     endGroupBirdNumber = 0;

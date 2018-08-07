@@ -12,5 +12,4 @@
 @interface FGStoryPlayViewController : FGBaseViewController
 @property (nonatomic,strong) NSMutableArray *playInfoArr;
 @property (nonatomic,strong) FGStoryModel *playModel;
-
 @end

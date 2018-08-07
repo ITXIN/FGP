@@ -15,7 +15,6 @@
 #import "FGCategoryMenuView.h"
 #import "FLStoryViewController.h"
 #import "CARadarView.h"
-#import "FGBuildingsView.h"
 #import "FGAngryBirdsView.h"
 #import "FGAlertView.h"
 #import "FGGameViewController.h"
