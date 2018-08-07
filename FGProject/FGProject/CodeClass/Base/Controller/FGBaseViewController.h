@@ -15,7 +15,6 @@
 @property (nonatomic,strong) FGBlurEffectView *blurView;
 @property (nonatomic,strong) FGUserManager *userManager;
 
-
 - (void)initSubviews;
 - (void)setupLayoutSubviews;
 - (void)setupBlurEffectImage:(UIImage*)image;

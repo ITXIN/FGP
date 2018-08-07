@@ -7,7 +7,7 @@
 //http://blog.it985.com/13697.html
 
 #import "MyWaterView.h"
-//static NSInteger pastCout;
+
 @interface MyWaterView()
 {
     UIColor *currentWaterColor;
@@ -27,8 +27,7 @@
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect{
 #warning --- 占用 cup 较高 22%,绘制图片占用 cup 较高
     // Drawing code
     CGContextRef contxt = UIGraphicsGetCurrentContext();
@@ -57,7 +56,6 @@
     CGContextDrawPath(contxt, kCGPathStroke);
     CGPathRelease(path);
     
-  
     //绘制 cos()
     CGContextRef contxt1 = UIGraphicsGetCurrentContext();
     CGMutablePathRef path1 = CGPathCreateMutable();
@@ -68,8 +66,7 @@
     CGContextSetFillColorWithColor(contxt1, currentWaterColor.CGColor );
     float y1 = self.waveHeight;
     CGPathMoveToPoint(path1, NULL, 0, y1);
-    for (float x = 0; x <= rect.size.width; x ++)
-    {
+    for (float x = 0; x <= rect.size.width; x ++){
         y1 =5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
         CGPathAddLineToPoint(path1, nil, x, y1);
     }
@@ -86,8 +83,8 @@
     
 //    [self drawTextWithRect:rect];
 }
-- (void)drawTextWithRect:(CGRect)rect
-{
+
+- (void)drawTextWithRect:(CGRect)rect{
     //绘制文字
     //由于一直在绘制清除,遮住了
     CGFloat sizeFont = 50.0;
@@ -95,10 +92,10 @@
     point.x = (rect.size.width - sizeFont)/2;
     point.y = (rect.size.height - sizeFont)/2;
     NSString *str = [NSString stringWithFormat:@"%ld",self.count];
-    if (str.length == 1)
-    {
+    if (str.length == 1){
         str = [NSString stringWithFormat:@" %ld",self.count];
     }
+    
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     //设置文字前景颜色
     dic [NSForegroundColorAttributeName] = [UIColor whiteColor];
@@ -107,8 +104,8 @@
     dic [NSFontAttributeName] = [UIFont boldSystemFontOfSize:sizeFont];
     [str drawAtPoint:point withAttributes:dic];
 }
-- (instancetype)initWithFrame:(CGRect)frame
-{
+
+- (instancetype)initWithFrame:(CGRect)frame{
     self.b = 0.0;
     self = [super initWithFrame:frame];
     if (self)
@@ -125,8 +122,7 @@
 }
 
 #pragma mark 初始化波浪参数
-- (void)initWaveValue
-{
+- (void)initWaveValue{
     //公式中用到(起始幅度)
     self.wave = 1.5;
     //判断加减
@@ -145,8 +141,7 @@
     self.w = 180;
 }
 
-- (void)animateWave
-{
+- (void)animateWave{
     if (self.jia == YES) {
         self.wave += self.waveIncrease;
         self.wave = (self.wave < self.waveMin ? self.waveMin : self.wave);
@@ -171,56 +166,48 @@
 #pragma mark -
 #pragma mark --- 重写方法
 
-- (void)setCount:(NSInteger)count
-{
+- (void)setCount:(NSInteger)count{
     _count = count;
 }
-- (void)setWave:(float)wave
-{
+
+- (void)setWave:(float)wave{
     _wave = wave;
     [self upDateLableFromTag:kWave_Tag value:wave];
 }
 
-- (void)setWaveIncrease:(float)waveIncrease
-{
+- (void)setWaveIncrease:(float)waveIncrease{
     _waveIncrease = waveIncrease;
     [self upDateLableFromTag:kWaveIncrease_Tag value:waveIncrease];
 }
 
--(void)setWaveMin:(float)waveMin
-{
+-(void)setWaveMin:(float)waveMin{
     _waveMin = waveMin;
     [self upDateLableFromTag:kWaveMin_Tag value:waveMin];
 }
 
-- (void)setWaveMax:(float)waveMax
-{
+- (void)setWaveMax:(float)waveMax{
     _waveMax = waveMax;
     [self upDateLableFromTag:kWaveMax_Tag value:waveMax];
 }
 
-- (void)setWaveSpeed:(float)waveSpeed
-{
+- (void)setWaveSpeed:(float)waveSpeed{
     _waveSpeed = waveSpeed;
     [self upDateLableFromTag:kSpeed_Tag value:waveSpeed];
 }
 
-- (void)setWaveHeight:(float)waveHeight
-{
+- (void)setWaveHeight:(float)waveHeight{
     _waveHeight = waveHeight;
     [self upDateLableFromTag:kHeight_Tag value:waveHeight];
 }
 
-- (void)setW:(float)w
-{
+- (void)setW:(float)w{
     _w = w;
     [self upDateLableFromTag:kWaveW_Tag value:w];
 }
 
 #pragma mark -
 #pragma mark --- 更新显示slider 的数据
-- (void)upDateLableFromTag:(NSInteger)tag value:(CGFloat)value
-{
+- (void)upDateLableFromTag:(NSInteger)tag value:(CGFloat)value{
 //    if (tag == 0) {
 //        return;
 //    }

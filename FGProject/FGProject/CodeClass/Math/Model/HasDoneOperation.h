@@ -23,8 +23,6 @@
 
 /**
  *  清理题目统计
- *
- *  @param leveMark
  */
 + (void)clearHadDoneDataWithDifcultyLevelMark:(NSString *)leveMark;
 

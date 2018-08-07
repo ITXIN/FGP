@@ -10,8 +10,7 @@
 
 @implementation AnimationProcess
 
-+ (void)springAnimationProcessWithView:(UIView *)view upHeight:(CGFloat)upHeight
-{
++ (void)springAnimationProcessWithView:(UIView *)view upHeight:(CGFloat)upHeight{
     CGPoint center = view.center;
     center.y -= upHeight;
     view.center = center;
@@ -23,8 +22,8 @@
         
     }];
 }
-+ (void)scaleAnmiationProcessWithView:(UIView *)view
-{
+
++ (void)scaleAnmiationProcessWithView:(UIView *)view{
     view.transform = CGAffineTransformMakeScale(0.2, 0.2);
     [UIView animateWithDuration:0.3 animations:^{
         view.transform = CGAffineTransformMakeScale(1.2, 1.2);

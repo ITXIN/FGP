@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2361A3FE20D757060041981D /* FGImageLeftTitleRightButtom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */; };
+		23CADFE32119826900EF8CE1 /* FGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CADFE22119826900EF8CE1 /* FGRootView.m */; };
 		8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */; };
 		8F4753CF206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753CE206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m */; };
 		8F4753D2206226260002C0B7 /* UIColor+FGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4753D1206226260002C0B7 /* UIColor+FGColor.m */; };
@@ -47,7 +48,6 @@
 		8F6AA5EE1FB0410500A7B5C7 /* FGBlurEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3171FB0410400A7B5C7 /* FGBlurEffectView.m */; };
 		8F6AA5EF1FB0410500A7B5C7 /* FGCategoryMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3191FB0410400A7B5C7 /* FGCategoryMenuView.m */; };
 		8F6AA5F01FB0410500A7B5C7 /* FGDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA31B1FB0410400A7B5C7 /* FGDateView.m */; };
-		8F6AA5F11FB0410500A7B5C7 /* RootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA31D1FB0410400A7B5C7 /* RootView.m */; };
 		8F6AA5F21FB0410500A7B5C7 /* FGMathRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3261FB0410400A7B5C7 /* FGMathRootViewController.m */; };
 		8F6AA5F31FB0410500A7B5C7 /* FGMediumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3281FB0410400A7B5C7 /* FGMediumViewController.m */; };
 		8F6AA5F61FB0410500A7B5C7 /* FGSimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA32D1FB0410400A7B5C7 /* FGSimpleViewController.m */; };
@@ -682,6 +682,8 @@
 /* Begin PBXFileReference section */
 		2361A3FC20D757060041981D /* FGImageLeftTitleRightButtom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageLeftTitleRightButtom.h; sourceTree = "<group>"; };
 		2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageLeftTitleRightButtom.m; sourceTree = "<group>"; };
+		23CADFE12119826900EF8CE1 /* FGRootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGRootView.h; sourceTree = "<group>"; };
+		23CADFE22119826900EF8CE1 /* FGRootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGRootView.m; sourceTree = "<group>"; };
 		50CD0E07C5EC3671962FD5B6 /* Pods-FGProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FGProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FGProject/Pods-FGProject.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3A0EF41FBD6C62005AE91C /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 		8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CusLayerView.m; sourceTree = "<group>"; };
@@ -763,8 +765,6 @@
 		8F6AA3191FB0410400A7B5C7 /* FGCategoryMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGCategoryMenuView.m; sourceTree = "<group>"; };
 		8F6AA31A1FB0410400A7B5C7 /* FGDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGDateView.h; sourceTree = "<group>"; };
 		8F6AA31B1FB0410400A7B5C7 /* FGDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGDateView.m; sourceTree = "<group>"; };
-		8F6AA31C1FB0410400A7B5C7 /* RootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootView.h; sourceTree = "<group>"; };
-		8F6AA31D1FB0410400A7B5C7 /* RootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootView.m; sourceTree = "<group>"; };
 		8F6AA31F1FB0410400A7B5C7 /* APPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPHeader.h; sourceTree = "<group>"; };
 		8F6AA3201FB0410400A7B5C7 /* Definition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definition.h; sourceTree = "<group>"; };
 		8F6AA3211FB0410400A7B5C7 /* FGProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FGProject-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1771,8 +1771,8 @@
 				8F6AA3191FB0410400A7B5C7 /* FGCategoryMenuView.m */,
 				8F6AA31A1FB0410400A7B5C7 /* FGDateView.h */,
 				8F6AA31B1FB0410400A7B5C7 /* FGDateView.m */,
-				8F6AA31C1FB0410400A7B5C7 /* RootView.h */,
-				8F6AA31D1FB0410400A7B5C7 /* RootView.m */,
+				23CADFE12119826900EF8CE1 /* FGRootView.h */,
+				23CADFE22119826900EF8CE1 /* FGRootView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3751,8 +3751,8 @@
 				8FADBE6A1FB46D9E0018F6C8 /* PullCircleView.m in Sources */,
 				8F6AA5D61FB0410500A7B5C7 /* AlertView.m in Sources */,
 				8F6AA82B1FB0410700A7B5C7 /* WriteFunction.m in Sources */,
-				8F6AA5F11FB0410500A7B5C7 /* RootView.m in Sources */,
 				8F6AA82F1FB0410700A7B5C7 /* FGDrawBirdView.m in Sources */,
+				23CADFE32119826900EF8CE1 /* FGRootView.m in Sources */,
 				8F6AA2AE1FB0405B00A7B5C7 /* main.m in Sources */,
 				8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */,
 				8F6AA5DC1FB0410500A7B5C7 /* FGAIActionView.m in Sources */,

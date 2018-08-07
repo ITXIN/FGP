@@ -14,6 +14,7 @@
     [super initSubviews];
     
 }
+
 -(void)setQuestionModel:(FGMathOperationModel *)questionModel{
     for (UIButton *btn in self.bgView.subviews){
         [btn removeFromSuperview];
@@ -30,6 +31,7 @@
     }else if (questionModel.operationLevel == MathOperationLevelThird){
         count = 7;
     }
+    
     UIImage *operationImage = [UIImage new];
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < count; i ++){
@@ -61,7 +63,7 @@
             
         }else if (i == 5){
             operationImage = [UIImage imageNamed:@"dengyu"];
-          
+            
         }else if(i == 6){
             operationImage = [UIImage imageNamed:@"wenhao"];
         }
@@ -76,10 +78,9 @@
             make.bottom.equalTo(self.bgView).offset(-10);
             make.centerY.equalTo(self.bgView);
         }];
-        
     }
     
     [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:10 tailSpacing:10];
-    
 }
+
 @end

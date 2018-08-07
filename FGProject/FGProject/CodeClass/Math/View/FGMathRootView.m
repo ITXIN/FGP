@@ -15,6 +15,7 @@
 
 - (void)initSubviews{
     [super initSubviews];
+    
     CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/3];
     basicAnim.duration = 2.0;
@@ -27,10 +28,8 @@
     
     NSArray *tagArr = @[@(MathRootViewActionTypeSubtract),@(MathRootViewActionTypeAdd),@(MathRootViewActionTypeMultiply),@(MathRootViewActionTypeDivide),@(MathRootViewActionTypeSun),@(MathRootViewActionTypeCompre)];
     NSArray *imageNameArr = @[@"jianhao-01",@"jiahao-02.png",@"chenghao-01",@"chuhao-01",@"taiyang-03",@"zhonghe-01.png"];
-    
     CGFloat operationButtonWidth = kScreenWidth/7;
     CGSize operationSize = CGSizeMake(operationButtonWidth, operationButtonWidth);
-    CGFloat topMar = 20;
     CGFloat btnSpace = 20.0;
     for (NSInteger i = 0 ; i < tagArr.count; i ++) {
         UIButton *tempBtn = ({
@@ -87,19 +86,6 @@
                 }];
                 break;
             }
-                
-            case MathRootViewActionTypeSun:
-            {
-                
-//                self.sunBtn = tempBtn;
-//                [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.right.mas_equalTo(self.subtractBtn.mas_left).offset(-2*btnSpace);
-//                    make.top.mas_equalTo(topMar/2);
-//                    make.size.mas_equalTo(CGSizeMake(kScreenWidth/10, kScreenWidth/10));
-//                }];
-                
-                break;
-            }
             case MathRootViewActionTypeCompre:
             {
                 self.compreBtn = tempBtn;
@@ -118,11 +104,10 @@
         }
     }
     
-    
     //隐藏接口删除数据
-//    UILongPressGestureRecognizer *longPGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clearPastData:)];
-//    longPGR.minimumPressDuration = 4.0;
-//    [self.sunBtn addGestureRecognizer:longPGR];
+    UILongPressGestureRecognizer *longPGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clearPastData:)];
+    longPGR.minimumPressDuration = 10.0;
+    [self addGestureRecognizer:longPGR];
 }
 
 #pragma mark -
@@ -131,10 +116,10 @@
     [AnimationProcess springAnimationProcessWithView:btn upHeight:30.f];
     [[SoundsProcess shareInstance]playSoundOfTock];
 }
+
 - (void)clickAction:(UIButton *)btn{
     [[SoundsProcess shareInstance]playSoundOfTock];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(choiceBtnAction:)])
-    {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(choiceBtnAction:)]){
         [self.delegate choiceBtnAction:btn.tag];
     }
 }
@@ -142,7 +127,7 @@
 #pragma mark -
 #pragma mark --- 清理数据
 - (void)clearPastData:(UILongPressGestureRecognizer *)tap{
-    NSLog(@"-----sun long state %ld",tap.state);
+    FGLOG(@"-----sun long state %ld",tap.state);
     if (tap.state == UIGestureRecognizerStateBegan){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"清除题目统计"
                                                         message:@"是否确定清除题目统计,如果确认清理,所做题目统计将不能找回."
@@ -150,16 +135,12 @@
                                               cancelButtonTitle:@"YES"
                                               otherButtonTitles:@"NO",nil];
         [alert show];
-        
-        return;
-        
     }else{
-        
     }
-    
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"-----index %ld",buttonIndex);
+    FGLOG(@"-----index %ld",buttonIndex);
     if (buttonIndex == 0){
         //题目统计都是一个,没有区分难易程度.
         //清理
@@ -172,9 +153,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.countBtn setTitle:@"今天0道" forState:UIControlStateNormal];
     }else{
-        
     }
-    
 }
 
 @end

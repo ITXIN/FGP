@@ -15,6 +15,7 @@
     CGFloat btnHeight;
     CGFloat btnMargin;
 }
+
 -(void)dealloc{
     [_timer invalidate];
     _timer = nil;

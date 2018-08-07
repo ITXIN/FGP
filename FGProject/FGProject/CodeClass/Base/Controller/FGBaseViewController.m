@@ -37,12 +37,13 @@
     self.navigationView.navigationView.backgroundColor = [UIColor clearColor];
     [self.bgView addSubview:self.navigationView];
     
-    
 }
+
 #pragma mark - FGNavigationviewDelegate
 -(void)popToRootViewController{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 //默认是有image,特殊情况去设置
 - (void)setupBlurEffectImage:(UIImage*)image{
     self.blurView.bgImageView.image = image;
@@ -53,16 +54,19 @@
     _titleStr = titleStr;
     self.navigationView.titleStr = [NSString stringWithFormat:@"%@",titleStr];
 }
+
 - (void)setupLayoutSubviews{
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
     [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.leading.mas_equalTo(self.view);
         make.height.mas_equalTo(64);
         make.top.mas_equalTo(0);
     }];
+    
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.bgView);
     }];
@@ -72,15 +76,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

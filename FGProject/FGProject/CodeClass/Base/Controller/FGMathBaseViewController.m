@@ -31,7 +31,6 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.circleView circleViewWillDisapper];
-    
 }
 
 - (void)viewDidLoad {
@@ -63,6 +62,7 @@
     });
     
 }
+
 #pragma mark -------name----
 - (void)datastatisticAction{
     FGMathOperationDataStatisticsViewController *staticsVC = [[FGMathOperationDataStatisticsViewController alloc]init];
@@ -93,4 +93,5 @@
         make.edges.mas_equalTo(self.circleView.waterWaveView.countLab);
     }];
 }
+
 @end

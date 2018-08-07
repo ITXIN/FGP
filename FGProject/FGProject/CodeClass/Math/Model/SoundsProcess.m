@@ -11,9 +11,7 @@
 #import <AudioToolbox/AudioServices.h>
 @implementation SoundsProcess
 
-+ (SoundsProcess *)shareInstance
-{
-    
++ (SoundsProcess *)shareInstance{
     static SoundsProcess *sounds = nil;//声明一个全局的指针
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -28,10 +26,10 @@
         }else{
           sounds.isPlaySound = YES;
         }
-       
     });
     return sounds;
 }
+
 - (void)setIsPlaySound:(BOOL)isPlaySound{
     _isPlaySound = isPlaySound;
     if (isPlaySound) {
@@ -39,8 +37,6 @@
     }else{
         [FGProjectHelper saveDataWithKey:SOUND_PLAY_STATE_KEY data:@"NO"];
     }
-    
-    
 }
 
 //点击声音
@@ -49,12 +45,14 @@
         [self playSoundWithNameStr:@"Tock"];
     }
 }
+
 //wonderful
 - (void)playSoundOfWonderful{
     if (self.isPlaySound) {
         [self playSoundWithNameStr:@"wonderful"];
     }
 }
+
 //wrong
 - (void)playSoundOfWrong{
     if (self.isPlaySound) {
@@ -62,6 +60,7 @@
         [self playSoundWithNameStr:@"wrong"];
     }
 }
+
 //fireworks
 - (void)playSoundOfFireworks{
     if (self.isPlaySound) {
@@ -69,10 +68,7 @@
     }
 }
 
-
-
-- (void)playSoundWithNameStr:(NSString *)soundNameStr
-{
+- (void)playSoundWithNameStr:(NSString *)soundNameStr{
     NSArray *typeArr = @[@"wav",@"mp3",@"caf"];
     SystemSoundID theSoundID;
     for (int i = 0; i < typeArr.count; i ++){
@@ -89,13 +85,14 @@
         }
     }
 }
+
 //仅 iPhone 可以 iPad 没有震动
-- (void)vibratePlay
-{
+- (void)vibratePlay{
     for (int i = 1; i < 3; i++){
         [self performSelector:@selector(deleteKeyClick) withObject:self afterDelay:i *.3f];
     }
 }
+
 //类方法不能调用实例方法
 - (void)deleteKeyClick{
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);

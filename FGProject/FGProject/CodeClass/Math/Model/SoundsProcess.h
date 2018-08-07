@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface SoundsProcess : NSObject
-
 + (SoundsProcess *)shareInstance;
 @property (nonatomic,assign) BOOL isPlaySound;
 
@@ -29,4 +28,5 @@
  *  震动
  */
 - (void)vibratePlay;
+
 @end

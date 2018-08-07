@@ -12,20 +12,20 @@
 
 @property (nonatomic,strong) UILabel *operationSettingTitleLab;
 @property (nonatomic,strong) NSMutableDictionary *operationsDic;
-//@property (nonatomic, strong) FGImageTopTitleBottomButton *voiceBtn;
 @property (nonatomic, strong) FGImageLeftTitleRightButtom *voiceBtn;
 @end
 
 @implementation FGMathSettingViewController
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[FGMathOperationManager shareMathOperationManager]saveMathCompreOfOperationType:[NSDictionary dictionaryWithDictionary:self.operationsDic]];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
 
 - (void)initSubviews{
     [super initSubviews];
@@ -56,7 +56,6 @@
         label;
     });
     
-    
     UIImageView *preImageView;
     NSArray *titleArr = @[@"setting_add",@"setting_subtract",@"setting_multiply",@"setting_divide"];
     
@@ -72,7 +71,6 @@
         UIButton *tempBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.bgView addSubview:btn];
-            //            [btn setTitle:titleLab[i] forState:UIControlStateNormal];
             btn.tag = MathOperationActionTypeAdd + i;
             [btn setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateSelected];
@@ -107,15 +105,15 @@
             tempBtn.selected = YES;
             self.operationsDic[tagStr] = @"YES";
         }
-        
     }
-    
 }
+
 #pragma mark -----------
 - (void)voiceBtnAction:(UIButton*)sender{
     sender.selected = !sender.selected;
     [SoundsProcess shareInstance].isPlaySound = !sender.selected;
 }
+
 #pragma mark -------action----
 - (void)actionBtn:(UIButton*)sender{
     //至少选择一个
@@ -125,6 +123,7 @@
             count ++;
         }
     }
+    
     if (count == 1 && sender.selected == YES) {
         [SVProgressHUD showInfoWithStatus:@"至少选择一种计算类型"];
         return;
@@ -137,16 +136,17 @@
     }else{
         [self.operationsDic setValue:@"NO" forKey:tagStr];
     }
-    
 }
 
 #pragma mark -----------
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
+    
     [self.operationSettingTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(64);
         make.left.mas_equalTo(kScreenWidth/2);
     }];
+    
     [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(50);
         make.top.equalTo(self.operationSettingTitleLab
@@ -155,21 +155,11 @@
         make.width.mas_equalTo(130);
         
     }];
-    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

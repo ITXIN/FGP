@@ -14,17 +14,14 @@
 @end
 @implementation DiffcultyLevelView
 
--(instancetype)initWithFrame:(CGRect)frame
-{
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         self.menuBtnArr = [NSMutableArray array];
         self.menuBtnCenterArr = [NSMutableArray array];
         NSArray *titleArr = @[EASY_DIFFCULTYLEVEL_BTN_TITLE,MEDIUM_DIFFCULTYLEVEL_BTN_TITLE,DIFFCULT_DIFFCULTYLEVEL_BTN_TITLE];
         CGFloat widthBtn = frame.size.height;
         CGFloat paceBtn = 20.0;
-        
         
         NSArray *tagArr = @[@(MathOperationActionTypeCompreOfSimple),@(MathOperationActionTypeCompreOfMedium),@(MathOperationActionTypeCompreOfDiffculty)];
         for (int i = 0; i < 3; i ++){
@@ -37,7 +34,6 @@
             CGFloat centerX = i*(widthBtn + paceBtn) + widthBtn/2.0;
             [self.menuBtnCenterArr addObject:[NSNumber numberWithFloat:centerX]];
             levelBtn.backgroundColor = [UIColor clearColor];
-            //            levelBtn.tag = 100 + i;
             levelBtn.tag = [tagArr[i] integerValue];
             [levelBtn setTitle:titleArr[i] forState:UIControlStateNormal];
             [levelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -49,13 +45,13 @@
             
             [self.menuBtnArr addObject:levelBtn];
         }
+        
         [self showMenu];
     }
     return self;
 }
 
-- (void)levelAction:(UIButton *)btn
-{
+- (void)levelAction:(UIButton *)btn{
     [[SoundsProcess shareInstance]playSoundOfTock];
     [AnimationProcess springAnimationProcessWithView:btn upHeight:30.f];
     if (self.delegate && [self.delegate respondsToSelector:@selector(diffcultyBtnAction:)]){
@@ -65,11 +61,9 @@
 
 #pragma mark -
 #pragma mark --- panded fucntion
-- (void)panGesAcion:(UIPanGestureRecognizer *)sender
-{
+- (void)panGesAcion:(UIPanGestureRecognizer *)sender{
     UIButton *btn = (UIButton *)sender.view;
     [AnimationProcess springAnimationProcessWithView:btn upHeight:30.f];
-    
 }
 
 #pragma mark------显示菜单栏
@@ -97,9 +91,9 @@
         }];
     }
 }
+
 #pragma mark-----Animation 子菜单动画
-- (void)viewAnimation:(UIView *)view duration:(CGFloat )duration x:(CGFloat)x y:(CGFloat)y alpha:(CGFloat)alpha
-{
+- (void)viewAnimation:(UIView *)view duration:(CGFloat )duration x:(CGFloat)x y:(CGFloat)y alpha:(CGFloat)alpha{
     [UIView animateWithDuration:duration animations:^{
         view.center = CGPointMake(self.centerPoint.x + x, y);
         view.alpha = alpha;

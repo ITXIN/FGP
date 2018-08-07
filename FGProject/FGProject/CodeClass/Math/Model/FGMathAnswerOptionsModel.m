@@ -9,6 +9,7 @@
 #import "FGMathAnswerOptionsModel.h"
 
 @implementation FGMathAnswerOptionsModel
+
 - (instancetype)init{
     self = [super init];
     if (self){
@@ -16,4 +17,5 @@
     }
     return self;
 }
+
 @end

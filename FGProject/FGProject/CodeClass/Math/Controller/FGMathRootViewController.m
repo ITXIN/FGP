@@ -17,10 +17,10 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "FGMathOperationDataStatisticsViewController.h"
 #import "FGMathSettingViewController.h"
+
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
 @property (nonatomic, strong) FGMathRootView *choiceView;
 @property (nonatomic, strong) DiffcultyLevelView *diffView;
-
 @property (nonatomic,strong)  UIButton *settingBtn;
 @end
 
@@ -46,7 +46,6 @@
         [btn setBackgroundImage:[UIImage imageNamed:@"math_setting"] forState:UIControlStateNormal];
         btn;
     });
-    
 }
 
 #pragma mark -----------
@@ -126,9 +125,6 @@
         default:
             break;
     }
-    
-    
-    
 }
 
 #pragma mark -
@@ -157,11 +153,9 @@
             [self.view makeToast:@"还在施工中。。。。"];
             break;
         }
-            
         default:
             break;
     }
-    
 }
 
 - (void)setupLayoutSubviews{

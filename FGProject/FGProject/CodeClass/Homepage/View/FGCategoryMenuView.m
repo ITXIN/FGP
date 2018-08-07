@@ -21,8 +21,7 @@
     UIImageView *imagView;
     NSTimer *timer;
 }
--(void)dealloc
-{
+-(void)dealloc{
     [timer invalidate];
     timer = nil;
 }
@@ -54,7 +53,6 @@
             btn;
         });
         
-        
         [categoryBtn.layer addAnimation:basicAnim forKey:@"categoryKeyTarnsform.rotaiton.z"];
         
         
@@ -84,11 +82,9 @@
             categoryBtn.tag = CategoryMath;
             
             [self.mathBtn setBackgroundImage:[UIImage imageNamed:@"home_calculate_bg"] forState:UIControlStateNormal];
-            
         }
         
         [self.btnsArr addObject:categoryBtn];
-        
     }
     
     self.actionBtn = ({
@@ -103,6 +99,7 @@
         btn;
         
     });
+    
     [self.actionBtn setImage:[UIImage imageNamed:@"home_start_bg01"] forState:UIControlStateNormal];
     
     actionBtnRadius = sqrt(pow(CGRectGetWidth(self.actionBtn.frame)/2,2)*2)/2 ;
@@ -114,21 +111,22 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(categoryTap:)];
     self.bgView.userInteractionEnabled = YES;
     [self.bgView  addGestureRecognizer:tap];
-//    [self setupTimer];
+    //    [self setupTimer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self actionBtnClick:self.actionBtn];
     });
+    
 }
 
 #pragma mark -
 #pragma mark ---init Timer
-- (void)setupTimer
-{
+- (void)setupTimer{
     [timer invalidate];
     timer = nil;
     timer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(autoAction) userInfo:nil repeats:YES];
     [[NSRunLoop  currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
+
 #pragma mark -
 #pragma mark --- timeAction
 - (void)autoAction{
@@ -139,15 +137,13 @@
     [self startGameImageNewAnimation];
 }
 
-
 #pragma mark -
 #pragma mark --- Tom
-- (void)startGameImageNewAnimation
-{
+- (void)startGameImageNewAnimation{
     [self setupTag:arc4random()%11];
 }
-- (void)setupTag:(NSInteger )tag
-{
+
+- (void)setupTag:(NSInteger )tag{
     switch (tag) {
         case cymbal:
             [self tomAnimation:@"cymbal" count:13];//拨
@@ -185,15 +181,15 @@
             break;
     }
 }
+
 #pragma mark -
 #pragma mark --- Tom Animation
-- (void)tomAnimation:(NSString *)imageName count:(int )count
-{
+- (void)tomAnimation:(NSString *)imageName count:(int )count{
     if ([imagView isAnimating]){
         return;
     }
-    NSMutableArray *imageArr = [NSMutableArray array];
     
+    NSMutableArray *imageArr = [NSMutableArray array];
     for (int i = 0; i < count; i ++){
         NSString *str = [NSString stringWithFormat:@"%@_%02d.jpg",imageName,i];
         NSString *path = [[NSBundle mainBundle] pathForResource:str ofType:nil];
@@ -209,8 +205,6 @@
     [imagView performSelector:@selector(setAnimationImages:) withObject:nil afterDelay:imagView.animationDuration];
 }
 
-
-
 //点击没有响应,不管你怎么移动，CoreAnimation的一个核心就是虽然看起来btn的frame在持续改变（在动画中），但是其frame的设置是立即改变的，比如你把一个button从0，0移动到200，200，在这种情况下：
 //1.如果你使用的是显式动画（就像你现在用的CAKeyframeAnimation），是通过指定path来进行动画的，它的frame并没有改变，点击范围还是0，0这里
 //2.如果你使用的是隐式动画，是通过设置frame来进行动画的，那么它的点击范围就是200，200这里
@@ -219,10 +213,8 @@
 - (void)categoryTap:(UITapGestureRecognizer*)sender
 {
     CGPoint touchPoint = [sender locationInView:self.bgView];
-//    FGLOG(@"11");
     for (UIButton *btn in self.btnsArr){
         if ([btn.layer.presentationLayer hitTest:touchPoint]){
-//            FGLOG(@"22");
             [[SoundsProcess shareInstance] playSoundOfTock];
             if (self.categoryDelegate && [self.categoryDelegate respondsToSelector:@selector(categoryAction:)]){
                 [self.categoryDelegate categoryAction:btn];
@@ -242,6 +234,7 @@
     self.storyLayer = nil;
     self.mathLayer = nil;
 }
+
 #pragma mark -
 #pragma mark --- ActionBtnClick
 - (void)actionBtnClick:(UIButton*)sender{
@@ -312,7 +305,6 @@
         pathAnima.removedOnCompletion = YES;
         [circleLayer addAnimation:pathAnima forKey:@"strokeEndAnimation1"];
         
-        
         CAKeyframeAnimation *orbit = [CAKeyframeAnimation animation];
         orbit.keyPath = @"position";
         orbit.path = circlePath.CGPath;
@@ -332,13 +324,9 @@
             
             [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:50 options:UIViewAnimationOptionCurveLinear animations:^{
                 btn.transform = CGAffineTransformMakeScale(0.9, 0.9);
-                
             } completion:^(BOOL finished) {
-                
                 btn.transform = CGAffineTransformIdentity;
-                
             }];
-            
             
             [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:50 options:UIViewAnimationOptionCurveLinear animations:^{
                 self.actionBtn.transform = CGAffineTransformMakeScale(0.5, 0.5);
@@ -362,10 +350,8 @@
                 self.actionBtn.transform = CGAffineTransformIdentity;
             }];
         }
-        
         [self.bgView.layer addSublayer:circleLayer];
     }
-    
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "FGRootViewController.h"
 #import "FGMathRootViewController.h"
-#import "RootView.h"
+#import "FGRootView.h"
 #import "FGTomViewController.h"
 #import "AIVoiceMathematicsViewController.h"
 #import "FGDateView.h"
@@ -24,7 +24,7 @@
 #import "FGVideoViewController.h"
 @interface FGRootViewController ()<FGCategoryMenuViewDelegate>
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
-@property (nonatomic,strong) RootView *rootBgView;
+@property (nonatomic,strong) FGRootView *rootBgView;
 @property (nonatomic,strong) FGCategoryMenuView *cateGoryMenuView;
 @end
 
@@ -46,9 +46,10 @@
 
 - (void)initSubviews{
     [super initSubviews];
+    
     self.navigationView.hidden = YES;
     //波以及背景
-    self.rootBgView = [[RootView alloc]init];
+    self.rootBgView = [[FGRootView alloc]init];
     [self.bgView addSubview:self.rootBgView];
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
     if (cound > 50) {//绕过审核
@@ -136,6 +137,7 @@
 
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
+    
     [self.rootBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.bgView);
     }];

@@ -13,6 +13,7 @@
 @property (nonatomic,strong) FGMathOperationManager *mathManager;
 @property (nonatomic,strong) TooltipForAnswerView *toolView;
 @property (nonatomic,strong) CircleView *circleView;
+
 - (void)updatCircleviewData;//更新波的高度
 - (void)showCircleAnimationOfWaterWave;
 @end

@@ -9,13 +9,9 @@
 #import "FGClickRandomAnswerCountModel.h"
 
 @implementation FGClickRandomAnswerCountModel
--(instancetype)init
-{
+-(instancetype)init{
     self = [super init];
-    if (self)
-    {
-        
-        
+    if (self){
     }
     return self;
 }

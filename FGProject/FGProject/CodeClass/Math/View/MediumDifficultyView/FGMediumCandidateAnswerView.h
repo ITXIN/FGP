@@ -12,7 +12,6 @@
  */
 @class MediumOperationModel;
 @protocol FGMediumCandidateAnswerViewDelegate <NSObject>
-
 @optional
 - (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType;
 @end
@@ -20,7 +19,6 @@
 @interface FGMediumCandidateAnswerView : UIView
 @property (nonatomic, strong)  UIView *bgView;
 @property (nonatomic,strong) NSMutableArray *candidateBtnArr;
-
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,weak) id <FGMediumCandidateAnswerViewDelegate> delegate;
 - (void)setupAnswerModel:(FGMathAnswerOptionsModel*)answerOptionModel;

@@ -12,12 +12,8 @@
  */
 
 @interface AdjustVolume : NSObject
-//{
-//    SEL sele;
-//}
+
 @property (nonatomic,weak) id delegate;
-//- (void)setDelegate:(id)callDelegate sel:(SEL)callSel;
-//- (void)setDelegate:(id)callDelegate;//使用这个名字和系统默认的 set一样了
 + (instancetype)shareAdjustVolumeManager;
 - (void)setCallDelegate:(id)callDelegate;
 @end

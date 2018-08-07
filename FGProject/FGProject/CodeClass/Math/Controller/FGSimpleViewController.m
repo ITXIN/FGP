@@ -18,11 +18,13 @@
 @end
 
 @implementation FGSimpleViewController
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self setupSimplewOperationViewNewQuestionModel];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -90,6 +92,7 @@
     FGMathOperationModel *questModel = [self.mathManager generateSimpleOperationModelWithOperationType:self.mathOperationActionType];
     [self.answerView operationSubjectByQuestionModel:questModel];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

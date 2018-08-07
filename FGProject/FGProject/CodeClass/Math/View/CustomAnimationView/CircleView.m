@@ -15,6 +15,7 @@
     NSArray *colorArr;
     CARadarView *radarView;
 }
+
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
@@ -31,20 +32,20 @@
     return self;
 }
 
-- (void)circleViewWillApper
-{
+- (void)circleViewWillApper{
     [self.waterWaveView.timer setFireDate:[NSDate distantPast]];
     //100是按100道题水充满,可以设置其他的
     [self updatCircleviewData];
     [self.waterWaveView showAnimationOfWaterWave];
     [radarView startAnimation];
 }
-- (void)circleViewWillDisapper
-{
+
+- (void)circleViewWillDisapper{
     [radarView stopAnimation];
     [self.waterWaveView.timer setFireDate:[NSDate distantFuture]];
     [self.layer removeAllAnimations];
 }
+
 - (void)updatCircleviewData{
     self.waterWaveView.count = [[FGMathOperationManager shareMathOperationManager] getCurrentDateHasDone];
     self.waterWaveView.waveHeight = self.waterWaveView.frame.size.height- self.waterWaveView.frame.size.height*self.waterWaveView.count/DATA_WAVE_HEIGHT_SCALE;

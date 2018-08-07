@@ -15,12 +15,10 @@
 @end
 @interface FGCategoryMenuView : FGBaseView
 @property (nonatomic,strong) UIButton *actionBtn;
-
 @property (nonatomic,strong) UIButton *gameBtn;
 @property (nonatomic,strong) UIButton *mathBtn;
 @property (nonatomic,strong) UIButton *aiBtn;
 @property (nonatomic,strong) UIButton *storysBtn;
-
 @property (nonatomic,strong) NSMutableArray *btnsArr;
 
 @property (nonatomic,strong) CAShapeLayer *gameLayer;

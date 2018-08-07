@@ -26,8 +26,6 @@
 @property (nonatomic,assign) CGPoint centerPoint;
 @property (nonatomic,strong) NSMutableArray *menuBtnCenterArr;
 
-
-
 @property (nonatomic,strong) UIPanGestureRecognizer * panGestureRecognizer;
 @property (nonatomic, assign) CGFloat panDragCoefficient;
 @property (nonatomic, assign) CGPoint restCenter;

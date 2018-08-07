@@ -36,10 +36,4 @@
 
 @property (nonatomic,strong) NSMutableArray *mistakesOperationModelArr;
 
-
-
-//@property (nonatomic,assign) NSInteger divideTotalNumber;
-//@property (nonatomic,assign) NSInteger divideTotalNumber;
-
-
 @end

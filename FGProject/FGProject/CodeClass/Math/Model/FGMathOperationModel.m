@@ -9,6 +9,7 @@
 #import "FGMathOperationModel.h"
 
 @implementation FGMathOperationModel
+
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:[NSNumber numberWithInteger:self.firstNum] forKey:@"firstNum"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.secondNum] forKey:@"secondNum"];
@@ -19,6 +20,7 @@
     [aCoder encodeObject:[NSNumber numberWithInteger:self.secondOperationType] forKey:@"secondOperationType"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.operationLevel] forKey:@"operationLevel"];
 }
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self){
@@ -106,16 +108,15 @@
     questionModel.secondNum = secondNum;
     questionModel.mathOperationActionType = currentOperationTyp;
     questionModel.operationLevel = MathOperationLevelTwo;
-    //    questionModel.userAnswerStr = nil;
     return questionModel;
 }
+
 // MARK: - ---------------------------------- 三个数 ----------------------------------
 #pragma mark -
 #pragma mark --- 产生运算式 随机
 +(FGMathOperationModel *)generateMathOperationModel{
     
-     NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeArr];
-    
+    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeArr];
     MathOperationActionType firstOperationType = [operationArr[arc4random()%operationArr.count] integerValue];
     FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModelWithOperationType:firstOperationType];
     FGMathOperationModel *mediumOperationModel = [[FGMathOperationModel alloc]init];
@@ -168,7 +169,6 @@
        
     }else if(mediumOperationModel.firstOperationType == MathOperationActionTypeAdd || mediumOperationModel.firstOperationType == MathOperationActionTypeSubtract){
         //目前只支持先计算前面的结果
-        
         if (mediumOperationModel.answerNum == 0) {
             secondMathOperationType = mediumOperationModel.firstOperationType;
             if (secondMathOperationType == MathOperationActionTypeAdd) {
@@ -192,10 +192,10 @@
             [SVProgressHUD showErrorWithStatus:@"Error"];
         }
         
-        
     }else{
-        [SVProgressHUD showErrorWithStatus:@"异常"];
+        [SVProgressHUD showErrorWithStatus:@"Error"];
     }
+    
     mediumOperationModel.secondOperationType = secondMathOperationType;
     mediumOperationModel.thirdNum = thirdNum;
     mediumOperationModel.operationLevel = MathOperationLevelThird;
@@ -239,7 +239,5 @@
     */
     return mediumOperationModel;
 }
-
-
 
 @end

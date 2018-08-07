@@ -9,7 +9,9 @@
 #import "FGMathOperationDataStatisticsModel.h"
 
 @implementation FGMathOperationDataStatisticsModel
+
 - (NSInteger)totalMistakesNumber{
     return self.totalNumber - self.totalAccuracyNumber;
 }
+
 @end

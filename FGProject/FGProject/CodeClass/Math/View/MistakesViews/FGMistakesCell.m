@@ -18,9 +18,10 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
+
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self =  [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -66,17 +67,17 @@
             
         }
         answerBgView.backgroundColor = UIColor.yellowColor;
-
+        
         self.operationView.backgroundColor = UIColor.purpleColor;
         self.contentView.backgroundColor = UIColor.cyanColor;
         [btnArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:2.5 leadSpacing:0 tailSpacing:0];
-        
         
     }
     return self;
 }
 
 - (void)setupQuestMode:(FGMathOperationModel*)questModel{
-     [self.operationView setQuestionModel:questModel];
+    [self.operationView setQuestionModel:questModel];
 }
+
 @end

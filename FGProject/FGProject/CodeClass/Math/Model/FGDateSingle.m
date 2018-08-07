@@ -9,6 +9,7 @@
 #import "FGDateSingle.h"
 
 @implementation FGDateSingle
+
 + (FGDateSingle *)shareInstance{
     static FGDateSingle *dateSingle = nil;//声明一个全局的指针
     static dispatch_once_t onceToken;
@@ -17,10 +18,12 @@
     });
     return dateSingle;
 }
+
 - (NSDate*)date{
      NSDate *senddate = [NSDate date];
     return senddate;
 }
+
 //获取当前的时间
 - (NSString *)curretDate{
     return [self stringWithDate:[self date]];
@@ -30,8 +33,7 @@
     NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"YYYY-MM-dd"];
     NSString *locationString = [dateformatter stringFromDate:date];
-    NSLog(@"今天日期 %@",locationString);
-//    locationString = @"20180320";
+    FGLOG(@"今天日期 %@",locationString);
     return locationString;
 }
 
@@ -43,7 +45,7 @@
     NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
     NSString *locationString = [dateformatter stringFromDate:date];
-    NSLog(@"今天日期 %@",locationString);
+    FGLOG(@"今天日期 %@",locationString);
     return locationString;
 }
 
