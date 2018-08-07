@@ -16,7 +16,6 @@
 @property (nonatomic,strong) FGMathOperationManager *mathManager;
 @property (nonatomic,strong) UIButton *totalPercentageBtn;
 @property (nonatomic,strong) UILabel *totalNumberLab;
-
 @property (nonatomic,strong) PNPieChart *detailPieChart;
 @property (nonatomic,strong) UIView  *detailLegendView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -151,8 +150,8 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     pieChart.legendStyle = PNLegendItemStyleStacked;
     pieChart.legendFont = [UIFont boldSystemFontOfSize:15.0f];
 }
-#pragma mark -------delegate----
 
+#pragma mark -------delegate----
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
