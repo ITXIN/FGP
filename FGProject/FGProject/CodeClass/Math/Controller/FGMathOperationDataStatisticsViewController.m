@@ -55,6 +55,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
         tableView.showsVerticalScrollIndicator = NO;
         [self.bgView addSubview:tableView];
         tableView.delaysContentTouches = NO;
+        tableView.backgroundColor = UIColor.clearColor;
         [tableView registerClass:[FGMistakesCell class] forCellReuseIdentifier:reusedMistakesID];
         tableView;
     });

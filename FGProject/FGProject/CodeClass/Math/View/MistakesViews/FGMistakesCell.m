@@ -27,10 +27,13 @@
     if (self) {
         self.operationView = [[FGMistakesOperationView alloc] init];
         [self.contentView addSubview:self.operationView];
-        
+        self.contentView.backgroundColor = UIColor.clearColor;
+        self.backgroundColor = UIColor.clearColor;
+        self.userInteractionEnabled = NO;
         UIView *answerBgView  = ({
             UIView *view = [[UIView alloc]init];
             [self.contentView addSubview:view];
+            view.backgroundColor = UIColor.clearColor;
             view.tag = 1000;
             view;
         });
@@ -53,11 +56,11 @@
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [answerBgView addSubview:btn];
                 btn.tag = 2000+i;
-                [btn setTitle:[NSString stringWithFormat:@"%ld",arc4random()%100] forState:UIControlStateNormal];
+                [btn setTitle:[NSString stringWithFormat:@"%d",arc4random()%100] forState:UIControlStateNormal];
                 btn;
             });
             tempBtn.titleLabel.font = [UIFont boldSystemFontOfSize:35.0];
-            tempBtn.backgroundColor = UIColor.redColor;
+//            tempBtn.backgroundColor = UIColor.redColor;
             [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.bottom.equalTo(answerBgView);
                 make.centerY.equalTo(answerBgView);
@@ -66,10 +69,10 @@
             [btnArr addObject:tempBtn];
             
         }
-        answerBgView.backgroundColor = UIColor.yellowColor;
+//        answerBgView.backgroundColor = UIColor.yellowColor;
         
-        self.operationView.backgroundColor = UIColor.purpleColor;
-        self.contentView.backgroundColor = UIColor.cyanColor;
+//        self.operationView.backgroundColor = UIColor.purpleColor;
+//        self.contentView.backgroundColor = UIColor.cyanColor;
         [btnArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:2.5 leadSpacing:0 tailSpacing:0];
         
     }
