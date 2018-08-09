@@ -175,13 +175,13 @@
 #pragma mark -
 #pragma mark --- postDataToFireBase
 - (void)postDataToFireBaseWithClickQuestionModel:(FGClickRandomAnswerCountModel*)clickModel{
-    NSString *dateStr = [FGProjectHelper logTimeStringFromDate:[NSDate date]];
-    NSDictionary *dic = [FGProjectHelper postDataWithClickRandomModel:clickModel];
-    [[self.dataBaseRef child:dateStr] updateChildValues:dic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
-        if (error) {
-            return ;
-        }
-    }];
+//    NSString *dateStr = [FGProjectHelper logTimeStringFromDate:[NSDate date]];
+//    NSDictionary *dic = [FGProjectHelper postDataWithClickRandomModel:clickModel];
+//    [[self.dataBaseRef child:dateStr] updateChildValues:dic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+//        if (error) {
+//            return ;
+//        }
+//    }];
 }
 
 /**

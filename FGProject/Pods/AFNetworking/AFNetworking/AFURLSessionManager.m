@@ -113,8 +113,8 @@ typedef void (^AFURLSessionTaskCompletionHandler)(NSURLResponse *response, id re
 
 @interface AFURLSessionManagerTaskDelegate : NSObject <NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate>
 - (instancetype)initWithTask:(NSURLSessionTask *)task;
-@property (nonatomic, weak) AFURLSessionManager *manager;
-@property (nonatomic, strong) NSMutableData *mutableData;
+@property (nonatomic, weak) AFURLSessionManager *manager;//被代理的manger，weak防止循环引用
+@property (nonatomic, strong) NSMutableData *mutableData;//在NSURLSessionTaskDelegate的URLSession:task:didCompleteWithError:方法中拼接下载的数据。
 @property (nonatomic, strong) NSProgress *uploadProgress;
 @property (nonatomic, strong) NSProgress *downloadProgress;
 @property (nonatomic, copy) NSURL *downloadFileURL;
@@ -160,7 +160,7 @@ typedef void (^AFURLSessionTaskCompletionHandler)(NSURLResponse *response, id re
         [progress addObserver:self
                    forKeyPath:NSStringFromSelector(@selector(fractionCompleted))
                       options:NSKeyValueObservingOptionNew
-                      context:NULL];
+                      context:NULL];//监听反馈处理进度
     }
     return self;
 }
@@ -186,7 +186,7 @@ typedef void (^AFURLSessionTaskCompletionHandler)(NSURLResponse *response, id re
 }
 
 #pragma mark - NSURLSessionTaskDelegate
-
+//处理请求响应
 - (void)URLSession:(__unused NSURLSession *)session
               task:(NSURLSessionTask *)task
 didCompleteWithError:(NSError *)error
@@ -194,7 +194,7 @@ didCompleteWithError:(NSError *)error
     __strong AFURLSessionManager *manager = self.manager;
 
     __block id responseObject = nil;
-
+    //userInfo 储存一些信息当完成或失败发送通知。
     __block NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     userInfo[AFNetworkingTaskDidCompleteResponseSerializerKey] = manager.responseSerializer;
 
@@ -255,17 +255,18 @@ didCompleteWithError:(NSError *)error
 }
 
 #pragma mark - NSURLSessionDataDelegate
-
+//下载收到数据
 - (void)URLSession:(__unused NSURLSession *)session
           dataTask:(__unused NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
+    //更新下载进度，更新时会改变其fractionCompleted,因在manager初始化中对fractionCompleted做了KVO，所以会触发NSProgress Tracking。
     self.downloadProgress.totalUnitCount = dataTask.countOfBytesExpectedToReceive;
     self.downloadProgress.completedUnitCount = dataTask.countOfBytesReceived;
-
+    //拼接数据
     [self.mutableData appendData:data];
 }
-
+//上传数据处理
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
    didSendBodyData:(int64_t)bytesSent
     totalBytesSent:(int64_t)totalBytesSent
@@ -472,7 +473,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 - (instancetype)init {
     return [self initWithSessionConfiguration:nil];
 }
-
+//基类初始化属性。
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration {
     self = [super init];
     if (!self) {
@@ -503,6 +504,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     self.lock = [[NSLock alloc] init];
     self.lock.name = AFURLSessionManagerLockName;
 
+    //获取未完成的任务。初始化应该没有任务的，主要是解决：防止后台回来，重新初始化这个session，一些之前的后台请求任务，导致程序的crash。
     [self.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         for (NSURLSessionDataTask *task in dataTasks) {
             [self addDelegateForDataTask:task uploadProgress:nil downloadProgress:nil completionHandler:nil];

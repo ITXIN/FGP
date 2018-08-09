@@ -66,7 +66,7 @@
 - (instancetype)initWithBaseURL:(NSURL *)url
            sessionConfiguration:(NSURLSessionConfiguration *)configuration
 {
-    self = [super initWithSessionConfiguration:configuration];
+    self = [super initWithSessionConfiguration:configuration];//父类初始化
     if (!self) {
         return nil;
     }

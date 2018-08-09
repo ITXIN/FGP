@@ -29,6 +29,12 @@
 
 @implementation FGRootViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self dataOfStoryRequest];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -80,9 +86,20 @@
             
             btn;
         });
+        
+      
     }
 }
 
+- (void)dataOfStoryRequest{
+    [[FGHttpsRequestManager shareInstance] getDataWithUrlStr:[NSString stringWithFormat:@"%@%@",FGStoryBaseURLString,FGStoryHomePageURLString] succeedHandler:^(id responseObject, NSError *error) {
+        NSDictionary *dataDic = (NSDictionary*)responseObject;
+        NSArray *musicArr = dataDic[@"data"][@"music"];
+        FGLOG(@"-----网络数据 %@",musicArr);
+    } failedHandler:^(NSError *error) {
+        FGLOG(@"-----failedHandler %@",error);
+    }];
+}
 #pragma mark -
 - (void)myCenterAction:(UIButton*)sender{
     FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
