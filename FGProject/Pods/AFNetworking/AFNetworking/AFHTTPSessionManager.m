@@ -116,7 +116,7 @@
 }
 
 #pragma mark -
-
+//GET方法获取数据，不带进度
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
@@ -125,7 +125,7 @@
 
     return [self GET:URLString parameters:parameters progress:nil success:success failure:failure];
 }
-
+//GET方法获取数据，带进度
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
                      progress:(void (^)(NSProgress * _Nonnull))downloadProgress
@@ -145,7 +145,7 @@
 
     return dataTask;
 }
-
+//使用HEAD 方法获取数据
 - (NSURLSessionDataTask *)HEAD:(NSString *)URLString
                     parameters:(id)parameters
                        success:(void (^)(NSURLSessionDataTask *task))success
@@ -182,7 +182,7 @@
 
     return dataTask;
 }
-
+//上传数据
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(nullable id)parameters
      constructingBodyWithBlock:(nullable void (^)(id<AFMultipartFormData> _Nonnull))block

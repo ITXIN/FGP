@@ -196,6 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
  This notification assigns no notification object. The `userInfo` dictionary contains an `NSNumber` object under the `AFNetworkingReachabilityNotificationStatusItem` key, representing the `AFNetworkReachabilityStatus` value for the current network reachability.
 
  @warning In order for network reachability to be monitored, include the `SystemConfiguration` framework in the active target's "Link Binary With Library" build phase, and add `#import <SystemConfiguration/SystemConfiguration.h>` to the header prefix of the project (`Prefix.pch`).
+ FOUNDATION_EXPORT 和#define 都能定义常量。FOUNDATION_EXPORT 能够使用 == 进行判断，效率略高。而且能够隐藏定义细节 ,就是实现部分不在.中
  */
 FOUNDATION_EXPORT NSString * const AFNetworkingReachabilityDidChangeNotification;
 FOUNDATION_EXPORT NSString * const AFNetworkingReachabilityNotificationStatusItem;

@@ -27,12 +27,13 @@
 #import <arpa/inet.h>
 #import <ifaddrs.h>
 #import <netdb.h>
-
+//网络环境发生改变的时候接受通知。
 NSString * const AFNetworkingReachabilityDidChangeNotification = @"com.alamofire.networking.reachability.change";
+//当网络状态发生改变时，发送通知带上数据，使用这个变量作为key标示状态数据，
 NSString * const AFNetworkingReachabilityNotificationStatusItem = @"AFNetworkingReachabilityNotificationStatusItem";
-
+//网络变化的回调
 typedef void (^AFNetworkReachabilityStatusBlock)(AFNetworkReachabilityStatus status);
-
+//枚举值转换为字符串
 NSString * AFStringFromNetworkReachabilityStatus(AFNetworkReachabilityStatus status) {
     switch (status) {
         case AFNetworkReachabilityStatusNotReachable:
@@ -46,12 +47,33 @@ NSString * AFStringFromNetworkReachabilityStatus(AFNetworkReachabilityStatus sta
             return NSLocalizedStringFromTable(@"Unknown", @"AFNetworking", nil);
     }
 }
-
+/**
+ *  根据SCNetworkReachabilityFlags这个网络标记来转换成我们在开发中经常使用的网络状态
+ 1.不能连接网络
+ 2.蜂窝连接
+ 3.WiFi连接
+ 4.未知连接
+ 
+ 一个类中的私有方法写成static void funcName() 这样的c函数比较好。
+ 
+ 1. 在文件的最前方，比较容易查找
+ 
+ 2. 可以适当的使用内联函数，提高效率。
+ */
 static AFNetworkReachabilityStatus AFNetworkReachabilityStatusForFlags(SCNetworkReachabilityFlags flags) {
+    // 是否能够到达
     BOOL isReachable = ((flags & kSCNetworkReachabilityFlagsReachable) != 0);
+    
+    //联网之前需要建立连接
     BOOL needsConnection = ((flags & kSCNetworkReachabilityFlagsConnectionRequired) != 0);
+    
+    //是否可以自动连接
     BOOL canConnectionAutomatically = (((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) || ((flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0));
+    
+    //是否可以连接，在不需要用户手动设置的前提下
     BOOL canConnectWithoutUserInteraction = (canConnectionAutomatically && (flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0);
+    
+    // 是否可以联网的条件 1.能够到达 2.不需要建立连接或者不需要用户手动设置连接 就表示能够连接到网络
     BOOL isNetworkReachable = (isReachable && (!needsConnection || canConnectWithoutUserInteraction));
 
     AFNetworkReachabilityStatus status = AFNetworkReachabilityStatusUnknown;
@@ -77,6 +99,7 @@ static AFNetworkReachabilityStatus AFNetworkReachabilityStatusForFlags(SCNetwork
  * as they are sent. If notifications are sent directly, it is possible that
  * a queued notification (for an earlier status condition) is processed after
  * the later update, resulting in the listener being left in the wrong state.
+ 处理网络变化的两种方式：block和通知。为了保证数据统一，把这个过程封装到一个函数中。
  */
 static void AFPostReachabilityStatusChange(SCNetworkReachabilityFlags flags, AFNetworkReachabilityStatusBlock block) {
     AFNetworkReachabilityStatus status = AFNetworkReachabilityStatusForFlags(flags);
@@ -216,9 +239,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
         }
 
     };
-
+    //创建上下文
     SCNetworkReachabilityContext context = {0, (__bridge void *)callback, AFNetworkReachabilityRetainCallback, AFNetworkReachabilityReleaseCallback, NULL};
+    //设置回调
     SCNetworkReachabilitySetCallback(self.networkReachability, AFNetworkReachabilityCallback, &context);
+   
+    //加入RunLoop池
     SCNetworkReachabilityScheduleWithRunLoop(self.networkReachability, CFRunLoopGetMain(), kCFRunLoopCommonModes);
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
