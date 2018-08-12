@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param error The error that occurred while attempting to decode the response data.
 
  @return The object decoded from the specified response data.
+ 这个方法来返回序列化后的结果。不管是下边的∂，还是它的子类，都遵守这个协议，也就是在各自的实现中实现了这个协议，然后返回了属于自身的一个结果。
  */
 - (nullable id)responseObjectForResponse:(nullable NSURLResponse *)response
                            data:(nullable NSData *)data

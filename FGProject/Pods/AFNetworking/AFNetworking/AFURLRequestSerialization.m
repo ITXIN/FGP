@@ -43,6 +43,7 @@ typedef NSString * (^AFQueryStringSerializationBlock)(NSURLRequest *request, id 
  should be percent-escaped in the query string.
     - parameter string: The string to be percent-escaped.
     - returns: The percent-escaped string.
+ 对特殊字符编码过滤处理
  */
 NSString * AFPercentEscapedStringFromString(NSString *string) {
     static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
@@ -170,12 +171,19 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 @end
 
 #pragma mark -
-
+/*监听元素的集合 ，如果在平时开发中想要监听一个对象中某个自定义的属性时，只需要手动实现监听方法就行了。在setter方法中加入两行代码就行了
+ willChangeValueForKey 和 didChangeValueForKey
+ */
 static NSArray * AFHTTPRequestSerializerObservedKeyPaths() {
     static NSArray *_AFHTTPRequestSerializerObservedKeyPaths = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _AFHTTPRequestSerializerObservedKeyPaths = @[NSStringFromSelector(@selector(allowsCellularAccess)), NSStringFromSelector(@selector(cachePolicy)), NSStringFromSelector(@selector(HTTPShouldHandleCookies)), NSStringFromSelector(@selector(HTTPShouldUsePipelining)), NSStringFromSelector(@selector(networkServiceType)), NSStringFromSelector(@selector(timeoutInterval))];
+        _AFHTTPRequestSerializerObservedKeyPaths = @[NSStringFromSelector(@selector(allowsCellularAccess)),//允许蜂窝访问
+                                                     NSStringFromSelector(@selector(cachePolicy)),//缓存策略
+                                                     NSStringFromSelector(@selector(HTTPShouldHandleCookies)),//使用cookies
+                                                     NSStringFromSelector(@selector(HTTPShouldUsePipelining)),//使用管线连接
+                                                     NSStringFromSelector(@selector(networkServiceType)),//网络服务类型
+                                                     NSStringFromSelector(@selector(timeoutInterval))];//超时时间
     });
 
     return _AFHTTPRequestSerializerObservedKeyPaths;
@@ -209,14 +217,17 @@ static void *AFHTTPRequestSerializerObserverContext = &AFHTTPRequestSerializerOb
     self.requestHeaderModificationQueue = dispatch_queue_create("requestHeaderModificationQueue", DISPATCH_QUEUE_CONCURRENT);
 
     // Accept-Language HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+    
+    // 传递可接受的语言，q代表对语言的喜好程度，默认是取出前5个的数据，不足5个，取实际的个数
     NSMutableArray *acceptLanguagesComponents = [NSMutableArray array];
     [[NSLocale preferredLanguages] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         float q = 1.0f - (idx * 0.1f);
         [acceptLanguagesComponents addObject:[NSString stringWithFormat:@"%@;q=%0.1g", obj, q]];
         *stop = q <= 0.5f;
     }];
+    //设置请求头
     [self setValue:[acceptLanguagesComponents componentsJoinedByString:@", "] forHTTPHeaderField:@"Accept-Language"];
-
+    //获取信息
     NSString *userAgent = nil;
 #if TARGET_OS_IOS
     // User-Agent Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
@@ -230,6 +241,7 @@ static void *AFHTTPRequestSerializerObserverContext = &AFHTTPRequestSerializerOb
     if (userAgent) {
         if (![userAgent canBeConvertedToEncoding:NSASCIIStringEncoding]) {
             NSMutableString *mutableUserAgent = [userAgent mutableCopy];
+            // 转换字符串的方法 http://nshipster.com/cfstringtransform/
             if (CFStringTransform((__bridge CFMutableStringRef)(mutableUserAgent), NULL, (__bridge CFStringRef)@"Any-Latin; Latin-ASCII; [:^ASCII:] Remove", false)) {
                 userAgent = mutableUserAgent;
             }
@@ -262,7 +274,7 @@ static void *AFHTTPRequestSerializerObserverContext = &AFHTTPRequestSerializerOb
 
 // Workarounds for crashing behavior using Key-Value Observing with XCTest
 // See https://github.com/AFNetworking/AFNetworking/issues/2523
-
+//下边的这几个setter方法，主要目的是触发kvo监听
 - (void)setAllowsCellularAccess:(BOOL)allowsCellularAccess {
     [self willChangeValueForKey:NSStringFromSelector(@selector(allowsCellularAccess))];
     _allowsCellularAccess = allowsCellularAccess;
@@ -366,13 +378,13 @@ forHTTPHeaderField:(NSString *)field
 
     NSMutableURLRequest *mutableRequest = [[NSMutableURLRequest alloc] initWithURL:url];
     mutableRequest.HTTPMethod = method;
-
+    // 设置mutableRequest的一些属性，这些属性就是AFHTTPRequestSerializerObservedKeyPaths() 返回的数组，
     for (NSString *keyPath in AFHTTPRequestSerializerObservedKeyPaths()) {
         if ([self.mutableObservedChangedKeyPaths containsObject:keyPath]) {
             [mutableRequest setValue:[self valueForKeyPath:keyPath] forKey:keyPath];
         }
     }
-
+    //过滤和设置请求
     mutableRequest = [[self requestBySerializingRequest:mutableRequest withParameters:parameters error:error] mutableCopy];
 
 	return mutableRequest;
@@ -384,14 +396,18 @@ forHTTPHeaderField:(NSString *)field
                               constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                                                   error:(NSError *__autoreleasing *)error
 {
+    //method 不能为空 不能是GET 和HEAD
     NSParameterAssert(method);
     NSParameterAssert(![method isEqualToString:@"GET"] && ![method isEqualToString:@"HEAD"]);
 
+    //    通过私有方法获取NSMutableURLRequest
     NSMutableURLRequest *mutableRequest = [self requestWithMethod:method URLString:URLString parameters:nil error:error];
 
+    //    创建一个AFStreamingMultipartFormData实例，用来处理数据。
     __block AFStreamingMultipartFormData *formData = [[AFStreamingMultipartFormData alloc] initWithURLRequest:mutableRequest stringEncoding:NSUTF8StringEncoding];
 
     if (parameters) {
+        //遍历parameters后 把value转成NSData然后拼接到formData中
         for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
             NSData *data = nil;
             if ([pair.value isKindOfClass:[NSData class]]) {
@@ -421,7 +437,7 @@ forHTTPHeaderField:(NSString *)field
 {
     NSParameterAssert(request.HTTPBodyStream);
     NSParameterAssert([fileURL isFileURL]);
-
+//    下边的这些代码就是把文件写到另一个地方的典型使用方法了
     NSInputStream *inputStream = request.HTTPBodyStream;
     NSOutputStream *outputStream = [[NSOutputStream alloc] initWithURL:fileURL append:NO];
     __block NSError *error = nil;
@@ -478,13 +494,13 @@ forHTTPHeaderField:(NSString *)field
     NSParameterAssert(request);
 
     NSMutableURLRequest *mutableRequest = [request mutableCopy];
-
+    //设置请求头
     [self.HTTPRequestHeaders enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL * __unused stop) {
         if (![request valueForHTTPHeaderField:field]) {
             [mutableRequest setValue:value forHTTPHeaderField:field];
         }
     }];
-
+    //设置查询字段
     NSString *query = nil;
     if (parameters) {
         if (self.queryStringSerialization) {
@@ -506,12 +522,13 @@ forHTTPHeaderField:(NSString *)field
             }
         }
     }
-
+    // 如果请求的method 为 GET/HEAD/DELETE 直接把查询拼接到URL中
     if ([self.HTTPMethodsEncodingParametersInURI containsObject:[[request HTTPMethod] uppercaseString]]) {
         if (query && query.length > 0) {
             mutableRequest.URL = [NSURL URLWithString:[[mutableRequest.URL absoluteString] stringByAppendingFormat:mutableRequest.URL.query ? @"&%@" : @"?%@", query]];
         }
     } else {
+        //其他的 要设置下边的内容，然后给请求的HTTPBody 赋值就可以了
         // #2864: an empty string is a valid x-www-form-urlencoded payload
         if (!query) {
             query = @"";
