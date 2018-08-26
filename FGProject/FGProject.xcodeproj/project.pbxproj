@@ -657,6 +657,7 @@
 		E62349322103682A00F04A6F /* FGMistakesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E62349312103682A00F04A6F /* FGMistakesModel.m */; };
 		E6239AE121042CF1002B0751 /* FGMistakesOperationDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */; };
 		E65AA461208B34C000A4F808 /* FGImageTopTitleBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */; };
+		E6A198592132909700B7C32C /* FGMathDiffcultyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A198582132909700B7C32C /* FGMathDiffcultyViewController.m */; };
 		E6EE387D208494DB005028D0 /* FGMathSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE387C208494DB005028D0 /* FGMathSettingViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -1450,6 +1451,8 @@
 		E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesOperationDataModel.m; sourceTree = "<group>"; };
 		E65AA45F208B34C000A4F808 /* FGImageTopTitleBottomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageTopTitleBottomButton.h; sourceTree = "<group>"; };
 		E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageTopTitleBottomButton.m; sourceTree = "<group>"; };
+		E6A198572132909700B7C32C /* FGMathDiffcultyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathDiffcultyViewController.h; sourceTree = "<group>"; };
+		E6A198582132909700B7C32C /* FGMathDiffcultyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMathDiffcultyViewController.m; sourceTree = "<group>"; };
 		E6EE387B208494DB005028D0 /* FGMathSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathSettingViewController.h; sourceTree = "<group>"; };
 		E6EE387C208494DB005028D0 /* FGMathSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMathSettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1806,6 +1809,8 @@
 				8F4753CE206222900002C0B7 /* FGMathOperationDataStatisticsViewController.m */,
 				E6EE387B208494DB005028D0 /* FGMathSettingViewController.h */,
 				E6EE387C208494DB005028D0 /* FGMathSettingViewController.m */,
+				E6A198572132909700B7C32C /* FGMathDiffcultyViewController.h */,
+				E6A198582132909700B7C32C /* FGMathDiffcultyViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3742,6 +3747,7 @@
 				8F6AA5D61FB0410500A7B5C7 /* AlertView.m in Sources */,
 				8F6AA82B1FB0410700A7B5C7 /* WriteFunction.m in Sources */,
 				23CADFE32119826900EF8CE1 /* FGRootView.m in Sources */,
+				E6A198592132909700B7C32C /* FGMathDiffcultyViewController.m in Sources */,
 				8F6AA2AE1FB0405B00A7B5C7 /* main.m in Sources */,
 				8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */,
 				8F6AA5DC1FB0410500A7B5C7 /* FGAIActionView.m in Sources */,
