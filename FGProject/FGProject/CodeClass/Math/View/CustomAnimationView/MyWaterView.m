@@ -22,11 +22,8 @@
 {
     [_timer invalidate];
     _timer = nil;
-    
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect{
 #warning --- 占用 cup 较高 22%,绘制图片占用 cup 较高
     // Drawing code
@@ -38,10 +35,7 @@
     
     float y = self.waveHeight;
     CGPathMoveToPoint(path, NULL, 0, y);
-    for (float x = 0; x <= rect.size.width; x ++)
-    {
-//        //y=Asin(wx+Φ)+B
-////       y = self.wave*sin(x/self.w*M_PI + 4*self.b/M_PI)*5 + self.waveHeight;//原来的
+    for (float x = 0; x <= rect.size.width; x ++){
         y =5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
         CGPathAddLineToPoint(path, nil, x, y);
         
@@ -61,8 +55,7 @@
     CGMutablePathRef path1 = CGPathCreateMutable();
     //画水波
     CGContextSetLineWidth(contxt1, 1);
-//    CGContextSetFillColorWithColor(contxt1, [[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1] CGColor]);
-    
+
     CGContextSetFillColorWithColor(contxt1, currentWaterColor.CGColor );
     float y1 = self.waveHeight;
     CGPathMoveToPoint(path1, NULL, 0, y1);
@@ -80,8 +73,6 @@
     CGContextDrawPath(contxt1, kCGPathStroke);
     CGPathRelease(path1);
     
-    
-//    [self drawTextWithRect:rect];
 }
 
 - (void)drawTextWithRect:(CGRect)rect{
@@ -108,13 +99,10 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self.b = 0.0;
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self){
         isHasBGImage = NO;
         [self setBackgroundColor:[UIColor clearColor]];
         currentWaterColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
-//         currentWaterColor = [UIColor colorWithRed:46/255.0f green:173/255.0f blue:151/255.0f alpha:1];
-        
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(animateWave) userInfo:nil repeats:YES];
         [self initWaveValue];
     }
@@ -208,23 +196,7 @@
 #pragma mark -
 #pragma mark --- 更新显示slider 的数据
 - (void)upDateLableFromTag:(NSInteger)tag value:(CGFloat)value{
-//    if (tag == 0) {
-//        return;
-//    }
-//    UIView *parentView = [[self superview] viewWithTag:tag];
-//    for (id tempView in parentView.subviews) {
-//        if ([tempView isKindOfClass:[UISlider class]]) {
-//            UISlider *tempSlider = (UISlider *)tempView;
-//            if (tempSlider.tag == tag) {
-//                //更新指示器的数值
-//                tempSlider.value = value;
-//                //更新显示的数据
-//                UILabel *tempLabel = (UILabel *)[parentView viewWithTag:showValueLableTag];
-//                tempLabel.text = [NSString stringWithFormat:@"%0.2f", value];
-//                [tempLabel sizeToFit];
-//            }
-//        }
-//    }
+    
 }
 
 @end

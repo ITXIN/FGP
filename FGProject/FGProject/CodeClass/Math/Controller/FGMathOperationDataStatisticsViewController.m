@@ -183,7 +183,6 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     FGMistakesCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedMistakesID];
     FGMistakesModel *model = self.dataArr[indexPath.section];
     FGMistakesOperationDataModel *mistakeModel = model.dataArr[indexPath.row];
-    
     [cell setupQuestMode:mistakeModel.objeKey];
     return cell;
 }

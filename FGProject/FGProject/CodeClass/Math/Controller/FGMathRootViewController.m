@@ -17,7 +17,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "FGMathOperationDataStatisticsViewController.h"
 #import "FGMathSettingViewController.h"
-
+#import "FGMathDiffcultyViewController.h"
 @interface FGMathRootViewController ()<DiffcultyLevelViewDelegate,MusicPlayerViewDelegate,FGMathRootViewDelegate>
 @property (nonatomic, strong) FGMathRootView *choiceView;
 @property (nonatomic, strong) DiffcultyLevelView *diffView;
@@ -150,7 +150,9 @@
         }
         case MathOperationActionTypeCompreOfDiffculty:
         {
-            [self.view makeToast:@"还在施工中。。。。"];
+//            [self.view makeToast:@"还在施工中。。。。"];
+            FGMathDiffcultyViewController *diffcultyVC = [[FGMathDiffcultyViewController alloc]init];
+            [self.navigationController pushViewController:diffcultyVC animated:YES];
             break;
         }
         default:
