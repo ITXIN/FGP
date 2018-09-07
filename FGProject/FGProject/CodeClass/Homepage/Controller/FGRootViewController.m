@@ -57,7 +57,7 @@
     self.rootBgView = [[FGRootView alloc]init];
     [self.bgView addSubview:self.rootBgView];
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
-    cound = 100;
+    cound = 70;
     if (cound > 50) {//绕过审核
         self.angryBirdView = [[FGAngryBirdsView alloc]init];
         [self.bgView addSubview:self.angryBirdView];

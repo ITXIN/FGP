@@ -61,16 +61,6 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     self.b = 0.0;
     //公式中用到(起始幅度)
     self.wave = 1.5;
-    //判断加减
-    self.jia = NO;
-    //幅度增长速度
-    self.waveIncrease = 0.1;
-    //减阈值 a
-    self.waveMin = 0.97;
-    //增阈值 a
-    self.waveMax = 1.93;
-    //b的增幅（速度控制）
-    self.waveSpeed = 0.1;
     //起始Y值
     self.waveHeight = kScreenWidth/7;
     //起始频率

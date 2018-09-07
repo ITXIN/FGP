@@ -43,9 +43,9 @@
     for (int i = 0; i < 4; i ++){
         UIButton *categoryBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self.bgView addSubview:btn];
+            [self addSubview:btn];
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.mas_equalTo(self.bgView );
+                make.center.mas_equalTo(self );
                 make.size.mas_equalTo(CGSizeMake(categoryBtnW, categoryBtnW));
             }];
             btn.layer.cornerRadius = categoryBtnW/2;
@@ -89,7 +89,7 @@
     
     self.actionBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.bgView  addSubview:btn];
+        [self  addSubview:btn];
         btn.frame = CGRectMake(0, 0, actionBtnW, actionBtnW);
         btn.center = self.center;
         btn.layer.cornerRadius = actionBtnW/2;
@@ -109,8 +109,8 @@
     bigCenterH = sqrt(pow(bigRadius,2)/2);//直角三角形的直角边
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(categoryTap:)];
-    self.bgView.userInteractionEnabled = YES;
-    [self.bgView  addGestureRecognizer:tap];
+    self.userInteractionEnabled = YES;
+    [self  addGestureRecognizer:tap];
     //    [self setupTimer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self actionBtnClick:self.actionBtn];
@@ -212,7 +212,7 @@
 #pragma mark --- 手势
 - (void)categoryTap:(UITapGestureRecognizer*)sender
 {
-    CGPoint touchPoint = [sender locationInView:self.bgView];
+    CGPoint touchPoint = [sender locationInView:self];
     for (UIButton *btn in self.btnsArr){
         if ([btn.layer.presentationLayer hitTest:touchPoint]){
             [[SoundsProcess shareInstance] playSoundOfTock];
@@ -350,7 +350,7 @@
                 self.actionBtn.transform = CGAffineTransformIdentity;
             }];
         }
-        [self.bgView.layer addSublayer:circleLayer];
+        [self.layer addSublayer:circleLayer];
     }
 }
 

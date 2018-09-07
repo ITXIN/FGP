@@ -277,6 +277,7 @@ static CGFloat heightWave = 0;
 
 -(void)setCount:(NSInteger)count{
     _count = count;
+    count = 300;
     _countLab.text = [NSString stringWithFormat:@"%ld",count];
     self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*count/DATA_WAVE_HEIGHT_SCALE;
     heightWave = self.myWaterView.ripplePosition;

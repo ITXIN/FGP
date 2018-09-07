@@ -16,7 +16,7 @@
 }
 
 -(void)setQuestionModel:(FGMathOperationModel *)questionModel{
-    for (UIButton *btn in self.bgView.subviews){
+    for (UIButton *btn in self.subviews){
         [btn removeFromSuperview];
     }
     
@@ -70,13 +70,13 @@
         
         numAndOperBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [numAndOperBtn setBackgroundImage:operationImage forState:UIControlStateNormal];
-        [self.bgView addSubview:numAndOperBtn];
+        [self addSubview:numAndOperBtn];
         [arr addObject:numAndOperBtn];
         
         [numAndOperBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.bgView).offset(10);
-            make.bottom.equalTo(self.bgView).offset(-10);
-            make.centerY.equalTo(self.bgView);
+            make.top.equalTo(self).offset(10);
+            make.bottom.equalTo(self).offset(-10);
+            make.centerY.equalTo(self);
         }];
     }
     

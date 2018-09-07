@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Bert. All rights reserved.
 //http://blog.it985.com/13697.html
 
+///该文件暂时没有用到
+
 #import "MyWaterView.h"
 
 @interface MyWaterView()

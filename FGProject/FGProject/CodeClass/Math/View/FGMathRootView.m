@@ -34,7 +34,7 @@
     for (NSInteger i = 0 ; i < tagArr.count; i ++) {
         UIButton *tempBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self.bgView addSubview:btn];
+            [self addSubview:btn];
             btn.tag =  [(NSNumber*)tagArr[i] integerValue];
             [btn setBackgroundImage:[UIImage imageNamed:imageNameArr[i]] forState:UIControlStateNormal];
             [btn.layer addAnimation:basicAnim forKey:@"transform.rotation.z"];
@@ -48,8 +48,8 @@
             {
                 self.subtractBtn = tempBtn;
                 [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.bottom.equalTo(self.bgView.mas_centerY).offset(-btnSpace*2);
-                    make.right.equalTo(self.bgView.mas_centerX).offset(-btnSpace/2);
+                    make.bottom.equalTo(self.mas_centerY).offset(-btnSpace*2);
+                    make.right.equalTo(self.mas_centerX).offset(-btnSpace/2);
                     make.size.mas_equalTo(operationSize);
                 }];
                 break;
@@ -70,7 +70,7 @@
             {
                 self.multiplyBtn = tempBtn;
                 [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(self.bgView.mas_centerX).offset(btnSpace/2);
+                    make.left.equalTo(self.mas_centerX).offset(btnSpace/2);
                     make.top.mas_equalTo(self.subtractBtn);
                     make.size.mas_equalTo(operationSize);
                 }];
@@ -92,7 +92,7 @@
                 [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.mas_equalTo(self.subtractBtn.mas_bottom).offset(10);
                     make.size.mas_equalTo(operationSize);
-                    make.centerX.equalTo(self.bgView);
+                    make.centerX.equalTo(self);
                 }];
                 tempBtn.backgroundColor = [UIColor whiteColor];
                 tempBtn.layer.cornerRadius = operationButtonWidth/2;

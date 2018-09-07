@@ -14,11 +14,11 @@
     [super initSubviews];
     //红色气球
     self.redImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qiqiu3.png"]];
-    [self.bgView addSubview:self.redImageView];
+    [self addSubview:self.redImageView];
     
     //黄色气球
     self.yellowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"huangqiu.png"]];
-    [self.bgView addSubview:self.yellowImageView];
+    [self addSubview:self.yellowImageView];
     
     _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _startBtn.frame = CGRectMake(kScreenWidth - 100 - kScreenHeight/6, kScreenHeight/2, kScreenHeight/6, kScreenHeight/6);
@@ -27,12 +27,12 @@
     [_startBtn addTarget:self action:@selector(startBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_startBtn setImage:[UIImage imageNamed:@"qiqiu_start"] forState:UIControlStateNormal];
     _startBtn.backgroundColor = [UIColor clearColor];
-    [self.bgView addSubview:_startBtn];
+    [self addSubview:_startBtn];
     
     //太阳
     _sunImgView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth+50, kScreenHeight/6, kScreenWidth/10, kScreenWidth/10)];
     _sunImgView.image = [UIImage imageNamed:@"taiyang-03"];
-    [self.bgView addSubview:_sunImgView];
+    [self addSubview:_sunImgView];
     
     //晃动动画
     CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
