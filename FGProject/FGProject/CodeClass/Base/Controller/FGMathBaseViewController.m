@@ -71,7 +71,7 @@
 
 #pragma mark -----------
 - (void)updatCircleviewData{
-    [self.circleView updatCircleviewData];
+    [self.circleView updatWaterWaveView];
 }
 
 - (void)showCircleAnimationOfWaterWave{

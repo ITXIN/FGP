@@ -31,8 +31,6 @@
 
 @property (nonatomic,strong) CAShapeLayer *bigBirdShapeLayer;
 
-
-
 - (void)restartBirdsAnimation;//重新开始动画
 
 @end

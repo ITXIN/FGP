@@ -11,15 +11,11 @@
 @interface MyWaterView()
 {
     UIColor *currentWaterColor;
-    BOOL isHasBGImage;
-    UIImage *image;
 }
-//公式中用到(起始相位)
-@property (assign, nonatomic) float b;
 @end
 @implementation MyWaterView
--(void)dealloc
-{
+
+-(void)dealloc{
     [_timer invalidate];
     _timer = nil;
 }
@@ -38,9 +34,8 @@
     for (float x = 0; x <= rect.size.width; x ++){
         y =5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
         CGPathAddLineToPoint(path, nil, x, y);
-        
     }
-
+    
     //从左到右填充颜色
     CGPathAddLineToPoint(path, nil, rect.size.width, rect.size.height);
     CGPathAddLineToPoint(path, nil, 0,rect.size.height);
@@ -55,7 +50,7 @@
     CGMutablePathRef path1 = CGPathCreateMutable();
     //画水波
     CGContextSetLineWidth(contxt1, 1);
-
+    
     CGContextSetFillColorWithColor(contxt1, currentWaterColor.CGColor );
     float y1 = self.waveHeight;
     CGPathMoveToPoint(path1, NULL, 0, y1);
@@ -75,36 +70,15 @@
     
 }
 
-- (void)drawTextWithRect:(CGRect)rect{
-    //绘制文字
-    //由于一直在绘制清除,遮住了
-    CGFloat sizeFont = 50.0;
-    CGPoint point ;
-    point.x = (rect.size.width - sizeFont)/2;
-    point.y = (rect.size.height - sizeFont)/2;
-    NSString *str = [NSString stringWithFormat:@"%ld",self.count];
-    if (str.length == 1){
-        str = [NSString stringWithFormat:@" %ld",self.count];
-    }
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    //设置文字前景颜色
-    dic [NSForegroundColorAttributeName] = [UIColor whiteColor];
-    //设置背景颜色
-    dic [NSBackgroundColorAttributeName] = [UIColor clearColor];
-    dic [NSFontAttributeName] = [UIFont boldSystemFontOfSize:sizeFont];
-    [str drawAtPoint:point withAttributes:dic];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame{
-    self.b = 0.0;
     self = [super initWithFrame:frame];
     if (self){
-        isHasBGImage = NO;
         [self setBackgroundColor:[UIColor clearColor]];
+        
+        [self initWaveValue];
+        
         currentWaterColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(animateWave) userInfo:nil repeats:YES];
-        [self initWaveValue];
     }
     return self;
 }
@@ -127,6 +101,7 @@
     self.waveHeight = kScreenWidth/7;
     //起始频率
     self.w = 180;
+    self.b = 0.0;
 }
 
 - (void)animateWave{

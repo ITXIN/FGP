@@ -13,34 +13,34 @@ static CGFloat x;
     NSInteger number;
     CGFloat myWaterWaveHeigh;
 }
-
-- (void)drawRect:(CGRect)rect{
-    [super drawRect:rect];
-    if (x >= rect.size.width){
-        x = 0;
-    }
-    
-    int y1 = ((int)( self.waveHeight) + 1);
-    //当大于一定高度,帆船消失换为另外的图片
-    if (y1 <= rect.size.height/3){
-        x += 2;
-        int y2 = 10;
-        UIImage *image = [UIImage imageNamed:@"fish-01"];
-        if ((int)x == (int)rect.size.width/2 || (int)x == (int)rect.size.width/4 || (int)x == (int)rect.size.width/4*3){
-            y2 = 30;
-            image = [self imageRotatedByDegrees:90.f image:image];
-            [image drawInRect:CGRectMake(x, y1- rect.size.width/4/2-(y2), rect.size.width/4, rect.size.width/4)];
-        }else{
-            [image drawInRect:CGRectMake(x, y1- rect.size.width/4/2-(y2), rect.size.width/4, rect.size.width/4)];
-        }
-    }else{
-        x ++;
-        [[UIImage imageNamed:@"sailing"] drawInRect:CGRectMake(x, y1- rect.size.width/3+(arc4random()%(4+1)), rect.size.width/3, rect.size.width/3)];
-    }
-    //这个方法会把背景颜色清理掉
-    //  CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
-}
-
+/*
+ - (void)drawRect:(CGRect)rect{
+ [super drawRect:rect];
+ if (x >= rect.size.width){
+ x = 0;
+ }
+ 
+ int y1 = ((int)( self.waveHeight) + 1);
+ //当大于一定高度,帆船消失换为另外的图片
+ if (y1 <= rect.size.height/3){
+ x += 2;
+ int y2 = 10;
+ UIImage *image = [UIImage imageNamed:@"fish-01"];
+ if ((int)x == (int)rect.size.width/2 || (int)x == (int)rect.size.width/4 || (int)x == (int)rect.size.width/4*3){
+ y2 = 30;
+ image = [self imageRotatedByDegrees:90.f image:image];
+ [image drawInRect:CGRectMake(x, y1- rect.size.width/4/2-(y2), rect.size.width/4, rect.size.width/4)];
+ }else{
+ [image drawInRect:CGRectMake(x, y1- rect.size.width/4/2-(y2), rect.size.width/4, rect.size.width/4)];
+ }
+ }else{
+ x ++;
+ [sailngImage drawInRect:CGRectMake(x, y1- rect.size.width/3+(arc4random()%(4+1)), rect.size.width/3, rect.size.width/3)];
+ }
+ //这个方法会把背景颜色清理掉
+ //  CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
+ }
+ */
 -(CGFloat)DegreesToRadians:(CGFloat)degress{
     return degress*M_PI/180.0;
 }
@@ -72,6 +72,15 @@ static CGFloat x;
     return newImage;
 }
 
+- (UIImageView *)sailngImageView{
+    if (!_sailngImageView) {
+        _sailngImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sailing"]];
+        _sailngImageView.frame = CGRectMake(0, -20, 30, 30);
+        [self insertSubview:_sailngImageView belowSubview:_countLab];
+    }
+    return _sailngImageView;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
@@ -80,12 +89,14 @@ static CGFloat x;
         self.layer.masksToBounds = YES;
         
         x = 0;
+        number = 0;
+        myWaterWaveHeigh = 0;
+        
         _myWaterView = [[MyWaterView alloc]initWithFrame:CGRectMake(0, 0 , kScreenWidth/7, kScreenWidth/7)];
         _myWaterView.layer.cornerRadius = kScreenWidth/7/2;
         _myWaterView.layer.masksToBounds = YES;
         [self addSubview:_myWaterView];
-        number = 0;
-        myWaterWaveHeigh = 0;
+        
         //绘制文字占用空间已经 cup 使用情况和在 MyWaterView 一样
         //但是如果要设置文字动画就需要在这设置为属性
         _countLab = [[UILabel alloc]initWithFrame:self.bounds];
@@ -94,7 +105,7 @@ static CGFloat x;
         _countLab.textColor = [UIColor lightGrayColor];
         _countLab.font = [UIFont boldSystemFontOfSize:50.f];
         [self addSubview:_countLab];
-        [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(animateWaveFish) userInfo:nil repeats:YES];
+        
         self.titleLab = ({
             UILabel *label = [[UILabel alloc]init];
             [self addSubview:label];
@@ -108,15 +119,90 @@ static CGFloat x;
             label.textAlignment = NSTextAlignmentCenter;
             label;
         });
+       
+         [self initWaveValue];
     }
     
     return self;
 }
 
+#pragma mark 初始化波浪参数
+- (void)initWaveValue{
+    //公式中用到(起始幅度)
+    self.wave = self.myWaterView.wave;
+    //起始频率
+    self.w = 90;
+    self.b = self.myWaterView.b;
+}
+
+- (void)setupBoard{
+    NSInteger i = arc4random() %10;
+    float y = self.waveHeight;;
+    NSMutableArray *tempArr = [NSMutableArray array];
+    if (i %2 == 0){
+        for (float x = 0; x <= kScreenWidth/7; x ++){
+            //y=Acos(wx+Φ)+B
+            y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
+            [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
+        }
+    }else{
+        for (float x = 0; x <= kScreenWidth/7; x ++){
+            //y=Asin(wx+Φ)+B
+            y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
+            [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
+        }
+    }
+    
+    [self drawGroupLineWithGroupPointArr:tempArr];
+}
+
 #pragma mark -
-#pragma mark --- 绘制 fish
-- (void)animateWaveFish{
-    [self setNeedsDisplay];
+#pragma mark --- 绘制路径
+- (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)tepPointsArr{
+    
+    UIBezierPath *circlePath = [UIBezierPath bezierPath];
+    circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
+    circlePath.lineCapStyle = kCGLineCapRound;
+    circlePath.lineJoinStyle = kCGLineJoinRound;
+    
+    CAShapeLayer *circleLayer = [CAShapeLayer layer];
+    circleLayer.lineCap = kCALineCapRound;
+    circleLayer.lineJoin =  kCALineJoinRound;
+    // 设置填充颜色
+    circleLayer.fillColor = [UIColor clearColor].CGColor;
+    // 设置线宽
+    circleLayer.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
+    // 设置线的颜色
+    circleLayer.strokeColor = UIColor.redColor.CGColor;
+    circleLayer.strokeEnd = 1.0;
+    circleLayer.strokeStart = 0.0;
+    for (int i = 0; i < tepPointsArr.count; i ++){
+        if (i == 0){
+            [circlePath moveToPoint:CGPointFromString(tepPointsArr[i]) ];
+        }else{
+            [circlePath addLineToPoint:CGPointFromString(tepPointsArr[i])];
+        }
+    }
+    circleLayer.path = circlePath.CGPath;
+    [self.layer addSublayer:circleLayer];
+    
+    [self.sailngImageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:INT_MAX] forKey:@"Stroken1"];
+
+}
+
+- (CAKeyframeAnimation *)setupStartLiveCircularAnimationPath:(UIBezierPath *)path withRepatCount:(NSInteger)repeatCount{
+    CAKeyframeAnimation *orbit = [CAKeyframeAnimation animation];
+    orbit.keyPath = @"position";
+    orbit.path = path.CGPath;
+    orbit.duration = 6;
+    orbit.additive = YES;
+    orbit.repeatCount = repeatCount;
+    orbit.calculationMode = kCAAnimationPaced;
+    orbit.rotationMode = nil;
+    orbit.removedOnCompletion = YES;//到了那个移动位置后,是否返回
+    //    orbit.delegate = self;
+    orbit.fillMode = kCAFillModeForwards;
+    return orbit;
 }
 
 #pragma mark -
@@ -160,8 +246,19 @@ static CGFloat x;
             return ;
         }
     } completion:^(BOOL finished) {
-        if ((int)myWaterWaveHeigh ==(int) self.waveHeight){
+        if ((int)myWaterWaveHeigh == (int) self.waveHeight){
             myWaterWaveHeigh = 0;
+            
+            //超过一定高度不显示帆船
+            if (self.waveHeight > 50.0) {
+                FGLOG(@"%f",self.waveHeight);
+                //帆船的初始化
+                [self setupBoard];
+            }else{
+                [self.sailngImageView removeFromSuperview];
+                self.sailngImageView = nil;
+            }
+            
             return;
         }else{
             [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
@@ -183,7 +280,4 @@ static CGFloat x;
     return _myWaterView.count;
 }
 
-- (NSTimer *)timer{
-    return _myWaterView.timer;
-}
 @end

@@ -17,6 +17,6 @@
 
 - (void)circleViewWillDisapper;
 
-- (void)updatCircleviewData;
+- (void)updatWaterWaveView;
 
 @end
