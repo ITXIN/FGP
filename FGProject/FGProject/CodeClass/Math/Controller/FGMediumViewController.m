@@ -98,28 +98,7 @@
 #pragma mark -
 #pragma mark --- update view
 - (void)updateView{
-    /*
-     NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
-     NSString *numberStr = [NSString stringWithFormat:@"今天已经完成了%ld道题目",(long)_doneCount];
-     UIColor *numberColor = [UIColor colorWithRed:(arc4random()%(255 -1 +1)+1)/255.0 green:(arc4random()%(255 -1 +1)+1)/255.0 blue:(arc4random()%(255 -1 +1)+1)/255.0 alpha:1.0];
-     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:numberStr];
-     NSRange numberRange = NSMakeRange(7, [NSString stringWithFormat:@"%ld",_doneCount].length);
-     [str addAttribute:NSForegroundColorAttributeName value:numberColor range:numberRange];
-     [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Arial-BoldItalicMT" size:35.0] range:numberRange];
-     
-     NSRange textRange = NSMakeRange(0, 7);
-     NSRange textRange1 = NSMakeRange(7+[NSString stringWithFormat:@"%ld",_doneCount].length, 3);
-     UIColor *textColor = [UIColor colorWithRed:(arc4random()%(255 -1 +1)+1)/255.0 green:(arc4random()%(255 -1 +1)+1)/255.0 blue:(arc4random()%(255 -1 +1)+1)/255.0 alpha:1.0];
-     NSArray *fontArr = @[@"Helvetica-Bold",@"American Typewriter",@"Arial-BoldMT",@"Courier-Bold",@"CourierNewPS-BoldMT",@"Georgia-Bold"];
-     UIFont *textFont = [UIFont fontWithName:fontArr[arc4random()%(fontArr.count)] size:25.f];
-     
-     [str addAttribute:NSForegroundColorAttributeName value:textColor range:textRange];
-     [str addAttribute:NSFontAttributeName value:textFont range:textRange];
-     [str addAttribute:NSForegroundColorAttributeName value:textColor range:textRange1];
-     [str addAttribute:NSFontAttributeName value:textFont range:textRange1];
-     
-     self.navigationView.titleLab.attributedText = str ;
-     */
+  
     self.currentOperaModel = [self.mathManager generateMediumOperationModel];
     [self.mediumLOV setMediumOperationModel:self.currentOperaModel];
     FGMathAnswerOptionsModel *answerOptionModel = [self.mathManager generateRandomAnswerNum:self.currentOperaModel.answerNum];
@@ -170,18 +149,6 @@
         [[SoundsProcess shareInstance] playSoundOfWrong];
         [self updateView];
     }
-}
-
-#pragma mark -
-#pragma mark --- postDataToFireBase
-- (void)postDataToFireBaseWithClickQuestionModel:(FGClickRandomAnswerCountModel*)clickModel{
-//    NSString *dateStr = [FGProjectHelper logTimeStringFromDate:[NSDate date]];
-//    NSDictionary *dic = [FGProjectHelper postDataWithClickRandomModel:clickModel];
-//    [[self.dataBaseRef child:dateStr] updateChildValues:dic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
-//        if (error) {
-//            return ;
-//        }
-//    }];
 }
 
 /**
