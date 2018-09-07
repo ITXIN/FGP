@@ -14,8 +14,9 @@
 @property (nonatomic, assign)CGFloat mainRippleoffsetX;//主波偏移量
 @property (nonatomic, assign)CGFloat minorRippleoffsetX;//次波偏移量
 @property (nonatomic, assign)CGFloat rippleSpeed;//波浪速度
-@property (nonatomic, assign)CGFloat ripplePosition;//波浪Y轴位置
+@property (nonatomic, assign)CGFloat ripplePosition;//波浪Y轴位置 距顶部距离
 @property (nonatomic, assign)float rippleAmplitude;//波浪振幅
+
 //设置frame 主波填充颜色  次波填充颜色
 - (instancetype)initWithFrame:(CGRect)frame mainRippleColor:(UIColor *)mainRippleColor minorRippleColor:(UIColor *)minorRippleColor;
 //设置frame 主波填充颜色  次波填充颜色 主波偏移量 次波偏移量 波浪速度 波浪Y轴位置 波浪振幅

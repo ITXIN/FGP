@@ -71,11 +71,7 @@
     /*
      *创建两个layer
      */
-//    for (CALayer *layer in self.layer.sublayers) {
-//        if ([layer isKindOfClass:[CAShapeLayer class]]) {
-//            [layer removeFromSuperlayer];
-//        }
-//    }
+
     if (!_mainRippleLayer) {
         self.mainRippleLayer = [CAShapeLayer layer];
         self.mainRippleLayer.fillColor = self.mainRippleColor.CGColor;
@@ -94,13 +90,13 @@
     [self.rippleDisplayLink addToRunLoop:[NSRunLoop mainRunLoop]
                                  forMode:NSRunLoopCommonModes];
     
-    
 }
 
 - (void)getCurrentRipple {
     [self drawMainRipple];
     [self drawMinorRipple];
 }
+
 - (void)drawMainRipple{
     self.mainRippleoffsetX += self.rippleSpeed;
     CGMutablePathRef path = CGPathCreateMutable();
@@ -117,10 +113,9 @@
     CGPathRelease(path);
 }
 
+
 - (void)drawMinorRipple{
     self.minorRippleoffsetX += self.rippleSpeed+0.1f;
-
-    
     CGMutablePathRef minorRipple = CGPathCreateMutable();
     CGPathMoveToPoint(minorRipple, nil, 0, self.ripplePosition);
     CGFloat y = 0.f;
@@ -133,6 +128,10 @@
     CGPathCloseSubpath(minorRipple);
     self.minorRippleLayer.path = minorRipple;
     CGPathRelease(minorRipple);
+}
+
+- (void)setRipplePosition:(CGFloat)ripplePosition{
+    _ripplePosition = ripplePosition;
 }
 /*Only override drawRect: if you perform custom drawing.
  An empty implementation adversely affects performance during animation.

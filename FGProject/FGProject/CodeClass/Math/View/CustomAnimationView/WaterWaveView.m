@@ -7,7 +7,8 @@
 //
 
 #import "WaterWaveView.h"
-
+#import "WaterRippleView.h"
+static CGFloat heightWave = 0;
 @implementation WaterWaveView
 {
     NSInteger number;
@@ -87,21 +88,18 @@
         self.backgroundColor = RGBA(255, 255, 255, 1);
         self.layer.cornerRadius = frame.size.width/2;
         self.layer.masksToBounds = YES;
-        
-     
+
         number = 0;
         myWaterWaveHeigh = 0;
-        
-//        _myWaterView = [[MyWaterView alloc]initWithFrame:CGRectMake(0, 0 , kScreenWidth/7, kScreenWidth/7)];
-        
+     
         _myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/7, kScreenWidth/7)
-                               mainRippleColor:[UIColor colorWithRed:253/255.0 green:183/255.0 blue:106/255.0 alpha:1]
-                              minorRippleColor:[UIColor colorWithRed:253/255.0 green:158/255.0 blue:61/255.0 alpha:1]
-                             mainRippleoffsetX:1.0f
-                            minorRippleoffsetX:1.1f
-                                   rippleSpeed:2.0f
-                                ripplePosition:50.0f//高度
-                               rippleAmplitude:5.0f];
+                                              mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1]
+                                             minorRippleColor:[UIColor colorWithRed:84/255.0f green:200/255.0f blue:120/255.0f alpha:1]
+                                            mainRippleoffsetX:1.0f
+                                           minorRippleoffsetX:1.1f
+                                                  rippleSpeed:2.0f
+                                               ripplePosition:20.0f//高度
+                                              rippleAmplitude:5.0f];
         _myWaterView.layer.cornerRadius = kScreenWidth/7/2;
         _myWaterView.layer.masksToBounds = YES;
         [self addSubview:_myWaterView];
@@ -128,8 +126,8 @@
             label.textAlignment = NSTextAlignmentCenter;
             label;
         });
-       
-         [self initWaveValue];
+        
+        [self initWaveValue];
     }
     
     return self;
@@ -146,7 +144,7 @@
 
 - (void)setupBoard{
     NSInteger i = arc4random() %10;
-    float y = self.waveHeight;;
+    float y = self.waveHeight;
     NSMutableArray *tempArr = [NSMutableArray array];
     if (i %2 == 0){
         for (float x = 0; x <= kScreenWidth/7; x ++){
@@ -196,7 +194,7 @@
     [self.layer addSublayer:circleLayer];
     
     [self.sailngImageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:INT_MAX] forKey:@"Stroken1"];
-
+    
 }
 
 - (CAKeyframeAnimation *)setupStartLiveCircularAnimationPath:(UIBezierPath *)path withRepatCount:(NSInteger)repeatCount{
@@ -217,10 +215,15 @@
 #pragma mark -
 #pragma mark --- 显示动画
 - (void)showAnimationOfWaterWave{
-    [UIView animateWithDuration:1 animations:^{
-        [self countAnimation];
-        [self waterWaveAnimation];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.sailngImageView removeFromSuperview];
+        self.sailngImageView = nil;
+        [UIView animateWithDuration:1 animations:^{
+            [self countAnimation];
+            [self waterWaveAnimation];
+        }];
+    });
+    
 }
 
 - (void)countAnimation{
@@ -246,44 +249,38 @@
 }
 
 - (void)waterWaveAnimation{
-//    _myWaterView.ripplePosition = myWaterWaveHeigh;
-//    [UIView animateWithDuration:2 animations:^{
-//        myWaterWaveHeigh ++;
-//        _myWaterView.ripplePosition = myWaterWaveHeigh;
-//        if (myWaterWaveHeigh > self.waveHeight){
-//            myWaterWaveHeigh = 0;
-//            return ;
-//        }
-//    } completion:^(BOOL finished) {
-//        if ((int)myWaterWaveHeigh == (int) self.waveHeight){
-//            myWaterWaveHeigh = 0;
     
-            //超过一定高度不显示帆船
-            if (self.waveHeight > 50.0) {
-                FGLOG(@"%f",self.waveHeight);
-                //帆船的初始化
-                [self setupBoard];
-            }else{
+    self.myWaterView.ripplePosition = myWaterWaveHeigh;
+    [UIView animateWithDuration:0.05 animations:^{
+        myWaterWaveHeigh ++;
+        if ((int)self.myWaterView.ripplePosition >= (int)heightWave){
+            self.myWaterView.ripplePosition = heightWave;
+            myWaterWaveHeigh = 0;
+            self.waveHeight = self.myWaterView.ripplePosition;
+            //闪动
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [self.sailngImageView removeFromSuperview];
                 self.sailngImageView = nil;
-            }
-//
-//            return;
-//        }else{
-//            [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
-//        }
-//    }];
+                [self setupBoard];
+            });
+            return ;
+        }
+        
+    }completion:^(BOOL finished) {
+        if ((int)self.myWaterView.ripplePosition >= (int)heightWave){
+            return ;
+        }else{
+            [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
+        }
+    }];
 }
-
 
 -(void)setCount:(NSInteger)count{
     _count = count;
     _countLab.text = [NSString stringWithFormat:@"%ld",count];
-//    self.myWaterView.ripplePosition =  100*count/DATA_WAVE_HEIGHT_SCALE;
-//    self.myWaterView.mainRippleoffsetX = 1.0;
-//    self.myWaterView.minorRippleoffsetX = 1.0;
+    self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*count/DATA_WAVE_HEIGHT_SCALE;
+    heightWave = self.myWaterView.ripplePosition;
     [self showAnimationOfWaterWave];
-//    [self.myWaterView  setNeedsDisplay];
 }
 
 @end
