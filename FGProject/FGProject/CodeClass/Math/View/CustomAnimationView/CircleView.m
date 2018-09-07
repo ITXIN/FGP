@@ -47,8 +47,8 @@
 
 - (void)updatWaterWaveView{
     self.waterWaveView.count = [[FGMathOperationManager shareMathOperationManager] getCurrentDateHasDone];
-    self.waterWaveView.waveHeight = self.waterWaveView.frame.size.height- self.waterWaveView.frame.size.height*self.waterWaveView.count/DATA_WAVE_HEIGHT_SCALE;
-    [self.waterWaveView showAnimationOfWaterWave];
+//    self.waterWaveView.waveHeight = 100 - 100*self.waterWaveView.count/DATA_WAVE_HEIGHT_SCALE;
+//    [self.waterWaveView showAnimationOfWaterWave];
 }
 
 @end

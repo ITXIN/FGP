@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23557E9821425B6D006FF9E7 /* WaterRippleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23557E9721425B6C006FF9E7 /* WaterRippleView.m */; };
 		2361A3FE20D757060041981D /* FGImageLeftTitleRightButtom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */; };
 		23CADFE32119826900EF8CE1 /* FGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CADFE22119826900EF8CE1 /* FGRootView.m */; };
 		8F3E0A1F1FBEE37300B838B0 /* CusLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E0A1D1FBEE37300B838B0 /* CusLayerView.m */; };
@@ -679,6 +680,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23557E9621425B6B006FF9E7 /* WaterRippleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterRippleView.h; sourceTree = "<group>"; };
+		23557E9721425B6C006FF9E7 /* WaterRippleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterRippleView.m; sourceTree = "<group>"; };
 		2361A3FC20D757060041981D /* FGImageLeftTitleRightButtom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageLeftTitleRightButtom.h; sourceTree = "<group>"; };
 		2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageLeftTitleRightButtom.m; sourceTree = "<group>"; };
 		23CADFE12119826900EF8CE1 /* FGRootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGRootView.h; sourceTree = "<group>"; };
@@ -1866,6 +1869,8 @@
 		8F6AA3441FB0410400A7B5C7 /* CustomAnimationView */ = {
 			isa = PBXGroup;
 			children = (
+				23557E9621425B6B006FF9E7 /* WaterRippleView.h */,
+				23557E9721425B6C006FF9E7 /* WaterRippleView.m */,
 				8F6AA3471FB0410400A7B5C7 /* CARadarView.h */,
 				8F6AA3481FB0410400A7B5C7 /* CARadarView.m */,
 				8F6AA3491FB0410400A7B5C7 /* CircleView.h */,
@@ -3791,6 +3796,7 @@
 				E65AA461208B34C000A4F808 /* FGImageTopTitleBottomButton.m in Sources */,
 				8F6AA60D1FB0410500A7B5C7 /* TooltipForAnswerView.m in Sources */,
 				8F6AA6101FB0410500A7B5C7 /* MusicPlayerView.m in Sources */,
+				23557E9821425B6D006FF9E7 /* WaterRippleView.m in Sources */,
 				8F6AA60A1FB0410500A7B5C7 /* FGSimpleOperationView.m in Sources */,
 				8F6AA8221FB0410700A7B5C7 /* FLDeviceUID.m in Sources */,
 				8F6AA5D71FB0410500A7B5C7 /* PcmPlayer.m in Sources */,

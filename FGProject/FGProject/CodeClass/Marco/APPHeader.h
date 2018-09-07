@@ -133,7 +133,7 @@
 //数学计算的范围
 static NSInteger kMathOperationRangeNumber = 11;
 
-#define DATA_WAVE_HEIGHT_SCALE 1000 //做题统计高度参数，1000是按1000道题水充满,可以设置其他的
+#define DATA_WAVE_HEIGHT_SCALE 500 //做题统计高度参数，1000是按1000道题水充满,可以设置其他的
 
 //数学运算数据统计
 #define kMathOperationDataStatisticsKey @"kMathOperationDataStatisticsKey"

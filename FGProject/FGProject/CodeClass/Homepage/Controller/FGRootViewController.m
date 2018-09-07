@@ -57,6 +57,7 @@
     self.rootBgView = [[FGRootView alloc]init];
     [self.bgView addSubview:self.rootBgView];
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
+    cound = 100;
     if (cound > 50) {//绕过审核
         self.angryBirdView = [[FGAngryBirdsView alloc]init];
         [self.bgView addSubview:self.angryBirdView];
@@ -87,7 +88,6 @@
             btn;
         });
         
-      
     }
 }
 
@@ -100,6 +100,7 @@
         FGLOG(@"-----failedHandler %@",error);
     }];
 }
+
 #pragma mark -
 - (void)myCenterAction:(UIButton*)sender{
     FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];

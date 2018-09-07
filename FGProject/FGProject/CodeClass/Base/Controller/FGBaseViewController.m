@@ -26,7 +26,6 @@
 - (void)initSubviews{
     self.bgView= ({
         UIView *view = [[UIView alloc]init];
-        view.backgroundColor = [UIColor yellowColor];
         [self.view addSubview:view];
         view;
     });

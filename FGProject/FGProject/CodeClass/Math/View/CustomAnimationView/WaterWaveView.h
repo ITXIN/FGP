@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyWaterView.h"
+//#import "MyWaterView.h"
+
+#import "WaterRippleView.h"
 /**
  *  绘制了图片以及统计个数
  */
 @interface WaterWaveView : UIView
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, strong)  UILabel *countLab;
-@property (nonatomic, strong) MyWaterView *myWaterView;
+@property (nonatomic, strong) WaterRippleView *myWaterView;
 @property (nonatomic, strong) UILabel *titleLab;
 @property (nonatomic, strong) UIImageView *sailngImageView;
 
