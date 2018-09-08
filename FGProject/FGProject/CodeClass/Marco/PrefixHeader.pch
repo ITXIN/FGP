@@ -28,12 +28,9 @@
 #import "FGNetworkingReachable.h"
 #import <POP/POP.h>
 #import "FGProject-Bridging-Header.h"
-//#import <JSPatchPlatform/JSPatch.h>
 #import "Toast+UIView.h"
 #import "FGBlurEffectView.h"
-#import "Firebase.h"
 #import "FLDeviceUID.h"
-#import <GoogleMobileAds/GoogleMobileAds.h>
 #import "FGAlertView.h"
 #import "JCAlertView.h"
 #import "FGNavigationView.h"

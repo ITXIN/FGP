@@ -27,7 +27,7 @@
     FGClickRandomAnswerCountModel *clickRandomCounModel;
 }
 
-@property (nonatomic,strong) FIRDatabaseReference *dataBaseRef;//存字符串
+//@property (nonatomic,strong) FIRDatabaseReference *dataBaseRef;//存字符串
 @property (nonatomic,strong) FGMediumLevelOperatorView *mediumLOV;
 @property (nonatomic,strong) FGMediumCandidateAnswerView *candidateAV;
 @property (nonatomic,strong) FGMathOperationModel *currentOperaModel;
@@ -87,13 +87,13 @@
 
 #pragma mark -
 #pragma mark --- 数据上传 Firebase
-- (void)setupPostDataToFireBase{
-    NSString *adidStr = [FLDeviceUID uid];
-    self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
-    self.dataBaseRef = [[[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_MATH] child:FIREBASE_DATABASE_CATEGORY_MATH_MEDIUM];
-    
-    self.dataBaseRef = [self.dataBaseRef child:[NSString stringWithFormat:@"%@",[FGProjectHelper logTimeStringFromDate:[NSDate date]]]];
-}
+//- (void)setupPostDataToFireBase{
+//    NSString *adidStr = [FLDeviceUID uid];
+//    self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
+//    self.dataBaseRef = [[[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_MATH] child:FIREBASE_DATABASE_CATEGORY_MATH_MEDIUM];
+//    
+//    self.dataBaseRef = [self.dataBaseRef child:[NSString stringWithFormat:@"%@",[FGProjectHelper logTimeStringFromDate:[NSDate date]]]];
+//}
 
 #pragma mark -
 #pragma mark --- update view

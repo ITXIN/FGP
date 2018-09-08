@@ -57,8 +57,8 @@ UIImagePickerControllerDelegate,UINavigationControllerDelegate
 
 @property (nonatomic, strong) NSMutableArray *noAnswerArr;//不知道如何回复的处理.
 
-@property (nonatomic,strong ) FIRDatabaseReference *dataBaseRef;//存字符串
-@property (nonatomic,strong ) FIRStorageReference  *storageRef;//存文件图片等(文件存储系统，保存文件后会生成一个url)
+//@property (nonatomic,strong ) FIRDatabaseReference *dataBaseRef;//存字符串
+//@property (nonatomic,strong ) FIRStorageReference  *storageRef;//存文件图片等(文件存储系统，保存文件后会生成一个url)
 @property (nonatomic,strong ) NSString *firebaseRootKeyStr;//标识符
 @end
 
@@ -199,22 +199,22 @@ static CGRect   strOfRect;
 
 #pragma mark -
 #pragma mark --- 数据上传 Firebase
-- (void)setupPostDataToFireBase
-{
-    NSString *adidStr = [FLDeviceUID uid];
-
-    self.firebaseRootKeyStr = [NSString stringWithFormat:@"%@-%@",adidStr,[FGProjectHelper logTimeStringFromDate:[NSDate date]]] ;
-    NSLog(@"-----addid %@",  self.firebaseRootKeyStr);
-    self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
-    self.dataBaseRef = [[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_AI];
-    
-    self.dataBaseRef = [self.dataBaseRef child:self.firebaseRootKeyStr];
-//    [self.dataBaseRef removeValue];
-    
-    self.storageRef = [[FIRStorage storage]referenceForURL:FIREBASE_STORAGE_URL];
-    self.storageRef = [[self.storageRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_AI];
-    self.storageRef = [self.storageRef child:self.firebaseRootKeyStr];
-}
+//- (void)setupPostDataToFireBase
+//{
+//    NSString *adidStr = [FLDeviceUID uid];
+//
+//    self.firebaseRootKeyStr = [NSString stringWithFormat:@"%@-%@",adidStr,[FGProjectHelper logTimeStringFromDate:[NSDate date]]] ;
+//    NSLog(@"-----addid %@",  self.firebaseRootKeyStr);
+//    self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
+//    self.dataBaseRef = [[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_AI];
+//
+//    self.dataBaseRef = [self.dataBaseRef child:self.firebaseRootKeyStr];
+////    [self.dataBaseRef removeValue];
+//
+//    self.storageRef = [[FIRStorage storage]referenceForURL:FIREBASE_STORAGE_URL];
+//    self.storageRef = [[self.storageRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_AI];
+//    self.storageRef = [self.storageRef child:self.firebaseRootKeyStr];
+//}
 
 #pragma mark -
 #pragma mark --- FGAIChatCellDelegate 设置语音
@@ -362,8 +362,7 @@ static CGRect   strOfRect;
         [cell.iconBtn setImage:image forState:UIControlStateNormal];
         [self.tableView reloadData];
         
-        
-        [self postStoregeDataWithImage:image];
+//        [self postStoregeDataWithImage:image];
         
     }];
     
@@ -605,9 +604,7 @@ static CGRect   strOfRect;
         NSLog(@"----- tempMySpeakStr %@",tempAiSpeakStr);
         NSLog(@"----- aiSpeakStr %@",self.aiSpeakWordsStr);
         
-        
-       
-        [self postDataToFireBase];
+//        [self postDataToFireBase];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.mySpeakDataArr addObject:[NSString stringWithFormat:@"%@",self.mySpeakWordsStr]];
@@ -658,42 +655,42 @@ static CGRect   strOfRect;
 
 #pragma mark -
 #pragma mark --- postDataToFireBase
-- (void)postDataToFireBase
-{
-    NSString *dateStr = [FGProjectHelper logTimeStringFromDate:[NSDate date]];
-    [self.dataBaseRef.childByAutoId updateChildValues:@{
-                                                @"MySpeak":[NSString stringWithFormat:@"%@: %@",dateStr,self.mySpeakWordsStr],
-                                                @"AISpeak":[NSString stringWithFormat:@"%@: %@",dateStr,self.aiSpeakWordsStr]
-                                                }withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
-                                                    if (error) {
-                                                        NSLog(@"-----error %@ %@ %@",error,ref.key,ref.URL);
-                                                        return ;
-                                                    }
-                                                }];
-    
-}
+//- (void)postDataToFireBase
+//{
+//    NSString *dateStr = [FGProjectHelper logTimeStringFromDate:[NSDate date]];
+//    [self.dataBaseRef.childByAutoId updateChildValues:@{
+//                                                @"MySpeak":[NSString stringWithFormat:@"%@: %@",dateStr,self.mySpeakWordsStr],
+//                                                @"AISpeak":[NSString stringWithFormat:@"%@: %@",dateStr,self.aiSpeakWordsStr]
+//                                                }withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+//                                                    if (error) {
+//                                                        NSLog(@"-----error %@ %@ %@",error,ref.key,ref.URL);
+//                                                        return ;
+//                                                    }
+//                                                }];
+//
+//}
 
 #pragma mark -
 #pragma mark --- postStoregeData
-- (void)postStoregeDataWithImage:(UIImage*)image
-{
-    
-    NSData *imageData = UIImageJPEGRepresentation(image, 1);
-    
-    FIRStorageUploadTask *dataTask = [self.storageRef putData:imageData];
-    [dataTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
-        
-//        [self.view makeToast:[NSString stringWithFormat:@"上传进度:%.2f%%", (float)snapshot.progress.completedUnitCount / (float)snapshot.progress.totalUnitCount*100
-//                              ]];
-    }];
-    [dataTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
-        [self.view makeToast:@"上传成功"];
-    }];
-    [dataTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
-        [self.view makeToast:@"上传失败"];
-    }];
-    
-}
+//- (void)postStoregeDataWithImage:(UIImage*)image
+//{
+//
+//    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+//
+//    FIRStorageUploadTask *dataTask = [self.storageRef putData:imageData];
+//    [dataTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
+//
+////        [self.view makeToast:[NSString stringWithFormat:@"上传进度:%.2f%%", (float)snapshot.progress.completedUnitCount / (float)snapshot.progress.totalUnitCount*100
+////                              ]];
+//    }];
+//    [dataTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
+//        [self.view makeToast:@"上传成功"];
+//    }];
+//    [dataTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
+//        [self.view makeToast:@"上传失败"];
+//    }];
+//
+//}
 
 #pragma mark -
 #pragma mark --- UIScrollviewDelegate
