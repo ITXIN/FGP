@@ -107,8 +107,6 @@
         [self addSubview:_myWaterView];
         self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*_count/DATA_WAVE_HEIGHT_SCALE;
         
-        //绘制文字占用空间已经 cup 使用情况和在 MyWaterView 一样
-        //但是如果要设置文字动画就需要在这设置为属性
         _countLab = [[UILabel alloc]initWithFrame:self.bounds];
         [_countLab setText:@"0"];
         _countLab.textAlignment = NSTextAlignmentCenter;
@@ -145,7 +143,11 @@
     self.b = 0.0;
 }
 
-- (void)setupBoard{
+- (void)setupBoardAnimation{
+    //清除以前的
+    [self.sailngImageView removeFromSuperview];
+    self.sailngImageView = nil;
+    
     NSInteger i = arc4random() %10;
     float y = self.waveHeight;
     if (!positinArr) {
@@ -227,7 +229,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.sailngImageView removeFromSuperview];
         self.sailngImageView = nil;
-        self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*_count/DATA_WAVE_HEIGHT_SCALE;
+        self.myWaterView.ripplePosition = [self getRipplePosition];
         tempRipplePosition = self.myWaterView.ripplePosition;
         self.myWaterView.ripplePosition = 0;
         [self countAnimation];
@@ -260,12 +262,8 @@
         if (self.myWaterView.ripplePosition >= tempRipplePosition){
             self.myWaterView.ripplePosition = tempRipplePosition;
             self.waveHeight = self.myWaterView.ripplePosition;
-            //闪动
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.sailngImageView removeFromSuperview];
-                self.sailngImageView = nil;
-                [self setupBoard];
-            });
+            
+            [self setupBoardAnimation];
             return ;
         }else{
             [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
@@ -275,8 +273,21 @@
 
 -(void)setCount:(NSInteger)count{
     _count = count;
-    _countLab.text = [NSString stringWithFormat:@"%ld",count];
-    [self showAnimationOfWaterWave];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _countLab.text = [NSString stringWithFormat:@"%ld",count];
+        self.myWaterView.ripplePosition = [self getRipplePosition];
+        
+        //解决更新有点频繁
+        if (count%10==0) {
+            [self.sailngImageView removeFromSuperview];
+            self.sailngImageView = nil;
+            [self setupBoardAnimation];
+        }
+    });
+}
+
+- (CGFloat)getRipplePosition{
+     return CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*_count/DATA_WAVE_HEIGHT_SCALE;
 }
 
 @end

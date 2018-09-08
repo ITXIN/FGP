@@ -35,6 +35,7 @@
 
 - (void)circleViewWillApper{
     [self updatWaterWaveView];
+    [self.waterWaveView showAnimationOfWaterWave];
     [radarView startAnimation];
 }
 
@@ -45,6 +46,7 @@
 
 - (void)updatWaterWaveView{
     self.waterWaveView.count = [[FGMathOperationManager shareMathOperationManager] getCurrentDateHasDone];
+    
 }
 
 @end
