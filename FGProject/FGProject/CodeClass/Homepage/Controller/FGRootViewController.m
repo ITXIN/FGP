@@ -29,24 +29,18 @@
 
 @implementation FGRootViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self dataOfStoryRequest];
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    FGUserManager *user = self.userManager;
-    FGLOG(@"---%@ %@ %@",user.name,user.ID,user.isPlaySound);
-
-    NSString *uidStr = [FLDeviceUID uid];
-    NSDictionary *userInfoDic = @{@"name":@"聪明可爱的宝贝",@"ID":[NSString stringWithFormat:@"%@",uidStr],@"isPlaySound":@"N"};
-    [user saveUserDataWithDic:userInfoDic];
-    FGLOG(@"更新---%@ %@ %@",user.name,user.ID,user.isPlaySound);
+//    FGUserManager *user = self.userManager;
+//    FGLOG(@"---%@ %@ %@",user.name,user.ID,user.isPlaySound);
+//
+//    NSString *uidStr = [FLDeviceUID uid];
+//    NSDictionary *userInfoDic = @{@"name":@"聪明可爱的宝贝",@"ID":[NSString stringWithFormat:@"%@",uidStr],@"isPlaySound":@"N"};
+//    [user saveUserDataWithDic:userInfoDic];
+//    FGLOG(@"更新---%@ %@ %@",user.name,user.ID,user.isPlaySound);
 }
 
 - (void)initSubviews{
@@ -59,8 +53,8 @@
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
     cound = 70;
     if (cound > 50) {//绕过审核
-        self.angryBirdView = [[FGAngryBirdsView alloc]init];
-        [self.bgView addSubview:self.angryBirdView];
+//        self.angryBirdView = [[FGAngryBirdsView alloc]init];
+//        [self.bgView addSubview:self.angryBirdView];
         //类别
         self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];
         self.cateGoryMenuView.categoryDelegate = self;
@@ -89,16 +83,7 @@
         });
         
     }
-}
-
-- (void)dataOfStoryRequest{
-    [[FGHttpsRequestManager shareInstance] getDataWithUrlStr:[NSString stringWithFormat:@"%@%@",FGStoryBaseURLString,FGStoryHomePageURLString] succeedHandler:^(id responseObject, NSError *error) {
-        NSDictionary *dataDic = (NSDictionary*)responseObject;
-        NSArray *musicArr = dataDic[@"data"][@"music"];
-        FGLOG(@"-----网络数据 %@",musicArr);
-    } failedHandler:^(NSError *error) {
-        FGLOG(@"-----failedHandler %@",error);
-    }];
+    
 }
 
 #pragma mark -

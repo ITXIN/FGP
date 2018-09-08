@@ -34,8 +34,6 @@
 }
 
 - (void)circleViewWillApper{
-    
-    //100是按100道题水充满,可以设置其他的
     [self updatWaterWaveView];
     [radarView startAnimation];
 }
@@ -47,8 +45,6 @@
 
 - (void)updatWaterWaveView{
     self.waterWaveView.count = [[FGMathOperationManager shareMathOperationManager] getCurrentDateHasDone];
-//    self.waterWaveView.waveHeight = 100 - 100*self.waterWaveView.count/DATA_WAVE_HEIGHT_SCALE;
-//    [self.waterWaveView showAnimationOfWaterWave];
 }
 
 @end

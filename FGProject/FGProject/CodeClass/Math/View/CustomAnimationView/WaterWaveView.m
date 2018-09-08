@@ -8,11 +8,13 @@
 
 #import "WaterWaveView.h"
 #import "WaterRippleView.h"
-static CGFloat heightWave = 0;
+
 @implementation WaterWaveView
 {
     NSInteger number;
-    CGFloat myWaterWaveHeigh;
+    CGFloat tempRipplePosition;
+    CAShapeLayer *circleLayer;
+    NSMutableArray *positinArr;
 }
 /*
  - (void)drawRect:(CGRect)rect{
@@ -88,10 +90,10 @@ static CGFloat heightWave = 0;
         self.backgroundColor = RGBA(255, 255, 255, 1);
         self.layer.cornerRadius = frame.size.width/2;
         self.layer.masksToBounds = YES;
-
+        
         number = 0;
-        myWaterWaveHeigh = 0;
-     
+        self.count = [[FGMathOperationManager shareMathOperationManager] getCurrentDateHasDone];
+        
         _myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/7, kScreenWidth/7)
                                               mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1]
                                              minorRippleColor:[UIColor colorWithRed:84/255.0f green:200/255.0f blue:120/255.0f alpha:1]
@@ -103,6 +105,7 @@ static CGFloat heightWave = 0;
         _myWaterView.layer.cornerRadius = kScreenWidth/7/2;
         _myWaterView.layer.masksToBounds = YES;
         [self addSubview:_myWaterView];
+        self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*_count/DATA_WAVE_HEIGHT_SCALE;
         
         //绘制文字占用空间已经 cup 使用情况和在 MyWaterView 一样
         //但是如果要设置文字动画就需要在这设置为属性
@@ -145,56 +148,62 @@ static CGFloat heightWave = 0;
 - (void)setupBoard{
     NSInteger i = arc4random() %10;
     float y = self.waveHeight;
-    NSMutableArray *tempArr = [NSMutableArray array];
+    if (!positinArr) {
+        positinArr = [NSMutableArray array];
+    }else{
+        [positinArr removeAllObjects];
+    }
     if (i %2 == 0){
         for (float x = 0; x <= kScreenWidth/7; x ++){
             //y=Acos(wx+Φ)+B
             y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
-            [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
+            [positinArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
         }
     }else{
         for (float x = 0; x <= kScreenWidth/7; x ++){
             //y=Asin(wx+Φ)+B
             y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
-            [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
+            [positinArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
         }
     }
     
-    [self drawGroupLineWithGroupPointArr:tempArr];
+    [self drawBoardLine];
 }
 
 #pragma mark -
 #pragma mark --- 绘制路径
-- (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)tepPointsArr{
+- (void)drawBoardLine{
     
     UIBezierPath *circlePath = [UIBezierPath bezierPath];
     circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
     circlePath.lineCapStyle = kCGLineCapRound;
     circlePath.lineJoinStyle = kCGLineJoinRound;
     
-    CAShapeLayer *circleLayer = [CAShapeLayer layer];
-    circleLayer.lineCap = kCALineCapRound;
-    circleLayer.lineJoin =  kCALineJoinRound;
-    // 设置填充颜色
-    circleLayer.fillColor = [UIColor clearColor].CGColor;
-    // 设置线宽
-    circleLayer.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
-    // 设置线的颜色
-    circleLayer.strokeColor = UIColor.redColor.CGColor;
-    circleLayer.strokeEnd = 1.0;
-    circleLayer.strokeStart = 0.0;
-    for (int i = 0; i < tepPointsArr.count; i ++){
+    if (!circlePath) {
+        circleLayer = [CAShapeLayer layer];
+        circleLayer.lineCap = kCALineCapRound;
+        circleLayer.lineJoin =  kCALineJoinRound;
+        // 设置填充颜色
+        circleLayer.fillColor = [UIColor clearColor].CGColor;
+        // 设置线宽
+        circleLayer.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
+        // 设置线的颜色
+        circleLayer.strokeColor = UIColor.redColor.CGColor;
+        circleLayer.strokeEnd = 1.0;
+        circleLayer.strokeStart = 0.0;
+        [self.layer addSublayer:circleLayer];
+    }
+    
+    for (int i = 0; i < positinArr.count; i ++){
         if (i == 0){
-            [circlePath moveToPoint:CGPointFromString(tepPointsArr[i]) ];
+            [circlePath moveToPoint:CGPointFromString(positinArr[i]) ];
         }else{
-            [circlePath addLineToPoint:CGPointFromString(tepPointsArr[i])];
+            [circlePath addLineToPoint:CGPointFromString(positinArr[i])];
         }
     }
     circleLayer.path = circlePath.CGPath;
-    [self.layer addSublayer:circleLayer];
     
     [self.sailngImageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:INT_MAX] forKey:@"Stroken1"];
-    
 }
 
 - (CAKeyframeAnimation *)setupStartLiveCircularAnimationPath:(UIBezierPath *)path withRepatCount:(NSInteger)repeatCount{
@@ -218,28 +227,23 @@ static CGFloat heightWave = 0;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.sailngImageView removeFromSuperview];
         self.sailngImageView = nil;
-        [UIView animateWithDuration:1 animations:^{
-            [self countAnimation];
-            [self waterWaveAnimation];
-        }];
+        self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*_count/DATA_WAVE_HEIGHT_SCALE;
+        tempRipplePosition = self.myWaterView.ripplePosition;
+        self.myWaterView.ripplePosition = 0;
+        [self countAnimation];
+        [self waterWaveAnimation];
     });
-    
 }
 
 - (void)countAnimation{
     if (self.count == 0){
         return;
     }
-    _countLab.text = [NSString stringWithFormat:@"%ld",number];
-    [UIView animateWithDuration:1 animations:^{
-        number ++;
-        _countLab.text = [NSString stringWithFormat:@"%ld",number];
-        if (number > self.count){
-            number = 0;
-            return ;
-        }
+    
+    [UIView animateWithDuration:0.05 animations:^{
+        _countLab.text = [NSString stringWithFormat:@"%ld",++number];
     } completion:^(BOOL finished) {
-        if (number == self.count){
+        if (number >= self.count){
             number = 0;
             return ;
         }else{
@@ -250,12 +254,11 @@ static CGFloat heightWave = 0;
 
 - (void)waterWaveAnimation{
     
-    self.myWaterView.ripplePosition = myWaterWaveHeigh;
     [UIView animateWithDuration:0.05 animations:^{
-        myWaterWaveHeigh ++;
-        if ((int)self.myWaterView.ripplePosition >= (int)heightWave){
-            self.myWaterView.ripplePosition = heightWave;
-            myWaterWaveHeigh = 0;
+        self.myWaterView.ripplePosition ++;
+    }completion:^(BOOL finished) {
+        if (self.myWaterView.ripplePosition >= tempRipplePosition){
+            self.myWaterView.ripplePosition = tempRipplePosition;
             self.waveHeight = self.myWaterView.ripplePosition;
             //闪动
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -263,11 +266,6 @@ static CGFloat heightWave = 0;
                 self.sailngImageView = nil;
                 [self setupBoard];
             });
-            return ;
-        }
-        
-    }completion:^(BOOL finished) {
-        if ((int)self.myWaterView.ripplePosition >= (int)heightWave){
             return ;
         }else{
             [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
@@ -277,10 +275,7 @@ static CGFloat heightWave = 0;
 
 -(void)setCount:(NSInteger)count{
     _count = count;
-    count = 300;
     _countLab.text = [NSString stringWithFormat:@"%ld",count];
-    self.myWaterView.ripplePosition = CGRectGetHeight(self.myWaterView.frame) -  CGRectGetHeight(self.myWaterView.frame)*count/DATA_WAVE_HEIGHT_SCALE;
-    heightWave = self.myWaterView.ripplePosition;
     [self showAnimationOfWaterWave];
 }
 
