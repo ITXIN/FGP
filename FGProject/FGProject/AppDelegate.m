@@ -41,7 +41,7 @@
 //    [IFlySpeechUtility createUtility:initString];
     
     FGRootViewController *rootVC = [[FGRootViewController alloc]init];
-    FGNavigationController *nagC = [[FGNavigationController alloc]initWithRootViewController:rootVC];
+    UINavigationController *nagC = [[UINavigationController alloc]initWithRootViewController:rootVC];
     self.window.rootViewController = nagC;
     [[UINavigationBar appearance] setHidden:YES];
     

@@ -29,9 +29,9 @@
         [self.view addSubview:view];
         view;
     });
-    self.blurView = [[FGBlurEffectView alloc]init];
+    self.blurView = [[FGBlurEffectView alloc] init];
     [self.bgView addSubview:self.blurView];
-    self.navigationView = [[FGNavigationView alloc]initWithDelegate:self];
+    self.navigationView = [[FGNavigationView alloc] initWithDelegate:self];
     self.navigationView.delegate = self;
     self.navigationView.navigationView.backgroundColor = [UIColor clearColor];
     [self.bgView addSubview:self.navigationView];
