@@ -242,23 +242,23 @@
         return;
     }
     
-    [UIView animateWithDuration:0.05 animations:^{
+//    [UIView animateWithDuration:0.05 animations:^{
         _countLab.text = [NSString stringWithFormat:@"%ld",++number];
-    } completion:^(BOOL finished) {
+//    } completion:^(BOOL finished) {
         if (number >= self.count){
             number = 0;
             return ;
         }else{
             [self performSelector:@selector(countAnimation) withObject:nil afterDelay:0.05];
         }
-    }];
+//    }];
 }
 
 - (void)waterWaveAnimation{
     
-    [UIView animateWithDuration:0.05 animations:^{
+//    [UIView animateWithDuration:0.05 animations:^{
         self.myWaterView.ripplePosition ++;
-    }completion:^(BOOL finished) {
+//    }completion:^(BOOL finished) {
         if (self.myWaterView.ripplePosition >= tempRipplePosition){
             self.myWaterView.ripplePosition = tempRipplePosition;
             self.waveHeight = self.myWaterView.ripplePosition;
@@ -268,7 +268,7 @@
         }else{
             [self performSelector:@selector(waterWaveAnimation) withObject:nil afterDelay:0.05];
         }
-    }];
+//    }];
 }
 
 -(void)setCount:(NSInteger)count{

@@ -1,26 +1,22 @@
 //
-//  MediumCandidateAnswerView.h
+//  FGDiffcultyCandidateAnswerView.h
 //  FGProject
 //
-//  Created by Bert on 16/1/18.
-//  Copyright © 2016年 XL. All rights reserved.
+//  Created by 鑫龙魂 on 2018/9/9.
+//  Copyright © 2018年 bert. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-/**
- *  中等难度候选答案视图
- */
-//@class MediumOperationModel;
-@protocol FGMediumCandidateAnswerViewDelegate <NSObject>
+@protocol FGDiffcultyCandidateAnswerViewDelegate <NSObject>
 @optional
 - (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType;
 @end
 
-@interface FGMediumCandidateAnswerView : UIView
+@interface FGDiffcultyCandidateAnswerView : UIView
 @property (nonatomic, strong)  UIView *bgView;
 @property (nonatomic,strong) NSMutableArray *candidateBtnArr;
 @property (nonatomic,strong) NSTimer *timer;
-@property (nonatomic,weak) id <FGMediumCandidateAnswerViewDelegate> delegate;
+@property (nonatomic,weak) id <FGDiffcultyCandidateAnswerViewDelegate> delegate;
 - (void)setupAnswerModel:(FGMathAnswerOptionsModel*)answerOptionModel;
 
 @end
