@@ -9,6 +9,7 @@
 #import "FGBaseViewController.h"
 @class CircleView;
 @class TooltipForAnswerView;
+#import "TooltipForAnswerView.h"
 @interface FGMathBaseViewController : FGBaseViewController
 @property (nonatomic,strong) FGMathOperationManager *mathManager;
 @property (nonatomic,strong) TooltipForAnswerView *toolView;

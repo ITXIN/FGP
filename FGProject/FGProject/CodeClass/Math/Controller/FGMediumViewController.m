@@ -9,25 +9,15 @@
 #import "FGMediumViewController.h"
 #import "FGRewardsView.h"
 #import "FGMediumLevelOperatorView.h"
-//#import "MediumOperationModel.h"
 #import "FGMediumCandidateAnswerView.h"
 #import "MCFireworksButton.h"
-#import "TooltipForAnswerView.h"
-
 #import "FGMathRootViewController.h"
-#import "CircleView.h"
-#import "FGImageViewAnimationView.h"
 #import "FGClickRandomAnswerCountModel.h"
 #import "FGMathAnswerOptionsModel.h"
 @interface FGMediumViewController ()<FGMediumCandidateAnswerViewDelegate>
 {
-    CGFloat height;
-    CGFloat leftMargin;
-    FGImageViewAnimationView *imageAnimationView;
     FGClickRandomAnswerCountModel *clickRandomCounModel;
 }
-
-//@property (nonatomic,strong) FIRDatabaseReference *dataBaseRef;//存字符串
 @property (nonatomic,strong) FGMediumLevelOperatorView *mediumLOV;
 @property (nonatomic,strong) FGMediumCandidateAnswerView *candidateAV;
 @property (nonatomic,strong) FGMathOperationModel *currentOperaModel;
@@ -55,11 +45,7 @@
 
 - (void)initSubviews{
     [super initSubviews];
-    
-    height = HEIGHT_MEDIUM_VC;
-    leftMargin = LEFT_MARGIN_MEDIUM_VC + 30.0;
-    leftMargin = 60.0;
-    
+   
     //运算式
     self.mediumLOV  = [[FGMediumLevelOperatorView alloc]init];
     [self.view addSubview:self.mediumLOV];
@@ -86,19 +72,8 @@
 }
 
 #pragma mark -
-#pragma mark --- 数据上传 Firebase
-//- (void)setupPostDataToFireBase{
-//    NSString *adidStr = [FLDeviceUID uid];
-//    self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
-//    self.dataBaseRef = [[[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_MATH] child:FIREBASE_DATABASE_CATEGORY_MATH_MEDIUM];
-//    
-//    self.dataBaseRef = [self.dataBaseRef child:[NSString stringWithFormat:@"%@",[FGProjectHelper logTimeStringFromDate:[NSDate date]]]];
-//}
-
-#pragma mark -
 #pragma mark --- update view
 - (void)updateView{
-  
     self.currentOperaModel = [self.mathManager generateMediumOperationModel];
     [self.mediumLOV setMediumOperationModel:self.currentOperaModel];
     FGMathAnswerOptionsModel *answerOptionModel = [self.mathManager generateRandomAnswerNum:self.currentOperaModel.answerNum];
@@ -121,7 +96,6 @@
                 [HasDoneOperation setStarNumberWithDiffcultyLevelMark:MEDIUM_STAR_NUMBER_MARK];
                 
                 if (![self.view.subviews containsObject:self.toolView]){
-                    self.toolView = [[TooltipForAnswerView alloc]initWithFrame:self.view.bounds];
                     [self.view addSubview:self.toolView];
                     @weakify(self);
                     self.toolView.actionIndexBlock = ^(NSInteger index) {
@@ -142,7 +116,6 @@
                 [self fireworksProcess];
             }else{
                 [self updateView];
-                [imageAnimationView startImageAnimation];//再次开始动画
             }
         });
     }else{

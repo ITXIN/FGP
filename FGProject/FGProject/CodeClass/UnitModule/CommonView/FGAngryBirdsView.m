@@ -209,7 +209,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         
         [tempGroupView.layer addSublayer:circleLayer];
         
-        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:2] forKey:@"Stroken1"];
+        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:5] forKey:@"Stroken1"];
         
     }
 }

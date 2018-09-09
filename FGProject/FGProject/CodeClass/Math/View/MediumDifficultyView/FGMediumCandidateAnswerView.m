@@ -23,8 +23,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        btnWidth = kScreenHeight/5;
-        btnHeight = kScreenHeight/5;
+        btnWidth = kScreenHeight/4;
+        btnHeight = kScreenHeight/4;
         btnMargin = (kScreenWidth - 4*btnWidth)/5;
         
         _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,kScreenWidth,btnHeight)];
@@ -36,7 +36,7 @@
         
         for (int i = 0; i < 4; i ++){
             UIButton *buttton =  [UIButton buttonWithType:UIButtonTypeCustom];
-            buttton.titleLabel.font = [UIFont systemFontOfSize:50];
+            buttton.titleLabel.font = [UIFont boldSystemFontOfSize:38.f];
             buttton.titleLabel.textAlignment = NSTextAlignmentCenter;
             buttton.alpha = 0;
             buttton.frame = CGRectMake(0, 0,btnWidth, btnHeight);

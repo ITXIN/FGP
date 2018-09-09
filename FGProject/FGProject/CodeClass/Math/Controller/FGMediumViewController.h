@@ -11,7 +11,7 @@
  *  show medium diffcute
  */
 #import "FGMathBaseViewController.h"
-#import "TooltipForAnswerView.h"
+
 @interface FGMediumViewController : FGMathBaseViewController
 
 @end

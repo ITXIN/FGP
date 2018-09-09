@@ -20,6 +20,12 @@
     self.yellowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"huangqiu.png"]];
     [self addSubview:self.yellowImageView];
     
+    UITapGestureRecognizer *gesTure = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    self.redImageView.userInteractionEnabled = YES;
+    self.yellowImageView.userInteractionEnabled = YES;
+    [self.redImageView addGestureRecognizer:gesTure];
+    [self.yellowImageView addGestureRecognizer:gesTure];
+    
     _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _startBtn.frame = CGRectMake(kScreenWidth - 100 - kScreenHeight/6, kScreenHeight/2, kScreenHeight/6, kScreenHeight/6);
     _startBtn.hidden = YES;
@@ -69,6 +75,22 @@
     //    self.radarView.opacityValue = 0.9;
     //    [self.radarView startAnimation];
     
+}
+
+- (void)tapAction:(UITapGestureRecognizer*)ges{
+    UIImageView *img = (UIImageView*)ges.view;
+    CGRect temp = img.frame;
+    [UIView animateWithDuration:0.5 animations:^{
+        img.frame = CGRectMake(CGRectGetMinX(img.frame)+100, -100, CGRectGetWidth(img.frame)-50, CGRectGetHeight(img.frame)-50);
+    }completion:^(BOOL finished) {
+        img.alpha = 0.0;
+        img.frame = temp;
+    }];
+}
+
+- (void)showImageView{
+    self.yellowImageView.alpha = 1.0;
+    self.redImageView.alpha = 1.0;
 }
 
 - (void)startBtnClick:(UIButton *)btn{
