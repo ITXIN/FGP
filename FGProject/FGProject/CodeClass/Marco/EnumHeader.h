@@ -62,16 +62,13 @@ typedef NS_ENUM(NSInteger,MathRootViewActionType){
     MathRootViewActionTypeDivide,
     MathRootViewActionTypeCompre,
     MathRootViewActionTypeSun,
-    //    MathRootViewActionTypeCompreOfSimple,
-    //    MathRootViewActionTypeCompreOfMedium,
-    //    MathRootViewActionTypeCompreOfDiffculty,
 };
 
 //+-一级，x/二级运算
 //Math运算 二数运算，三数运算
 typedef NS_ENUM(NSInteger, MathOperationLevel){
     MathOperationLevelTwo = 2000,
-    MathOperationLevelThird,
+    MathOperationLevelThree,
    
 };
 
@@ -83,13 +80,22 @@ typedef NS_ENUM(NSInteger,MathOperationActionType){
     MathOperationActionTypeDivide = 2003,
     MathOperationActionTypeCompreOfSimple = 2004,
     MathOperationActionTypeCompreOfMedium= 2005,
-    MathOperationActionTypeCompreOfDiffculty= 2006,
+    MathOperationActionTypeCompreOfChallenge= 2006,
 };
 
-//Math SimpleView
-typedef NS_ENUM(NSInteger,MathSimpleOperationViewActionType){
-    MathSimpleOperationViewActionTypeOperation = 2000,
-    MathSimpleOperationViewActionTypeAnswer,
+
+//Math
+typedef NS_ENUM(NSInteger,MathOperationChooseResultType){
+    MathOperationChooseResultTypeError = 2000,
+    MathOperationChooseResultTypeCorrect
+};
+
+
+////Math 运算回答结果类型
+typedef NS_ENUM(NSInteger,MathCompreOfChallengeTimerLevel){
+    MathCompreOfChallengeTimerLevelOneLevel = 15,
+    MathCompreOfChallengeTimerLevelTwoLevel = 10,
+    MathCompreOfChallengeTimerLevelThreeLevel = 5
 };
 
 //MyCenter

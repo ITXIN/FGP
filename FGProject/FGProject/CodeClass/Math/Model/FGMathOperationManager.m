@@ -185,7 +185,7 @@
         case MathOperationActionTypeCompreOfMedium:
             operationStr = @"+";
             break;
-        case MathOperationActionTypeCompreOfDiffculty:
+        case MathOperationActionTypeCompreOfChallenge:
             operationStr = @"+";
             break;
         default:
@@ -194,8 +194,8 @@
 }
 
 //保存运算数据统计
-- (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer{
-
+- (void)saveMathOperationDataStatisticsWithUserOperationState:(MathOperationChooseResultType)actionTypeAnswer{
+    
     NSMutableDictionary *dataDic = [self getAllData];
     
     MathOperationActionType operationActionType;
@@ -206,20 +206,22 @@
     }
     
     NSDictionary *detailDic = @{
-                                [NSString stringWithFormat:@"%@",kMathOperationTypeKey]:[NSString stringWithFormat:@"%ld",operationActionType],
-                                [NSString stringWithFormat:@"%@",kMathOperationStateKey]:[NSString stringWithFormat:@"%@",actionTypeAnswer==MathSimpleOperationViewActionTypeAnswer? @"YES":@"NO"],
-                                [NSString stringWithFormat:@"%@",kMathOperationObjKey]:self.currentMathOperationModel ,
-                                [NSString stringWithFormat:@"%@",kMathOperationDateKey]:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
+                                kMathOperationTypeKey:[NSString stringWithFormat:@"%ld",operationActionType],
+                                kMathOperationStateKey:[NSString stringWithFormat:@"%@",actionTypeAnswer == MathOperationChooseResultTypeCorrect? @"YES":@"NO"],
+                                kMathOperationObjKey:self.currentMathOperationModel ,
+                                kMathOperationDateKey:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
                                 };
+    
     FGMathOperationModel *mathOperationModel = self.currentMathOperationModel;
     FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
+    
     if (dataDic.allValues.count == 0) {
         dataDic = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                   [self.dateSingle curretDate]:@{
-                                                                          [NSString stringWithFormat:@"%@",kMathOperationDetailDataKey]:@[detailDic],
-                                                                          [NSString stringWithFormat:@"%@",kMathOperationDetailDataTotalNumberKey]:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
+                                                                          kMathOperationDetailDataKey:@[detailDic],
+                                                                          kMathOperationDetailDataTotalNumberKey:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]],
                                                                           },
-                                                                  [NSString stringWithFormat:@"%@",kMathOperationDataStatisticsTotalNumberKey]:@"1"
+                                                                  kMathOperationDataStatisticsTotalNumberKey:@"1"
                                                                   }];
     }else{
         
@@ -258,7 +260,7 @@
         if ([key isKindOfClass:[NSString class]] ) {
             if (![(NSString*)key hasPrefix:@"k"] ) {//日期
                 NSMutableArray *mistakeOperationDataArr = [NSMutableArray array];
-                for (NSDictionary*dic in dataDic[key][@"kMathOperationDetailDataKey"]) {//模型
+                for (NSDictionary*dic in dataDic[key][kMathOperationDetailDataKey]) {//模型
                     if ([dic[kMathOperationStateKey] isEqualToString:@"NO"]) {
                         FGMistakesOperationDataModel *mistakeOperationDataModel = [[FGMistakesOperationDataModel alloc]initWithDic:dic];
                         [mistakeOperationDataArr addObject:mistakeOperationDataModel];
@@ -358,7 +360,7 @@
                             compreOfMediumAccuracyNumber ++;
                         }
                         break;
-                    case MathOperationActionTypeCompreOfDiffculty:
+                    case MathOperationActionTypeCompreOfChallenge:
                         compreOfDiffcultyTotalNumber ++;
                         if (isState) {
                             compreOfDiffcultyAccuracyNumber ++;
@@ -429,13 +431,13 @@
         case MathOperationActionTypeCompreOfMedium:
             
             break;
-        case MathOperationActionTypeCompreOfDiffculty:
+        case MathOperationActionTypeCompreOfChallenge:
             
             break;
         default:
             break;
     }
-
+    
 }
 
 - (NSInteger)getCurrentDateHasDone{

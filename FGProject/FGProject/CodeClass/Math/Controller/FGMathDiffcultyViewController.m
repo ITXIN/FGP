@@ -83,12 +83,12 @@
 
 #pragma mark -
 #pragma mark --- MediumCandidateAnswerViewDelegate
-- (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType{
+- (void)didClickCandidateActionType:(MathOperationChooseResultType)actionType{
     
     [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
     [self updatCircleviewData];
     
-    if (actionType == MathSimpleOperationViewActionTypeAnswer) {
+    if (actionType == MathOperationChooseResultTypeCorrect) {
         [[SoundsProcess shareInstance] playSoundOfWonderful];
         dispatch_after(7.0, dispatch_get_main_queue(), ^{
             NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];

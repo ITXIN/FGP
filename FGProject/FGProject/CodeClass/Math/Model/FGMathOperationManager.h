@@ -39,7 +39,7 @@
 //获取今日已经做的个数
 - (NSInteger)getCurrentDateHasDone;
 //保存运算数据统计
-- (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer;
+- (void)saveMathOperationDataStatisticsWithUserOperationState:(MathOperationChooseResultType)actionTypeAnswer;
 //获取统计具体数据
 - (void)updateDataStatistic;
 //保存用户对运算类型的选择

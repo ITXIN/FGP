@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol FGDiffcultyCandidateAnswerViewDelegate <NSObject>
 @optional
-- (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType;
+- (void)didClickCandidateActionType:(MathOperationChooseResultType)actionType;
 - (void)challengeFailure;//挑战失败
 @end
 

@@ -13,7 +13,7 @@
 //@class MediumOperationModel;
 @protocol FGMediumCandidateAnswerViewDelegate <NSObject>
 @optional
-- (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType;
+- (void)didClickCandidateActionType:(MathOperationChooseResultType)actionType;
 @end
 
 @interface FGMediumCandidateAnswerView : UIView

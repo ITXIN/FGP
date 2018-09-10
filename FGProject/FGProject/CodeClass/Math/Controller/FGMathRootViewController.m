@@ -148,7 +148,7 @@
             [self.navigationController pushViewController:mediumVC animated:YES];
             break;
         }
-        case MathOperationActionTypeCompreOfDiffculty:
+        case MathOperationActionTypeCompreOfChallenge:
         {
 //            [self.view makeToast:@"还在施工中。。。。"];
             FGMathDiffcultyViewController *diffcultyVC = [[FGMathDiffcultyViewController alloc]init];

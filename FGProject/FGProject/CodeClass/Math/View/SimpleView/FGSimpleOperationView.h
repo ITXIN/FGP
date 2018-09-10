@@ -15,7 +15,7 @@
  */
 //typedef void (^backToRootVCBlock) (void);
 @protocol FGSimpleOperationViewDelegate <NSObject>
-- (void)simpleViewOperationActionType:(MathSimpleOperationViewActionType)actionType;
+- (void)simpleViewOperationActionType:(MathOperationChooseResultType)actionType;
 @end
 
 @interface FGSimpleOperationView : UIView

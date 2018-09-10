@@ -198,45 +198,8 @@
     
     mediumOperationModel.secondOperationType = secondMathOperationType;
     mediumOperationModel.thirdNum = thirdNum;
-    mediumOperationModel.operationLevel = MathOperationLevelThird;
+    mediumOperationModel.operationLevel = MathOperationLevelThree;
     
-    /*
-    if (mediumOperationModel.answerNum > 0) {//只有加减
-        
-        MathOperationActionType secondMathOperationType = [operationArr[arc4random()%2] integerValue];
-        NSInteger thirdNum = arc4random() % kMathOperationRangeNumber;
-        if (secondMathOperationType == MathOperationActionTypeSubtract){
-            while (mediumOperationModel.answerNum < thirdNum){
-                thirdNum = arc4random() % kMathOperationRangeNumber;
-            }
-            mediumOperationModel.answerNum = mediumOperationModel.answerNum - thirdNum;
-        }else if(secondMathOperationType == MathOperationActionTypeAdd){
-            mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
-        }
-        
-        mediumOperationModel.secondOperationType = secondMathOperationType;
-        mediumOperationModel.thirdNum = thirdNum;
-    }else{
-        
-        NSInteger thirdNum = arc4random() % kMathOperationRangeNumber;
-        if (thirdNum == 0) {
-            //当都为0，最后一个既可以为加号也可以为减号。
-            MathOperationActionType secondMathOperationType = [operationArr[arc4random()%2] integerValue];
-            mediumOperationModel.thirdNum = thirdNum;
-            mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
-            mediumOperationModel.secondOperationType = secondMathOperationType;
-            
-        }else{
-            mediumOperationModel.answerNum = mediumOperationModel.answerNum + thirdNum;
-            mediumOperationModel.secondOperationType = MathOperationActionTypeAdd;
-            mediumOperationModel.thirdNum = thirdNum;
-        }
-        
-        
-    }
-    mediumOperationModel.operationLevel = MathOperationLevelThird;
-    
-    */
     return mediumOperationModel;
 }
 

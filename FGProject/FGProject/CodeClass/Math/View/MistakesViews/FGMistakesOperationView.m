@@ -28,7 +28,7 @@
     NSInteger count = 0;
     if (questionModel.operationLevel == MathOperationLevelTwo) {
         count = 5;
-    }else if (questionModel.operationLevel == MathOperationLevelThird){
+    }else if (questionModel.operationLevel == MathOperationLevelThree){
         count = 7;
     }
     
@@ -42,7 +42,7 @@
         }else if (i == 1){
             if (questionModel.operationLevel == MathOperationLevelTwo) {
                 operationImage = [mathManager getOperationImageWithOperationType: questionModel.mathOperationActionType];
-            }else if (questionModel.operationLevel == MathOperationLevelThird){
+            }else if (questionModel.operationLevel == MathOperationLevelThree){
                 operationImage = [mathManager getOperationImageWithOperationType:questionModel.firstOperationType];
             }
         }else if (i == 2){
@@ -50,13 +50,13 @@
         }else if(i == 3){
             if (questionModel.operationLevel == MathOperationLevelTwo) {
                 operationImage = [UIImage imageNamed:@"dengyu"];
-            }else if (questionModel.operationLevel == MathOperationLevelThird){
+            }else if (questionModel.operationLevel == MathOperationLevelThree){
                 operationImage = [mathManager getOperationImageWithOperationType:questionModel.secondOperationType];
             }
         }else if (i ==4){
             if (questionModel.operationLevel == MathOperationLevelTwo) {
                 operationImage = [UIImage imageNamed:@"wenhao"];
-            }else if (questionModel.operationLevel == MathOperationLevelThird){
+            }else if (questionModel.operationLevel == MathOperationLevelThree){
                 
                 operationImage = [mathManager getOperationNumberImageWithNumber:questionModel.thirdNum];
             }

@@ -42,7 +42,7 @@
             buttton.frame = CGRectMake(0, 0,btnWidth, btnHeight);
             buttton.center = self.bgView.center;
             //tag值默认为0
-            buttton.tag = MathSimpleOperationViewActionTypeOperation;
+            buttton.tag = MathOperationChooseResultTypeError;
             [buttton setBackgroundImage:[UIImage imageNamed:@"countNum-bg"] forState:UIControlStateNormal];
             buttton.layer.cornerRadius = (buttton.frame.size.height)/2;
             buttton.layer.masksToBounds = YES;
@@ -74,7 +74,7 @@
 
 - (void)candidateBtnClick:(UIButton *)btn{
     //最好的方法是比较点击间隔时间如果间隔时间大于某个值就
-    if (btn.tag == MathSimpleOperationViewActionTypeAnswer) {
+    if (btn.tag == MathOperationChooseResultTypeCorrect) {
         [AnimationProcess springAnimationProcessWithView:btn upHeight:30.0];
     }else{
         [AnimationProcess scaleAnmiationProcessWithView:btn];
@@ -100,7 +100,7 @@
         [AnimationProcess springAnimationProcessWithView:self.candidateBtnArr[i] upHeight:arc4random()%(100-30+1)+30];
         if (i == answerOptionModel.answerIndex){
             UIButton *anwerBtn = (UIButton *)self.candidateBtnArr[i];
-            anwerBtn.tag = MathSimpleOperationViewActionTypeAnswer;
+            anwerBtn.tag = MathOperationChooseResultTypeCorrect;
         }
     }
     
@@ -133,7 +133,7 @@
 #pragma mark--------设置button的属性
 //标题  大小 初始位置 响应时间
 - (void)setButtonView:(UIButton *)buttton title:(NSString *)title duration:(CGFloat)duration{
-    buttton.tag = MathSimpleOperationViewActionTypeOperation;
+    buttton.tag = MathOperationChooseResultTypeError;
     [buttton setTitle:title forState:(UIControlStateNormal)];
     [UIView animateWithDuration:duration animations:^{
         buttton.center = CGPointMake(self.bgView.frame.size.width/2, self.bgView.frame.size.height/2);

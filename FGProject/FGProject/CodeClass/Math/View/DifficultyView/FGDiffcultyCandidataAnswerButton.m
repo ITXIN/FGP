@@ -82,13 +82,11 @@
 
 - (void)startAnimateWave{
     self.myWaterView.ripplePosition ++;
-    
-    
     if (self.myWaterView.ripplePosition >= CGRectGetHeight(self.frame)){
         self.isEnd = YES;
         return ;
     }else{
-        [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:10/CGRectGetHeight(self.frame)];
+        [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:MathCompreOfChallengeTimerLevelThreeLevel/CGRectGetHeight(self.frame)];
     }
 }
 

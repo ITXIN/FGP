@@ -99,7 +99,7 @@
         [self setButtonView:self.candidateBtnArr[i] title:self.answerOptionArr[i] backgroundColor:0 green:0 blue:0];
         if (i == answerModle.answerIndex){
             UIButton *anwerBtn = (UIButton *)self.candidateBtnArr[i];
-            anwerBtn.tag = MathSimpleOperationViewActionTypeAnswer;
+            anwerBtn.tag = MathOperationChooseResultTypeCorrect;
         }
     }
 }
@@ -144,14 +144,14 @@
 
 #pragma mark-------对题目准确性的判断------
 - (void)answerBtnAction:(UIButton *)button{
-    if(button.tag == MathSimpleOperationViewActionTypeAnswer){
+    if(button.tag == MathOperationChooseResultTypeCorrect){
         if (self.delegate && [self.delegate respondsToSelector:@selector(simpleViewOperationActionType:)]) {
-            [self.delegate simpleViewOperationActionType:MathSimpleOperationViewActionTypeAnswer];
+            [self.delegate simpleViewOperationActionType:MathOperationChooseResultTypeCorrect];
         }
     }else{
         //统计,分析点击情况
         if (self.delegate && [self.delegate respondsToSelector:@selector(simpleViewOperationActionType:)]) {
-            [self.delegate simpleViewOperationActionType:MathSimpleOperationViewActionTypeOperation];
+            [self.delegate simpleViewOperationActionType:MathOperationChooseResultTypeError];
         }
     }
 }

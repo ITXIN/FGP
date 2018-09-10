@@ -23,7 +23,7 @@
         CGFloat widthBtn = frame.size.height;
         CGFloat paceBtn = 20.0;
         
-        NSArray *tagArr = @[@(MathOperationActionTypeCompreOfSimple),@(MathOperationActionTypeCompreOfMedium),@(MathOperationActionTypeCompreOfDiffculty)];
+        NSArray *tagArr = @[@(MathOperationActionTypeCompreOfSimple),@(MathOperationActionTypeCompreOfMedium),@(MathOperationActionTypeCompreOfChallenge)];
         for (int i = 0; i < 3; i ++){
             self.panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panGesAcion:)];
             
