@@ -18,7 +18,7 @@
                                                           mainRippleoffsetX:1.0f
                                                          minorRippleoffsetX:1.1f
                                                                 rippleSpeed:2.0f
-                                                             ripplePosition:100.0f//高度
+                                                             ripplePosition:0.0f//高度
                                                             rippleAmplitude:5.0f];
     self.myWaterView.backgroundColor = UIColor.clearColor;
     self.myWaterView.userInteractionEnabled = YES;
@@ -27,7 +27,7 @@
 
 
 - (id)initWithFrame:(CGRect)frame {
-    
+
     self = [super initWithFrame:frame];
     if (self) {
        
@@ -35,57 +35,61 @@
         self.userInteractionEnabled = YES;
         self.titleLabel.font = [UIFont boldSystemFontOfSize:38.f];
         [self setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-//        [self setBackgroundImage:[UIImage imageNamed:@"countNum-bg"] forState:UIControlStateNormal];
+        [self setBackgroundImage:[UIImage imageNamed:@"countNum-bg"] forState:UIControlStateNormal];
         self.backgroundColor = UIColor.clearColor;
-        [self addTarget:self action:@selector(candidateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
+        self.layer.cornerRadius = (frame.size.height)/2;
+        self.layer.masksToBounds = YES;
     }
     return self;
 }
 
-- (void)candidateBtnClick:(UIButton*)sender{
-    NSLog(@"---buton--%@",sender);
-}
-
-
-- (id)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-    UIView *hitView = [super hitTest:point withEvent:event];
-//    if (hitView == self)
-//    {
-        return self;
-//    }
-//    else
-//    {
-//        return hitView;
-//    }
-}
-
-
-- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents{
-    [super addTarget:target action:action forControlEvents:controlEvents];
-    
-}
-
-
 - (void)waterWaveAnimation{
-    
-//    self.myWaterView.ripplePosition = 0.0;
-//    [self startAnimateWave];
+    self.myWaterView.ripplePosition = 0.0;
+    self.isEnd = NO;
+    self.myWaterView.mainRippleColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
+    self.myWaterView.minorRippleColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
+    [UIView animateWithDuration:10 animations:^{
+        self.myWaterView.minorRippleColor = UIColor.redColor;
+        self.myWaterView.mainRippleColor = UIColor.redColor;
+    }];
+    [self startAnimateWave];
 }
-- (void)startAnimateWave{
-    NSLog(@"---start--");
+- (NSArray *)getRGBDictionaryByColor:(UIColor *)originColor
+{
+    CGFloat r=0,g=0,b=0,a=0;
+    if ([self respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+        [originColor getRed:&r green:&g blue:&b alpha:&a];
+    }
+    else {
+        const CGFloat *components = CGColorGetComponents(originColor.CGColor);
+        r = components[0];
+        g = components[1];
+        b = components[2];
+        a = components[3];
+    }
     
+    return @[@(r),@(g),@(b)];
+}
+
+- (UIColor *)getColorWithColor:(UIColor *)beginColor andCoe:(double)coe andMarginArray:(NSArray<NSNumber *> *)marginArray {
+    NSArray *beginColorArr = [self getRGBDictionaryByColor:beginColor];
+    double red = [beginColorArr[0] doubleValue] + coe * [marginArray[0] doubleValue];
+    double green = [beginColorArr[1] doubleValue]+ coe * [marginArray[1] doubleValue];
+    double blue = [beginColorArr[2] doubleValue] + coe * [marginArray[2] doubleValue];
+    return RGB(abs(red), abs(green), abs(blue));
+    
+}
+
+- (void)startAnimateWave{
     self.myWaterView.ripplePosition ++;
     
+    
     if (self.myWaterView.ripplePosition >= CGRectGetHeight(self.frame)){
+        self.isEnd = YES;
         return ;
     }else{
         [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:10/CGRectGetHeight(self.frame)];
-        
     }
-}
-- (void)animateWave{
-    NSLog(@"---timer--");
 }
 
 @end

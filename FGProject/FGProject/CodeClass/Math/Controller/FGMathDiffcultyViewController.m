@@ -125,6 +125,12 @@
     }
 }
 
+- (void)challengeFailure{
+    [JCAlertView showOneButtonWithTitle:@"挑战失败" Message:@"本次得分100" ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
+        
+    }];
+}
+
 /**
  *  烟花效果
  */

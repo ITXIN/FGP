@@ -13,9 +13,6 @@
 #import "FGMistakesModel.h"
 #import "FGMistakesOperationDataModel.h"
 @implementation FGMathOperationManager
-static NSString *countKey = @"countKey";
-static NSString *rewardKey = @"rewardKey";
-static NSString *hasDoneKey = @"hasDoneKey";
 
 + (FGMathOperationManager*)shareMathOperationManager{
     static FGMathOperationManager *manager = nil;
@@ -24,8 +21,6 @@ static NSString *hasDoneKey = @"hasDoneKey";
         manager = [[FGMathOperationManager alloc] init];
         manager.operationsArr = @[@(MathOperationActionTypeAdd),@(MathOperationActionTypeSubtract),@(MathOperationActionTypeMultiply),@(MathOperationActionTypeDivide)];
         manager.dateSingle = [FGDateSingle shareInstance];
-        manager.countDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:countKey]];
-        manager.hasDoneDic = [NSMutableDictionary dictionaryWithDictionary: manager.countDic[hasDoneKey]];
         manager.dataStatisticsModel = [[FGMathOperationDataStatisticsModel alloc]init];
         
     });
@@ -200,13 +195,8 @@ static NSString *hasDoneKey = @"hasDoneKey";
 
 //保存运算数据统计
 - (void)saveMathOperationDataStatisticsWithUserOperationState:(MathSimpleOperationViewActionType)actionTypeAnswer{
-    
-    NSInteger hasDone = [self getCurrentDateHasDone];
-    hasDone ++;
-    //今天做的题目个数
-    [self saveCurrentDateHasDoneNumber:hasDone];
-    
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+
+    NSMutableDictionary *dataDic = [self getAllData];
     
     MathOperationActionType operationActionType;
     if (self.isCompreOperation) {
@@ -237,7 +227,7 @@ static NSString *hasDoneKey = @"hasDoneKey";
         NSMutableArray *currentDateDetailArr = [NSMutableArray arrayWithArray:
                                                 currentDateDic[kMathOperationDetailDataKey]];
         [currentDateDetailArr addObject:detailDic];
-        [currentDateDic setValue:[NSString stringWithFormat:@"%ld",[self getCurrentDateHasDone]] forKey:kMathOperationDetailDataTotalNumberKey];
+        [currentDateDic setValue:[NSString stringWithFormat:@"%ld",currentDateDetailArr.count] forKey:kMathOperationDetailDataTotalNumberKey];
         [currentDateDic setValue:currentDateDetailArr forKey:kMathOperationDetailDataKey];
         [dataDic setValue:currentDateDic forKey:[self.dateSingle curretDate]];
         
@@ -286,12 +276,12 @@ static NSString *hasDoneKey = @"hasDoneKey";
         }
     }
     return dataArr;
-    
 }
 
 //数据统计
 - (void)updateDataStatistic{
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    
+    NSMutableDictionary *dataDic = [self getAllData];
     
     NSInteger totalNumber = [dataDic[kMathOperationDataStatisticsTotalNumberKey] integerValue];
     self.dataStatisticsModel.totalNumber = totalNumber;
@@ -393,14 +383,14 @@ static NSString *hasDoneKey = @"hasDoneKey";
 
 #pragma mark -------保存综合练习题目类型设置----
 - (void)saveMathCompreOfOperationType:(NSDictionary*)typeDic{
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    NSMutableDictionary *dataDic = [self getAllData];
     dataDic[kMathCompreOfOperationTypeKey] = typeDic;
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
     
 }
 
 - (NSDictionary*)getMathCompreOfOperationTypeDic{
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[FGProjectHelper getDataWithKey:kMathOperationDataStatisticsKey]];
+    NSMutableDictionary *dataDic = [self getAllData];
     NSDictionary *typeDic = [NSDictionary dictionaryWithDictionary:dataDic[kMathCompreOfOperationTypeKey]];
     return typeDic;
 }
@@ -448,17 +438,10 @@ static NSString *hasDoneKey = @"hasDoneKey";
 
 }
 
-//保存今日已经做的个数
-- (void)saveCurrentDateHasDoneNumber:(NSInteger)number{
-    //今天做的题目个数
-    [self.hasDoneDic setValue:[NSString stringWithFormat:@"%ld",number] forKey:[self.dateSingle curretDate]];
-    [self.countDic setObject:self.hasDoneDic forKey:hasDoneKey];
-    [self.countDic setObject:@"" forKey:rewardKey];
-    [FGProjectHelper saveDataWithKey:countKey data:self.countDic];
-}
-
 - (NSInteger)getCurrentDateHasDone{
-    NSString *hasDoneStr = self.hasDoneDic[[self.dateSingle curretDate]];
+    NSMutableDictionary *dataDic = [self getAllData];
+    NSDictionary *currentDic = [dataDic objectForKey:[self.dateSingle curretDate]];
+    NSString *hasDoneStr = currentDic[kMathOperationDetailDataTotalNumberKey];
     return [hasDoneStr integerValue];
 }
 

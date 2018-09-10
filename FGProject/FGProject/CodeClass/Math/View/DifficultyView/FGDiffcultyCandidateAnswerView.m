@@ -19,6 +19,10 @@
 -(void)dealloc{
     [_timer invalidate];
     _timer = nil;
+
+    for (FGDiffcultyCandidataAnswerButton *btn  in self.candidateBtnArr) {
+          [btn removeObserver:self forKeyPath:@"isEnd"];
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -35,25 +39,37 @@
         }];
         self.candidateBtnArr = [NSMutableArray array];
      
-        
         for (int i = 0; i < 4; i ++){
             FGDiffcultyCandidataAnswerButton *buttton =  [[FGDiffcultyCandidataAnswerButton alloc]initWithFrame:CGRectMake(0, 0, btnWidth, btnHeight)];
-           
             buttton.alpha = 0;
             buttton.center = self.bgView.center;
             //tag值默认为0
             buttton.tag = MathSimpleOperationViewActionTypeOperation;
-            buttton.layer.cornerRadius = (buttton.frame.size.height)/2;
-            buttton.layer.masksToBounds = YES;
-//            [buttton addTarget:self action:@selector(candidateBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(candidateBtnClick:)];
+            [buttton addGestureRecognizer:tap];
             
             [self.bgView addSubview:buttton];
             [self.candidateBtnArr addObject:buttton];
+            
+            if (i == 3) {
+                //监听是否完成倒计时,监听一个，存在误差
+                [buttton addObserver:self forKeyPath:@"isEnd" options:NSKeyValueObservingOptionNew context:nil];
+            }
         }
         [self setupTimer];
     }
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context{
+    if ([object isKindOfClass:[FGDiffcultyCandidataAnswerButton class]]) {
+        BOOL isEnd = [(FGDiffcultyCandidataAnswerButton*)object isEnd];
+        if ([keyPath isEqualToString:@"isEnd"] && isEnd ) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(challengeFailure)]){
+                [self.delegate challengeFailure];
+            }
+        }
+    }
 }
 
 #pragma mark -
@@ -72,7 +88,8 @@
     [AnimationProcess scaleAnmiationProcessWithView:self.candidateBtnArr[arc4random() %self.candidateBtnArr.count]];
 }
 
-- (void)candidateBtnClick:(UIButton *)btn{
+- (void)candidateBtnClick:(UITapGestureRecognizer *)sender{
+    FGDiffcultyCandidataAnswerButton *btn = (FGDiffcultyCandidataAnswerButton*)sender.view;
     //最好的方法是比较点击间隔时间如果间隔时间大于某个值就
     if (btn.tag == MathSimpleOperationViewActionTypeAnswer) {
         [AnimationProcess springAnimationProcessWithView:btn upHeight:30.0];

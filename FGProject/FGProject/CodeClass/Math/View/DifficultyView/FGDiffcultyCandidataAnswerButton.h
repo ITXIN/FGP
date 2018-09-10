@@ -10,6 +10,7 @@
 @class WaterRippleView;
 @interface FGDiffcultyCandidataAnswerButton : UIButton
 @property (nonatomic, strong) WaterRippleView* myWaterView;
-- (void)candidateBtnClick:(UIButton*)sender;
+@property (nonatomic, assign) BOOL isEnd;
+
 - (void)waterWaveAnimation;
 @end

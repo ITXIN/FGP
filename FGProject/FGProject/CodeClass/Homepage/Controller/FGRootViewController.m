@@ -77,6 +77,8 @@
             }];
             btn.tag = CategoryMath;
             [btn addTarget:self action:@selector(myCenterAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+//            [btn addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
             CABasicAnimation *basicAnimation = [FGProjectHelper animationRotationZ];
             [btn.layer addAnimation:basicAnimation forKey:@"calculateKeyTarnsform.rotaiton.z"];
 

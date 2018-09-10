@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231F57CB2145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 231F57C82145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.m */; };
+		231F57CC2145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 231F57C92145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.m */; };
 		23557E9821425B6D006FF9E7 /* WaterRippleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23557E9721425B6C006FF9E7 /* WaterRippleView.m */; };
 		2361A3FE20D757060041981D /* FGImageLeftTitleRightButtom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361A3FD20D757060041981D /* FGImageLeftTitleRightButtom.m */; };
 		23CADFE32119826900EF8CE1 /* FGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CADFE22119826900EF8CE1 /* FGRootView.m */; };
@@ -681,6 +683,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		231F57C72145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGDiffcultyCandidateAnswerView.h; sourceTree = "<group>"; };
+		231F57C82145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGDiffcultyCandidataAnswerButton.m; sourceTree = "<group>"; };
+		231F57C92145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGDiffcultyCandidateAnswerView.m; sourceTree = "<group>"; };
+		231F57CA2145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGDiffcultyCandidataAnswerButton.h; sourceTree = "<group>"; };
 		23557E9621425B6B006FF9E7 /* WaterRippleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterRippleView.h; sourceTree = "<group>"; };
 		23557E9721425B6C006FF9E7 /* WaterRippleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterRippleView.m; sourceTree = "<group>"; };
 		2361A3FC20D757060041981D /* FGImageLeftTitleRightButtom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageLeftTitleRightButtom.h; sourceTree = "<group>"; };
@@ -1501,6 +1507,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		231F57C62145FBC80056ED1C /* DifficultyView */ = {
+			isa = PBXGroup;
+			children = (
+				231F57CA2145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.h */,
+				231F57C82145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.m */,
+				231F57C72145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.h */,
+				231F57C92145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.m */,
+			);
+			path = DifficultyView;
+			sourceTree = "<group>";
+		};
 		7E456DE4D0AAC5936273AF01 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1852,6 +1869,7 @@
 		8F6AA3411FB0410400A7B5C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				231F57C62145FBC80056ED1C /* DifficultyView */,
 				E6234928210323AD00F04A6F /* MistakesViews */,
 				8F6AA3421FB0410400A7B5C7 /* FGMathRootView.h */,
 				8F6AA3431FB0410400A7B5C7 /* FGMathRootView.m */,
@@ -3809,6 +3827,7 @@
 				8FB1607F1FBC43EE006C9BBA /* FGMyCenterViewController.m in Sources */,
 				8F6AA5F81FB0410500A7B5C7 /* AnimationProcess.m in Sources */,
 				8F7DE9552060C58100A74108 /* FGBaseView.m in Sources */,
+				231F57CC2145FBC80056ED1C /* FGDiffcultyCandidateAnswerView.m in Sources */,
 				8F6AA5EE1FB0410500A7B5C7 /* FGBlurEffectView.m in Sources */,
 				8F6AA8301FB0410700A7B5C7 /* FGImageViewAnimationView.m in Sources */,
 				8F6AA5FB1FB0410500A7B5C7 /* FGClickRandomAnswerCountModel.m in Sources */,
@@ -3835,6 +3854,7 @@
 				8FBCD4F81FBEC3F800E72BB6 /* FGUserManager.m in Sources */,
 				8F6AA5E71FB0410500A7B5C7 /* FGTomViewController.m in Sources */,
 				8F6AA5E11FB0410500A7B5C7 /* FGStartAIChatView.m in Sources */,
+				231F57CB2145FBC80056ED1C /* FGDiffcultyCandidataAnswerButton.m in Sources */,
 				8F6AA6081FB0410500A7B5C7 /* FGMediumLevelOperatorView.m in Sources */,
 				8F6AA6031FB0410500A7B5C7 /* CircleView.m in Sources */,
 				8F6AA5E41FB0410500A7B5C7 /* SAMath.m in Sources */,

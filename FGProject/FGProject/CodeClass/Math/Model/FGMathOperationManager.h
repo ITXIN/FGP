@@ -16,8 +16,6 @@
 @interface FGMathOperationManager : NSObject
 + (FGMathOperationManager*)shareMathOperationManager;
 @property (nonatomic,strong) NSArray *operationsArr;
-@property (nonatomic,strong) NSMutableDictionary *countDic;//统计已经做过的题目个数以及奖励
-@property (nonatomic,strong) NSMutableDictionary *hasDoneDic;//
 
 @property (nonatomic,strong) FGMathOperationModel *currentMathOperationModel;
 @property (nonatomic, strong) FGMathAnswerOptionsModel *currentMathAnswerOperationModel;

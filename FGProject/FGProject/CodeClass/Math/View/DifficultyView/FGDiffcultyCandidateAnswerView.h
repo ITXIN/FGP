@@ -10,6 +10,7 @@
 @protocol FGDiffcultyCandidateAnswerViewDelegate <NSObject>
 @optional
 - (void)didClickCandidateActionType:(MathSimpleOperationViewActionType)actionType;
+- (void)challengeFailure;//挑战失败
 @end
 
 @interface FGDiffcultyCandidateAnswerView : UIView
