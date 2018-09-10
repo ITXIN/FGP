@@ -12,7 +12,7 @@
 
 - (void)setupWithFrame:(CGRect)frame {
    
-    self.myWaterView = [[WaterRippleView alloc] initWithFrame:frame
+    self.myWaterView = [[WaterRippleView alloc] initWithFrame:self.bounds
                                                             mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1]
                                                            minorRippleColor:[UIColor colorWithRed:84/255.0f green:200/255.0f blue:120/255.0f alpha:1]
                                                           mainRippleoffsetX:1.0f
@@ -39,6 +39,7 @@
         self.backgroundColor = UIColor.clearColor;
         self.layer.cornerRadius = (frame.size.height)/2;
         self.layer.masksToBounds = YES;
+        self.isEnd = NO;
     }
     return self;
 }
@@ -46,14 +47,18 @@
 - (void)waterWaveAnimation{
     self.myWaterView.ripplePosition = 0.0;
     self.isEnd = NO;
-    self.myWaterView.mainRippleColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
-    self.myWaterView.minorRippleColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
-    [UIView animateWithDuration:10 animations:^{
-        self.myWaterView.minorRippleColor = UIColor.redColor;
-        self.myWaterView.mainRippleColor = UIColor.redColor;
-    }];
+    
+//    self.myWaterView.mainRippleColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
+//    self.myWaterView.minorRippleColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
+//    [UIView animateWithDuration:10 animations:^{
+//        self.myWaterView.minorRippleColor = UIColor.redColor;
+//        self.myWaterView.mainRippleColor = UIColor.redColor;
+//    }];
+    
     [self startAnimateWave];
+    
 }
+
 - (NSArray *)getRGBDictionaryByColor:(UIColor *)originColor
 {
     CGFloat r=0,g=0,b=0,a=0;
@@ -80,14 +85,43 @@
     
 }
 
-- (void)startAnimateWave{
-    self.myWaterView.ripplePosition ++;
-    if (self.myWaterView.ripplePosition >= CGRectGetHeight(self.frame)){
-        self.isEnd = YES;
-        return ;
-    }else{
-        [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:MathCompreOfChallengeTimerLevelThree/CGRectGetHeight(self.frame)];
-    }
+- (void)stopWaterRipper{
+    [self.myWaterView.layer removeAllAnimations];
 }
+
+- (void)startAnimateWave{
+//    self.myWaterView.ripplePosition += MathCompreOfChallengeTimerLevelThree;
+//    NSLog(@"---wave---%f",self.myWaterView.ripplePosition);
+//    if (self.myWaterView.ripplePosition >= CGRectGetHeight(self.frame)){
+//        self.isEnd = YES;
+//        return ;
+//    }else{
+//        [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:MathCompreOfChallengeTimerLevelThree/CGRectGetHeight(self.frame)];
+//    }
+    
+    self.myWaterView.frame = self.bounds;
+    [UIView animateWithDuration:10 animations:^{
+        self.myWaterView.frame = CGRectMake(0, CGRectGetHeight(self.frame)+10, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+        NSLog(@"---wave---%f",self.myWaterView.ripplePosition);
+            self.isEnd = YES;
+    }completion:^(BOOL finished) {
+        if (finished) {
+            self.isEnd = YES;
+        }
+    }];
+}
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//    UIView *hitView = [super hitTest:point withEvent:event];
+////    if (hitView == self)
+////    {
+//        return self;
+////    }
+////    else
+////    {
+////        return hitView;
+////    }
+//
+//}
 
 @end

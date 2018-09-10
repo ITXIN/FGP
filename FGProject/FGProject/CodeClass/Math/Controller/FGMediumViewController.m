@@ -92,9 +92,7 @@
         dispatch_after(7.0, dispatch_get_main_queue(), ^{
             NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
             //每间隔6道题弹出一次
-            if (_doneCount %6 == 0){
-                [HasDoneOperation setStarNumberWithDiffcultyLevelMark:MEDIUM_STAR_NUMBER_MARK];
-                
+            if (_doneCount %6 == 0){                
                 if (![self.view.subviews containsObject:self.toolView]){
                     [self.view addSubview:self.toolView];
                     @weakify(self);

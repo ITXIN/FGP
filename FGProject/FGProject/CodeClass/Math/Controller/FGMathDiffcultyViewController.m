@@ -94,8 +94,6 @@
             NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
             //每间隔6道题弹出一次
             if (_doneCount %6 == 0){
-                [HasDoneOperation setStarNumberWithDiffcultyLevelMark:MEDIUM_STAR_NUMBER_MARK];
-                
                 if (![self.view.subviews containsObject:self.toolView]){
                     [self.view addSubview:self.toolView];
                     @weakify(self);
@@ -127,7 +125,7 @@
 
 - (void)challengeFailure{
     [JCAlertView showOneButtonWithTitle:@"挑战失败" Message:@"本次得分100" ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
-        
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

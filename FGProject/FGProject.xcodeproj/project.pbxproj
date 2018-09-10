@@ -58,7 +58,6 @@
 		8F6AA5F81FB0410500A7B5C7 /* AnimationProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3321FB0410400A7B5C7 /* AnimationProcess.m */; };
 		8F6AA5FA1FB0410500A7B5C7 /* FGDateSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3361FB0410400A7B5C7 /* FGDateSingle.m */; };
 		8F6AA5FB1FB0410500A7B5C7 /* FGClickRandomAnswerCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3381FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.m */; };
-		8F6AA5FC1FB0410500A7B5C7 /* HasDoneOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */; };
 		8F6AA5FF1FB0410500A7B5C7 /* SoundsProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3401FB0410400A7B5C7 /* SoundsProcess.m */; };
 		8F6AA6001FB0410500A7B5C7 /* FGMathRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3431FB0410400A7B5C7 /* FGMathRootView.m */; };
 		8F6AA6021FB0410500A7B5C7 /* CARadarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA3481FB0410400A7B5C7 /* CARadarView.m */; };
@@ -792,8 +791,6 @@
 		8F6AA3361FB0410400A7B5C7 /* FGDateSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGDateSingle.m; sourceTree = "<group>"; };
 		8F6AA3371FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGClickRandomAnswerCountModel.h; sourceTree = "<group>"; };
 		8F6AA3381FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGClickRandomAnswerCountModel.m; sourceTree = "<group>"; };
-		8F6AA3391FB0410400A7B5C7 /* HasDoneOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HasDoneOperation.h; sourceTree = "<group>"; };
-		8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HasDoneOperation.m; sourceTree = "<group>"; };
 		8F6AA33F1FB0410400A7B5C7 /* SoundsProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundsProcess.h; sourceTree = "<group>"; };
 		8F6AA3401FB0410400A7B5C7 /* SoundsProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundsProcess.m; sourceTree = "<group>"; };
 		8F6AA3421FB0410400A7B5C7 /* FGMathRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGMathRootView.h; sourceTree = "<group>"; };
@@ -1850,8 +1847,6 @@
 				8F6AA3361FB0410400A7B5C7 /* FGDateSingle.m */,
 				8F6AA3371FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.h */,
 				8F6AA3381FB0410400A7B5C7 /* FGClickRandomAnswerCountModel.m */,
-				8F6AA3391FB0410400A7B5C7 /* HasDoneOperation.h */,
-				8F6AA33A1FB0410400A7B5C7 /* HasDoneOperation.m */,
 				8F6AA33F1FB0410400A7B5C7 /* SoundsProcess.h */,
 				8F6AA3401FB0410400A7B5C7 /* SoundsProcess.m */,
 				8F9BDB141FB83C1D00BE8717 /* FGMathOperationManager.h */,
@@ -3769,7 +3764,6 @@
 				8F6AA8281FB0410700A7B5C7 /* FSDAirportFlipLabel.m in Sources */,
 				8FE33445206201B20030F8EC /* FGMathOperationModel.m in Sources */,
 				8FF61A1E1FC0274C007306D6 /* FGSetupPhotoViewController.m in Sources */,
-				8F6AA5FC1FB0410500A7B5C7 /* HasDoneOperation.m in Sources */,
 				8FADBE6A1FB46D9E0018F6C8 /* PullCircleView.m in Sources */,
 				8F6AA5D61FB0410500A7B5C7 /* AlertView.m in Sources */,
 				8F6AA82B1FB0410700A7B5C7 /* WriteFunction.m in Sources */,

@@ -144,14 +144,14 @@
     if (buttonIndex == 0){
         //题目统计都是一个,没有区分难易程度.
         //清理
-        [HasDoneOperation clearHadDoneDataWithDifcultyLevelMark:EASY_STAR_NUMBER_MARK];
-        [HasDoneOperation clearHadDoneDataWithDifcultyLevelMark:MEDIUM_STAR_NUMBER_MARK];
-        [HasDoneOperation clearHadDoneDataWithDifcultyLevelMark:HARD_STAR_NUMBER_MARK];
-        
-        FGDateSingle *single = [FGDateSingle shareInstance];
-        [[NSUserDefaults standardUserDefaults] setValue:0 forKey:[single curretDate]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self.countBtn setTitle:@"今天0道" forState:UIControlStateNormal];
+//        [HasDoneOperation clearHadDoneDataWithDifcultyLevelMark:EASY_STAR_NUMBER_MARK];
+//        [HasDoneOperation clearHadDoneDataWithDifcultyLevelMark:MEDIUM_STAR_NUMBER_MARK];
+//        [HasDoneOperation clearHadDoneDataWithDifcultyLevelMark:HARD_STAR_NUMBER_MARK];
+//
+//        FGDateSingle *single = [FGDateSingle shareInstance];
+//        [[NSUserDefaults standardUserDefaults] setValue:0 forKey:[single curretDate]];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [self.countBtn setTitle:@"今天0道" forState:UIControlStateNormal];
     }else{
     }
 }

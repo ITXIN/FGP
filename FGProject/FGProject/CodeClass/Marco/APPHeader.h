@@ -119,13 +119,6 @@
 //角度转弧度
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-
-
-//star
-#define EASY_STAR_NUMBER_MARK @"Easy"
-#define MEDIUM_STAR_NUMBER_MARK @"Medium"
-#define HARD_STAR_NUMBER_MARK @"Hard"
-
 //难易程度
 #define EASY_DIFFCULTYLEVEL_BTN_TITLE @"简单"
 #define MEDIUM_DIFFCULTYLEVEL_BTN_TITLE @"中等"

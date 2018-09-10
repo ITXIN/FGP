@@ -17,7 +17,6 @@
 #import "FGDateSingle.h"
 #import "AnimationProcess.h"
 #import "SoundsProcess.h"
-#import "HasDoneOperation.h"
 #import "MusicPlayerView.h"
 #import "AdjustVolume.h"
 #import "Masonry.h"

@@ -13,4 +13,5 @@
 @property (nonatomic, assign) BOOL isEnd;
 
 - (void)waterWaveAnimation;
+- (void)stopWaterRipper;
 @end
