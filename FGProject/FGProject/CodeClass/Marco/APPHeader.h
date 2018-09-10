@@ -135,21 +135,42 @@ static NSInteger kMathOperationRangeNumber = 11;
 
 #define DATA_WAVE_HEIGHT_SCALE 500 //做题统计高度参数，1000是按1000道题水充满,可以设置其他的
 
-//数学运算数据统计
+
+//数学运算数据统计，总数据的key
 #define kMathOperationDataStatisticsKey @"kMathOperationDataStatisticsKey"
 
+//数据中总数量key
 #define kMathOperationDataStatisticsTotalNumberKey @"kMathOperationDataStatisticsTotalNumberKey"
 
+//挑战模式数据key
+#define kMathOperationCompreOfChallengeDataKey @"kMathOperationCompreOfChallengeDataKey"
+
+//挑战模式数据总量key
+#define kMathOperationCompreOfChallengeTotalNumberKey @"kMathOperationCompreOfChallengeTotalNumberKey"
+
+//挑战模式定时器等级
+#define kMathOperationCompreOfChallengeTimerLevelOneKey @"kMathOperationCompreOfChallengeTimerLevelOneKey"
+#define kMathOperationCompreOfChallengeTimerLevelTwoKey @"kMathOperationCompreOfChallengeTimerLevelTwoKey"
+#define kMathOperationCompreOfChallengeTimerLevelThreeKey @"kMathOperationCompreOfChallengeTimerLevelThreeKey"
+
+//数据中每日数据key
 #define kMathOperationDetailDataKey @"kMathOperationDetailDataKey"
+
+//数据中每日数据总数key
 #define kMathOperationDetailDataTotalNumberKey @"kMathOperationDetailDataTotalNumberKey"
 
 #define kMathOperationTypeKey @"kMathOperationTypeKey" //运算类型
 #define kMathOperationStateKey @"kMathOperationStateKey"//状态是否正确
 #define kMathOperationObjKey @"kMathOperationObjKey"//运算式
 #define kMathOperationDateKey @"kMathOperationDateKey"//日期
+#define kMathOperationCompreOfChallengeTimerLevelKey @"kMathOperationCompreOfChallengeTimerLevelKey"//混合运算挑战模式定时器等级
 
 //综合练习类型
 #define kMathCompreOfOperationTypeKey @"kMathCompreOfOperationTypeKey"
+
+//挑战模式定时器选择
+#define kMathOperationCompreOfChallengeTimerLevelTypeKey @"kMathOperationCompreOfChallengeTimerLevelTypeKey"
+
 
 //儿童数学的游戏
 #define GAME_CHILDERN_API @"http://cdnapi.bbwansha.com/bb_video30/Home/game/games/version/3/app_id/6/app_sub_id/1?t=589AB3E0"

@@ -19,10 +19,7 @@
 -(void)dealloc{
     [_timer invalidate];
     _timer = nil;
-
-    for (FGDiffcultyCandidataAnswerButton *btn  in self.candidateBtnArr) {
-          [btn removeObserver:self forKeyPath:@"isEnd"];
-    }
+    [self removeObserver];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -50,15 +47,23 @@
             
             [self.bgView addSubview:buttton];
             [self.candidateBtnArr addObject:buttton];
-            
-            if (i == 3) {
-                //监听是否完成倒计时,监听一个，存在误差
-                [buttton addObserver:self forKeyPath:@"isEnd" options:NSKeyValueObservingOptionNew context:nil];
-            }
         }
+        
         [self setupTimer];
     }
     return self;
+}
+
+- (void)addObserver{
+    FGDiffcultyCandidataAnswerButton *btn = (FGDiffcultyCandidataAnswerButton*)self.candidateBtnArr[2];
+    [btn addObserver:self forKeyPath:@"isEnd" options:NSKeyValueObservingOptionNew context:nil];
+        NSLog(@"---add---%@",btn);
+}
+
+- (void)removeObserver{
+    FGDiffcultyCandidataAnswerButton *btn = (FGDiffcultyCandidataAnswerButton*)self.candidateBtnArr[2];
+    [btn removeObserver:self forKeyPath:@"isEnd"];
+    NSLog(@"---remov---%@",btn);
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context{
@@ -71,6 +76,7 @@
         }
     }
 }
+
 
 #pragma mark -
 #pragma mark ---init Timer
@@ -89,6 +95,9 @@
 }
 
 - (void)candidateBtnClick:(UITapGestureRecognizer *)sender{
+    
+    [self removeObserver];
+    
     FGDiffcultyCandidataAnswerButton *btn = (FGDiffcultyCandidataAnswerButton*)sender.view;
     //最好的方法是比较点击间隔时间如果间隔时间大于某个值就
     if (btn.tag == MathOperationChooseResultTypeCorrect) {
@@ -130,8 +139,12 @@
     [self viewAnimation:self.candidateBtnArr[3] duration:2.9 x:x2 y:0 alpha:1.0];
     
     for (FGDiffcultyCandidataAnswerButton *btn  in self.candidateBtnArr) {
+        btn.isEnd = NO;
         [btn waterWaveAnimation];
     }
+
+    //监听是否完成倒计时,监听一个，存在误差
+    [self addObserver];
 }
 
 #pragma mark-----CAAnimation

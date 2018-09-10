@@ -93,9 +93,9 @@ typedef NS_ENUM(NSInteger,MathOperationChooseResultType){
 
 ////Math 运算回答结果类型
 typedef NS_ENUM(NSInteger,MathCompreOfChallengeTimerLevel){
-    MathCompreOfChallengeTimerLevelOneLevel = 15,
-    MathCompreOfChallengeTimerLevelTwoLevel = 10,
-    MathCompreOfChallengeTimerLevelThreeLevel = 5
+    MathCompreOfChallengeTimerLevelOne = 15,
+    MathCompreOfChallengeTimerLevelTwo = 10,
+    MathCompreOfChallengeTimerLevelThree = 5
 };
 
 //MyCenter

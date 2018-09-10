@@ -19,7 +19,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[FGMathOperationManager shareMathOperationManager]saveMathCompreOfOperationType:[NSDictionary dictionaryWithDictionary:self.operationsDic]];
+    [[FGMathOperationManager shareMathOperationManager] saveMathCompreOfOperationType:[NSDictionary dictionaryWithDictionary:self.operationsDic]];
 }
 
 - (void)viewDidLoad {
@@ -47,7 +47,7 @@
     });
     
     
-    self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeDic]];
+    self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager] getMathCompreOfOperationTypeDic]];
     self.operationSettingTitleLab = ({
         UILabel *label = [[UILabel alloc]init];
         [self.bgView addSubview:label];

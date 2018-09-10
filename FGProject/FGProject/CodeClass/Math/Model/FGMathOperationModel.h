@@ -17,8 +17,7 @@
 @property (nonatomic, assign) NSInteger secondNum;
 //正确答案
 @property (nonatomic, assign) NSInteger answerNum;
-//用户的答案
-//@property (nonatomic, strong) NSString *userAnswerStr;
+
 @property (nonatomic, assign) NSInteger thirdNum;//候选答案
 /**
  *  两个运算符 为三个数运算
@@ -27,6 +26,6 @@
 @property (nonatomic,assign) MathOperationActionType secondOperationType;
 
 + (FGMathOperationModel *)generateMathOperationModelWithOperationType:(MathOperationActionType )operationType;
-+ (FGMathOperationModel *)generateMathOperationModel;
++ (FGMathOperationModel *)generateCompreMathOperationModelWithOperationType:(MathOperationActionType )operationType;
 + (FGMathOperationModel *)generateRandomAnwserNum:(NSInteger)userAnswer;
 @end

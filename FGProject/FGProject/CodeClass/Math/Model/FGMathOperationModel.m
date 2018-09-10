@@ -74,7 +74,7 @@
     NSInteger secondNum = 0;
     //运算符
     MathOperationActionType currentOperationTyp;
-    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeArr];
+    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager] getMathCompreOfOperationTypeArr];
     
     if (operationType == MathOperationActionTypeCompreOfSimple){
         currentOperationTyp = [(NSNumber*)operationArr[arc4random()%operationArr.count] integerValue];
@@ -114,10 +114,12 @@
 // MARK: - ---------------------------------- 三个数 ----------------------------------
 #pragma mark -
 #pragma mark --- 产生运算式 随机
-+(FGMathOperationModel *)generateMathOperationModel{
++(FGMathOperationModel *)generateCompreMathOperationModelWithOperationType:(MathOperationActionType)operationType{
     
-    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager]getMathCompreOfOperationTypeArr];
+    NSArray *operationArr = [[FGMathOperationManager shareMathOperationManager] getMathCompreOfOperationTypeArr];
+    
     MathOperationActionType firstOperationType = [operationArr[arc4random()%operationArr.count] integerValue];
+    
     FGMathOperationModel *questModel = [FGMathOperationModel generateMathOperationModelWithOperationType:firstOperationType];
     FGMathOperationModel *mediumOperationModel = [[FGMathOperationModel alloc]init];
     mediumOperationModel.firstOperationType = firstOperationType;
@@ -199,7 +201,7 @@
     mediumOperationModel.secondOperationType = secondMathOperationType;
     mediumOperationModel.thirdNum = thirdNum;
     mediumOperationModel.operationLevel = MathOperationLevelThree;
-    
+    mediumOperationModel.mathOperationActionType = operationType;
     return mediumOperationModel;
 }
 

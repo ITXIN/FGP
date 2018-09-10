@@ -75,7 +75,7 @@
 #pragma mark -
 #pragma mark --- update view
 - (void)updateView{
-    self.currentOperaModel = [self.mathManager generateMediumOperationModel];
+    self.currentOperaModel = [self.mathManager generateCompreMathOperationModelWithOperationType:MathOperationActionTypeCompreOfChallenge];
     [self.mediumLOV setMediumOperationModel:self.currentOperaModel];
     FGMathAnswerOptionsModel *answerOptionModel = [self.mathManager generateRandomAnswerNum:self.currentOperaModel.answerNum];
     [self.candidateAV setupAnswerModel:answerOptionModel];

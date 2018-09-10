@@ -86,7 +86,7 @@
         self.isEnd = YES;
         return ;
     }else{
-        [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:MathCompreOfChallengeTimerLevelThreeLevel/CGRectGetHeight(self.frame)];
+        [self performSelector:@selector(startAnimateWave) withObject:nil afterDelay:MathCompreOfChallengeTimerLevelThree/CGRectGetHeight(self.frame)];
     }
 }
 
