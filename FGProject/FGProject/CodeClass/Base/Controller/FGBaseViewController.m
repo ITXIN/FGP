@@ -50,8 +50,17 @@
 
 #pragma mark -
 - (void)setTitleStr:(NSString *)titleStr{
-    _titleStr = titleStr;
-    self.navigationView.titleStr = [NSString stringWithFormat:@"%@",titleStr];
+    if (titleStr && titleStr.length > 0) {
+        _titleStr = titleStr;
+        self.navigationView.titleLab.text = [NSString stringWithFormat:@"%@",titleStr];
+    }
+}
+
+- (void)setAttributedTitleStr:(NSAttributedString *)attributedTitleStr{
+    if (attributedTitleStr) {
+        _attributedTitleStr = attributedTitleStr;
+        self.navigationView.titleLab.attributedText = attributedTitleStr;
+    }
 }
 
 - (void)setupLayoutSubviews{

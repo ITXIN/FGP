@@ -57,9 +57,15 @@
 - (NSArray*)getMathCompreOfOperationTypeArr;
 
 //获取存储的所有数据,
-- (NSMutableDictionary*)getAllData;
+//- (NSMutableDictionary*)getAllData;
 
 //获取存储的错题
 - (NSMutableArray*)getAllMistakes;
+
+//更新挑战模式最高记录
+- (void)updateCurrentChallengeHighestRecordWithNumber:(NSInteger)number;
+
+//获取挑战模式最高记录
+- (NSInteger)getCurrentChallengeHighestRecord;
 
 @end

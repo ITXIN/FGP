@@ -15,7 +15,6 @@
 @property (nonatomic,strong) UIButton *backBtn;
 @property (nonatomic,strong) UIView *navigationView;
 @property (nonatomic,strong) UILabel *titleLab;
-@property (nonatomic,strong) NSString *titleStr;
 
 @property (nonatomic,assign) id <FGNavigationViewDelegate> delegate;
 

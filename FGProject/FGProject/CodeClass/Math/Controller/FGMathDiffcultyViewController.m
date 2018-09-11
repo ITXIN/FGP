@@ -21,6 +21,8 @@
 @property (nonatomic,strong) FGMediumLevelOperatorView *mediumLOV;
 @property (nonatomic,strong) FGDiffcultyCandidateAnswerView *candidateAV;
 @property (nonatomic,strong) FGMathOperationModel *currentOperaModel;
+@property (nonatomic, assign) NSInteger currentNumber;
+@property (nonatomic, assign) NSInteger currentHighestRecord;
 @end
 
 @implementation FGMathDiffcultyViewController
@@ -35,7 +37,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.mediumLOV.timer setFireDate:[NSDate distantPast]];
-
+    self.currentHighestRecord =  [[FGMathOperationManager shareMathOperationManager] getCurrentChallengeHighestRecord];
+    [self updateTitleStr];
 }
 
 - (void)viewDidLoad {
@@ -46,6 +49,8 @@
 - (void)initSubviews{
     [super initSubviews];
     self.titleStr = @"困难";
+    self.currentNumber = 0;
+    
     [self hiddenCircleView];
     //运算式
     self.mediumLOV  = [[FGMediumLevelOperatorView alloc]init];
@@ -88,7 +93,8 @@
 
 - (void)paustAction:(UIButton*)sender{
     [self.candidateAV pauseWaterRipper];
-    [JCAlertView showOneButtonWithTitle:@"挑战暂停" Message:@"目前得分100" ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"继续挑战" Click:^{
+    NSString *message = [NSString stringWithFormat:@"目前%@",[self getAlertViewMessage]];
+    [JCAlertView showOneButtonWithTitle:@"暂停挑战" Message:message ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"继续挑战" Click:^{
         sender.selected = !sender.selected;
         [self.candidateAV continueWaterRipper];
     }];
@@ -99,26 +105,65 @@
 - (void)didClickCandidateActionType:(MathOperationChooseResultType)actionType{
     
     [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
-    [self updatCircleviewData];//更新数据
-
+    
     if (actionType == MathOperationChooseResultTypeCorrect) {
         [[SoundsProcess shareInstance] playSoundOfWonderful];
+        self.currentNumber ++;
         [self updateView];
+        [self updateTitleStr];
     }else{
-
         [self showErrorView];
     }
 }
 
 - (void)challengeFailure{
+    [self updateTitleStr];
     [self showErrorView];
 }
 
 - (void)showErrorView{
     [[SoundsProcess shareInstance] playSoundOfWrong];
-    [JCAlertView showOneButtonWithTitle:@"挑战失败" Message:@"本次得分100" ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
-        [self.navigationController popViewControllerAnimated:YES];
+
+    NSString *message = [NSString stringWithFormat:@"本次%@",[self getAlertViewMessage]];
+ 
+    [JCAlertView showOneButtonWithTitle:@"挑战结束" Message:message ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
+        
+        if (self.currentNumber > self.currentHighestRecord) {
+            [self fireworksProcess];
+            [[FGMathOperationManager shareMathOperationManager] updateCurrentChallengeHighestRecordWithNumber:self.currentNumber];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }else{
+          [self.navigationController popViewControllerAnimated:YES];
+        }
     }];
+}
+
+- (NSString *)getAlertViewMessage{
+    NSString *message = [NSString stringWithFormat:@"得分: %ld 最高记录得分: %ld",self.currentNumber,self.currentHighestRecord];
+    return message;
+}
+
+- (void)updateTitleStr{
+    NSString *message = [NSString stringWithFormat:@"目前得分: %ld 最高记录得分: %ld",self.currentNumber,self.currentHighestRecord];
+    
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:message];
+    NSRange numberRange = [message rangeOfString:@"目前得分: "];
+    NSRange hightestRange = [message rangeOfString:@"最高记录得分: "];
+    NSRange numberR = NSMakeRange(numberRange.length, hightestRange.location-numberRange.length);
+    NSRange hightestR = NSMakeRange(hightestRange.location+hightestRange.length, message.length-(hightestRange.location+hightestRange.length));
+    
+    UIColor *color = UIColor.redColor;
+    UIFont *font = [UIFont boldSystemFontOfSize:18.f];
+    
+    [attr addAttribute:NSForegroundColorAttributeName value:color range:numberR];
+    [attr addAttribute:NSFontAttributeName value:font range:numberR];
+    
+    [attr addAttribute:NSForegroundColorAttributeName value:color range:hightestR];
+    [attr addAttribute:NSFontAttributeName value:font range:hightestR];
+    
+    self.attributedTitleStr = attr;
 }
 
 
@@ -126,7 +171,7 @@
  *  烟花效果
  */
 - (void)fireworksProcess{
-    [FGRewardViewHUD show];
+//    [FGRewardViewHUD show];
     //播放烟花声音
     [[SoundsProcess shareInstance] playSoundOfFireworks];
     dispatch_group_t group = dispatch_group_create();
@@ -157,14 +202,14 @@
         {
             // 并行执行的线程一
             MCFireworksButton *likeButton = arr[i];
-            [likeButton popOutsideWithDuration:5.5];
+            [likeButton popOutsideWithDuration:1.5];
             [likeButton animate];
             [shadowView addSubview:likeButton];
         }
     });
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         // 汇总结果
-        [UIView animateWithDuration:3 delay:1.2 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        [UIView animateWithDuration:2 delay:1.2 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
             [self.view viewWithTag:10012].alpha = 0;
         } completion:^(BOOL finished) {
             [[self.view viewWithTag:10012] removeFromSuperview];

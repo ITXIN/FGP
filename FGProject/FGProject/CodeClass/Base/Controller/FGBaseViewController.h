@@ -12,6 +12,7 @@
 @property (nonatomic,strong) UIView *bgView;
 @property (nonatomic,strong) FGNavigationView *navigationView;
 @property (nonatomic,strong) NSString *titleStr;
+@property (nonatomic,strong) NSAttributedString *attributedTitleStr;
 @property (nonatomic,strong) FGBlurEffectView *blurView;
 @property (nonatomic,strong) FGUserManager *userManager;
 

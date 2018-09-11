@@ -224,7 +224,8 @@
                                                                           kMathOperationCompreOfChallengeTimerLevelOneKey:@"0",
                                                                           kMathOperationCompreOfChallengeTimerLevelTwoKey:@"0",
                                                                           kMathOperationCompreOfChallengeTimerLevelThreeKey:@"0",
-                                                                          kMathOperationCompreOfChallengeTotalNumberKey:@"0"
+                                                                          kMathOperationCompreOfChallengeTotalNumberKey:@"0",
+                                                                          kMathOperationCompreOfChallengeHighestRecord:@"0"
                                                                           
                                                                           }
                                                                   }];
@@ -282,6 +283,7 @@
     return dataDic;
 }
 
+//获取错题数据
 - (NSMutableArray*)getAllMistakes{
     NSMutableDictionary *dataDic = [self getAllData];
     NSMutableArray *dataArr = [NSMutableArray array];
@@ -302,11 +304,34 @@
                     mistakesModel.count = [NSString stringWithFormat:@"%@",dataDic[key][kMathOperationDetailDataTotalNumberKey]];
                     [dataArr addObject:mistakesModel];
                 }
-                
             }
         }
     }
     return dataArr;
+}
+
+//获取挑战模式最高记录
+- (NSInteger)getCurrentChallengeHighestRecord{
+    
+    NSMutableDictionary *dataDic = [self getAllData];
+    NSInteger heightRecode = [dataDic[kMathOperationCompreOfChallengeDataKey][kMathOperationCompreOfChallengeHighestRecord] integerValue];
+    
+    return heightRecode;
+}
+
+//更新挑战模式最高记录
+- (void)updateCurrentChallengeHighestRecordWithNumber:(NSInteger)number{
+    
+    if (number > [self getCurrentChallengeHighestRecord]) {
+        
+        NSMutableDictionary *dataDic = [self getAllData];
+        NSMutableDictionary *chanllengeDic = [NSMutableDictionary dictionaryWithDictionary: dataDic[kMathOperationCompreOfChallengeDataKey]];
+        
+        [chanllengeDic setValue:[NSString stringWithFormat:@"%ld",number] forKey:kMathOperationCompreOfChallengeHighestRecord];
+        dataDic[kMathOperationCompreOfChallengeDataKey] = chanllengeDic;
+        
+        [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
+    }
 }
 
 //数据统计

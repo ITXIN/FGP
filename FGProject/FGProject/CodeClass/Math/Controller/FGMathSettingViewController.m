@@ -46,12 +46,94 @@
         btn;
     });
     
+    [self setupCompreOperationType];
+    
+    [self setupChallengeTimerLever];
+}
+
+#pragma mark -
+- (void)setupChallengeTimerLever{
+    UIView *challengeView = ({
+        UIView *view = [UIView new];
+        [self.view addSubview:view];
+        view;
+    });
+    challengeView.backgroundColor = UIColor.redColor;
+    
+    [challengeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.voiceBtn);
+        make.top.mas_equalTo(self.voiceBtn.mas_bottom).offset(10);
+        make.size.mas_equalTo(CGSizeMake(200, 100));
+    }];
+    
+    UILabel *titleLab = ({
+        UILabel *label = [UILabel new];
+        [challengeView addSubview:label];
+        label.font = [UIFont systemFontOfSize:15.0];
+        label.text = @"挑战模式等级设置";
+        label;
+    });
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(challengeView);
+    }];
+    
+    MathCompreOfChallengeTimerLevel timerLev ;
+    NSString *titleStr = @"";
+    for (NSInteger i = 0; i < 3; i++) {
+      
+        UIButton *tempBtn = ({
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [challengeView addSubview:btn];
+            [btn setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateSelected];
+            [btn addTarget:self action:@selector(challengeLeveAction:) forControlEvents:UIControlEventTouchUpInside];
+            btn;
+        });
+        
+        UILabel *tempLab = ({
+            UILabel *label = [UILabel new];
+            [challengeView addSubview:label];
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:13.0];
+            label.textAlignment = NSTextAlignmentCenter;
+            label;
+        });
+        
+        if (i == 0) {
+            timerLev = MathCompreOfChallengeTimerLevelOne;
+            titleStr = @"初级";
+        }else if (i == 1){
+            timerLev = MathCompreOfChallengeTimerLevelTwo;
+            titleStr = @"中级";
+        }else{
+            timerLev = MathCompreOfChallengeTimerLevelThree;
+            titleStr = @"高级";
+        }
+        
+        tempBtn.tag = timerLev;
+        tempLab.text = [NSString stringWithFormat:@"%@",titleStr];
+        
+        [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(titleLab.mas_bottom).offset(5);
+            make.left.mas_equalTo(20*(i+1) + i*(30));
+        }];
+        [tempLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(tempBtn.mas_bottom).offset(5);
+            make.centerX.equalTo(tempBtn);
+        }];
+        
+    }
+    
+}
+
+
+- (void)setupCompreOperationType{
     
     self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager] getMathCompreOfOperationTypeDic]];
     self.operationSettingTitleLab = ({
         UILabel *label = [[UILabel alloc]init];
         [self.bgView addSubview:label];
-        label.font = [UIFont boldSystemFontOfSize:18.0];
+        label.font = [UIFont boldSystemFontOfSize:15.0];
         label.text = @"综合题目类型设置(勾选要做的类型)";
         label;
     });
@@ -108,11 +190,17 @@
     }
 }
 
+
 #pragma mark -----------
 - (void)voiceBtnAction:(UIButton*)sender{
     sender.selected = !sender.selected;
     [SoundsProcess shareInstance].isPlaySound = !sender.selected;
 }
+
+- (void)challengeLeveAction:(UIButton*)sender{
+    
+}
+
 
 #pragma mark -------action----
 - (void)actionBtn:(UIButton*)sender{
@@ -148,9 +236,8 @@
     }];
     
     [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(50);
-        make.top.equalTo(self.operationSettingTitleLab
-                         .mas_bottom).offset(5);
+        make.left.mas_equalTo(20);
+        make.top.equalTo(self.operationSettingTitleLab).offset(5);
         make.height.mas_equalTo(60);
         make.width.mas_equalTo(130);
         

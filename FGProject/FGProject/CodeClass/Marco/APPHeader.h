@@ -141,6 +141,9 @@ static NSInteger kMathOperationRangeNumber = 11;
 //挑战模式数据总量key
 #define kMathOperationCompreOfChallengeTotalNumberKey @"kMathOperationCompreOfChallengeTotalNumberKey"
 
+//挑战模式最高记录
+#define kMathOperationCompreOfChallengeHighestRecord  @"kMathOperationCompreOfChallengeHighestRecord"
+
 //挑战模式定时器等级
 #define kMathOperationCompreOfChallengeTimerLevelOneKey @"kMathOperationCompreOfChallengeTimerLevelOneKey"
 #define kMathOperationCompreOfChallengeTimerLevelTwoKey @"kMathOperationCompreOfChallengeTimerLevelTwoKey"

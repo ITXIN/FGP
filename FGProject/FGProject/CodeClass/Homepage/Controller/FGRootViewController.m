@@ -22,6 +22,7 @@
 #import "FGMyCenterViewController.h"
 #import "FGVideoViewController.h"
 #import "FGMathDiffcultyViewController.h"
+#import "FGMathSettingViewController.h"
 @interface FGRootViewController ()<FGCategoryMenuViewDelegate>
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
 @property (nonatomic,strong) FGRootView *rootBgView;
@@ -94,10 +95,13 @@
 //    FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
 //    [self.navigationController pushViewController:myCenterVC animated:YES];
     
-    
+//
     FGMathDiffcultyViewController *myCenterVC = [[FGMathDiffcultyViewController alloc]init];
     [self.navigationController pushViewController:myCenterVC animated:YES];
     
+    
+//    FGMathSettingViewController *settingVC = [[FGMathSettingViewController alloc]init];
+//    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 #pragma mark -

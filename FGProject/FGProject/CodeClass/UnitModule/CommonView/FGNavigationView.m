@@ -32,7 +32,7 @@
         self.titleLab = ({
             UILabel *label = [[UILabel alloc]init];
             [self addSubview:label];
-            label.font = [UIFont systemFontOfSize:13];
+            label.font = [UIFont systemFontOfSize:15.0];
             label.textAlignment = NSTextAlignmentCenter;
             
             label;
@@ -51,11 +51,6 @@
         [preView.navigationController popViewControllerAnimated:YES];
     }
     
-}
-
-- (void)setTitleStr:(NSString *)titleStr{
-    _titleStr = titleStr;
-    self.titleLab.text = titleStr;
 }
 
 -(void)layoutSubviews{
