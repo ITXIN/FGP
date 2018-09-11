@@ -78,6 +78,14 @@
     [self.circleView.waterWaveView showAnimationOfWaterWave];
 }
 
+- (void)showCircleView{
+    self.circleView.hidden = NO;
+}
+
+- (void)hiddenCircleView{
+    self.circleView.hidden = YES;
+}
+
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.circleView mas_makeConstraints:^(MASConstraintMaker *make) {

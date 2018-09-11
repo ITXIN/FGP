@@ -15,9 +15,10 @@
 
 @interface FGDiffcultyCandidateAnswerView : UIView
 @property (nonatomic, strong)  UIView *bgView;
-@property (nonatomic,strong) NSMutableArray *candidateBtnArr;
-@property (nonatomic,strong) NSTimer *timer;
-@property (nonatomic,weak) id <FGDiffcultyCandidateAnswerViewDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *candidateBtnArr;
+@property (nonatomic, weak) id <FGDiffcultyCandidateAnswerViewDelegate> delegate;
 - (void)setupAnswerModel:(FGMathAnswerOptionsModel*)answerOptionModel;
 
+- (void)pauseWaterRipper;
+- (void)continueWaterRipper;
 @end

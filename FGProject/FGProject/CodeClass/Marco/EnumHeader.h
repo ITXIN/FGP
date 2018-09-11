@@ -86,8 +86,8 @@ typedef NS_ENUM(NSInteger,MathOperationActionType){
 
 //Math
 typedef NS_ENUM(NSInteger,MathOperationChooseResultType){
-    MathOperationChooseResultTypeError = 2000,
-    MathOperationChooseResultTypeCorrect
+    MathOperationChooseResultTypeCorrect = 3000,
+    MathOperationChooseResultTypeError
 };
 
 

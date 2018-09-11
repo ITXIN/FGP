@@ -29,14 +29,13 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.mediumLOV.timer setFireDate:[NSDate distantFuture]];
-    [self.candidateAV.timer setFireDate:[NSDate distantFuture]];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.mediumLOV.timer setFireDate:[NSDate distantPast]];
-    [self.candidateAV.timer setFireDate:[NSDate distantPast]];
-    
+
 }
 
 - (void)viewDidLoad {
@@ -47,6 +46,7 @@
 - (void)initSubviews{
     [super initSubviews];
     self.titleStr = @"困难";
+    [self hiddenCircleView];
     //运算式
     self.mediumLOV  = [[FGMediumLevelOperatorView alloc]init];
     [self.view addSubview:self.mediumLOV];
@@ -57,19 +57,24 @@
     [self.view addSubview:self.candidateAV];
     [self updateView];
     
-}
-
-- (void)setupLayoutSubviews{
-    [super setupLayoutSubviews];
-    [self.mediumLOV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.bgView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
-    }];
+   __unused UIButton *paustBtn = ({
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.view addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(50);
+            make.right.mas_equalTo(-50);
+            make.size.mas_equalTo(CGSizeMake(90, 40));
+        }];
+       [btn addTarget:self action:@selector(paustAction:) forControlEvents:UIControlEventTouchUpInside];
+       [btn setTitle:@"暂停" forState:UIControlStateNormal];
+       btn.titleLabel.font = [UIFont systemFontOfSize:20.0];
+       [btn setBackgroundColor:RGB(41, 124, 247)];
+       [btn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+       btn.layer.cornerRadius = 5.0;
+       btn.layer.masksToBounds = YES;
+       btn;
+   });
     
-    [self.candidateAV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.mediumLOV.mas_bottom).offset(20);
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
-    }];
 }
 
 #pragma mark -
@@ -81,53 +86,41 @@
     [self.candidateAV setupAnswerModel:answerOptionModel];
 }
 
+- (void)paustAction:(UIButton*)sender{
+    [self.candidateAV pauseWaterRipper];
+    [JCAlertView showOneButtonWithTitle:@"挑战暂停" Message:@"目前得分100" ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"继续挑战" Click:^{
+        sender.selected = !sender.selected;
+        [self.candidateAV continueWaterRipper];
+    }];
+}
+
 #pragma mark -
 #pragma mark --- MediumCandidateAnswerViewDelegate
 - (void)didClickCandidateActionType:(MathOperationChooseResultType)actionType{
     
     [self.mathManager saveMathOperationDataStatisticsWithUserOperationState:actionType];
-    [self updatCircleviewData];
-    
+    [self updatCircleviewData];//更新数据
+
     if (actionType == MathOperationChooseResultTypeCorrect) {
         [[SoundsProcess shareInstance] playSoundOfWonderful];
-        dispatch_after(7.0, dispatch_get_main_queue(), ^{
-            NSInteger _doneCount = [self.mathManager getCurrentDateHasDone];
-            //每间隔6道题弹出一次
-            if (_doneCount %6 == 0){
-                if (![self.view.subviews containsObject:self.toolView]){
-                    [self.view addSubview:self.toolView];
-                    @weakify(self);
-                    self.toolView.actionIndexBlock = ^(NSInteger index) {
-                        @strongify(self);
-                        [self.toolView removeFromSuperview];
-                        if (index == REST_BTN_TAG_TOOLTIP){
-                            [self.navigationController popViewControllerAnimated:YES];
-                        }else{
-                            CATransition *animation=[CATransition animation];
-                            animation.type=@"rippleEffect";
-                            animation.duration=2.0;
-                            [self.view.superview.layer addAnimation:animation forKey:@"donghua"];
-                            [self updateView];
-                            [self showCircleAnimationOfWaterWave];
-                        }
-                    };
-                }
-                [self fireworksProcess];
-            }else{
-                [self updateView];
-            }
-        });
-    }else{
-        [[SoundsProcess shareInstance] playSoundOfWrong];
         [self updateView];
+    }else{
+
+        [self showErrorView];
     }
 }
 
 - (void)challengeFailure{
+    [self showErrorView];
+}
+
+- (void)showErrorView{
+    [[SoundsProcess shareInstance] playSoundOfWrong];
     [JCAlertView showOneButtonWithTitle:@"挑战失败" Message:@"本次得分100" ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
+
 
 /**
  *  烟花效果
@@ -180,5 +173,18 @@
     });
 }
 
+
+- (void)setupLayoutSubviews{
+    [super setupLayoutSubviews];
+    [self.mediumLOV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.bgView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
+    }];
+    
+    [self.candidateAV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mediumLOV.mas_bottom).offset(20);
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
+    }];
+}
 
 @end

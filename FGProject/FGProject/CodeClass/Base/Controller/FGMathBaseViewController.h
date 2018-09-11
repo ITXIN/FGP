@@ -11,10 +11,14 @@
 @class TooltipForAnswerView;
 #import "TooltipForAnswerView.h"
 @interface FGMathBaseViewController : FGBaseViewController
+
 @property (nonatomic,strong) FGMathOperationManager *mathManager;
 @property (nonatomic,strong) TooltipForAnswerView *toolView;
 @property (nonatomic,strong) CircleView *circleView;
 
 - (void)updatCircleviewData;//更新波的高度
 - (void)showCircleAnimationOfWaterWave;
+- (void)showCircleView;
+- (void)hiddenCircleView;
+
 @end

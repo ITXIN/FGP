@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 @class WaterRippleView;
-@interface FGDiffcultyCandidataAnswerButton : UIButton
+@interface FGDiffcultyCandidataAnswerButton : UIView
 @property (nonatomic, strong) WaterRippleView* myWaterView;
+@property (nonatomic, strong) UIButton *actionBtn;
 @property (nonatomic, assign) BOOL isEnd;
 
-- (void)waterWaveAnimation;
+- (void)startWaterRipper;
 - (void)stopWaterRipper;
+- (void)pauseWaterRipper;
+- (void)continueWaterRipper;
 @end

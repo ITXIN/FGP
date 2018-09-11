@@ -46,7 +46,6 @@
 
 - (void)updatWaterWaveView{
     self.waterWaveView.count = [[FGMathOperationManager shareMathOperationManager] getCurrentDateHasDone];
-    
 }
 
 @end
