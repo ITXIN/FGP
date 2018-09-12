@@ -40,9 +40,6 @@
 
 - (void)initSubviews{
     [super initSubviews];
-    
-    [self setupBlurEffectImage:[FGProjectHelper blurryImage:[UIImage imageNamed:@"Indexbg-01"] withBlurLevel:1]];
-    
     //    self.dateView = [[FGDateView alloc]init];
     //    [self.view addSubview:self.dateView];
     //    [self.dateView mas_makeConstraints:^(MASConstraintMaker *make) {

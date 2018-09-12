@@ -150,8 +150,7 @@ static CGRect   strOfRect;
     FGBlurEffectView *blurView = [[FGBlurEffectView alloc]init];
     [self.view addSubview:blurView];
     dispatch_async(dispatch_get_main_queue(), ^{
-        blurView.bgImageView.image = [FGProjectHelper blurryImage:[UIImage imageNamed:@"Indexbg-03"] withBlurLevel:1];
-        blurView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        blurView.bgImageView.image = [UIImage imageNamed:@"Indexbg-03"];
     });
     
     [blurView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -51,7 +51,7 @@
                                 context:nil];
 }
 
-//毛玻璃
+//毛玻璃效果，耗内存，推荐系统方法
 +(UIImage *)blurryImage:(UIImage *)image withBlurLevel:(CGFloat)blur {
     if (blur < 0.f || blur > 1.f) {
         blur = 0.5f;

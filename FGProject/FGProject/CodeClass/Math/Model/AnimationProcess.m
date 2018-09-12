@@ -14,7 +14,7 @@
     CGPoint center = view.center;
     center.y -= upHeight;
     view.center = center;
-    [UIView animateWithDuration:(int)(arc4random()%(2-1+1)+1) delay:0 usingSpringWithDamping:0.2f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.75 delay:0 usingSpringWithDamping:0.2f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
         CGPoint center = view.center;
         center.y += upHeight;
         view.center = center;

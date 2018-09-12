@@ -50,7 +50,6 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
                                                  selector:@selector(groupBirdsAnimation)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
-        [self groupBirdsAnimation];
         
     }
     return self;
@@ -145,13 +144,13 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         self.waveHeight = y;
         NSMutableArray *tempArr = [NSMutableArray array];
         if (i %2 == 0){
-            for (float x = -100; x <= kScreenWidth+100; x ++){
+            for (float x = -20; x <= kScreenWidth+20; x ++){
                 //y=Acos(wx+Φ)+B
                 y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
             }
         }else{
-            for (float x = -100; x <= kScreenWidth+100; x ++){
+            for (float x = -20; x <= kScreenWidth+20; x ++){
                 //y=Asin(wx+Φ)+B
                 y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
@@ -209,7 +208,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         
         [tempGroupView.layer addSublayer:circleLayer];
         
-        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:5] forKey:@"Stroken1"];
+        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:10] forKey:@"Stroken1"];
         
     }
 }
@@ -274,8 +273,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 - (void)tapGroupImageView:(UITapGestureRecognizer*)sender{
     CGPoint touchPoint = [sender locationInView:bgView];
     for (UIImageView *imageView in groupImagesArr){
-        if ([imageView.layer.presentationLayer hitTest:touchPoint])
-        {
+        if ([imageView.layer.presentationLayer hitTest:touchPoint]){
             [[SoundsProcess shareInstance] playSoundOfTock];
             currentTapBirdView = imageView;
           
@@ -395,13 +393,13 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         }
        
         if (endGroupBirdNumber == groupBirdCount){
-            [self restartBirdsAnimation];
+            [self startBirdsAnimation];
         }
     }
 }
 
 #warning --- 当进入后台重新打开,绘制的线不能清除
-- (void)restartBirdsAnimation{
+- (void)startBirdsAnimation{
     [self clerarGroupBirdsAnimation];
     [self groupBirdsAnimation];
     endGroupBirdNumber = 0;

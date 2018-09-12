@@ -48,6 +48,7 @@
                 make.center.mas_equalTo(self );
                 make.size.mas_equalTo(CGSizeMake(categoryBtnW, categoryBtnW));
             }];
+            btn.backgroundColor = UIColor.whiteColor;
             btn.layer.cornerRadius = categoryBtnW/2;
             btn.layer.masksToBounds = YES;
             btn;
@@ -71,7 +72,7 @@
         }else if (i == 1){
             self.aiBtn = categoryBtn;
             categoryBtn.tag = CategoryAI;
-            [self.aiBtn setImage:[UIImage imageNamed:@"AI"] forState:UIControlStateNormal];
+            [self.aiBtn setImage:[UIImage imageNamed:@"home_story"] forState:UIControlStateNormal];
         }else if (i == 2) {
             self.storysBtn = categoryBtn;
             categoryBtn.tag = CategoryStory;

@@ -107,7 +107,15 @@ NSString *const JCAlertViewDidDismissNotification = @"JCAlertViewDidDismissNotif
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
-    [self addScreenShot];
+//    [self addScreenShot];
+    UIWindow *screenWindow = [UIApplication sharedApplication].windows.firstObject;
+   __unused UIView *bgView = ({
+        UIView *view = [UIView new];
+        [self.view addSubview:view];
+        view.frame = screenWindow.bounds;
+        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        view;
+    });
     [self addCoverView];
     [self addAlertView];
 }

@@ -16,7 +16,6 @@
     self.bgImageView =  ({
         UIImageView *imgView = [[UIImageView alloc]init];
         [self addSubview:imgView];
-//        imgView.image = [FGProjectHelper blurryImage:[UIImage imageNamed:@"Indexbg-01"] withBlurLevel:1];//返回按钮颜色
         imgView.image = [UIImage imageNamed:@"Indexbg-01"];
         imgView;
     });
