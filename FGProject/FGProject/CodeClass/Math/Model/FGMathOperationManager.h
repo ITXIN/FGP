@@ -68,4 +68,7 @@
 //获取挑战模式最高记录
 - (NSInteger)getCurrentChallengeHighestRecord;
 
+//获取挑战模式难度等级
+- (MathCompreOfChallengeLevel)getCurrentChallengeLevel;
+- (void)updateCurrentChallengeLevel:(MathCompreOfChallengeLevel)level;
 @end

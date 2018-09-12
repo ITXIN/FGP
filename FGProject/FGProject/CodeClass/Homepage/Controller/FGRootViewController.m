@@ -87,6 +87,9 @@
         });
 //
 //    }
+//  NSLog(@"---lev---%ld",[[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel]);
+    
+    
     
 }
 

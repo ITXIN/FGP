@@ -12,12 +12,15 @@
 @implementation FGUserManager
 
 static NSString *userInfoKey = @"userInfoKey";
+
 static FGUserManager *defaultUser = nil;
 + (FGUserManager*)standard{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         defaultUser = [[FGUserManager alloc]init];
         NSDictionary *userInfoDic = [FGProjectHelper getDataWithKey:userInfoKey];
+ 
+        
         if (userInfoDic && userInfoDic.allValues.count>0) {
             [defaultUser setValuesForKeysWithDictionary:userInfoDic];
         }else{
@@ -65,6 +68,7 @@ static FGUserManager *defaultUser = nil;
 
 #pragma mark -
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key{

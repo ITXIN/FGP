@@ -144,10 +144,13 @@ static NSInteger kMathOperationRangeNumber = 11;
 //挑战模式最高记录
 #define kMathOperationCompreOfChallengeHighestRecord  @"kMathOperationCompreOfChallengeHighestRecord"
 
-//挑战模式定时器等级
-#define kMathOperationCompreOfChallengeTimerLevelOneKey @"kMathOperationCompreOfChallengeTimerLevelOneKey"
-#define kMathOperationCompreOfChallengeTimerLevelTwoKey @"kMathOperationCompreOfChallengeTimerLevelTwoKey"
-#define kMathOperationCompreOfChallengeTimerLevelThreeKey @"kMathOperationCompreOfChallengeTimerLevelThreeKey"
+//挑战模式难度选择
+#define kMathOperationCompreOfChallengeLevelKey @"kMathOperationCompreOfChallengeLevelKey"
+
+//挑战模式难度等级
+#define kMathOperationCompreOfChallengeLevelOneTotalNumberKey @"kMathOperationCompreOfChallengeLevelOneTotalNumberKey"
+#define kMathOperationCompreOfChallengeLevelTwoTotalNumberKey @"kMathOperationCompreOfChallengeLevelTwoTotalNumberKey"
+#define kMathOperationCompreOfChallengeLevelThreeTotalNumberKey @"kMathOperationCompreOfChallengeLevelThreeTotalNumberKey"
 
 //数据中每日数据key
 #define kMathOperationDetailDataKey @"kMathOperationDetailDataKey"
@@ -161,12 +164,12 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define kMathOperationDateKey @"kMathOperationDateKey"//日期
 #define kMathOperationCompreOfChallengeTimerLevelKey @"kMathOperationCompreOfChallengeTimerLevelKey"//混合运算挑战模式定时器等级
 
-//综合练习类型
-#define kMathCompreOfOperationTypeKey @"kMathCompreOfOperationTypeKey"
-
-//挑战模式定时器选择
-#define kMathOperationCompreOfChallengeTimerLevelTypeKey @"kMathOperationCompreOfChallengeTimerLevelTypeKey"
-
+//综合练习选择的类型
+#define kMathCompreOfOperationChooseTypeKey @"kMathCompreOfOperationChooseTypeKey"
+#define kMathCompreOfOperationChooseAddTypeKey @"kMathCompreOfOperationChooseAddTypeKey"
+#define kMathCompreOfOperationChooseSubtractTypeKey @"kMathCompreOfOperationChooseSubtractTypeKey"
+#define kMathCompreOfOperationChooseMultiplyTypeKey @"kMathCompreOfOperationChooseMultiplyTypeKey"
+#define kMathCompreOfOperationChooseDivideTypeKey @"kMathCompreOfOperationChooseDivideTypeKey"
 
 //儿童数学的游戏
 #define GAME_CHILDERN_API @"http://cdnapi.bbwansha.com/bb_video30/Home/game/games/version/3/app_id/6/app_sub_id/1?t=589AB3E0"

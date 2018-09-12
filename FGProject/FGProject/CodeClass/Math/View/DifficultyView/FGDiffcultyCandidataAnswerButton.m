@@ -113,7 +113,7 @@
     self.myWaterView.ripplePosition = 0.0;
     self.isEnd = NO;
     self.myWaterView.frame = self.bounds;
-    [UIView animateWithDuration:MathCompreOfChallengeTimerLevelThree animations:^{
+    [UIView animateWithDuration:[[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel] animations:^{
         self.myWaterView.frame = CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     }completion:^(BOOL finished) {
         if (finished) {
@@ -121,6 +121,5 @@
         }
     }];
 }
-
 
 @end

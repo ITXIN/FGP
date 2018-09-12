@@ -198,14 +198,13 @@
     FGMathOperationModel *mathOperationModel = self.currentMathOperationModel;
     MathOperationActionType operationActionType = self.currentMathOperationModel.mathOperationActionType;
     
-    MathCompreOfChallengeTimerLevel timerLeverl = MathCompreOfChallengeTimerLevelOne;
-#warning 需要取出来用户设置，默认 MathCompreOfChallengeTimerLevelOneLevel
+    MathCompreOfChallengeLevel timerLeverl = [self getCurrentChallengeLevel];
     NSDictionary *detailDic = @{
                                 kMathOperationTypeKey:[NSString stringWithFormat:@"%ld",operationActionType],
                                 kMathOperationStateKey:[NSString stringWithFormat:@"%@",actionTypeAnswer == MathOperationChooseResultTypeCorrect? @"YES":@"NO"],
                                 kMathOperationObjKey:self.currentMathOperationModel ,
                                 kMathOperationDateKey:[NSString stringWithFormat:@"%@",[self.dateSingle getDetailDate]],
-                                kMathOperationCompreOfChallengeTimerLevelTypeKey:[NSString stringWithFormat:@"%ld",timerLeverl]
+                                kMathOperationCompreOfChallengeLevelKey:[NSString stringWithFormat:@"%ld",timerLeverl]
                                 };
     
     FGLOG(@"%ld %ld %ld = %ld",mathOperationModel.firstNum,mathOperationModel.mathOperationActionType,mathOperationModel.secondNum,mathOperationModel.answerNum);
@@ -221,12 +220,12 @@
                                                                   kMathOperationDataStatisticsTotalNumberKey:@"1",
                                                                   kMathOperationCompreOfChallengeDataKey:
                                                                       @{
-                                                                          kMathOperationCompreOfChallengeTimerLevelOneKey:@"0",
-                                                                          kMathOperationCompreOfChallengeTimerLevelTwoKey:@"0",
-                                                                          kMathOperationCompreOfChallengeTimerLevelThreeKey:@"0",
+                                                                          kMathOperationCompreOfChallengeLevelOneTotalNumberKey:@"0",
+                                                                          kMathOperationCompreOfChallengeLevelTwoTotalNumberKey:@"0",
+                                                                          kMathOperationCompreOfChallengeLevelThreeTotalNumberKey:@"0",
                                                                           kMathOperationCompreOfChallengeTotalNumberKey:@"0",
-                                                                          kMathOperationCompreOfChallengeHighestRecord:@"0"
-                                                                          
+                                                                          kMathOperationCompreOfChallengeHighestRecord:@"0",
+                                                                          kMathOperationCompreOfChallengeLevelKey:[NSString stringWithFormat:@"%ld",timerLeverl]
                                                                           }
                                                                   }];
     }else{
@@ -252,15 +251,15 @@
             NSInteger totalChallenge =  [challengeDataDic[kMathOperationCompreOfChallengeTotalNumberKey] integerValue];
             [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++totalChallenge] forKey:kMathOperationCompreOfChallengeTotalNumberKey];
             
-            if (timerLeverl == MathCompreOfChallengeTimerLevelOne) {
-                NSInteger leveOne = [challengeDataDic[kMathOperationCompreOfChallengeTimerLevelOneKey] integerValue];
-                [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++leveOne] forKey:kMathOperationCompreOfChallengeTimerLevelOneKey];
-            }else if (timerLeverl == MathCompreOfChallengeTimerLevelTwo){
-                NSInteger leveTwo = [challengeDataDic[kMathOperationCompreOfChallengeTimerLevelTwoKey] integerValue];
-                [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++leveTwo] forKey:kMathOperationCompreOfChallengeTimerLevelTwoKey];
+            if (timerLeverl == MathCompreOfChallengeLevelOne) {
+                NSInteger leveOne = [challengeDataDic[kMathOperationCompreOfChallengeLevelOneTotalNumberKey] integerValue];
+                [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++leveOne] forKey:kMathOperationCompreOfChallengeLevelOneTotalNumberKey];
+            }else if (timerLeverl == MathCompreOfChallengeLevelTwo){
+                NSInteger leveTwo = [challengeDataDic[kMathOperationCompreOfChallengeLevelTwoTotalNumberKey] integerValue];
+                [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++leveTwo] forKey:kMathOperationCompreOfChallengeLevelTwoTotalNumberKey];
             }else{
-                NSInteger leveThree = [challengeDataDic[kMathOperationCompreOfChallengeTimerLevelThreeKey] integerValue];
-                [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++leveThree] forKey:kMathOperationCompreOfChallengeTimerLevelThreeKey];
+                NSInteger leveThree = [challengeDataDic[kMathOperationCompreOfChallengeLevelThreeTotalNumberKey] integerValue];
+                [challengeDataDic setValue:[NSString stringWithFormat:@"%ld",++leveThree] forKey:kMathOperationCompreOfChallengeLevelThreeTotalNumberKey];
             }
             
             [dataDic setValue:challengeDataDic forKey:kMathOperationCompreOfChallengeDataKey];
@@ -312,10 +311,8 @@
 
 //获取挑战模式最高记录
 - (NSInteger)getCurrentChallengeHighestRecord{
-    
     NSMutableDictionary *dataDic = [self getAllData];
     NSInteger heightRecode = [dataDic[kMathOperationCompreOfChallengeDataKey][kMathOperationCompreOfChallengeHighestRecord] integerValue];
-    
     return heightRecode;
 }
 
@@ -323,16 +320,52 @@
 - (void)updateCurrentChallengeHighestRecordWithNumber:(NSInteger)number{
     
     if (number > [self getCurrentChallengeHighestRecord]) {
-        
         NSMutableDictionary *dataDic = [self getAllData];
         NSMutableDictionary *chanllengeDic = [NSMutableDictionary dictionaryWithDictionary: dataDic[kMathOperationCompreOfChallengeDataKey]];
-        
         [chanllengeDic setValue:[NSString stringWithFormat:@"%ld",number] forKey:kMathOperationCompreOfChallengeHighestRecord];
         dataDic[kMathOperationCompreOfChallengeDataKey] = chanllengeDic;
-        
         [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
     }
 }
+
+//获取挑战模式难度等级
+- (MathCompreOfChallengeLevel)getCurrentChallengeLevel{
+    NSMutableDictionary *dataDic = [self getAllData];
+    if (!dataDic[kMathOperationCompreOfChallengeDataKey][kMathOperationCompreOfChallengeLevelKey]) {
+        
+        dataDic = [NSMutableDictionary dictionaryWithDictionary:
+                   @{
+                     kMathOperationCompreOfChallengeDataKey:@{
+                             kMathOperationCompreOfChallengeLevelKey:[NSString stringWithFormat:@"%ld",MathCompreOfChallengeLevelOne]
+                             }
+                     }];
+        
+        [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
+        return MathCompreOfChallengeLevelOne;
+    }
+    
+    NSMutableDictionary *chanllengeDic = [NSMutableDictionary dictionaryWithDictionary: dataDic[kMathOperationCompreOfChallengeDataKey]];
+    NSString *level = chanllengeDic[kMathOperationCompreOfChallengeLevelKey];
+    
+    if ([level integerValue] == MathCompreOfChallengeLevelOne) {
+        return MathCompreOfChallengeLevelOne;
+    }else if ([level integerValue] == MathCompreOfChallengeLevelTwo){
+        return MathCompreOfChallengeLevelTwo;
+    }else{
+        return MathCompreOfChallengeLevelThree;
+    }
+}
+
+- (void)updateCurrentChallengeLevel:(MathCompreOfChallengeLevel)level{
+    NSMutableDictionary *dataDic = [self getAllData];
+    NSMutableDictionary *chanllengeDic = [NSMutableDictionary dictionaryWithDictionary: dataDic[kMathOperationCompreOfChallengeDataKey]];
+    chanllengeDic[kMathOperationCompreOfChallengeLevelKey] = [NSString stringWithFormat:@"%ld",level];
+    dataDic[kMathOperationCompreOfChallengeDataKey] = chanllengeDic;
+    [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
+}
+
+
+
 
 //数据统计
 - (void)updateDataStatistic{
@@ -437,17 +470,27 @@
     self.dataStatisticsModel.totalAccuracyNumber = totalAccuracyNumber;
 }
 
-#warning 需要优化放在user里面（挑战模式定时器等级也放在user里面）
 #pragma mark -------保存综合练习题目类型设置----
 - (void)saveMathCompreOfOperationType:(NSDictionary*)typeDic{
     NSMutableDictionary *dataDic = [self getAllData];
-    dataDic[kMathCompreOfOperationTypeKey] = typeDic;
+    dataDic[kMathCompreOfOperationChooseTypeKey] = typeDic;
     [FGProjectHelper saveDataWithKey:kMathOperationDataStatisticsKey data:dataDic];
 }
 
 - (NSDictionary*)getMathCompreOfOperationTypeDic{
     NSMutableDictionary *dataDic = [self getAllData];
-    NSDictionary *typeDic = [NSDictionary dictionaryWithDictionary:dataDic[kMathCompreOfOperationTypeKey]];
+    if (!dataDic[kMathCompreOfOperationChooseTypeKey]) {
+        dataDic = [NSMutableDictionary dictionaryWithDictionary:
+                   @{
+                     kMathCompreOfOperationChooseTypeKey:@{
+                             kMathCompreOfOperationChooseAddTypeKey:@"YES",
+                             kMathCompreOfOperationChooseSubtractTypeKey:@"YES",
+                             kMathCompreOfOperationChooseMultiplyTypeKey:@"YES",
+                             kMathCompreOfOperationChooseDivideTypeKey:@"YES"
+                             }}
+                   ];
+    }
+    NSDictionary *typeDic = [NSDictionary dictionaryWithDictionary:dataDic[kMathCompreOfOperationChooseTypeKey]];
     return typeDic;
 }
 
@@ -456,12 +499,22 @@
     NSMutableArray *typeArr = [NSMutableArray array];
     for (NSString *key in typeDic.allKeys) {
         if ([typeDic[key] isEqualToString:@"YES"]) {
-            [typeArr addObject: key];
+            if ([key isEqualToString:kMathCompreOfOperationChooseAddTypeKey]) {
+                [typeArr addObject: @(MathOperationActionTypeAdd)];
+            }else if ([key isEqualToString:kMathCompreOfOperationChooseSubtractTypeKey]){
+                 [typeArr addObject: @(MathOperationActionTypeSubtract)];
+            }else if ([key isEqualToString:kMathCompreOfOperationChooseMultiplyTypeKey]){
+                 [typeArr addObject: @(MathOperationActionTypeMultiply)];
+            }else if ([key isEqualToString:kMathCompreOfOperationChooseDivideTypeKey]){
+                 [typeArr addObject: @(MathOperationActionTypeDivide)];
+            }
         }
     }
+    
     if (typeArr.count == 0) {
         return self.operationsArr;
     }
+    
     return typeArr;
 }
 

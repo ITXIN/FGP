@@ -10,9 +10,11 @@
 #import "FGImageLeftTitleRightButtom.h"
 @interface FGMathSettingViewController ()
 
-@property (nonatomic,strong) UILabel *operationSettingTitleLab;
-@property (nonatomic,strong) NSMutableDictionary *operationsDic;
+@property (nonatomic, strong) UILabel *operationSettingTitleLab;
+@property (nonatomic, strong) NSMutableDictionary *operationsDic;
 @property (nonatomic, strong) FGImageLeftTitleRightButtom *voiceBtn;
+@property (nonatomic, strong) UIView *challengeView;
+@property (nonatomic, assign) MathCompreOfChallengeLevel level;
 @end
 
 @implementation FGMathSettingViewController
@@ -20,6 +22,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[FGMathOperationManager shareMathOperationManager] saveMathCompreOfOperationType:[NSDictionary dictionaryWithDictionary:self.operationsDic]];
+    [[FGMathOperationManager shareMathOperationManager] updateCurrentChallengeLevel:self.level];
 }
 
 - (void)viewDidLoad {
@@ -53,14 +56,15 @@
 
 #pragma mark -
 - (void)setupChallengeTimerLever{
-    UIView *challengeView = ({
+    self.level = [[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel];
+    self.challengeView = ({
         UIView *view = [UIView new];
         [self.view addSubview:view];
         view;
     });
-    challengeView.backgroundColor = UIColor.redColor;
+    self.challengeView.backgroundColor = UIColor.redColor;
     
-    [challengeView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.challengeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.voiceBtn);
         make.top.mas_equalTo(self.voiceBtn.mas_bottom).offset(10);
         make.size.mas_equalTo(CGSizeMake(200, 100));
@@ -68,22 +72,22 @@
     
     UILabel *titleLab = ({
         UILabel *label = [UILabel new];
-        [challengeView addSubview:label];
+        [self.challengeView addSubview:label];
         label.font = [UIFont systemFontOfSize:15.0];
         label.text = @"挑战模式等级设置";
         label;
     });
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(challengeView);
+        make.left.top.mas_equalTo(self.challengeView);
     }];
     
-    MathCompreOfChallengeTimerLevel timerLev ;
+    MathCompreOfChallengeLevel timerLev ;
     NSString *titleStr = @"";
     for (NSInteger i = 0; i < 3; i++) {
       
         UIButton *tempBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [challengeView addSubview:btn];
+            [self.challengeView addSubview:btn];
             [btn setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateSelected];
             [btn addTarget:self action:@selector(challengeLeveAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -92,7 +96,7 @@
         
         UILabel *tempLab = ({
             UILabel *label = [UILabel new];
-            [challengeView addSubview:label];
+            [self.challengeView addSubview:label];
             label.textColor = [UIColor whiteColor];
             label.font = [UIFont systemFontOfSize:13.0];
             label.textAlignment = NSTextAlignmentCenter;
@@ -100,17 +104,22 @@
         });
         
         if (i == 0) {
-            timerLev = MathCompreOfChallengeTimerLevelOne;
+            timerLev = MathCompreOfChallengeLevelOne;
             titleStr = @"初级";
         }else if (i == 1){
-            timerLev = MathCompreOfChallengeTimerLevelTwo;
+            timerLev = MathCompreOfChallengeLevelTwo;
             titleStr = @"中级";
         }else{
-            timerLev = MathCompreOfChallengeTimerLevelThree;
+            timerLev = MathCompreOfChallengeLevelThree;
             titleStr = @"高级";
         }
         
         tempBtn.tag = timerLev;
+        if (tempBtn.tag == self.level) {
+            tempBtn.selected = YES;
+        }else{
+            tempBtn.selected = NO;
+        }
         tempLab.text = [NSString stringWithFormat:@"%@",titleStr];
         
         [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,9 +132,7 @@
         }];
         
     }
-    
 }
-
 
 - (void)setupCompreOperationType{
     
@@ -176,20 +183,30 @@
         }];
         
         preImageView = tempImageView;
-        NSString *tagStr = [NSString stringWithFormat:@"%ld",tempBtn.tag];
-        if (self.operationsDic.allValues.count == 4) {
-            if ([self.operationsDic[tagStr]isEqualToString:@"YES"]) {
-                tempBtn.selected = YES;
-            }else{
-                tempBtn.selected = NO;
-            }
-        }else{
-            tempBtn.selected = YES;
-            self.operationsDic[tagStr] = @"YES";
+        
+        if (tempBtn.tag == MathOperationActionTypeAdd) {
+            tempBtn.selected = [self.operationsDic[kMathCompreOfOperationChooseAddTypeKey] isEqualToString:@"YES"]?YES:NO;
+        }else if (tempBtn.tag == MathOperationActionTypeSubtract){
+            tempBtn.selected = [self.operationsDic[kMathCompreOfOperationChooseSubtractTypeKey] isEqualToString:@"YES"]?YES:NO;
+        }else if (tempBtn.tag == MathOperationActionTypeMultiply){
+            tempBtn.selected = [self.operationsDic[kMathCompreOfOperationChooseMultiplyTypeKey] isEqualToString:@"YES"]?YES:NO;
+        }else if (tempBtn.tag == MathOperationActionTypeDivide){
+            tempBtn.selected = [self.operationsDic[kMathCompreOfOperationChooseDivideTypeKey] isEqualToString:@"YES"]?YES:NO;
         }
+        
+//        NSString *tagStr = [NSString stringWithFormat:@"%ld",tempBtn.tag];
+//        if (self.operationsDic.allValues.count == 4) {
+//            if ([self.operationsDic[tagStr]isEqualToString:@"YES"]) {
+//                tempBtn.selected = YES;
+//            }else{
+//                tempBtn.selected = NO;
+//            }
+//        }else{
+//            tempBtn.selected = YES;
+//            self.operationsDic[tagStr] = @"YES";
+//        }
     }
 }
-
 
 #pragma mark -----------
 - (void)voiceBtnAction:(UIButton*)sender{
@@ -198,7 +215,17 @@
 }
 
 - (void)challengeLeveAction:(UIButton*)sender{
-    
+    for (UIView *view  in self.challengeView.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton*)view;
+            btn.selected = NO;
+        }
+    }
+    sender.selected = YES;
+    if (sender.selected) {
+        self.level = sender.tag;
+    }
+    [[FGMathOperationManager shareMathOperationManager] updateCurrentChallengeLevel:self.level];
 }
 
 
@@ -218,7 +245,18 @@
     }
     
     sender.selected = !sender.selected;
-    NSString *tagStr = [NSString stringWithFormat:@"%ld",sender.tag];
+    
+    NSString *tagStr = @"";
+    if (sender.tag == MathOperationActionTypeAdd) {
+        tagStr = kMathCompreOfOperationChooseAddTypeKey;
+    }else if (sender.tag == MathOperationActionTypeSubtract){
+        tagStr = kMathCompreOfOperationChooseSubtractTypeKey;
+    }else if (sender.tag == MathOperationActionTypeMultiply){
+        tagStr = kMathCompreOfOperationChooseMultiplyTypeKey;
+    }else if (sender.tag == MathOperationActionTypeDivide){
+        tagStr = kMathCompreOfOperationChooseDivideTypeKey;
+    }
+
     if (sender.selected) {
         [self.operationsDic setValue:@"YES" forKey:tagStr];
     }else{
