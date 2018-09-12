@@ -14,6 +14,6 @@
 @property (nonatomic, strong) UIImageView *sunImgView;
 @property (nonatomic, strong) UIImageView *redImageView;
 @property (nonatomic, strong) UIImageView *yellowImageView;
-@property (nonatomic, strong) UIButton *startBtn;
+//@property (nonatomic, strong) UIButton *startBtn;
 
 @end

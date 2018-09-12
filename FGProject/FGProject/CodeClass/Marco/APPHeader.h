@@ -68,6 +68,8 @@
 #undef	RGB
 #define RGB(R,G,B)		[UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
 
+#define kColorBackground RGB(41, 124, 247)
+
 //间距
 #define TenPadding 10.0
 
@@ -119,10 +121,6 @@
 //角度转弧度
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-//难易程度
-#define EASY_DIFFCULTYLEVEL_BTN_TITLE @"简单"
-#define MEDIUM_DIFFCULTYLEVEL_BTN_TITLE @"中等"
-#define DIFFCULT_DIFFCULTYLEVEL_BTN_TITLE @"较难"
 //数学计算的范围
 static NSInteger kMathOperationRangeNumber = 11;
 
@@ -184,7 +182,6 @@ static NSInteger kMathOperationRangeNumber = 11;
 //声音播放
 #define SOUND_PLAY_STATE_KEY @"SoundPlayStateKey"
 
-
 //Firbase key
 #define FIREBASE_DATABASE_URL @"https://fgmath-77076.firebaseio.com/"
 
@@ -200,12 +197,6 @@ static NSInteger kMathOperationRangeNumber = 11;
 #define FIREBASE_DATABASE_CATEGORY_GAME @"Game"
 
 #define AVAILABLE_IOS_11 @available(iOS 11.0, *)
-//#define Screen58Inch        (kScreenHeight  == 812.0)
-//#define Screen58InchWidth 812
-//#define SafeAreaToLeft (kScreenHeight == 812 ? 88.0 : 20.0)
-//#define SafeAreaToRight (kScreenHeight == 812 ? 44.0 : 39.0)
-
-
 
 #define kiPhoneX        (kScreenWidth == 812.0 &&  kScreenHeight == 375.f)
 

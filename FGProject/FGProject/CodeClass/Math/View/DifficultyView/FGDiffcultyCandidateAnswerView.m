@@ -15,7 +15,6 @@
 }
 
 -(void)dealloc{
-
 //    [self removeObserver];
 }
 
@@ -33,6 +32,13 @@
         }];
         self.candidateBtnArr = [NSMutableArray array];
      
+        
+        CGFloat btnMargin = (kScreenWidth - 4*btnWidth)/5;
+        //有5个间隙
+        CGFloat x1 = kScreenWidth/2 - btnWidth*3/2 - 2*btnMargin;
+        CGFloat x11 = -x1;
+        CGFloat x2 = kScreenWidth/2 - btnWidth/2 - btnMargin;
+        CGFloat x22 = -x2;
         for (int i = 0; i < 4; i ++){
             FGDiffcultyCandidataAnswerButton *buttton =  [[FGDiffcultyCandidataAnswerButton alloc]initWithFrame:CGRectMake(0, 0, btnWidth, btnHeight)];
             buttton.center = self.bgView.center;
@@ -42,8 +48,17 @@
 
             [self.bgView addSubview:buttton];
             [self.candidateBtnArr addObject:buttton];
+            if (i == 0 || i == 1) {
+                [self viewAnimation:self.candidateBtnArr[i] duration:0.5 x:i==0?x11:x1 y:0 alpha:1.0];
+            }else{
+                [self viewAnimation:self.candidateBtnArr[i] duration:1 x:i==2?x22:x2 y:0 alpha:1.0];
+            }
         }
 
+//        [self viewAnimation:self.candidateBtnArr[0] duration:0.5 x:-x1 y:0 alpha:1.0];
+//        [self viewAnimation:self.candidateBtnArr[1] duration:0.5 x:x1 y:0 alpha:1.0];
+//        [self viewAnimation:self.candidateBtnArr[2] duration:1.0 x:-x2 y:0 alpha:1.0];
+//        [self viewAnimation:self.candidateBtnArr[3] duration:1.0 x:x2 y:0 alpha:1.0];
     }
     return self;
 }
@@ -122,16 +137,6 @@
             anwerBtn.actionBtn.tag = MathOperationChooseResultTypeCorrect;
         }
     }
-    
-    CGFloat btnMargin = (kScreenWidth - 4*btnWidth)/5;
-    //有5个间隙
-    CGFloat x1 = kScreenWidth/2 - btnWidth*3/2 - 2*btnMargin;
-    CGFloat x2 = kScreenWidth/2 - btnWidth/2 - btnMargin;
-    [self viewAnimation:self.candidateBtnArr[0] duration:0.5 x:-x1 y:0 alpha:1.0];
-    [self viewAnimation:self.candidateBtnArr[1] duration:0.5 x:x1 y:0 alpha:1.0];
-    [self viewAnimation:self.candidateBtnArr[2] duration:1.0 x:-x2 y:0 alpha:1.0];
-    [self viewAnimation:self.candidateBtnArr[3] duration:1.0 x:x2 y:0 alpha:1.0];
-    
 }
 
 #pragma mark-----CAAnimation
@@ -153,7 +158,9 @@
     buttton.actionBtn.tag = MathOperationChooseResultTypeError;
     buttton.isEnd = NO;
     [buttton startWaterRipper];
-    [buttton.actionBtn setTitle:title forState:(UIControlStateNormal)];
+    [UIView animateWithDuration:0.25 animations:^{
+        [buttton.actionBtn setTitle:title forState:(UIControlStateNormal)];
+    }];
 }
 
 @end

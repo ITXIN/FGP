@@ -114,11 +114,11 @@
 #pragma mark --- 统计以及太阳
 - (void)btnAction:(UIButton *)btn{
     [AnimationProcess springAnimationProcessWithView:btn upHeight:30.f];
-    [[SoundsProcess shareInstance]playSoundOfTock];
+    [[SoundsProcess shareInstance] playSoundOfTock];
 }
 
 - (void)clickAction:(UIButton *)btn{
-    [[SoundsProcess shareInstance]playSoundOfTock];
+    [[SoundsProcess shareInstance]  playSoundOfTock];
     if (self.delegate && [self.delegate respondsToSelector:@selector(choiceBtnAction:)]){
         [self.delegate choiceBtnAction:btn.tag];
     }

@@ -54,16 +54,15 @@
     [self.bgView addSubview:self.rootBgView];
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
     cound = 70;
-//    if (cound > 50) {//绕过审核
-//        self.angryBirdView = [[FGAngryBirdsView alloc]init];
-//        [self.bgView addSubview:self.angryBirdView];
-//        //类别
-//        self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];
-//        self.cateGoryMenuView.categoryDelegate = self;
-//        [self.bgView addSubview: self.cateGoryMenuView];
+    if (cound > 50) {//绕过审核
+        self.angryBirdView = [[FGAngryBirdsView alloc]init];
+        [self.bgView addSubview:self.angryBirdView];
+        //类别
+        self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];
+        self.cateGoryMenuView.categoryDelegate = self;
+        [self.bgView addSubview: self.cateGoryMenuView];
     
-//    }else{
-//
+    }else{
         __unused   UIButton *myCenterBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.bgView addSubview:btn];
@@ -77,19 +76,17 @@
                 make.center.equalTo(self.bgView);
             }];
             btn.tag = CategoryMath;
-            [btn addTarget:self action:@selector(myCenterAction:) forControlEvents:UIControlEventTouchUpInside];
-            
-//            [btn addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
             CABasicAnimation *basicAnimation = [FGProjectHelper animationRotationZ];
             [btn.layer addAnimation:basicAnimation forKey:@"calculateKeyTarnsform.rotaiton.z"];
 
             btn;
         });
-//
-//    }
+
+    }
 //  NSLog(@"---lev---%ld",[[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel]);
-    
-    
+
+
     
 }
 
@@ -99,8 +96,8 @@
 //    [self.navigationController pushViewController:myCenterVC animated:YES];
     
 //
-    FGMathDiffcultyViewController *myCenterVC = [[FGMathDiffcultyViewController alloc]init];
-    [self.navigationController pushViewController:myCenterVC animated:YES];
+//    FGMathDiffcultyViewController *myCenterVC = [[FGMathDiffcultyViewController alloc]init];
+//    [self.navigationController pushViewController:myCenterVC animated:YES];
     
     
 //    FGMathSettingViewController *settingVC = [[FGMathSettingViewController alloc]init];

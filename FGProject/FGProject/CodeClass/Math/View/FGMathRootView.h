@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UIButton *subtractBtn;
 @property (nonatomic, strong) UIButton *multiplyBtn;
 @property (nonatomic, strong) UIButton *divideBtn;
-@property (nonatomic,strong) UIButton *reduceBtn;
+@property (nonatomic, strong) UIButton *reduceBtn;
 //做的题目数量
 @property (nonatomic, strong) UIButton *countBtn;
 //综合练习

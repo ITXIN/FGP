@@ -8,9 +8,7 @@
 
 #import "DiffcultyLevelView.h"
 @interface DiffcultyLevelView ()
-{
-    
-}
+
 @end
 @implementation DiffcultyLevelView
 
@@ -19,10 +17,10 @@
     if (self){
         self.menuBtnArr = [NSMutableArray array];
         self.menuBtnCenterArr = [NSMutableArray array];
-        NSArray *titleArr = @[EASY_DIFFCULTYLEVEL_BTN_TITLE,MEDIUM_DIFFCULTYLEVEL_BTN_TITLE,DIFFCULT_DIFFCULTYLEVEL_BTN_TITLE];
+        //难易程度
+        NSArray *titleArr = @[@"简单",@"中等",@"挑战"];
         CGFloat widthBtn = frame.size.height;
         CGFloat paceBtn = 20.0;
-        
         NSArray *tagArr = @[@(MathOperationActionTypeCompreOfSimple),@(MathOperationActionTypeCompreOfMedium),@(MathOperationActionTypeCompreOfChallenge)];
         for (int i = 0; i < 3; i ++){
             self.panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panGesAcion:)];
@@ -38,7 +36,7 @@
             [levelBtn setTitle:titleArr[i] forState:UIControlStateNormal];
             [levelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [levelBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
-            [levelBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+            [levelBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:15.f]];
             [self addSubview:levelBtn];
             
             [levelBtn addGestureRecognizer:self.panGestureRecognizer];
@@ -78,9 +76,9 @@
             centerX = centerX - preCenterX;
         }
         UIButton *btn = (UIButton *)self.menuBtnArr[i];
-        [self viewAnimation:btn duration:0.3*i+ 0.4 x:centerX y:centerY alpha:1.0];
+        [self viewAnimation:btn duration:0.2*i+ 0.2 x:centerX y:centerY alpha:1.0];
         btn.transform = CGAffineTransformMakeScale(0.2, 0.2);
-        [UIView animateWithDuration:0.3*i+ 0.4 animations:^{
+        [UIView animateWithDuration:0.2*i+ 0.2 animations:^{
             btn.transform = CGAffineTransformMakeScale(1.2, 1.2);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.1*i+ 0.1 animations:^{

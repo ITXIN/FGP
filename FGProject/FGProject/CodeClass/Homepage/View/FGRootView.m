@@ -26,14 +26,14 @@
     [self.redImageView addGestureRecognizer:gesTure];
     [self.yellowImageView addGestureRecognizer:gesTure];
     
-    _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _startBtn.frame = CGRectMake(kScreenWidth - 100 - kScreenHeight/6, kScreenHeight/2, kScreenHeight/6, kScreenHeight/6);
-    _startBtn.hidden = YES;
-    [_startBtn setTintColor:[UIColor whiteColor]];
-    [_startBtn addTarget:self action:@selector(startBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_startBtn setImage:[UIImage imageNamed:@"qiqiu_start"] forState:UIControlStateNormal];
-    _startBtn.backgroundColor = [UIColor clearColor];
-    [self addSubview:_startBtn];
+//    _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _startBtn.frame = CGRectMake(kScreenWidth - 100 - kScreenHeight/6, kScreenHeight/2, kScreenHeight/6, kScreenHeight/6);
+//    _startBtn.hidden = YES;
+//    [_startBtn setTintColor:[UIColor whiteColor]];
+//    [_startBtn addTarget:self action:@selector(startBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [_startBtn setImage:[UIImage imageNamed:@"qiqiu_start"] forState:UIControlStateNormal];
+//    _startBtn.backgroundColor = [UIColor clearColor];
+//    [self addSubview:_startBtn];
     
     //太阳
     _sunImgView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth+50, kScreenHeight/6, kScreenWidth/10, kScreenWidth/10)];
@@ -48,7 +48,7 @@
     basicAnim.repeatCount = HUGE_VAL;
     basicAnim.removedOnCompletion = NO;
     basicAnim.fillMode = kCAFillModeForwards;
-    [_startBtn.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
+    
     [self.redImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     [self.yellowImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/9];
@@ -91,10 +91,6 @@
 - (void)showImageView{
     self.yellowImageView.alpha = 1.0;
     self.redImageView.alpha = 1.0;
-}
-
-- (void)startBtnClick:(UIButton *)btn{
- 
 }
 
 - (void)setupSubviewsLayout{

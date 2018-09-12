@@ -113,8 +113,16 @@
     self.myWaterView.ripplePosition = 0.0;
     self.isEnd = NO;
     self.myWaterView.frame = self.bounds;
-    [UIView animateWithDuration:[[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel] animations:^{
+    self.myWaterView.mainRippleColor = kColorBackground;
+    self.myWaterView.minorRippleColor = kColorBackground;
+    self.myWaterView.alpha = 1.0;
+    [UIView animateWithDuration:[[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel] delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.myWaterView.frame = CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+//        self.myWaterView.mainRippleColor = [UIColor colorWithRed:86/255.0f green:arc4random()/255.0/255.0f blue:arc4random()/255.0/255.0f alpha:1];
+//        self.myWaterView.minorRippleColor = [UIColor colorWithRed:arc4random()/255.0/255.0f green:arc4random()/255.0/255.0f blue:arc4random()/255.0/255.0f alpha:1];
+        self.myWaterView.alpha = 0.5;
+//        self.myWaterView.mainRippleColor = UIColor.redColor;
+//        self.myWaterView.minorRippleColor = UIColor.yellowColor;
     }completion:^(BOOL finished) {
         if (finished) {
             self.isEnd = YES;

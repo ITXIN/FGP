@@ -48,12 +48,12 @@
 
 - (void)initSubviews{
     [super initSubviews];
-    self.titleStr = @"困难";
+
     self.currentNumber = 0;
-    
+    //隐藏
     [self hiddenCircleView];
     //运算式
-    self.mediumLOV  = [[FGMediumLevelOperatorView alloc]init];
+    self.mediumLOV = [[FGMediumLevelOperatorView alloc]init];
     [self.view addSubview:self.mediumLOV];
     
     //候选答案
@@ -66,20 +66,20 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.view addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(50);
-            make.right.mas_equalTo(-50);
+            make.top.mas_equalTo(25);
+            make.right.mas_equalTo(-25);
             make.size.mas_equalTo(CGSizeMake(90, 40));
         }];
        [btn addTarget:self action:@selector(paustAction:) forControlEvents:UIControlEventTouchUpInside];
        [btn setTitle:@"暂停" forState:UIControlStateNormal];
-       btn.titleLabel.font = [UIFont systemFontOfSize:20.0];
-       [btn setBackgroundColor:RGB(41, 124, 247)];
+       btn.titleLabel.font = [UIFont systemFontOfSize:18.0];
+       [btn setBackgroundColor:kColorBackground];
        [btn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
        btn.layer.cornerRadius = 5.0;
        btn.layer.masksToBounds = YES;
        btn;
    });
-    
+
 }
 
 #pragma mark -
@@ -146,23 +146,39 @@
 }
 
 - (void)updateTitleStr{
-    NSString *message = [NSString stringWithFormat:@"目前得分: %ld 最高记录得分: %ld",self.currentNumber,self.currentHighestRecord];
     
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:message];
-    NSRange numberRange = [message rangeOfString:@"目前得分: "];
-    NSRange hightestRange = [message rangeOfString:@"最高记录得分: "];
-    NSRange numberR = NSMakeRange(numberRange.length, hightestRange.location-numberRange.length);
-    NSRange hightestR = NSMakeRange(hightestRange.location+hightestRange.length, message.length-(hightestRange.location+hightestRange.length));
-    
+    NSString *levStr = @"";
     UIColor *color = UIColor.redColor;
     UIFont *font = [UIFont boldSystemFontOfSize:18.f];
+    MathCompreOfChallengeLevel lev = [[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel];
+    if (lev == MathCompreOfChallengeLevelOne) {
+        levStr = @"初级";
+    }else if (lev == MathCompreOfChallengeLevelTwo){
+        levStr = @"中级";
+    }else{
+        levStr = @"高级";
+    }
+    
+    NSString *message = [NSString stringWithFormat:@"挑战模式等级:%@ 目前得分: %ld 最高记录得分: %ld",levStr,self.currentNumber,self.currentHighestRecord];
+
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:message];
+    NSRange levRange = [message rangeOfString:@"挑战模式等级:"];
+    NSRange numberRange = [message rangeOfString:@" 目前得分: "];
+    NSRange hightestRange = [message rangeOfString:@" 最高记录得分: "];
+    
+    NSRange levR = NSMakeRange(levRange.length, (numberRange.location-levRange.length));
+    NSRange numberR = NSMakeRange(numberRange.location+numberRange.length, hightestRange.location-(numberRange.length+numberRange.location));
+    NSRange hightestR = NSMakeRange(hightestRange.location+hightestRange.length, message.length-(hightestRange.location+hightestRange.length));
+
+    [attr addAttribute:NSForegroundColorAttributeName value:color range:levR];
+    [attr addAttribute:NSFontAttributeName value:font range:levR];
     
     [attr addAttribute:NSForegroundColorAttributeName value:color range:numberR];
     [attr addAttribute:NSFontAttributeName value:font range:numberR];
-    
+
     [attr addAttribute:NSForegroundColorAttributeName value:color range:hightestR];
     [attr addAttribute:NSFontAttributeName value:font range:hightestR];
-    
+
     self.attributedTitleStr = attr;
 }
 
