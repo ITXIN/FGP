@@ -9,7 +9,7 @@
 #import "FGRootView.h"
 #import "CARadarView.h"
 #import "WaterRippleView.h"
-@implementation FGRootView
+@interface FGRootView ()<CAAnimationDelegate,UICollisionBehaviorDelegate>
 {
     UIView *bgView;
     NSMutableArray *groupPointArr ;
@@ -19,12 +19,15 @@
     UIImageView *currentTapBirdView;
 }
 
+@end
+
+@implementation FGRootView
+
 static NSInteger groupBirdCount = 0;
 static NSInteger endGroupBirdNumber = 0;
 
 - (void)initSubviews{
     [super initSubviews];
-    
     
     bgView = ({
         UIView *view = [[UIView alloc]init];
@@ -34,7 +37,6 @@ static NSInteger endGroupBirdNumber = 0;
         }];
         view;
     });
-    
     
     self.myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, kScreenHeight/2, kScreenWidth, kScreenHeight/2)
                                               mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:0.7]
@@ -55,13 +57,6 @@ static NSInteger endGroupBirdNumber = 0;
         label;
     });
     
-    
-    NSArray *arr = @[@"🦑",@"🐲",@"🐢",@"🐟",@"🦀️",@"🦐",@"🐳",@"🦈",@"🐬"];
-    UIBezierPath *path = [[UIBezierPath alloc] init];
-    
-    
-    
-    
     //太阳
     _sunImgView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth+50, kScreenHeight/6, kScreenWidth/10, kScreenWidth/10)];
     _sunImgView.image = [UIImage imageNamed:@"taiyang-03"];
@@ -69,13 +64,11 @@ static NSInteger endGroupBirdNumber = 0;
     
     //晃动动画
     CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/7];
     basicAnim.duration = 2.0;
     basicAnim.autoreverses = YES;
     basicAnim.repeatCount = HUGE_VAL;
     basicAnim.removedOnCompletion = NO;
     basicAnim.fillMode = kCAFillModeForwards;
-    
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/9];
     [_sunImgView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     
@@ -99,7 +92,6 @@ static NSInteger endGroupBirdNumber = 0;
     [self startBirdsAnimation];
 }
 
-
 #pragma mark 初始化波浪参数
 - (void)initWaveValue{
     self.b = 0.0;
@@ -116,8 +108,7 @@ static NSInteger endGroupBirdNumber = 0;
 - (void)clerarGroupBirdsAnimation{
     [tempGroupView removeFromSuperview];
     for (NSInteger i = 0; i < groupImagesArr.count; i ++){
-        UIImageView *imagesView = groupImagesArr[i];
-        [imagesView stopAnimating];
+        UILabel *imagesView = groupImagesArr[i];
         [imagesView.layer removeAllAnimations];
         [imagesView.layer removeFromSuperlayer];
         [imagesView removeFromSuperview];
@@ -129,12 +120,83 @@ static NSInteger endGroupBirdNumber = 0;
     [groupPointArr removeAllObjects];
     groupPointArr = nil;
     groupPointArr = [NSMutableArray array];
+}
+
+- (void)groupBirdsAnimation{
     
+    tempGroupView = ({
+        UIView *view = [[UIView alloc]init];
+        [bgView addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
+        view.tag = 20000;
+        view;
+    });
+    
+    NSArray *arr = @[@"🦑",@"🐲",@"🐢",@"🐟",@"🦀️",@"🦐",@"🐳",@"🦈",@"🐬",@"🐚"];
+    NSInteger numberBirds = 7;
+    groupBirdCount = numberBirds;
+    for (NSInteger i = 0; i < numberBirds; i ++){
+
+        UILabel *tempLab = ({
+            UILabel *label = [UILabel new];
+            [tempGroupView addSubview:label];
+            if (i != 0 ){
+                NSInteger size = arc4random()%20+90;
+                label.frame = CGRectMake(-arc4random()%100+20,-arc4random()%40-90,size , size);
+            }else{
+                label.frame = CGRectMake(-100,-30,100 , 100);
+            }
+            label.tag = 100 +i;
+            label.text = [NSString stringWithFormat:@"%@",arr[i]];
+            NSInteger size = arc4random()%30+50;
+            label.font = [UIFont systemFontOfSize:size];
+            label.backgroundColor = UIColor.clearColor;
+            //晃动动画
+            CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+            basicAnim.duration = 2.0;
+            basicAnim.autoreverses = YES;
+            basicAnim.repeatCount = HUGE_VAL;
+            basicAnim.removedOnCompletion = NO;
+            basicAnim.fillMode = kCAFillModeForwards;
+            basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/6];
+            [label.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
+            
+            
+            label;
+        });
+        [groupImagesArr addObject:tempLab];
+      
+    }
+    
+    for (NSInteger i = 0; i < numberBirds; i ++){
+        float y = kScreenHeight - 100 + arc4random()%50 + 20;
+        self.waveHeight = y;
+        NSMutableArray *tempArr = [NSMutableArray array];
+        if (i %2 == 0){
+            for (float x = -20; x <= kScreenWidth+50; x ++){
+                //y=Acos(wx+Φ)+B
+                y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
+                [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
+            }
+        }else{
+            for (float x = -20; x <= kScreenWidth+50; x ++){
+                //y=Asin(wx+Φ)+B
+                y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
+                [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
+            }
+        }
+        
+        [groupPointArr addObject:[[tempArr reverseObjectEnumerator] allObjects]];
+    }
+    
+    [self drawGroupLineWithGroupPointArr:groupPointArr imageViewArr:groupImagesArr];
 }
 
 
 
-
+/*
 - (void)groupBirdsAnimation{
     NSInteger numberBirds = arc4random()%10+1;
     groupBirdCount = numberBirds;
@@ -210,14 +272,13 @@ static NSInteger endGroupBirdNumber = 0;
     
     [self drawGroupLineWithGroupPointArr:groupPointArr imageViewArr:groupImagesArr];
 }
-
+*/
 
 #pragma mark -
 #pragma mark --- 绘制群鸟的路径
 - (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)pointsArr imageViewArr:(NSMutableArray*)imageViewArr{
-    
     for (NSInteger i = 0; i < imageViewArr.count; i ++){
-        UIImageView *imageView = (UIImageView*)imageViewArr[i];
+        UILabel *imageView = (UILabel*)imageViewArr[i];
         NSMutableArray *tepPointsArr = pointsArr[i];
         
         UIBezierPath *circlePath = [UIBezierPath bezierPath];
@@ -257,7 +318,7 @@ static NSInteger endGroupBirdNumber = 0;
         
         [tempGroupView.layer addSublayer:circleLayer];
         
-        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:10] forKey:@"Stroken1"];
+        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:1] forKey:@"Stroken1"];
         
     }
 }
@@ -304,7 +365,6 @@ static NSInteger endGroupBirdNumber = 0;
     endGroupBirdNumber = 0;
     currentTapBirdView = nil;
 }
-
 
 #pragma mark -
 - (void)tapAction:(UITapGestureRecognizer*)ges{
