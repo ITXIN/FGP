@@ -29,7 +29,7 @@
 - (void)initSubviews{
     [super initSubviews];
     
-    categoryBtnW = 100*kScreenHeightRatio;
+    categoryBtnW = 64*kScreenHeightRatio;
     actionBtnW = 150*kScreenHeightRatio;
     self.btnsArr = [NSMutableArray array];
     
@@ -48,7 +48,7 @@
                 make.center.mas_equalTo(self );
                 make.size.mas_equalTo(CGSizeMake(categoryBtnW, categoryBtnW));
             }];
-            btn.backgroundColor = UIColor.whiteColor;
+//            btn.backgroundColor = UIColor.whiteColor;
             btn.layer.cornerRadius = categoryBtnW/2;
             btn.layer.masksToBounds = YES;
             btn;
@@ -62,7 +62,7 @@
             categoryBtn.tag = CategoryGame;
             imagView = [[UIImageView alloc]init];
             [self.gameBtn addSubview:imagView];
-            imagView.image = [UIImage imageNamed:@"angry_11.jpg"];
+            imagView.image = [UIImage imageNamed:@"home_game"];
             [imagView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self.gameBtn);
             }];
@@ -72,17 +72,17 @@
         }else if (i == 1){
             self.aiBtn = categoryBtn;
             categoryBtn.tag = CategoryAI;
-            [self.aiBtn setImage:[UIImage imageNamed:@"home_story"] forState:UIControlStateNormal];
+            [self.aiBtn setImage:[UIImage imageNamed:@"home_chat"] forState:UIControlStateNormal];
         }else if (i == 2) {
             self.storysBtn = categoryBtn;
             categoryBtn.tag = CategoryStory;
-            [self.storysBtn setImage:[UIImage imageNamed:@"home_story"] forState:UIControlStateNormal];
-            [self.storysBtn setBackgroundImage:[UIImage imageNamed:@"home_story_bg"] forState:UIControlStateNormal];
+            [self.storysBtn setImage:[UIImage imageNamed:@"home_listen_story"] forState:UIControlStateNormal];
+//            [self.storysBtn setBackgroundImage:[UIImage imageNamed:@"home_story_bg"] forState:UIControlStateNormal];
         }else{
             self.mathBtn = categoryBtn;
             categoryBtn.tag = CategoryMath;
             
-            [self.mathBtn setBackgroundImage:[UIImage imageNamed:@"home_calculate_bg"] forState:UIControlStateNormal];
+            [self.mathBtn setImage:[UIImage imageNamed:@"home_calculate"] forState:UIControlStateNormal];
         }
         
         [self.btnsArr addObject:categoryBtn];
