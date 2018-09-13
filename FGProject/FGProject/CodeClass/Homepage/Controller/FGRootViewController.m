@@ -29,7 +29,6 @@
 @property (nonatomic,strong) FGRootView *rootBgView;
 @property (nonatomic,strong) FGCategoryMenuView *cateGoryMenuView;
 
-@property (nonatomic, strong) WaterRippleView *myWaterView;
 @end
 
 @implementation FGRootViewController
@@ -63,18 +62,6 @@
     if (cound > 50) {//绕过审核
         self.angryBirdView = [[FGAngryBirdsView alloc]init];
         [self.bgView addSubview:self.angryBirdView];
-        
-        
-        self.myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, kScreenHeight/2, kScreenWidth, kScreenHeight/2)
-                                                  mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1]
-                                                 minorRippleColor:[UIColor colorWithRed:84/255.0f green:200/255.0f blue:120/255.0f alpha:0.9]
-                                                mainRippleoffsetX:6.0f
-                                               minorRippleoffsetX:1.1f
-                                                      rippleSpeed:2.0f
-                                                   ripplePosition:kScreenHeight/2//高度
-                                                  rippleAmplitude:15.0f];
-        self.myWaterView.backgroundColor = UIColor.clearColor;
-        [self.bgView addSubview:self.myWaterView];
         
         //类别
         self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];

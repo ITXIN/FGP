@@ -98,8 +98,17 @@
         [btn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = 104;
         [btn setImage:[UIImage imageNamed:@"countNum-bg"] forState:UIControlStateNormal];
-        btn;
         
+        //晃动动画
+        CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2];
+        basicAnim.duration = 5.0;
+        basicAnim.autoreverses = YES;
+        basicAnim.repeatCount = HUGE_VAL;
+        basicAnim.removedOnCompletion = NO;
+        basicAnim.fillMode = kCAFillModeForwards;
+        [btn.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
+        btn;
     });
     
 //    [self.actionBtn setImage:[UIImage imageNamed:@"home_start_bg01"] forState:UIControlStateNormal];

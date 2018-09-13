@@ -39,8 +39,6 @@
     [self.redImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     [self.yellowImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
 
-    
-    
     self.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     self.effView = [[UIVisualEffectView alloc]initWithEffect:self.blurEffect];
     [self addSubview: self.effView];
