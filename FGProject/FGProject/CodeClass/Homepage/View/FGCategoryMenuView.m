@@ -97,11 +97,14 @@
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = 104;
+        [btn setImage:[UIImage imageNamed:@"countNum-bg"] forState:UIControlStateNormal];
         btn;
         
     });
     
-    [self.actionBtn setImage:[UIImage imageNamed:@"home_start_bg01"] forState:UIControlStateNormal];
+//    [self.actionBtn setImage:[UIImage imageNamed:@"home_start_bg01"] forState:UIControlStateNormal];
+    
+ 
     
     actionBtnRadius = sqrt(pow(CGRectGetWidth(self.actionBtn.frame)/2,2)*2)/2 ;
     smallRadius = categoryBtnW/5 + 20;
