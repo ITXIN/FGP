@@ -12,8 +12,8 @@
 @property (nonatomic,strong) CARadarView *radarView;
 //太阳图片
 @property (nonatomic, strong) UIImageView *sunImgView;
-@property (nonatomic, strong) UIImageView *redImageView;
-@property (nonatomic, strong) UIImageView *yellowImageView;
-//@property (nonatomic, strong) UIButton *startBtn;
+//@property (nonatomic, strong) UIImageView *redImageView;
+//@property (nonatomic, strong) UIImageView *yellowImageView;
+
 
 @end

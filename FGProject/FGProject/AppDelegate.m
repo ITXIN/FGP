@@ -49,6 +49,7 @@
     [[FGNetworkingReachable sharedInstance]startMonitoringNetworkReachable];
     
     [self setupSVProgressHUD];
+    [self clearMemory];
     
     return YES;
 }
@@ -60,6 +61,11 @@
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]]; //弹出框内容颜色
     [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];//圈圈
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];//大的背景
+}
+
+- (void)clearMemory{
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
+    [[SDImageCache sharedImageCache] clearMemory];//可不写
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

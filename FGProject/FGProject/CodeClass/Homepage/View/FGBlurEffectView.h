@@ -12,4 +12,7 @@
 @property (nonatomic,strong) UIBlurEffect *blurEffect;
 @property (nonatomic,strong) UIVisualEffectView *effView;
 @property (nonatomic,strong) UIImageView *bgImageView;
+
+@property (nonatomic, strong) UIImageView *redImageView;
+@property (nonatomic, strong) UIImageView *yellowImageView;
 @end

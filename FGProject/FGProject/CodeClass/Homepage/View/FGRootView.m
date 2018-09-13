@@ -13,28 +13,19 @@
 - (void)initSubviews{
     [super initSubviews];
     //红色气球
-    self.redImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qiqiu3.png"]];
-    [self addSubview:self.redImageView];
-    
-    //黄色气球
-    self.yellowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"huangqiu.png"]];
-    [self addSubview:self.yellowImageView];
-    
-    UITapGestureRecognizer *gesTure = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-    self.redImageView.userInteractionEnabled = YES;
-    self.yellowImageView.userInteractionEnabled = YES;
-    [self.redImageView addGestureRecognizer:gesTure];
-    [self.yellowImageView addGestureRecognizer:gesTure];
-    
-//    _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _startBtn.frame = CGRectMake(kScreenWidth - 100 - kScreenHeight/6, kScreenHeight/2, kScreenHeight/6, kScreenHeight/6);
-//    _startBtn.hidden = YES;
-//    [_startBtn setTintColor:[UIColor whiteColor]];
-//    [_startBtn addTarget:self action:@selector(startBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [_startBtn setImage:[UIImage imageNamed:@"qiqiu_start"] forState:UIControlStateNormal];
-//    _startBtn.backgroundColor = [UIColor clearColor];
-//    [self addSubview:_startBtn];
-    
+//    self.redImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qiqiu3.png"]];
+//    [self addSubview:self.redImageView];
+//
+//    //黄色气球
+//    self.yellowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"huangqiu.png"]];
+//    [self addSubview:self.yellowImageView];
+//
+//    UITapGestureRecognizer *gesTure = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+//    self.redImageView.userInteractionEnabled = YES;
+//    self.yellowImageView.userInteractionEnabled = YES;
+//    [self.redImageView addGestureRecognizer:gesTure];
+//    [self.yellowImageView addGestureRecognizer:gesTure];
+
     //太阳
     _sunImgView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth+50, kScreenHeight/6, kScreenWidth/10, kScreenWidth/10)];
     _sunImgView.image = [UIImage imageNamed:@"taiyang-03"];
@@ -49,8 +40,8 @@
     basicAnim.removedOnCompletion = NO;
     basicAnim.fillMode = kCAFillModeForwards;
     
-    [self.redImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
-    [self.yellowImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
+//    [self.redImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
+//    [self.yellowImageView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/9];
     [_sunImgView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     
@@ -88,25 +79,25 @@
     }];
 }
 
-- (void)showImageView{
-    self.yellowImageView.alpha = 1.0;
-    self.redImageView.alpha = 1.0;
-}
+//- (void)showImageView{
+//    self.yellowImageView.alpha = 1.0;
+//    self.redImageView.alpha = 1.0;
+//}
 
-- (void)setupSubviewsLayout{
-    [super setupSubviewsLayout];
-    
-    [self.redImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(100);
-        make.top.mas_equalTo(100);
-        make.size.mas_equalTo(CGSizeMake(60, 130));
-    }];
-    
-    [self.yellowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.redImageView);
-        make.right.mas_equalTo(-100);
-        make.size.equalTo(self.redImageView);
-    }];
-}
+//- (void)setupSubviewsLayout{
+//    [super setupSubviewsLayout];
+//
+//    [self.redImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(100);
+//        make.top.mas_equalTo(100);
+//        make.size.mas_equalTo(CGSizeMake(60, 130));
+//    }];
+//
+//    [self.yellowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.redImageView);
+//        make.right.mas_equalTo(-100);
+//        make.size.equalTo(self.redImageView);
+//    }];
+//}
 
 @end

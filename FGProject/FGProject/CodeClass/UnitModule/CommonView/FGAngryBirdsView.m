@@ -144,13 +144,13 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         self.waveHeight = y;
         NSMutableArray *tempArr = [NSMutableArray array];
         if (i %2 == 0){
-            for (float x = -20; x <= kScreenWidth+20; x ++){
+            for (float x = -20; x <= kScreenWidth+50; x ++){
                 //y=Acos(wx+Φ)+B
                 y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
             }
         }else{
-            for (float x = -20; x <= kScreenWidth+20; x ++){
+            for (float x = -20; x <= kScreenWidth+50; x ++){
                 //y=Asin(wx+Φ)+B
                 y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];

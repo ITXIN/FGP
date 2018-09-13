@@ -29,7 +29,7 @@
 - (void)initSubviews{
     [super initSubviews];
     
-    categoryBtnW = 64*kScreenHeightRatio;
+    categoryBtnW = 100*kScreenHeightRatio;
     actionBtnW = 150*kScreenHeightRatio;
     self.btnsArr = [NSMutableArray array];
     
@@ -48,7 +48,7 @@
                 make.center.mas_equalTo(self );
                 make.size.mas_equalTo(CGSizeMake(categoryBtnW, categoryBtnW));
             }];
-//            btn.backgroundColor = UIColor.whiteColor;
+            btn.backgroundColor = UIColor.whiteColor;
             btn.layer.cornerRadius = categoryBtnW/2;
             btn.layer.masksToBounds = YES;
             btn;
