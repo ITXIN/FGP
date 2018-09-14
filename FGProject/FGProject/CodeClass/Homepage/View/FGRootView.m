@@ -58,8 +58,17 @@ static NSInteger endGroupBirdNumber = 0;
     
 }
 
+#pragma mark -
+- (void)hiddenWaterAnimation{
+    [self clerarGroupBirdsAnimation];
+}
+
 - (void)showWaterAnimation{
     
+    groupPointArr = [NSMutableArray array];
+    groupImagesArr  = [NSMutableArray array];
+    [self initWaveValue];
+    [self startBirdsAnimation];
     if (!_myWaterView) {
         self.myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, kScreenHeight/2, kScreenWidth, kScreenHeight/2)
                                                   mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:0.7]
@@ -72,10 +81,6 @@ static NSInteger endGroupBirdNumber = 0;
         self.myWaterView.backgroundColor = UIColor.clearColor;
         [self addSubview:self.myWaterView];
         
-        groupPointArr = [NSMutableArray array];
-        groupImagesArr  = [NSMutableArray array];
-        [self initWaveValue];
-        [self startBirdsAnimation];
     }
    
 }
@@ -94,6 +99,8 @@ static NSInteger endGroupBirdNumber = 0;
 #pragma mark -
 #pragma mark --- 一群鸟
 - (void)clerarGroupBirdsAnimation{
+    [self.myWaterView removeFromSuperview];
+    self.myWaterView = nil;
     [tempGroupView removeFromSuperview];
     for (NSInteger i = 0; i < groupImagesArr.count; i ++){
         UIView *imagesView = groupImagesArr[i];

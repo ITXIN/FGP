@@ -24,4 +24,5 @@
 @property (assign, nonatomic) float b;
 
 - (void)showWaterAnimation;
+- (void)hiddenWaterAnimation;
 @end

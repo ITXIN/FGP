@@ -103,7 +103,13 @@
 #pragma mark -
 - (void)longGesShowWaterAnimation:(UILongPressGestureRecognizer*)ges{
     if (ges.state == UIGestureRecognizerStateBegan) {
-        [self.rootBgView showWaterAnimation];
+        if (!self.rootBgView.myWaterView) {
+            NSLog(@"---show---");
+            [self.rootBgView showWaterAnimation];
+        }else{
+            NSLog(@"---hidden---");
+             [self.rootBgView hiddenWaterAnimation];
+        }
     }
 }
 
