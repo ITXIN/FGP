@@ -122,21 +122,21 @@
 }
 
 - (void)showErrorView{
+    
     [[SoundsProcess shareInstance] playSoundOfWrong];
 
     NSString *message = [NSString stringWithFormat:@"本次%@",[self getAlertViewMessage]];
- 
-    [JCAlertView showOneButtonWithTitle:@"挑战结束" Message:message ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
-        
-        if (self.currentNumber > self.currentHighestRecord) {
-            [self fireworksProcess];
-            [[FGMathOperationManager shareMathOperationManager] updateCurrentChallengeHighestRecordWithNumber:self.currentNumber];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-        }else{
-          [self.navigationController popViewControllerAnimated:YES];
-        }
+   
+    NSString *title = @"挑战结束,下次再继续努力！！";
+    if (self.currentNumber > self.currentHighestRecord) {
+        title = @"真棒！打破了上次的最高记录！！";
+        [[FGMathOperationManager shareMathOperationManager] updateCurrentChallengeHighestRecordWithNumber:self.currentNumber];
+    }else if (self.currentNumber == self.currentHighestRecord){
+        title = @"差一点就打破了上次的最高记录，加油！！！";
+    }
+    
+    [JCAlertView showOneButtonWithTitle:title Message:message ButtonType:JCAlertViewButtonTypeDefault ButtonTitle:@"确定" Click:^{
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 
@@ -179,7 +179,10 @@
     [attr addAttribute:NSForegroundColorAttributeName value:color range:hightestR];
     [attr addAttribute:NSFontAttributeName value:font range:hightestR];
 
-    self.attributedTitleStr = attr;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.attributedTitleStr = attr;
+    }];
+    
 }
 
 

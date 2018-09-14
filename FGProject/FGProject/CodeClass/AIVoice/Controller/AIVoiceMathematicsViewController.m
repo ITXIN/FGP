@@ -129,8 +129,7 @@ static CGRect   strOfRect;
     return YES;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     iFlySpeechRecognizer.delegate = nil;
     [iFlySpeechRecognizer cancel];
@@ -147,15 +146,15 @@ static CGRect   strOfRect;
 //    self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight);
     
     self.noAnswerArr = [NSMutableArray arrayWithArray: @[@"我好像不明白.",@"对不起,我不知道.",@"我懂得太少,不清楚."]];
-    FGBlurEffectView *blurView = [[FGBlurEffectView alloc]init];
-    [self.view addSubview:blurView];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        blurView.bgImageView.image = [UIImage imageNamed:@"Indexbg-03"];
-    });
-    
-    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
+//    FGBlurEffectView *blurView = [[FGBlurEffectView alloc]init];
+//    [self.view addSubview:blurView];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        self.blurView.bgImageView.image = [UIImage imageNamed:@"Indexbg-03"];
+//    });
+//
+//    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.view);
+//    }];
     [self.view addSubview:self.tableView];
 //    
 //    self.startAIChatView = [[FGStartAIChatView alloc]initWithFrame:CGRectMake(10, kScreenWidth-80, kScreenHeight-20, 50)];
@@ -168,9 +167,8 @@ static CGRect   strOfRect;
     
     stopAISpeekGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelSpeechClick:)];
     
-    
-    
     [self setupSpeechSynthesizer];
+    
 
     //暂时隐藏
 //    self.aiActionView = [[FGAIActionView alloc]init];
@@ -217,8 +215,7 @@ static CGRect   strOfRect;
 
 #pragma mark -
 #pragma mark --- FGAIChatCellDelegate 设置语音
-- (void)setupSpeekConfig:(UIButton *)sender
-{
+- (void)setupSpeekConfig:(UIButton *)sender{
     iatConfig = [[TTSConfigViewController alloc]init];
     [self addChildViewController:iatConfig];
     iatConfig.view.layer.cornerRadius = 10;
@@ -383,14 +380,18 @@ static CGRect   strOfRect;
 
 #pragma mark -
 #pragma mark --- 取消语音合成阅读 speech
-- (void)cancelSpeechClick:(UITapGestureRecognizer*)sender
-{
-    if (_iFlySpeechSynthesizer)
-    {
+- (void)cancelSpeechClick:(UITapGestureRecognizer*)sender{
+    
+    if (_iFlySpeechSynthesizer && [_iFlySpeechSynthesizer isSpeaking]){
         [_iFlySpeechSynthesizer stopSpeaking];
-        
-        [self.startAIChatView endWave];
     }
+    
+    if (iFlySpeechRecognizer && [iFlySpeechRecognizer isListening]) {
+        [iFlySpeechRecognizer stopListening];
+    }
+    
+    [self.startAIChatView endWave];
+    
 }
 
 
@@ -456,8 +457,21 @@ static CGRect   strOfRect;
 {
     NSLog(@"--- 合成 onCompleted %@  errorType %d errorCode %d ",error.errorDesc,error.errorType,error.errorCode);
     [self.startAIChatView endWave];
-    [self.startAIChatView removeGestureRecognizer:stopAISpeekGR];
+//    [self.startAIChatView removeGestureRecognizer:stopAISpeekGR];
+    
+    [self scrollTableToFoot:YES];
 }
+
+- (void)scrollTableToFoot:(BOOL)animated{
+    NSInteger s = [self.tableView numberOfSections];  //有多少组
+    if (s<1) return;  //无数据时不执行 要不会crash
+    NSInteger r = [self.tableView numberOfRowsInSection:s-1]; //最后一组有多少行
+    if (r<1) return;
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];  //取最后一行数据
+    [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated]; //滚动到最后一行
+}
+
+
 /**
  *  开始合成回调
  */
@@ -538,12 +552,11 @@ static CGRect   strOfRect;
  *    在进行语音识别过程中的任何时刻都有可能回调此函数，你可以根据errorCode进行相应的处理，
  *  @param errorCode 错误描述
  */
-- (void) onError:(IFlySpeechError *) errorCode
-{
+- (void) onError:(IFlySpeechError *) errorCode{
      NSLog(@"-----语义理解 onError %@",errorCode.errorDesc);
-
-    
+      [self scrollTableToFoot:YES];
 }
+
 -(NSString*)DataTOjsonString:(id)object
 {
     NSString *jsonString = nil;

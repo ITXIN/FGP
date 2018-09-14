@@ -11,7 +11,6 @@
 #import "WaterRippleView.h"
 @interface FGRootView ()<CAAnimationDelegate,UICollisionBehaviorDelegate>
 {
-    UIView *bgView;
     NSMutableArray *groupPointArr ;
     NSMutableArray *groupImagesArr ;
     UIView *tempGroupView;
@@ -28,35 +27,7 @@ static NSInteger endGroupBirdNumber = 0;
 
 - (void)initSubviews{
     [super initSubviews];
-    
-    bgView = ({
-        UIView *view = [[UIView alloc]init];
-        [self addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
-        view;
-    });
-    
-    self.myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, kScreenHeight/2, kScreenWidth, kScreenHeight/2)
-                                              mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:0.7]
-                                             minorRippleColor:[UIColor colorWithRed:84/255.0f green:200/255.0f blue:120/255.0f alpha:0.5]
-                                            mainRippleoffsetX:6.0f
-                                           minorRippleoffsetX:1.1f
-                                                  rippleSpeed:2.0f
-                                               ripplePosition:kScreenHeight/2-100//高度
-                                              rippleAmplitude:15.0f];
-    self.myWaterView.backgroundColor = UIColor.clearColor;
-    [self addSubview:self.myWaterView];
-    
-    
-    UILabel *tempLab = ({
-        UILabel *label = [UILabel new];
-        [self addSubview:label];
-        label.text = @"🦑";
-        label;
-    });
-    
+
     //太阳
     _sunImgView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth+50, kScreenHeight/6, kScreenWidth/10, kScreenWidth/10)];
     _sunImgView.image = [UIImage imageNamed:@"taiyang-03"];
@@ -85,11 +56,28 @@ static NSInteger endGroupBirdNumber = 0;
     basicAnimX.path = circlePath.CGPath;
     [_sunImgView.layer addAnimation:basicAnimX forKey:@"KCBasicAnimation_RotationX"];
     
+}
+
+- (void)showWaterAnimation{
     
-    groupPointArr = [NSMutableArray array];
-    groupImagesArr  = [NSMutableArray array];
-    [self initWaveValue];
-    [self startBirdsAnimation];
+    if (!_myWaterView) {
+        self.myWaterView = [[WaterRippleView alloc] initWithFrame:CGRectMake(0, kScreenHeight/2, kScreenWidth, kScreenHeight/2)
+                                                  mainRippleColor:[UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:0.7]
+                                                 minorRippleColor:[UIColor colorWithRed:84/255.0f green:200/255.0f blue:120/255.0f alpha:0.5]
+                                                mainRippleoffsetX:6.0f
+                                               minorRippleoffsetX:1.1f
+                                                      rippleSpeed:2.0f
+                                                   ripplePosition:kScreenHeight/2-100//高度
+                                                  rippleAmplitude:15.0f];
+        self.myWaterView.backgroundColor = UIColor.clearColor;
+        [self addSubview:self.myWaterView];
+        
+        groupPointArr = [NSMutableArray array];
+        groupImagesArr  = [NSMutableArray array];
+        [self initWaveValue];
+        [self startBirdsAnimation];
+    }
+   
 }
 
 #pragma mark 初始化波浪参数
@@ -108,7 +96,7 @@ static NSInteger endGroupBirdNumber = 0;
 - (void)clerarGroupBirdsAnimation{
     [tempGroupView removeFromSuperview];
     for (NSInteger i = 0; i < groupImagesArr.count; i ++){
-        UILabel *imagesView = groupImagesArr[i];
+        UIView *imagesView = groupImagesArr[i];
         [imagesView.layer removeAllAnimations];
         [imagesView.layer removeFromSuperlayer];
         [imagesView removeFromSuperview];
@@ -126,7 +114,7 @@ static NSInteger endGroupBirdNumber = 0;
     
     tempGroupView = ({
         UIView *view = [[UIView alloc]init];
-        [bgView addSubview:view];
+        [self addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
@@ -134,24 +122,25 @@ static NSInteger endGroupBirdNumber = 0;
         view;
     });
     
-    NSArray *arr = @[@"🦑",@"🐲",@"🐢",@"🐟",@"🦀️",@"🦐",@"🐳",@"🦈",@"🐬",@"🐚"];
-    NSInteger numberBirds = 7;
+    NSArray *arr = @[@"🦑",@"🐙",@"🐟",@"🦀️",@"🐳",@"🐚"];
+    NSInteger numberBirds = arc4random()%5+1;
     groupBirdCount = numberBirds;
     for (NSInteger i = 0; i < numberBirds; i ++){
 
         UILabel *tempLab = ({
             UILabel *label = [UILabel new];
             [tempGroupView addSubview:label];
+            NSInteger size = arc4random()%20+20;
             if (i != 0 ){
-                NSInteger size = arc4random()%20+90;
-                label.frame = CGRectMake(-arc4random()%100+20,-arc4random()%40-90,size , size);
+                
+                label.frame = CGRectMake(-arc4random()%100-20,-30,size+30 , size+30);
+//                label.frame = CGRectMake(-arc4random()%100-20,-30,size , size);
             }else{
-                label.frame = CGRectMake(-100,-30,100 , 100);
+                label.frame = CGRectMake(-100,-30,size , size);
             }
             label.tag = 100 +i;
             label.text = [NSString stringWithFormat:@"%@",arr[i]];
-            NSInteger size = arc4random()%30+50;
-            label.font = [UIFont systemFontOfSize:size];
+            label.font = [UIFont systemFontOfSize:size-10];
             label.backgroundColor = UIColor.clearColor;
             //晃动动画
             CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -174,14 +163,15 @@ static NSInteger endGroupBirdNumber = 0;
         float y = kScreenHeight - 100 + arc4random()%50 + 20;
         self.waveHeight = y;
         NSMutableArray *tempArr = [NSMutableArray array];
+ 
         if (i %2 == 0){
-            for (float x = -20; x <= kScreenWidth+50; x ++){
+            for (float x = -100; x <= kScreenWidth+250; x ++){
                 //y=Acos(wx+Φ)+B
                 y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
             }
         }else{
-            for (float x = -20; x <= kScreenWidth+50; x ++){
+            for (float x = -100; x <= kScreenWidth+250; x ++){
                 //y=Asin(wx+Φ)+B
                 y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
                 [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
@@ -234,12 +224,12 @@ static NSInteger endGroupBirdNumber = 0;
         }
         
         NSMutableArray *imageArr = [NSMutableArray array];
-        for (int i = 0; i < 5; i ++){
-            [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"angrybird_0%d",i+1]]];
+        for (int i = 0; i < 20; i ++){
+            [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"swim_cycle.%d",i+1]]];
         }
         
         [imageView setAnimationImages:imageArr];
-        [imageView setAnimationDuration:imageArr.count *0.35];
+        [imageView setAnimationDuration:imageArr.count *0.25];
         [imageView setAnimationRepeatCount:0];
         [imageView startAnimating];
         
@@ -267,7 +257,7 @@ static NSInteger endGroupBirdNumber = 0;
             }
         }
         
-        [groupPointArr addObject:tempArr];
+        [groupPointArr addObject:[[tempArr reverseObjectEnumerator] allObjects]];
     }
     
     [self drawGroupLineWithGroupPointArr:groupPointArr imageViewArr:groupImagesArr];
@@ -282,7 +272,7 @@ static NSInteger endGroupBirdNumber = 0;
         NSMutableArray *tepPointsArr = pointsArr[i];
         
         UIBezierPath *circlePath = [UIBezierPath bezierPath];
-        circlePath.lineWidth = 1.0;//设置1就可以显示出来了,这里隐藏了
+        circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
         circlePath.lineCapStyle = kCGLineCapRound;
         circlePath.lineJoinStyle = kCGLineJoinRound;
         
@@ -292,7 +282,7 @@ static NSInteger endGroupBirdNumber = 0;
         // 设置填充颜色
         circleLayer.fillColor = [UIColor clearColor].CGColor;
         // 设置线宽
-        circleLayer.lineWidth = 1.0;//设置1就可以显示出来了,这里隐藏了
+        circleLayer.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
         // 设置线的颜色
         circleLayer.strokeColor = RGBA(255,255,255,1.0).CGColor;
         circleLayer.strokeEnd = 1.0;
@@ -327,7 +317,7 @@ static NSInteger endGroupBirdNumber = 0;
     CAKeyframeAnimation *orbit = [CAKeyframeAnimation animation];
     orbit.keyPath = @"position";
     orbit.path = path.CGPath;
-    orbit.duration = 10;
+    orbit.duration = 20+arc4random()%5;
     orbit.additive = YES;
     orbit.repeatCount = repeatCount;
     orbit.calculationMode = kCAAnimationPaced;
@@ -377,21 +367,5 @@ static NSInteger endGroupBirdNumber = 0;
         img.frame = temp;
     }];
 }
-
-//- (void)setupSubviewsLayout{
-//    [super setupSubviewsLayout];
-//
-//    [self.redImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(100);
-//        make.top.mas_equalTo(100);
-//        make.size.mas_equalTo(CGSizeMake(60, 130));
-//    }];
-//
-//    [self.yellowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.redImageView);
-//        make.right.mas_equalTo(-100);
-//        make.size.equalTo(self.redImageView);
-//    }];
-//}
 
 @end

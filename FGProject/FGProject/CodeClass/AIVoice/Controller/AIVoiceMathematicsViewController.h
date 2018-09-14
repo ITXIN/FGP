@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AIVoiceMathematicsViewController : UIViewController
+#import "FGBaseViewController.h"
+@interface AIVoiceMathematicsViewController : FGBaseViewController
 
 @end

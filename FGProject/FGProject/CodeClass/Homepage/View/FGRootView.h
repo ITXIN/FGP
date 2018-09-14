@@ -22,4 +22,6 @@
 @property (assign, nonatomic) float w;
 //公式中用到(起始相位)
 @property (assign, nonatomic) float b;
+
+- (void)showWaterAnimation;
 @end
