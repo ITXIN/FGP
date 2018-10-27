@@ -43,7 +43,6 @@
     
 //    FGUserManager *user = self.userManager;
 //    FGLOG(@"---%@ %@ %@",user.name,user.ID,user.isPlaySound);
-//
 //    NSString *uidStr = [FLDeviceUID uid];
 //    NSDictionary *userInfoDic = @{@"name":@"聪明可爱的宝贝",@"ID":[NSString stringWithFormat:@"%@",uidStr],@"isPlaySound":@"N"};
 //    [user saveUserDataWithDic:userInfoDic];
