@@ -111,11 +111,9 @@
 - (void)myCenterAction:(UIButton*)sender{
 //    FGMyCenterViewController *myCenterVC = [[FGMyCenterViewController alloc]init];
 //    [self.navigationController pushViewController:myCenterVC animated:YES];
-    
-//
+
 //    FGMathDiffcultyViewController *myCenterVC = [[FGMathDiffcultyViewController alloc]init];
 //    [self.navigationController pushViewController:myCenterVC animated:YES];
-    
     
 //    FGMathSettingViewController *settingVC = [[FGMathSettingViewController alloc]init];
 //    [self.navigationController pushViewController:settingVC animated:YES];
