@@ -24,7 +24,7 @@
 //    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];//隐藏状态栏
     
-//    //显示SDK的版本号
+    //显示SDK的版本号
     NSLog(@"verson=%@",[IFlySetting getVersion]);
     //设置sdk的log等级，log保存在下面设置的工作路径中
     [IFlySetting setLogFile:LVL_ALL];
@@ -47,7 +47,6 @@
     
     //监听网络
     [[FGNetworkingReachable sharedInstance]startMonitoringNetworkReachable];
-    
     [self setupSVProgressHUD];
     [self clearMemory];
     
