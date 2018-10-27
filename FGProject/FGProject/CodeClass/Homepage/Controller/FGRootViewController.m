@@ -58,7 +58,6 @@
     self.rootBgView = [[FGRootView alloc]init];
     [self.bgView addSubview:self.rootBgView];
     
-
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
     cound = 70;
     if (cound > 50) {//绕过审核
@@ -70,7 +69,6 @@
         self.cateGoryMenuView.categoryDelegate = self;
         [self.bgView addSubview: self.cateGoryMenuView];
     
-        
         UILongPressGestureRecognizer *longGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesShowWaterAnimation:)];
         longGes.minimumPressDuration = 2;
         [self.angryBirdView addGestureRecognizer:longGes];
@@ -95,9 +93,7 @@
 
             btn;
         });
-
     }
-//  NSLog(@"---lev---%ld",[[FGMathOperationManager shareMathOperationManager] getCurrentChallengeLevel]);
 }
 
 #pragma mark -
