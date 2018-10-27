@@ -26,6 +26,7 @@
     
 //    //显示SDK的版本号
     NSLog(@"verson=%@",[IFlySetting getVersion]);
+    
     //设置sdk的log等级，log保存在下面设置的工作路径中
     [IFlySetting setLogFile:LVL_ALL];
     //打开输出在console的log开关
