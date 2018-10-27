@@ -71,4 +71,6 @@
 //获取挑战模式难度等级
 - (MathCompreOfChallengeLevel)getCurrentChallengeLevel;
 - (void)updateCurrentChallengeLevel:(MathCompreOfChallengeLevel)level;
+
+- (NSMutableDictionary*)getAllData;
 @end
