@@ -45,7 +45,7 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
         }
     };
     
-    UIButton *myCenterBtn = ({
+  __unused  UIButton *myCenterBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [cus addSubview:btn];
         [btn setImage:[UIImage imageNamed:@"my_center"] forState:UIControlStateNormal];

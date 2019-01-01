@@ -163,32 +163,32 @@
 
 // MARK: - ----------------------------------  ----------------------------------
 - (void)getOperationActionTypeStr:(MathOperationActionType)type{
-    NSString *operationStr = @"";
-    switch (type) {
-        case MathOperationActionTypeAdd:
-            operationStr = @"+";
-            break;
-        case MathOperationActionTypeSubtract:
-            operationStr = @"-";
-            break;
-        case MathOperationActionTypeMultiply:
-            operationStr = @"x";
-            break;
-        case MathOperationActionTypeDivide:
-            operationStr = @"/";
-            break;
-        case MathOperationActionTypeCompreOfSimple:
-            operationStr = @"+";
-            break;
-        case MathOperationActionTypeCompreOfMedium:
-            operationStr = @"+";
-            break;
-        case MathOperationActionTypeCompreOfChallenge:
-            operationStr = @"+";
-            break;
-        default:
-            break;
-    }
+//    NSString *operationStr = @"";
+//    switch (type) {
+//        case MathOperationActionTypeAdd:
+//            operationStr = @"+";
+//            break;
+//        case MathOperationActionTypeSubtract:
+//            operationStr = @"-";
+//            break;
+//        case MathOperationActionTypeMultiply:
+//            operationStr = @"x";
+//            break;
+//        case MathOperationActionTypeDivide:
+//            operationStr = @"/";
+//            break;
+//        case MathOperationActionTypeCompreOfSimple:
+//            operationStr = @"+";
+//            break;
+//        case MathOperationActionTypeCompreOfMedium:
+//            operationStr = @"+";
+//            break;
+//        case MathOperationActionTypeCompreOfChallenge:
+//            operationStr = @"+";
+//            break;
+//        default:
+//            break;
+//    }
 }
 
 //保存运算数据统计
