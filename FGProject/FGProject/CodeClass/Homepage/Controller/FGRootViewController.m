@@ -32,10 +32,12 @@
 @end
 
 @implementation FGRootViewController
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
     [self.angryBirdView startBirdsAnimation];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

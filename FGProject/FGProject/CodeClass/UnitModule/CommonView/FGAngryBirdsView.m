@@ -20,6 +20,10 @@
     UIView *tempGroupView;
     UITapGestureRecognizer *singleTap;
     UIImageView *currentTapBirdView;
+    CAKeyframeAnimation *orbit;
+    CABasicAnimation *pathAnima;
+    UIBezierPath *circlePath;
+    CAShapeLayer *circleLayer;
 }
 
 static NSInteger groupBirdCount = 0;
@@ -171,22 +175,27 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         UIImageView *imageView = (UIImageView*)imageViewArr[i];
         NSMutableArray *tepPointsArr = pointsArr[i];
         
-        UIBezierPath *circlePath = [UIBezierPath bezierPath];
-        circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
-        circlePath.lineCapStyle = kCGLineCapRound;
-        circlePath.lineJoinStyle = kCGLineJoinRound;
+        if (!circlePath) {
+            circlePath = [UIBezierPath bezierPath];
+            circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
+            circlePath.lineCapStyle = kCGLineCapRound;
+            circlePath.lineJoinStyle = kCGLineJoinRound;
+        }
+       
+        if (!circleLayer) {
+            circleLayer = [CAShapeLayer layer];
+            circleLayer.lineCap = kCALineCapRound;
+            circleLayer.lineJoin =  kCALineJoinRound;
+            // 设置填充颜色
+            circleLayer.fillColor = [UIColor clearColor].CGColor;
+            // 设置线宽
+            circleLayer.lineWidth =0.0;//设置1就可以显示出来了,这里隐藏了
+            // 设置线的颜色
+            circleLayer.strokeColor = RGBA(255,255,255,1.0).CGColor;
+            circleLayer.strokeEnd = 1.0;
+            circleLayer.strokeStart = 0.0;
+        }
         
-        CAShapeLayer *circleLayer = [CAShapeLayer layer];
-        circleLayer.lineCap = kCALineCapRound;
-        circleLayer.lineJoin =  kCALineJoinRound;
-        // 设置填充颜色
-        circleLayer.fillColor = [UIColor clearColor].CGColor;
-        // 设置线宽
-        circleLayer.lineWidth =0.0;//设置1就可以显示出来了,这里隐藏了
-        // 设置线的颜色
-        circleLayer.strokeColor = RGBA(255,255,255,1.0).CGColor;
-        circleLayer.strokeEnd = 1.0;
-        circleLayer.strokeStart = 0.0;
         for (int i = 0; i < tepPointsArr.count; i ++){
             if (i == 0){
                 [circlePath moveToPoint:CGPointFromString(tepPointsArr[i]) ];
@@ -196,14 +205,17 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         }
         circleLayer.path = circlePath.CGPath;
 
-        CABasicAnimation *pathAnima = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-        pathAnima.duration = 15.5f;
-        pathAnima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        pathAnima.fromValue = [NSNumber numberWithFloat:0.0f];
-        pathAnima.toValue = [NSNumber numberWithFloat:1.0f];
-        pathAnima.fillMode = kCAFillModeForwards;
-        pathAnima.removedOnCompletion = YES;
-        pathAnima.repeatCount = 1;
+        if (!pathAnima) {
+            pathAnima = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+            pathAnima.duration = 15.5f;
+            pathAnima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            pathAnima.fromValue = [NSNumber numberWithFloat:0.0f];
+            pathAnima.toValue = [NSNumber numberWithFloat:1.0f];
+            pathAnima.fillMode = kCAFillModeForwards;
+            pathAnima.removedOnCompletion = YES;
+            pathAnima.repeatCount = 1;
+        }
+        
         [circleLayer addAnimation:pathAnima forKey:@"strokeEndAnimation1"];
         
         [tempGroupView.layer addSublayer:circleLayer];
@@ -214,22 +226,25 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 }
 
 - (CAKeyframeAnimation *)setupStartLiveCircularAnimationPath:(UIBezierPath *)path withRepatCount:(NSInteger)repeatCount{
-    CAKeyframeAnimation *orbit = [CAKeyframeAnimation animation];
-    orbit.keyPath = @"position";
-    orbit.path = path.CGPath;
-    orbit.duration = 10;
-    orbit.additive = YES;
-    orbit.repeatCount = repeatCount;
-    orbit.calculationMode = kCAAnimationPaced;
-    orbit.rotationMode = nil;
-    orbit.removedOnCompletion = NO;//到了那个移动位置后,是否返回
-    orbit.delegate = self;
-    orbit.fillMode = kCAFillModeForwards;
+    if (!orbit) {
+        orbit = [CAKeyframeAnimation animation];
+        orbit.keyPath = @"position";
+        orbit.path = path.CGPath;
+        orbit.duration = 10;
+        orbit.additive = YES;
+        orbit.repeatCount = repeatCount;
+        orbit.calculationMode = kCAAnimationPaced;
+        orbit.rotationMode = nil;
+        orbit.removedOnCompletion = NO;//到了那个移动位置后,是否返回
+        orbit.delegate = self;
+        orbit.fillMode = kCAFillModeForwards;
+    }
     return orbit;
 }
 
 #pragma mark -
 #pragma mark --- 添加碰撞效果
+/*
 - (void)setupGravityBehaviorWithImageView:(UIImageView*)imageView{
     // 初始化力学动画生成器
     UIDynamicAnimator *animator = [[UIDynamicAnimator alloc]initWithReferenceView:self];
@@ -257,6 +272,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     
     collisionBehavior.collisionDelegate =self;
 }
+*/
 
 #pragma mark -
 #pragma mark --- UICollisionBehaviorDelegate
