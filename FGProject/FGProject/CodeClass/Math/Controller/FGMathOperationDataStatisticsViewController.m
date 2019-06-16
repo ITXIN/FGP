@@ -53,7 +53,7 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.showsVerticalScrollIndicator = NO;
-        [self.bgView addSubview:tableView];
+        [self.view addSubview:tableView];
         tableView.delaysContentTouches = NO;
         tableView.backgroundColor = UIColor.clearColor;
         [tableView registerClass:[FGMistakesCell class] forCellReuseIdentifier:reusedMistakesID];
@@ -76,12 +76,12 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (kScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:items];
     [self setupPieChart:self.pieChart];
     self.legendView = [self.pieChart getLegendWithMaxWidth:200];
-    [self.bgView addSubview:self.legendView];
-    [self.bgView addSubview:self.pieChart];
+    [self.view addSubview:self.legendView];
+    [self.view addSubview:self.pieChart];
     
     self.totalPercentageBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.bgView addSubview:btn];
+        [self.view addSubview:btn];
         btn.tag = 1000;
         btn.backgroundColor = [UIColor fgPieChartLightGreenColor];
         btn.layer.cornerRadius = 10;
@@ -116,8 +116,8 @@ static NSString *reusedMistakesID = @"reusedMistakesID";
     self.detailPieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((CGFloat) (kScreenWidth / 2.0 - 100), 135, 200.0, 200.0) items:itemsTotalArr];
     [self setupPieChart:self.detailPieChart];
     self.detailLegendView = [self.detailPieChart getLegendWithMaxWidth:200];
-    [self.bgView addSubview:self.detailLegendView];
-    [self.bgView addSubview:self.detailPieChart];
+    [self.view addSubview:self.detailLegendView];
+    [self.view addSubview:self.detailPieChart];
     
     self.detailPieChart.hidden = YES;
     self.detailLegendView.hidden = YES;

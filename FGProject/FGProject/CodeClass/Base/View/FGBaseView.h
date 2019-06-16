@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FGBaseView : UIView
-//@property (nonatomic,strong) UIView *bgView;
 - (void)initSubviews;
 - (void)setupSubviewsLayout;
 @end

@@ -52,7 +52,7 @@
     
     self.mathManager = [FGMathOperationManager shareMathOperationManager];
     self.circleView = [[CircleView alloc]initWithFrame:CGRectMake(kScreenWidth- kScreenWidth/7 - kStatusBarAndNavigationBarHeight, 20 , kScreenWidth/7, kScreenWidth/7)];
-    [self.bgView addSubview:self.circleView];
+    [self.view addSubview:self.circleView];
     
     self.datastatisticBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];

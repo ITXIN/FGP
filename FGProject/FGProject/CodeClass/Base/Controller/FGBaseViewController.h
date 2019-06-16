@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FGBaseViewController : UIViewController
-@property (nonatomic,strong) UIView *bgView;
 @property (nonatomic,strong) FGNavigationView *navigationView;
 @property (nonatomic,strong) NSString *titleStr;
 @property (nonatomic,strong) NSAttributedString *attributedTitleStr;

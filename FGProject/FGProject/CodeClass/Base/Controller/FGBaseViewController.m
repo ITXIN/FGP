@@ -24,17 +24,12 @@
 }
 
 - (void)initSubviews{
-    self.bgView= ({
-        UIView *view = [[UIView alloc]init];
-        [self.view addSubview:view];
-        view;
-    });
     self.blurView = [[FGBlurEffectView alloc] init];
-    [self.bgView addSubview:self.blurView];
+    [self.view addSubview:self.blurView];
     self.navigationView = [[FGNavigationView alloc] initWithDelegate:self];
     self.navigationView.delegate = self;
     self.navigationView.navigationView.backgroundColor = [UIColor clearColor];
-    [self.bgView addSubview:self.navigationView];
+    [self.view addSubview:self.navigationView];
     
 }
 
@@ -64,11 +59,6 @@
 }
 
 - (void)setupLayoutSubviews{
-    
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-    
     [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.leading.mas_equalTo(self.view);
         make.height.mas_equalTo(64);
@@ -76,7 +66,7 @@
     }];
     
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
+        make.edges.equalTo(self.view);
     }];
 }
 

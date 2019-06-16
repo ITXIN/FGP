@@ -40,7 +40,7 @@
     
     self.voiceBtn = ({
         FGImageLeftTitleRightButtom *btn = [FGImageLeftTitleRightButtom buttonWithType:UIButtonTypeCustom];
-        [self.bgView addSubview:btn];
+        [self.view addSubview:btn];
         [btn setTitle:@"声音打开" forState:UIControlStateNormal];
         [btn setTitle:@"声音关闭" forState:UIControlStateSelected];
         btn.selected = ![SoundsProcess shareInstance].isPlaySound;
@@ -65,7 +65,7 @@
     self.operationsDic = [NSMutableDictionary dictionaryWithDictionary:[[FGMathOperationManager shareMathOperationManager] getMathCompreOfOperationTypeDic]];
     self.compreChooseView = ({
         UIView *view = [UIView new];
-        [self.bgView addSubview:view];
+        [self.view addSubview:view];
         view;
     });
     

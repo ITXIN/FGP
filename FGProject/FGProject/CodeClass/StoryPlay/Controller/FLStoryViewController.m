@@ -49,7 +49,7 @@
     //    }];
     _sphereView = [[XLSphereView alloc] init];
     _sphereView.sphereDelegate = self;
-    [self.bgView addSubview:_sphereView];
+    [self.view addSubview:_sphereView];
     
     [_sphereView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.view);

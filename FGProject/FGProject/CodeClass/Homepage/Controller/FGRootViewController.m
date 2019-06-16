@@ -26,7 +26,7 @@
 #import "WaterRippleView.h"
 @interface FGRootViewController ()<FGCategoryMenuViewDelegate>
 @property (nonatomic,strong) FGAngryBirdsView *angryBirdView;
-@property (nonatomic,strong) FGRootView *rootBgView;
+@property (nonatomic,strong) FGRootView *rootview;
 @property (nonatomic,strong) FGCategoryMenuView *cateGoryMenuView;
 
 @end
@@ -56,19 +56,19 @@
     
     self.navigationView.hidden = YES;
     //波以及背景
-    self.rootBgView = [[FGRootView alloc]init];
-    [self.bgView addSubview:self.rootBgView];
+    self.rootview = [[FGRootView alloc]init];
+    [self.view addSubview:self.rootview];
     
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
     cound = 70;
     if (cound > 50) {//绕过审核
         self.angryBirdView = [[FGAngryBirdsView alloc]init];
-        [self.bgView addSubview:self.angryBirdView];
+        [self.view addSubview:self.angryBirdView];
         
         //类别
         self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];
         self.cateGoryMenuView.categoryDelegate = self;
-        [self.bgView addSubview: self.cateGoryMenuView];
+        [self.view addSubview: self.cateGoryMenuView];
     
         UILongPressGestureRecognizer *longGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesShowWaterAnimation:)];
         longGes.minimumPressDuration = 2;
@@ -77,7 +77,7 @@
     }else{
         __unused   UIButton *myCenterBtn = ({
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self.bgView addSubview:btn];
+            [self.view addSubview:btn];
             CGFloat btnW = ([FGProjectHelper getIsiPad] == YES)? USER_ICON_IPAD_WIDTH:USER_ICON_IPAD_WIDTH/2;
             btn.layer.cornerRadius = btnW/2;
             btn.layer.masksToBounds = YES;
@@ -85,7 +85,7 @@
             [btn setImage:[UIImage imageNamed:@"home_calculate_bg"] forState:UIControlStateNormal];
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(100, 100));
-                make.center.equalTo(self.bgView);
+                make.center.equalTo(self.view);
             }];
             btn.tag = CategoryMath;
             [btn addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -100,12 +100,12 @@
 #pragma mark -
 - (void)longGesShowWaterAnimation:(UILongPressGestureRecognizer*)ges{
     if (ges.state == UIGestureRecognizerStateBegan) {
-        if (!self.rootBgView.myWaterView) {
+        if (!self.rootview.myWaterView) {
             NSLog(@"---show---");
-            [self.rootBgView showWaterAnimation];
+            [self.rootview showWaterAnimation];
         }else{
             NSLog(@"---hidden---");
-             [self.rootBgView hiddenWaterAnimation];
+             [self.rootview hiddenWaterAnimation];
         }
     }
 }
@@ -169,11 +169,11 @@
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     
-    [self.rootBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
+    [self.rootview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
     }];
     [self.angryBirdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
+        make.edges.equalTo(self.view);
     }];
     [self.cateGoryMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenHeight, kScreenHeight));

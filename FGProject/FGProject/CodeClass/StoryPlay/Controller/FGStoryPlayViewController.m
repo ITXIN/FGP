@@ -54,7 +54,7 @@ static NSString *reuserID = @"reuserID";
     self.navigationView.titleLab.font = [UIFont systemFontOfSize:15];
     self.playInfoArr = [NSMutableArray array];
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    [self.bgView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuserID];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -71,7 +71,7 @@ static NSString *reuserID = @"reuserID";
     
     self.musicImageView =  ({
         UIImageView *image = [[UIImageView alloc]init];
-        [self.bgView addSubview:image];
+        [self.view addSubview:image];
         image.contentMode = UIViewContentModeScaleAspectFill;
         image.layer.masksToBounds = YES;
         image.layer.cornerRadius = 3.0;
@@ -81,7 +81,7 @@ static NSString *reuserID = @"reuserID";
     
     self.playView = [[MusicPlayerView alloc]initWithFrame:CGRectMake(0, kScreenHeight*0.80- HEIGHT_PLAYERVIEW - 10, WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW)];
     self.playView.delegate = self;
-    [self.bgView addSubview:self.playView];
+    [self.view addSubview:self.playView];
     
 }
 
@@ -227,7 +227,7 @@ static NSString *reuserID = @"reuserID";
     }];
     [self.playView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-kStatusBarHeight);
-        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-20);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-20);
         make.size.mas_equalTo(CGSizeMake(WIDTH_PLAYERVIEW, HEIGHT_PLAYERVIEW));
     }];
 }
