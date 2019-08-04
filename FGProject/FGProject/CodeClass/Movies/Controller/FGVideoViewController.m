@@ -33,7 +33,7 @@
     urlStr = @"http://vod-pro-ww-live.akamaized.net/av_pv3_pa2/modav/bUnknown-72c75248-f4dd-449d-a753-77320b38dc46_p05nkl4v_1511133406793.mp4?__gda__=1511170307_512e06efdb379640406fecff12fc5991";
     [self.moviePlayerVC.moviePlayer setContentURL:[NSURL URLWithString:urlStr]];
     self.moviePlayerVC.moviePlayer.shouldAutoplay = YES;
-    [self.bgView insertSubview:self.moviePlayerVC.view belowSubview:self.navigationView];
+    [self.view insertSubview:self.moviePlayerVC.view belowSubview:self.navigationView];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     //播放完成
     [notificationCenter  addObserver:self selector:@selector(playMoviesFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayerVC];
@@ -47,7 +47,7 @@
 //    [super setupLayoutSubviews];
 //    [self.moviePlayerVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.mas_equalTo(100);
-//        make.centerY.equalTo(self.bgView);
+//        make.centerY.equalTo(self.view);
 //        make.size.mas_equalTo(CGSizeMake(kScreenWidth/2, kScreenHeight-2*64));
 //    }];
 //}
@@ -55,7 +55,7 @@
     [super viewDidLayoutSubviews];
     [self.moviePlayerVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(100);
-        make.centerY.equalTo(self.bgView);
+        make.centerY.equalTo(self.view);
         make.size.mas_equalTo(CGSizeMake(kScreenWidth/2, kScreenHeight-2*64));
     }];
 }

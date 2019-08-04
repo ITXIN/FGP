@@ -61,7 +61,7 @@
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.mediumLOV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.bgView.mas_centerY);
+        make.bottom.equalTo(self.view.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight/4));
     }];
     

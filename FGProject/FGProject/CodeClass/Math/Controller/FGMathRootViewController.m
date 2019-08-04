@@ -37,11 +37,11 @@
     
     self.choiceView = [[FGMathRootView alloc]initWithFrame:self.view.frame];
     self.choiceView.delegate = self;
-    [self.bgView insertSubview:self.choiceView belowSubview:self.navigationView];
+    [self.view insertSubview:self.choiceView belowSubview:self.navigationView];
     
     self.settingBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.bgView  addSubview:btn];
+        [self.view  addSubview:btn];
         [btn addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
         [btn setBackgroundImage:[UIImage imageNamed:@"math_setting"] forState:UIControlStateNormal];
         btn;
@@ -163,7 +163,7 @@
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
     [self.choiceView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.bgView);
+        make.edges.equalTo(self.view);
     }];
 
     [self.settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {

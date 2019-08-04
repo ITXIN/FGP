@@ -36,7 +36,7 @@
     
     self.answerView = [[FGSimpleOperationView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) operationType:self.mathOperationActionType];
     self.answerView.delegate = self;
-    [self.bgView insertSubview:self.answerView belowSubview:self.navigationView];
+    [self.view insertSubview:self.answerView belowSubview:self.navigationView];
 }
 
 #pragma mark -

@@ -29,7 +29,7 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
     self.dataArr = @[@"设置按钮点击音效",@"设置头像"];
     CusLayerView * cus = [[CusLayerView alloc]initWithFrame:self.view.bounds];
     cus.backgroundColor = [UIColor yellowColor];
-    [self.bgView insertSubview:cus belowSubview:self.navigationView];
+    [self.view insertSubview:cus belowSubview:self.navigationView];
     cus.myCenterViewActionBlock = ^(MyCenterViewActionType type) {
         switch (type) {
             case MyCenterViewActionTypeEditeUserIcon:
@@ -64,7 +64,7 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
 //    for (NSInteger i = 0 ; i < 2; i ++) {
 //        UIButton *editeBtn = ({
 //            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//            [self.bgView addSubview:btn];
+//            [self.view addSubview:btn];
 //            [btn setImage:[UIImage imageNamed:@"my_center"] forState:UIControlStateNormal];
 //            btn.layer.cornerRadius = 5;
 //            btn.layer.masksToBounds = YES;
@@ -92,7 +92,7 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
 //        tableView.dataSource = self;
 //        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        tableView.showsVerticalScrollIndicator = NO;
-//        [self.bgView insertSubview:tableView belowSubview:self.navigationView];
+//        [self.view insertSubview:tableView belowSubview:self.navigationView];
 ////        tableView.backgroundColor = HEX_ARGB(@"f6f6f6");
 //        tableView.delaysContentTouches = NO;
 //        [tableView registerClass:[FGMyCenterCell class] forCellReuseIdentifier:myCenterIdentifier];
@@ -104,7 +104,7 @@ static NSString *myCenterIdentifier = @"myCenterIdentifier";
     switchView.on = [SoundsProcess shareInstance].isPlaySound;
     [switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
 
-    [self.bgView addSubview:switchView];
+    [self.view addSubview:switchView];
 }
 - (void)myCenterAction{
     [SoundsProcess shareInstance].isPlaySound = NO;

@@ -52,7 +52,7 @@
 //    _imageView.frame = self.view.bounds;
     self.iconView =  ({
         UIImageView *image = [[UIImageView alloc]init];
-        [self.bgView addSubview:image];
+        [self.view addSubview:image];
         
         [image setContentMode:UIViewContentModeScaleAspectFill];
         image.clipsToBounds = YES;
@@ -76,7 +76,7 @@
     
     self.takePhotBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.bgView  addSubview:btn];
+        [self.view  addSubview:btn];
         btn.tag = 1001;
         [btn addTarget:self action:@selector(setPhotoAction:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitle:@"拍照" forState:UIControlStateNormal];
@@ -259,7 +259,7 @@
         make.top.mas_equalTo(self.navigationView.mas_bottom).offset(30);
 //        make.left.mas_equalTo(30);
 //        make.right.mas_equalTo(-30);
-        make.centerX.equalTo(self.bgView);
+        make.centerX.equalTo(self.view);
         make.size.mas_equalTo(CGSizeMake(200, 200));
     }];
     
