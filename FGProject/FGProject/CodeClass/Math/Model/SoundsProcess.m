@@ -79,7 +79,7 @@
                 AudioServicesPlaySystemSound(theSoundID);
                 return;
             }else{
-                NSLog(@"Failed to create sound ");
+                FGLOG(@"Failed to create sound ");
             }
         }else{
         }

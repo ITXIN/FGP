@@ -76,7 +76,7 @@
     //创建播放器
     musicPlayer = [[AVAudioPlayer alloc] initWithData:audioData error:&myError];
     if (musicPlayer == nil){
-        NSLog(@"error === %@",[myError description]);
+        FGLOG(@"error === %@",[myError description]);
     }
     musicPlayer.delegate = self;
     musicPlayer.numberOfLoops = 0;

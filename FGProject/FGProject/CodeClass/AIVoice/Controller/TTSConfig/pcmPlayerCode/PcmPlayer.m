@@ -52,7 +52,7 @@ typedef struct Wavehead
     if (self) {
         NSData *audioData = [NSData dataWithContentsOfFile:path];
         [self writeWaveHead:audioData sampleRate:sample];
-        NSLog(@"nihao");
+        FGLOG(@"nihao");
     }
     return self;
 }
@@ -65,7 +65,7 @@ typedef struct Wavehead
     self = [super init];
     if (self) {
         [self writeWaveHead:data sampleRate:sample];
-        NSLog(@"nihao");
+        FGLOG(@"nihao");
     }
     return self;
     
@@ -147,7 +147,7 @@ typedef struct Wavehead
     self.player = [[AVAudioPlayer alloc]initWithData:self.pcmData error:&err];
     if (err)
     {
-        NSLog(@"%@",err.localizedDescription);
+        FGLOG(@"%@",err.localizedDescription);
     }
     self.player.delegate = self;
     [self.player prepareToPlay];
@@ -159,7 +159,7 @@ typedef struct Wavehead
     
     if (self.isPlaying)
     {
-        NSLog(@"pcmPlayer isPlaying");
+        FGLOG(@"pcmPlayer isPlaying");
         return;
     }
     self.isPlaying = YES;
@@ -168,15 +168,15 @@ typedef struct Wavehead
     if ([self.pcmData length] > 44)
     {
         self.player.meteringEnabled = YES;
-        NSLog(@"音频持续时间是%f",self.player.duration);
+        FGLOG(@"音频持续时间是%f",self.player.duration);
         
         BOOL ret = [self.player play];
-        NSLog(@"play ret=%d",ret);
+        FGLOG(@"play ret=%d",ret);
     }
     else
     {
         self.isPlaying = NO;
-        NSLog(@"音频数据为空");
+        FGLOG(@"音频数据为空");
     }
     
 }
@@ -195,7 +195,7 @@ typedef struct Wavehead
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    NSLog(@"in pcmPlayer audioPlayerDidFinishPlaying");
+    FGLOG(@"in pcmPlayer audioPlayerDidFinishPlaying");
     self.isPlaying=NO;
 }
 

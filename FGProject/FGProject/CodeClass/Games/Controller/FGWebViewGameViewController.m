@@ -66,7 +66,7 @@
 #pragma mark --- WKUIDelegate
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
-    NSLog(@"-----mess %@",message);
+    FGLOG(@"-----mess %@",message);
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提醒" message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -80,10 +80,10 @@
 #pragma mark --- WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    NSLog(@"-----message of body %@",message.body);
+    FGLOG(@"-----message of body %@",message.body);
     if ([message.name isEqualToString:@"DemoInterface"])
     {
-        NSLog(@"-----接收到了");
+        FGLOG(@"-----接收到了");
     }
     
     //    if ((![[NSUserDefaults standardUserDefaults]boolForKey:USER_SIGNIN_FLAG]))
@@ -112,25 +112,25 @@
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"-----页面开始加载时调用 ");
+    FGLOG(@"-----页面开始加载时调用 ");
     
 }
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"-----当内容开始返回时调用 ");
+    FGLOG(@"-----当内容开始返回时调用 ");
 }
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"----/ 页面加载完成之后调用");
+    FGLOG(@"----/ 页面加载完成之后调用");
     
     
 }
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"----页面加载失败时调用");
+    FGLOG(@"----页面加载失败时调用");
     
 }
 

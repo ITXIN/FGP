@@ -201,7 +201,7 @@ static CGRect   strOfRect;
 //    NSString *adidStr = [FLDeviceUID uid];
 //
 //    self.firebaseRootKeyStr = [NSString stringWithFormat:@"%@-%@",adidStr,[FGProjectHelper logTimeStringFromDate:[NSDate date]]] ;
-//    NSLog(@"-----addid %@",  self.firebaseRootKeyStr);
+//    FGLOG(@"-----addid %@",  self.firebaseRootKeyStr);
 //    self.dataBaseRef = [[FIRDatabase database]referenceFromURL:FIREBASE_DATABASE_URL];
 //    self.dataBaseRef = [[self.dataBaseRef child:adidStr]child:FIREBASE_DATABASE_CATEGORY_AI];
 //
@@ -413,14 +413,14 @@ static CGRect   strOfRect;
         //设置发音人为小燕
         [_iFlySpeechSynthesizer setParameter:@"xiaoyan" forKey:[IFlySpeechConstant VOICE_NAME]]; //设置TTS合成的引擎资源文件路径
         [_iFlySpeechSynthesizer setParameter:newResPath forKey:@"tts_res_path"];
-                NSLog(@"-----newpath %@",newResPath);
+                FGLOG(@"-----newpath %@",newResPath);
         //音量,取值范围 0~100
         [_iFlySpeechSynthesizer setParameter:@"50" forKey: [IFlySpeechConstant VOLUME]];
         [_iFlySpeechSynthesizer setParameter:@"tts.pcm" forKey: [IFlySpeechConstant TTS_AUDIO_PATH]];
 
     }else
     {
-        NSLog(@"-----网络合成 ");
+        FGLOG(@"-----网络合成 ");
         //1.创建合成对象
         _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance]; _iFlySpeechSynthesizer.delegate =
         self;
@@ -444,7 +444,7 @@ static CGRect   strOfRect;
 - (void)speechWithWords:(NSString *)words
 {
     
-    NSLog(@"-----words %@",words);
+    FGLOG(@"-----words %@",words);
     //3.启动合成会话
     [_iFlySpeechSynthesizer startSpeaking:words];
 
@@ -455,7 +455,7 @@ static CGRect   strOfRect;
 #pragma mark --- IFlySpeechSynthesizer Delegate
 - (void)onCompleted:(IFlySpeechError*) error
 {
-    NSLog(@"--- 合成 onCompleted %@  errorType %d errorCode %d ",error.errorDesc,error.errorType,error.errorCode);
+    FGLOG(@"--- 合成 onCompleted %@  errorType %d errorCode %d ",error.errorDesc,error.errorType,error.errorCode);
     [self.startAIChatView endWave];
 //    [self.startAIChatView removeGestureRecognizer:stopAISpeekGR];
     
@@ -477,7 +477,7 @@ static CGRect   strOfRect;
  */
 - (void)onSpeakBegin
 {
-    NSLog(@"-----合成 onSpeakBegin ");
+    FGLOG(@"-----合成 onSpeakBegin ");
     [self.startAIChatView startWaveWithVolume:-1];
 }
 
@@ -506,11 +506,11 @@ static CGRect   strOfRect;
     _iFlySpeechUnderstander.delegate = self;
     bool ret = [_iFlySpeechUnderstander startListening];
     if (ret) {
-        NSLog(@"-----语义理解听成功 ");
+        FGLOG(@"-----语义理解听成功 ");
     }
     else
     {
-    NSLog(@"-----语义理解听失败 ");
+    FGLOG(@"-----语义理解听失败 ");
     }
 }
 
@@ -553,7 +553,7 @@ static CGRect   strOfRect;
  *  @param errorCode 错误描述
  */
 - (void) onError:(IFlySpeechError *) errorCode{
-     NSLog(@"-----语义理解 onError %@",errorCode.errorDesc);
+     FGLOG(@"-----语义理解 onError %@",errorCode.errorDesc);
       [self scrollTableToFoot:YES];
 }
 
@@ -569,7 +569,7 @@ static CGRect   strOfRect;
                                                        options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
                                                          error:&error];
     if (! jsonData) {
-        NSLog(@"Got an error: %@", error);
+        FGLOG(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
@@ -596,7 +596,7 @@ static CGRect   strOfRect;
         [_iFlySpeechUnderstander stopListening];
         
         [self.mySpeakWordsStr appendFormat:@"%@",resultsDic[@"text"]];
-        NSLog(@"-----你说的是: %@ \n 回答是:%lu",resultsDic[@"text"],(unsigned long)self.mySpeakWordsStr.length);
+        FGLOG(@"-----你说的是: %@ \n 回答是:%lu",resultsDic[@"text"],(unsigned long)self.mySpeakWordsStr.length);
         
         if ([self.aiSpeakWordsStr isEqualToString:@"(null)"])
         {
@@ -612,9 +612,9 @@ static CGRect   strOfRect;
         [self speechWithWords:self.aiSpeakWordsStr];//speech
         
         NSString *tempAiSpeakStr = [NSString stringWithFormat:@"%@",self.aiSpeakWordsStr];
-        NSLog(@"----- mySpeakWordsStr %@",self.mySpeakWordsStr);
-        NSLog(@"----- tempMySpeakStr %@",tempAiSpeakStr);
-        NSLog(@"----- aiSpeakStr %@",self.aiSpeakWordsStr);
+        FGLOG(@"----- mySpeakWordsStr %@",self.mySpeakWordsStr);
+        FGLOG(@"----- tempMySpeakStr %@",tempAiSpeakStr);
+        FGLOG(@"----- aiSpeakStr %@",self.aiSpeakWordsStr);
         
 //        [self postDataToFireBase];
         
@@ -650,7 +650,7 @@ static CGRect   strOfRect;
 - (void)onVolumeChanged:(int)volume
 {
 //    NSString * vol = [NSString stringWithFormat:@"音量：%d",volume];
-//    NSLog(@"-----语音识别onVolumeChanged %@",vol);
+//    FGLOG(@"-----语音识别onVolumeChanged %@",vol);
 
     [self.startAIChatView startWaveWithVolume:volume+5];;
     
@@ -662,7 +662,7 @@ static CGRect   strOfRect;
  ****/
 - (void) onBeginOfSpeech
 {
-    NSLog(@"-----语音识别 onBeginOfSpeech ");
+    FGLOG(@"-----语音识别 onBeginOfSpeech ");
 }
 
 #pragma mark -
@@ -675,7 +675,7 @@ static CGRect   strOfRect;
 //                                                @"AISpeak":[NSString stringWithFormat:@"%@: %@",dateStr,self.aiSpeakWordsStr]
 //                                                }withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
 //                                                    if (error) {
-//                                                        NSLog(@"-----error %@ %@ %@",error,ref.key,ref.URL);
+//                                                        FGLOG(@"-----error %@ %@ %@",error,ref.key,ref.URL);
 //                                                        return ;
 //                                                    }
 //                                                }];

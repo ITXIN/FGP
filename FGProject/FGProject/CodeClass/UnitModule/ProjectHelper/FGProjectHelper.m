@@ -35,7 +35,7 @@
                                                         options:NSJSONReadingMutableContainers
                                                           error:&err];
     if(err) {
-        NSLog(@"json解析失败：%@",err);
+        FGLOG(@"json解析失败：%@",err);
         return nil;
     }
     return dic;
@@ -71,7 +71,7 @@
     pixelBuffer = malloc(CGImageGetBytesPerRow(img) *
                          CGImageGetHeight(img));
     if(pixelBuffer == NULL)
-    NSLog(@"No pixelbuffer");
+    FGLOG(@"No pixelbuffer");
     outBuffer.data = pixelBuffer;
     outBuffer.width = CGImageGetWidth(img);
     outBuffer.height = CGImageGetHeight(img);
@@ -86,7 +86,7 @@
                                        NULL,
                                        kvImageEdgeExtend);
     if (error) {
-        NSLog(@"error from convolution %ld", error);
+        FGLOG(@"error from convolution %ld", error);
     }
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef ctx = CGBitmapContextCreate(

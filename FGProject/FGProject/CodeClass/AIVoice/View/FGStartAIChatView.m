@@ -211,13 +211,13 @@
 {
     if (![self.subviews containsObject:self.waver])
     {
-        NSLog(@"-----wave %p",self.waver);
+        FGLOG(@"-----wave %p",self.waver);
        
         [self addSubview:self.waver];
         [self addSubview:self.startBtn];
 
     }
-//    NSLog(@"-----startWaveWithVolume %ld",volume);
+//    FGLOG(@"-----startWaveWithVolume %ld",volume);
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.waver.alpha = 1.0;

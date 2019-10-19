@@ -30,19 +30,19 @@
         switch (status)
         {
             case AFNetworkReachabilityStatusUnknown:
-                NSLog(@"未知");
+                FGLOG(@"未知");
             {
                 _isReachable = NO;
             }
                 break;
             case AFNetworkReachabilityStatusNotReachable:
-                NSLog(@"没有网络");
+                FGLOG(@"没有网络");
             {
                 _isReachable = NO;
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
-                NSLog(@"3G|4G");
+                FGLOG(@"3G|4G");
             {
                 _isReachable = YES;
                 
@@ -61,7 +61,7 @@
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWiFi:
-                NSLog(@"WiFi");
+                FGLOG(@"WiFi");
             {
                 _isReachable = YES;
             }

@@ -34,7 +34,7 @@
 - (void)checkingAnimationState:(NSTimer*)timer
 {
 //    CABasicAnimation *aimat =(CABasicAnimation*)[_pathLayer animationForKey:@"strokeEnd"];
-//    NSLog(@"-----end %@ %d %d",aimat.byValue,aimat.isAdditive,aimat.cumulative);
+//    FGLOG(@"-----end %@ %d %d",aimat.byValue,aimat.isAdditive,aimat.cumulative);
 }
 -(void)animationPath:(UIBezierPath*)path inView:(UIView*)view strokeColor:(UIColor*)color lineWidth:(CGFloat)lineWidth layerFrame:(CGRect)layerFrame wordsLengh:(NSInteger)length
 {

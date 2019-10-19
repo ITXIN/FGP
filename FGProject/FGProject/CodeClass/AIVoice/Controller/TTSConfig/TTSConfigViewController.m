@@ -20,22 +20,22 @@
 #pragma mark - 视图生命周期
 - (void)viewDidLoad {
     
-    NSLog(@"%s[IN]",__func__);
+    FGLOG(@"%s[IN]",__func__);
     
     [super viewDidLoad];
     [self initView];
     
-    NSLog(@"%s[OUT]",__func__);
+    FGLOG(@"%s[OUT]",__func__);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    NSLog(@"%s[IN]",__func__);
+    FGLOG(@"%s[IN]",__func__);
     
     [super viewWillAppear:animated];
 
     [self needUpdateSettings];
     
-    NSLog(@"%s[OUT]",__func__);
+    FGLOG(@"%s[OUT]",__func__);
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -349,7 +349,7 @@
  */
 - (IBAction)onEngineTypeSegValueChanged:(id)sender {
     
-    NSLog(@"%s[IN]",__func__);
+    FGLOG(@"%s[IN]",__func__);
     
     TTSConfig *instance = [TTSConfig sharedInstance];
     UISegmentedControl *seg = (UISegmentedControl*) sender;
@@ -368,7 +368,7 @@
         [alert show];
     }
     
-    NSLog(@"%s[OUT]",__func__);
+    FGLOG(@"%s[OUT]",__func__);
 }
 
 #pragma mark - 发音人设置相关
@@ -376,7 +376,7 @@
 
 - (NSUInteger)numberOfItemsInPickerView:(AKPickerView *)pickerView{
     
-    //    NSLog(@"%s[IN]",__func__);
+    //    FGLOG(@"%s[IN]",__func__);
     
     NSUInteger count = 1;
     
@@ -395,14 +395,14 @@
         count = instance.vcnIdentiferArray.count;
     }
     
-    //    NSLog(@"%s,count=%d[OUT]",__func__,count);
+    //    FGLOG(@"%s,count=%d[OUT]",__func__,count);
     
     return count;
 }
 
 - (NSString *)pickerView:(AKPickerView *)pickerView titleForItem:(NSInteger)item{
     
-    //    NSLog(@"%s[IN],item=%d",__func__,item);
+    //    FGLOG(@"%s[IN],item=%d",__func__,item);
     
     TTSConfig* instance = [TTSConfig sharedInstance];
     
@@ -421,7 +421,7 @@
         }
     }
     
-    //    NSLog(@"%s[OUT],title=%@",__func__,title);
+    //    FGLOG(@"%s[OUT],title=%@",__func__,title);
     
     return title;
 }
@@ -431,7 +431,7 @@
     
     TTSConfig *instance = [TTSConfig sharedInstance];
     
-    //    NSLog(@"%s[IN],item=%d",__func__,item);
+    //    FGLOG(@"%s[IN],item=%d",__func__,item);
     
     //离线模式
     if(instance.engineType == [IFlySpeechConstant TYPE_LOCAL])
@@ -468,7 +468,7 @@
                 vcnInfo = [vcnInfo stringByAppendingFormat:@"\n性别：%@",sex];
             }
             
-            NSLog(@"vcnInfo:%@",vcnInfo);
+            FGLOG(@"vcnInfo:%@",vcnInfo);
         }
     }
     else
@@ -476,7 +476,7 @@
         instance.vcnName = [instance.vcnIdentiferArray objectAtIndex:item];
     }
     
-    //    NSLog(@"%s[OUT]",__func__);
+    //    FGLOG(@"%s[OUT]",__func__);
 }
 
 #pragma mark UIAlertViewDelegate

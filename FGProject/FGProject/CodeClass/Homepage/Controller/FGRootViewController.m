@@ -101,10 +101,10 @@
 - (void)longGesShowWaterAnimation:(UILongPressGestureRecognizer*)ges{
     if (ges.state == UIGestureRecognizerStateBegan) {
         if (!self.rootview.myWaterView) {
-            NSLog(@"---show---");
+            FGLOG(@"---show---");
             [self.rootview showWaterAnimation];
         }else{
-            NSLog(@"---hidden---");
+            FGLOG(@"---hidden---");
              [self.rootview hiddenWaterAnimation];
         }
     }

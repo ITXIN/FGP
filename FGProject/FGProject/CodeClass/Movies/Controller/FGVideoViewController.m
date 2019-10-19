@@ -73,15 +73,15 @@
     MPMoviePlaybackState playState = moviePlayer.playbackState;
     if (playState == MPMoviePlaybackStateStopped)
     {
-        //        NSLog(@"停止");
+        //        FGLOG(@"停止");
         
     } else if(playState == MPMoviePlaybackStatePlaying)
     {
-        //        NSLog(@"播放");
+        //        FGLOG(@"播放");
         //设置 url
     } else if(playState == MPMoviePlaybackStatePaused)
     {
-        //        NSLog(@"暂停");
+        //        FGLOG(@"暂停");
     }
 }
 - (void)loadStateChange:(NSNotification *)notification

@@ -120,7 +120,7 @@
                                      &sessionCategory1
                                      );
     if (error) {
-        NSLog(@"%s| AudioSessionSetProperty kAudioSessionProperty_AudioCategory error",__func__);
+        FGLOG(@"%s| AudioSessionSetProperty kAudioSessionProperty_AudioCategory error",__func__);
     }
     
     // check the audio route
@@ -128,7 +128,7 @@
     CFStringRef route;
     AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &size, &route);
     
-    NSLog(@"route = %@", route);
+    FGLOG(@"route = %@", route);
     
     CFRelease(route);
     
@@ -295,7 +295,7 @@
  ****/
 - (void)onBufferProgress:(int) progress message:(NSString *)msg
 {
-    NSLog(@"buffer progress %2d%%. msg: %@.", progress, msg);
+    FGLOG(@"buffer progress %2d%%. msg: %@.", progress, msg);
 }
 
 
@@ -312,7 +312,7 @@
  ****/
 - (void) onSpeakProgress:(int) progress beginPos:(int)beginPos endPos:(int)endPos
 {
-    NSLog(@"speak progress %2d%%.", progress);
+    FGLOG(@"speak progress %2d%%.", progress);
 }
 
 
@@ -365,7 +365,7 @@
     }else {
         text = [NSString stringWithFormat:@"发生错误：%d %@",error.errorCode,error.errorDesc];
         self.hasError = YES;
-        NSLog(@"%@",text);
+        FGLOG(@"%@",text);
     }
     
     [_inidicateView hide];

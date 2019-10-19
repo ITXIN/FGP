@@ -46,7 +46,7 @@
     _footLeftButton.tag = 7;
     [_footLeftButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_footLeftButton];
-    NSLog(@"-----width %f height %f",kScreenWidth,kScreenHeight);
+    FGLOG(@"-----width %f height %f",kScreenWidth,kScreenHeight);
     [UIView animateWithDuration:0.25 animations:^{
 //        self.view.transform = CGAffineTransformMakeRotation(-M_PI*0.5);
 //        self.view.frame = CGRectMake(0, 0,kScreenWidth,kScreenHeight );
@@ -196,7 +196,7 @@
 
 - (void)clickAction:(UIButton *)btn
 {
-    NSLog(@"%ld",btn.tag);
+    FGLOG(@"%ld",btn.tag);
     switch (btn.tag) {
         case cymbal:
             [self tomAnimation:@"cymbal" count:13];//拨

@@ -653,6 +653,7 @@
 		E62349322103682A00F04A6F /* FGMistakesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E62349312103682A00F04A6F /* FGMistakesModel.m */; };
 		E6239AE121042CF1002B0751 /* FGMistakesOperationDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */; };
 		E65AA461208B34C000A4F808 /* FGImageTopTitleBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */; };
+		E69F3882235B090C00EF6932 /* 1242-2208.png in Resources */ = {isa = PBXBuildFile; fileRef = E69F3881235B090C00EF6932 /* 1242-2208.png */; };
 		E6A198592132909700B7C32C /* FGMathDiffcultyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A198582132909700B7C32C /* FGMathDiffcultyViewController.m */; };
 		E6E48B8E21436A9B0088A3C8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E48B8D21436A9B0088A3C8 /* CoreTelephony.framework */; };
 		E6EE387D208494DB005028D0 /* FGMathSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE387C208494DB005028D0 /* FGMathSettingViewController.m */; };
@@ -1446,6 +1447,7 @@
 		E6239AE021042CF1002B0751 /* FGMistakesOperationDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMistakesOperationDataModel.m; sourceTree = "<group>"; };
 		E65AA45F208B34C000A4F808 /* FGImageTopTitleBottomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGImageTopTitleBottomButton.h; sourceTree = "<group>"; };
 		E65AA460208B34C000A4F808 /* FGImageTopTitleBottomButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGImageTopTitleBottomButton.m; sourceTree = "<group>"; };
+		E69F3881235B090C00EF6932 /* 1242-2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1242-2208.png"; sourceTree = "<group>"; };
 		E6A198572132909700B7C32C /* FGMathDiffcultyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGMathDiffcultyViewController.h; sourceTree = "<group>"; };
 		E6A198582132909700B7C32C /* FGMathDiffcultyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMathDiffcultyViewController.m; sourceTree = "<group>"; };
 		E6E48B8D21436A9B0088A3C8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -1984,6 +1986,7 @@
 		8F6AA36E1FB0410400A7B5C7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E69F3881235B090C00EF6932 /* 1242-2208.png */,
 				8FB160721FBC1C8D006C9BBA /* Flowers */,
 				8F6AA36F1FB0410400A7B5C7 /* BackgroundImage */,
 				8F6AA3761FB0410400A7B5C7 /* main.js */,
@@ -3440,6 +3443,7 @@
 				8F6AA7F11FB0410600A7B5C7 /* scratch_46.jpg in Resources */,
 				8F6AA65D1FB0410600A7B5C7 /* angry_01.jpg in Resources */,
 				8F6AA7B81FB0410600A7B5C7 /* pie_13.jpg in Resources */,
+				E69F3882235B090C00EF6932 /* 1242-2208.png in Resources */,
 				8F6AA68A1FB0410600A7B5C7 /* drink_01.jpg in Resources */,
 				8F6AA7791FB0410600A7B5C7 /* knockout_31.jpg in Resources */,
 				8F6AA80B1FB0410700A7B5C7 /* stomach_16.jpg in Resources */,

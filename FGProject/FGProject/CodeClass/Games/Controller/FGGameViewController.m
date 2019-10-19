@@ -85,7 +85,7 @@ static NSString *headerIdentifier = @"ReuseHeader";
     [[FGHttpsRequestManager shareInstance] getDataWithUrlStr:[NSString stringWithFormat:@"%@",GAME_CHILDERN_API] succeedHandler:^(id responseObject, NSError *error) {
         NSDictionary *dataDic = (NSDictionary*)responseObject;
         NSArray *musicArr = dataDic[@"data"];
-        NSLog(@"----dataOfGameRequest-网络数据 %@",musicArr);
+        FGLOG(@"----dataOfGameRequest-网络数据 %@",musicArr);
         NSDictionary *gameDic = (NSDictionary*)musicArr[1];
         NSArray *gamelistArr = gameDic[@"gamelist"];
         
@@ -93,7 +93,7 @@ static NSString *headerIdentifier = @"ReuseHeader";
             FGGameModel *model = [[FGGameModel alloc]init];
             [model setValuesForKeysWithDictionary:dic];
             if ([model.game_link containsString:@".bin"]) {
-                NSLog(@"-----link %@",model.game_link);
+                FGLOG(@"-----link %@",model.game_link);
                 continue;
             }
 //            [self.listModelArr addObject:model];
@@ -104,9 +104,9 @@ static NSString *headerIdentifier = @"ReuseHeader";
 //        [FGProjectHelper saveDataWithKey:[NSString stringWithFormat:@"%@%@",STORY_MUSIC_LIST_KEY,self.homeID] data:musicArr];
         [SVProgressHUD dismiss];
     } failedHandler:^(NSError *error) {
-        NSLog(@"----dataOfGameRequest-failedHandler %@",error);
+        FGLOG(@"----dataOfGameRequest-failedHandler %@",error);
 //        NSArray *dataArr = [FGProjectHelper getDataWithKey:[NSString stringWithFormat:@"%@%@",STORY_MUSIC_LIST_KEY,self.homeID]];
-        NSLog(@"----dataOfGameRequest-本地数据 ");
+        FGLOG(@"----dataOfGameRequest-本地数据 ");
 //        [self setupStoryDataWithArr:dataArr];
         [self loactionData];
 
@@ -156,7 +156,7 @@ static NSString *headerIdentifier = @"ReuseHeader";
         FGGameModel *model = [[FGGameModel alloc]init];
         [model setValuesForKeysWithDictionary:dic];
         if ([model.game_link containsString:@".bin"]) {
-            NSLog(@"-----link %@",model.game_link);
+            FGLOG(@"-----link %@",model.game_link);
             continue;
         }
         [self.englisthModelArr addObject:model];
@@ -165,7 +165,7 @@ static NSString *headerIdentifier = @"ReuseHeader";
         FGGameModel *model = [[FGGameModel alloc]init];
         [model setValuesForKeysWithDictionary:dic];
         if ([model.game_link containsString:@".bin"]) {
-            NSLog(@"-----link %@",model.game_link);
+            FGLOG(@"-----link %@",model.game_link);
             continue;
         }
         [self.onLineModelArr addObject:model];

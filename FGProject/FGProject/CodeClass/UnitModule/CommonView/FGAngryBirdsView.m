@@ -277,11 +277,11 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 #pragma mark -
 #pragma mark --- UICollisionBehaviorDelegate
 -(void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier atPoint:(CGPoint)p{
-    NSLog(@"开始碰撞时触发的方法");
+    FGLOG(@"开始碰撞时触发的方法");
 }
 
 -(void)collisionBehavior:(UICollisionBehavior *)behavior endedContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier{
-    NSLog(@"结束碰撞时触发的方法");
+    FGLOG(@"结束碰撞时触发的方法");
 }
 
 #pragma mark -

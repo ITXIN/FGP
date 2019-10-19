@@ -63,12 +63,12 @@ static NSInteger itemCount = 2;
         va_list arguments;
         id eachObject = otherButtonTitles;
         if (otherButtonTitles) {
-            NSLog(@"otherButtonTitles %@",otherButtonTitles);
+            FGLOG(@"otherButtonTitles %@",otherButtonTitles);
             va_start(arguments, otherButtonTitles);
             itemCount ++;
             [tittlsArr addObject:otherButtonTitles];
             while ((eachObject = va_arg(arguments, id))) {
-                NSLog(@"eachObject %@",eachObject);
+                FGLOG(@"eachObject %@",eachObject);
                 itemCount ++;
                 [tittlsArr addObject:eachObject];
             }
