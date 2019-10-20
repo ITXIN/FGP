@@ -11,7 +11,7 @@
 
 
 #ifdef DEBUG  //调试阶段
-#define FGLOG(...); NSLog(@"--%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
+#define FGLOG(...) NSLog(@"---%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 #else  //发布阶段
 #define FGLOG(...);
 #endif

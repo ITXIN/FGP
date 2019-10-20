@@ -9,10 +9,6 @@
 #import "FGAngryBirdsView.h"
 
 @interface FGAngryBirdsView ()<CAAnimationDelegate,UICollisionBehaviorDelegate>
-
-@end
-
-@implementation FGAngryBirdsView
 {
     UIView *bgView;
     NSMutableArray *groupPointArr ;
@@ -21,15 +17,61 @@
     UITapGestureRecognizer *singleTap;
     UIImageView *currentTapBirdView;
     CAKeyframeAnimation *orbit;
-    CABasicAnimation *pathAnima;
-    UIBezierPath *circlePath;
-    CAShapeLayer *circleLayer;
 }
+@property (nonatomic, strong) CABasicAnimation *pathAnima;
+@property (nonatomic, strong) UIBezierPath *circlePath;
+@property (nonatomic, strong) CAShapeLayer *circleLayer;;
+@end
+
+@implementation FGAngryBirdsView
+
 
 static NSInteger groupBirdCount = 0;
 static NSInteger endGroupBirdNumber = 0;
 static NSString *keyDropDowningAnimationGroup = @"positionKeyGroupDropDonwing";//掉落过程
 static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";//掉落过程
+
+- (UIBezierPath *)circlePath {
+   if (!_circlePath) {
+        _circlePath = [UIBezierPath bezierPath];
+        _circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
+        _circlePath.lineCapStyle = kCGLineCapRound;
+        _circlePath.lineJoinStyle = kCGLineJoinRound;
+    }
+    return _circlePath;
+}
+
+- (CAShapeLayer *)circleLayer {
+    if (!_circleLayer) {
+        _circleLayer = [CAShapeLayer layer];
+        _circleLayer.lineCap = kCALineCapRound;
+        _circleLayer.lineJoin =  kCALineJoinRound;
+        // 设置填充颜色
+        _circleLayer.fillColor = [UIColor clearColor].CGColor;
+        // 设置线宽
+        _circleLayer.lineWidth =0.0;//设置1就可以显示出来了,这里隐藏了
+        // 设置线的颜色
+        _circleLayer.strokeColor = RGBA(255,255,255,1.0).CGColor;
+        _circleLayer.strokeEnd = 1.0;
+        _circleLayer.strokeStart = 0.0;
+    }
+    return _circleLayer;
+}
+
+- (CABasicAnimation *)pathAnima {
+    if (!_pathAnima) {
+               _pathAnima = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+               _pathAnima.duration = 15.5f;
+               _pathAnima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+               _pathAnima.fromValue = [NSNumber numberWithFloat:0.0f];
+               _pathAnima.toValue = [NSNumber numberWithFloat:1.0f];
+               _pathAnima.fillMode = kCAFillModeForwards;
+               _pathAnima.removedOnCompletion = YES;
+               _pathAnima.repeatCount = 1;
+           }
+    return _pathAnima;
+}
+
 
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -74,6 +116,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 #pragma mark --- 一群鸟
 - (void)clerarGroupBirdsAnimation{
     [tempGroupView removeFromSuperview];
+    tempGroupView = nil;
     for (NSInteger i = 0; i < groupImagesArr.count; i ++){
         UIImageView *imagesView = groupImagesArr[i];
         [imagesView stopAnimating];
@@ -103,6 +146,12 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
         view.tag = 20000;
         view;
     });
+    [tempGroupView addGestureRecognizer:singleTap]; // 给图片添加手势
+    
+    NSMutableArray *imageArr = [NSMutableArray array];
+    for (int i = 0; i < 5; i ++){
+        [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"angrybird_0%d",i+1]]];
+    }
     
     for (NSInteger i = 0; i < numberBirds; i ++){
         UIImageView *imageView =  ({
@@ -127,21 +176,15 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
             return;
         }
         
-        NSMutableArray *imageArr = [NSMutableArray array];
-        for (int i = 0; i < 5; i ++){
-            [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"angrybird_0%d",i+1]]];
-        }
-
         [imageView setAnimationImages:imageArr];
         [imageView setAnimationDuration:imageArr.count *0.35];
         [imageView setAnimationRepeatCount:0];
         [imageView startAnimating];
         
-        [imageArr removeAllObjects];
-        imageArr = nil;
-
-        [tempGroupView addGestureRecognizer:singleTap]; // 给图片添加手势
     }
+
+    [imageArr removeAllObjects];
+    imageArr = nil;
     
     for (NSInteger i = 0; i < numberBirds; i ++){
         float y = arc4random()%50 + 20;
@@ -170,58 +213,33 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
 #pragma mark -
 #pragma mark --- 绘制群鸟的路径
 - (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)pointsArr imageViewArr:(NSMutableArray*)imageViewArr{
+    if (_circlePath) {
+        [_circlePath removeAllPoints];
+    }
+    if (_circleLayer) {
+        [_circleLayer removeAllAnimations];
+    }
+    [tempGroupView.layer removeAllAnimations];
     
     for (NSInteger i = 0; i < imageViewArr.count; i ++){
         UIImageView *imageView = (UIImageView*)imageViewArr[i];
         NSMutableArray *tepPointsArr = pointsArr[i];
-        
-        if (!circlePath) {
-            circlePath = [UIBezierPath bezierPath];
-            circlePath.lineWidth = 0.0;//设置1就可以显示出来了,这里隐藏了
-            circlePath.lineCapStyle = kCGLineCapRound;
-            circlePath.lineJoinStyle = kCGLineJoinRound;
-        }
-       
-        if (!circleLayer) {
-            circleLayer = [CAShapeLayer layer];
-            circleLayer.lineCap = kCALineCapRound;
-            circleLayer.lineJoin =  kCALineJoinRound;
-            // 设置填充颜色
-            circleLayer.fillColor = [UIColor clearColor].CGColor;
-            // 设置线宽
-            circleLayer.lineWidth =0.0;//设置1就可以显示出来了,这里隐藏了
-            // 设置线的颜色
-            circleLayer.strokeColor = RGBA(255,255,255,1.0).CGColor;
-            circleLayer.strokeEnd = 1.0;
-            circleLayer.strokeStart = 0.0;
-        }
-        
+
         for (int i = 0; i < tepPointsArr.count; i ++){
             if (i == 0){
-                [circlePath moveToPoint:CGPointFromString(tepPointsArr[i]) ];
+                [self.circlePath moveToPoint:CGPointFromString(tepPointsArr[i])];
             }else{
-                [circlePath addLineToPoint:CGPointFromString(tepPointsArr[i])];
+                [self.circlePath addLineToPoint:CGPointFromString(tepPointsArr[i])];
             }
         }
-        circleLayer.path = circlePath.CGPath;
-
-        if (!pathAnima) {
-            pathAnima = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-            pathAnima.duration = 15.5f;
-            pathAnima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-            pathAnima.fromValue = [NSNumber numberWithFloat:0.0f];
-            pathAnima.toValue = [NSNumber numberWithFloat:1.0f];
-            pathAnima.fillMode = kCAFillModeForwards;
-            pathAnima.removedOnCompletion = YES;
-            pathAnima.repeatCount = 1;
-        }
         
-        [circleLayer addAnimation:pathAnima forKey:@"strokeEndAnimation1"];
+        self.circleLayer.path = self.circlePath.CGPath;
         
-        [tempGroupView.layer addSublayer:circleLayer];
+        [self.circleLayer addAnimation:self.pathAnima forKey:@"strokeEndAnimation1"];
         
-        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:circlePath withRepatCount:10] forKey:@"Stroken1"];
+        [tempGroupView.layer addSublayer:self.circleLayer];
         
+        [imageView.layer addAnimation:[self setupStartLiveCircularAnimationPath:self.circlePath withRepatCount:10] forKey:@"Stroken1"];
     }
 }
 
@@ -295,6 +313,7 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
           
             [self dropBirdAnimationImagesWithImageView:imageView];
             [self dropBirdCABasicAnimationWithImageView:imageView point:touchPoint];
+            return;
         }
     }
 }

@@ -97,7 +97,7 @@ static NSInteger endGroupBirdNumber = 0;
 }
 
 #pragma mark -
-#pragma mark --- 一群鸟
+#pragma mark ---
 - (void)clerarGroupBirdsAnimation{
     [self.myWaterView removeFromSuperview];
     self.myWaterView = nil;
@@ -191,88 +191,8 @@ static NSInteger endGroupBirdNumber = 0;
     [self drawGroupLineWithGroupPointArr:groupPointArr imageViewArr:groupImagesArr];
 }
 
-
-
-/*
-- (void)groupBirdsAnimation{
-    NSInteger numberBirds = arc4random()%10+1;
-    groupBirdCount = numberBirds;
-    tempGroupView = ({
-        UIView *view = [[UIView alloc]init];
-        [bgView addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
-        view.tag = 20000;
-        view;
-    });
-    
-    for (NSInteger i = 0; i < numberBirds; i ++){
-        UIImageView *imageView =  ({
-            UIImageView *imgView = [[UIImageView alloc]init];
-            [tempGroupView addSubview:imgView];
-            CGFloat width = arc4random()%50 + 20;
-            
-            if (i != 0 ){
-                imgView.frame = CGRectMake(-arc4random()%100+20,arc4random()%20,width , width);
-            }else{
-                imgView.frame = CGRectMake(-100,0,100 , 100);
-            }
-            imgView.userInteractionEnabled = YES;
-            imgView.tag = 100 + i;
-            imgView.contentMode = UIViewContentModeScaleAspectFill;
-            imgView;
-        });
-        
-        [groupImagesArr addObject:imageView];
-        
-        if ([imageView isAnimating]){
-            return;
-        }
-        
-        NSMutableArray *imageArr = [NSMutableArray array];
-        for (int i = 0; i < 20; i ++){
-            [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"swim_cycle.%d",i+1]]];
-        }
-        
-        [imageView setAnimationImages:imageArr];
-        [imageView setAnimationDuration:imageArr.count *0.25];
-        [imageView setAnimationRepeatCount:0];
-        [imageView startAnimating];
-        
-        [imageArr removeAllObjects];
-        imageArr = nil;
-        
-//        [tempGroupView addGestureRecognizer:singleTap]; // 给图片添加手势
-    }
-    
-    for (NSInteger i = 0; i < numberBirds; i ++){
-        float y = kScreenHeight - 100 + arc4random()%50 + 20;
-        self.waveHeight = y;
-        NSMutableArray *tempArr = [NSMutableArray array];
-        if (i %2 == 0){
-            for (float x = -20; x <= kScreenWidth+50; x ++){
-                //y=Acos(wx+Φ)+B
-                y = 5*self.wave*cos(2*M_PI/self.w*x + self.b) + self.waveHeight;
-                [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
-            }
-        }else{
-            for (float x = -20; x <= kScreenWidth+50; x ++){
-                //y=Asin(wx+Φ)+B
-                y = 5*self.wave*sin(2*M_PI/self.w*x + self.b) + self.waveHeight;
-                [tempArr addObject:NSStringFromCGPoint(CGPointMake(x, y))];
-            }
-        }
-        
-        [groupPointArr addObject:[[tempArr reverseObjectEnumerator] allObjects]];
-    }
-    
-    [self drawGroupLineWithGroupPointArr:groupPointArr imageViewArr:groupImagesArr];
-}
-*/
-
 #pragma mark -
-#pragma mark --- 绘制群鸟的路径
+#pragma mark --- 绘制路径
 - (void)drawGroupLineWithGroupPointArr:(NSMutableArray *)pointsArr imageViewArr:(NSMutableArray*)imageViewArr{
     for (NSInteger i = 0; i < imageViewArr.count; i ++){
         UILabel *imageView = (UILabel*)imageViewArr[i];

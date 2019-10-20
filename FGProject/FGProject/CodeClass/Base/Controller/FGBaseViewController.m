@@ -18,19 +18,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
     self.userManager = [FGUserManager standard];
-    [self initSubviews];
-    [self setupLayoutSubviews];
-}
-
-- (void)initSubviews{
+    
     self.blurView = [[FGBlurEffectView alloc] init];
     [self.view addSubview:self.blurView];
+   
     self.navigationView = [[FGNavigationView alloc] initWithDelegate:self];
     self.navigationView.delegate = self;
     self.navigationView.navigationView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.navigationView];
     
+    [self initSubviews];
+    [self setupLayoutSubviews];
+}
+
+- (void)initSubviews{
+    FGLOG(@"---initSubviews");
 }
 
 #pragma mark - FGNavigationviewDelegate
