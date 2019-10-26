@@ -699,7 +699,7 @@
 		8F4753D420622DEC0002C0B7 /* FGMathOperationDataStatisticsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGMathOperationDataStatisticsModel.m; sourceTree = "<group>"; };
 		8F5E447A1FB3F695004BE4EC /* FGBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGBaseViewController.h; sourceTree = "<group>"; };
 		8F5E447B1FB3F695004BE4EC /* FGBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGBaseViewController.m; sourceTree = "<group>"; };
-		8F6AA29B1FB0405B00A7B5C7 /* FGProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F6AA29B1FB0405B00A7B5C7 /* 1+1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1+1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6AA29E1FB0405B00A7B5C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8F6AA29F1FB0405B00A7B5C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8F6AA2A51FB0405B00A7B5C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1549,7 +1549,7 @@
 		8F6AA29C1FB0405B00A7B5C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8F6AA29B1FB0405B00A7B5C7 /* FGProject.app */,
+				8F6AA29B1FB0405B00A7B5C7 /* 1+1.app */,
 				8F6AA2B31FB0405C00A7B5C7 /* FGProjectTests.xctest */,
 				8F6AA2BE1FB0405C00A7B5C7 /* FGProjectUITests.xctest */,
 			);
@@ -3047,7 +3047,7 @@
 			);
 			name = FGProject;
 			productName = FGProject;
-			productReference = 8F6AA29B1FB0405B00A7B5C7 /* FGProject.app */;
+			productReference = 8F6AA29B1FB0405B00A7B5C7 /* 1+1.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8F6AA2B21FB0405C00A7B5C7 /* FGProjectTests */ = {
@@ -4014,7 +4014,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.FGProject;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "1+1";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4042,7 +4042,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.FGProject;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "1+1";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

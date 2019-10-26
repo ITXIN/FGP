@@ -34,21 +34,21 @@ static NSInteger endGroupBirdNumber = 0;
     [self addSubview:_sunImgView];
     
     //晃动动画
-    CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    basicAnim.duration = 2.0;
-    basicAnim.autoreverses = YES;
-    basicAnim.repeatCount = HUGE_VAL;
-    basicAnim.removedOnCompletion = NO;
-    basicAnim.fillMode = kCAFillModeForwards;
-    basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/9];
-    [_sunImgView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
+//    CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+//    basicAnim.duration = 2.0;
+//    basicAnim.autoreverses = YES;
+//    basicAnim.repeatCount = HUGE_VAL;
+//    basicAnim.removedOnCompletion = YES;
+////    basicAnim.fillMode = kCAFillModeForwards;
+//    basicAnim.toValue = [NSNumber numberWithFloat:M_PI_2/9];
+//    [_sunImgView.layer addAnimation:basicAnim forKey:@"KCBasicAnimation_Rotation"];
     
     //太阳移动
     CAKeyframeAnimation *basicAnimX = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     basicAnimX.duration = 50.0;
     basicAnimX.autoreverses = NO;
     basicAnimX.repeatCount = HUGE_VAL;
-    basicAnimX.removedOnCompletion = NO;
+    basicAnimX.removedOnCompletion = YES;
     
     //以原点和半径
     UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(kScreenHeight, kScreenHeight/3*4) radius:kScreenHeight startAngle:M_PI endAngle:M_PI*2 clockwise:true];

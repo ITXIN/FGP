@@ -54,9 +54,9 @@
     //
     //http://cache.baiducontent.com/c?m=9d78d513d9981cee4fede52e5e478e364407c0356ac3975521dbc90ed5264c40347bfefe62670704a49421365cfc1806b1ac6565377471eac4d5d3179ca6922a2c8f2434701d9b4214d618a4dc46529b66cf04&p=8777830685cc43b108e2977e075d94&newp=9379c64ad4934eac58e7c1385b5e9e231610db2151d7d2146b82c825d7331b001c3bbfb42327160ed2c4766002a9435debf534723d0923a3dda5c91d9fb4c57479&user=baidu&fm=sc&query=iOS+backboardd&qid=a96da0400053f7d9&p1=4
     //UIVisualEffectView 和 动画一起使用会导致backboardd 占用cpu高
-    //    self.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    //    self.effView = [[UIVisualEffectView alloc]initWithEffect:self.blurEffect];
-    //    [self addSubview: self.effView];
+        self.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        self.effView = [[UIVisualEffectView alloc]initWithEffect:self.blurEffect];
+        [self addSubview: self.effView];
     
     
     //    [self layoutIfNeeded];
@@ -94,11 +94,6 @@
 
 - (void)setBlurEffect:(UIBlurEffect *)blurEffect{
     _blurEffect = blurEffect;
-}
-
-- (nonnull id)copyWithZone:(nullable NSZone *)zone {
-    FGBlurEffectView *view = [FGBlurEffectView sharedInstance];
-    return view;
 }
 
 @end

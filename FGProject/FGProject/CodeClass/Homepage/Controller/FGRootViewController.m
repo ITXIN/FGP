@@ -35,7 +35,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
-    [self.angryBirdView startBirdsAnimation];
+//    [self.angryBirdView startBirdsAnimation];
 }
 
 - (void)viewDidLoad {
@@ -55,8 +55,8 @@
     [super initSubviews];
     
     self.navigationView.hidden = YES;
-    //波以及背景
-    self.rootview = [[FGRootView alloc]init];
+    //太阳，水波以海洋生物
+    self.rootview = [[FGRootView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:self.rootview];
     
     NSInteger cound = [[FGMathOperationManager shareMathOperationManager].dataStatisticsModel totalNumber];
@@ -64,7 +64,7 @@
     if (cound > 50) {//绕过审核
         self.angryBirdView = [[FGAngryBirdsView alloc]init];
         [self.view addSubview:self.angryBirdView];
-        
+        [self.angryBirdView startBirdsAnimation];
         //类别
         self.cateGoryMenuView = [[FGCategoryMenuView alloc]initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenHeight)];
         self.cateGoryMenuView.categoryDelegate = self;
@@ -89,8 +89,8 @@
             }];
             btn.tag = CategoryMath;
             [btn addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
-            CABasicAnimation *basicAnimation = [FGProjectHelper animationRotationZ];
-            [btn.layer addAnimation:basicAnimation forKey:@"calculateKeyTarnsform.rotaiton.z"];
+//            CABasicAnimation *basicAnimation = [FGProjectHelper animationRotationZ];
+//            [btn.layer addAnimation:basicAnimation forKey:@"calculateKeyTarnsform.rotaiton.z"];
 
             btn;
         });
