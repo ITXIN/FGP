@@ -168,7 +168,6 @@
 
 - (void)setupLayoutSubviews{
     [super setupLayoutSubviews];
-    
     [self.rootview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
