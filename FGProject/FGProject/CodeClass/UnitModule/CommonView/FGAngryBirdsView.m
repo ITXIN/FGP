@@ -78,12 +78,26 @@ static NSString *keyDropDownEndAnimationGroup = @"positionKeyGroupDropDonwEnd";/
     for (int i = 0; i < 3; i ++){
         [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"angrybird_0%d",i+1]]];
     }
+    
     UIBezierPath *path2 = [UIBezierPath bezierPath];
-    path2.lineWidth = 5.0;
-    path2.lineCapStyle = kCGLineCapRound;
-    path2.lineJoinStyle = kCGLineJoinRound;
+//    path2.lineWidth = 5.0;
+//    path2.lineCapStyle = kCGLineCapRound;
+//    path2.lineJoinStyle = kCGLineJoinRound;
     [path2 moveToPoint:CGPointMake(10, 50)];
     [path2 addCurveToPoint:CGPointMake(kScreenWidth, 100) controlPoint1:CGPointMake(kScreenWidth/3*1, 20) controlPoint2:CGPointMake(kScreenWidth/2, 50)];//两个切点
+    
+    CAKeyframeAnimation * orbit = [CAKeyframeAnimation animation];
+    orbit.keyPath = @"position";
+    orbit.path = path2.CGPath;
+    orbit.duration = 10;
+    orbit.additive = YES;
+    orbit.repeatCount = HUGE_VAL;
+    orbit.calculationMode = kCAAnimationPaced;
+    orbit.rotationMode = nil;
+    orbit.removedOnCompletion = NO;//到了那个移动位置后,是否返回
+    orbit.delegate = self;
+    orbit.fillMode = kCAFillModeForwards;
+    
     for (NSInteger i = 0; i < groupBirdCount; i ++){
         CGFloat width = arc4random()%50 + 30;
         UIImageView *imageView =  ({
